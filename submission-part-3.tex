@@ -1,0 +1,2608 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[philosophies,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+%\documentclass[preprints,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+% For posting an early version of this manuscript as a preprint, you may use "preprints" as the journal. Changing "submit" to "accept" before posting will remove line numbers.
+
+%--------------------
+% Class Options:
+%--------------------
+%----------
+% journal
+%----------
+% Choose between the following MDPI journals:
+% ...  philosophies, ...
+
+%---------
+% article
+%---------
+% The default type of manuscript is "article", but can be replaced by: 
+% abstract, addendum, article, benchmark, book, bookreview, briefcommunication, briefreport, casereport, changes, clinicopathologicalchallenge, comment, commentary, communication, conceptpaper, conferenceproceedings, correction, conferencereport, creative, datadescriptor, discussion, entry, expressionofconcern, extendedabstract, editorial, essay, erratum, fieldguide, hypothesis, interestingimages, letter, meetingreport, monograph, newbookreceived, obituary, opinion, proceedingpaper, projectreport, reply, retraction, review, perspective, protocol, shortnote, studyprotocol, supfile, systematicreview, technicalnote, viewpoint, guidelines, registeredreport, tutorial,  giantsinurology, urologyaroundtheworld
+% supfile = supplementary materials
+
+%----------
+% submit
+%----------
+% The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g., the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
+
+%------------------
+% moreauthors
+%------------------
+% If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
+
+%---------
+% pdftex
+%---------
+% The option pdftex is for use with pdfLaTeX. Remove "pdftex" for (1) compiling with LaTeX & dvi2pdf (if eps figures are used) or for (2) compiling with XeLaTeX.
+
+%=================================================================
+% MDPI internal commands - do not modify
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2025}
+\copyrightyear{2025}
+%\externaleditor{Firstname Lastname} % More than 1 editor, please add `` and '' before the last editor name
+\datereceived{ } 
+\daterevised{ } % Comment out if no revised date
+\dateaccepted{ } 
+\datepublished{ } 
+%\datecorrected{} % For corrected papers: "Corrected: XXX" date in the original paper.
+%\dateretracted{} % For retracted papers: "Retracted: XXX" date in the original paper.
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+%\pdfoutput=1 % Uncommented for upload to arXiv.org
+%\CorrStatement{yes}  % For updates
+%\longauthorlist{yes} % For many authors that exceed the left citation part
+%\IsAssociation{yes} % For association journals
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, float, amsmath, amssymb, lineno, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, colortbl, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, array, tabularx, pbox, ragged2e, tocloft, marginnote, marginfix, enotez, amsthm, natbib, hyperref, cleveref, scrextend, url, geometry, newfloat, caption, draftwatermark, seqsplit
+% cleveref: load \crefname definitions after \begin{document}
+
+% Import custom definitions
+\input{custom-definitions}
+
+
+%=================================================================
+% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{Sheaf Mereology: Parts and Wholes in a Topos-Theoretic Setting}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{Title}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0000-0000-000X} % Add \orcidA{} behind the author's name
+%\newcommand{\orcidauthorB}{0000-0000-0000-000X} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Firstname Lastname $^{1}$\orcidA{}, Firstname Lastname $^{2}$ and Firstname Lastname $^{2,}$*}
+
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Firstname Lastname, Firstname Lastname and Firstname Lastname}
+
+% Author citation:  
+\AuthorCitation{Lastname, F.; Lastname, F.; Lastname, F.}
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Affiliation 1; e-mail@e-mail.com\\
+$^{2}$ \quad Affiliation 2; e-mail@e-mail.com}
+
+% Contact information of the corresponding author
+\corres{Correspondence: e-mail@e-mail.com; Tel.: (optional; include country code; if there are multiple corresponding authors, add author initials) +xx-xxxx-xxx-xxxx (F.L.)}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation.}  
+% Current address should not be the same as any items in the Affiliation section.
+
+%\secondnote{These authors contributed equally to this work.}
+% The commands \thirdnote{} till \eighthnote{} are available for further notes.
+
+%\simplesumm{} % Simple summary
+
+%\conference{} % An extended version of a conference paper
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{A single paragraph of about 200 words maximum. For research articles, abstracts should give a pertinent overview of the work. We strongly encourage authors to use the following style of structured abstracts, but without headings: (1) Background: place the question addressed in a broad context and highlight the purpose of the study; (2) Methods: describe briefly the main methods or treatments applied; (3) Results: summarize the article's main findings; (4) Conclusions: indicate the main conclusions or interpretations. The abstract should be an objective representation of the article, it must not contain results which are not presented and substantiated in the main text and should not exaggerate the main conclusions.}
+
+% Keywords
+\keyword{mereology; fusions and integral wholes; sheaves; point-free topology; frames and locales; toposes; modality; merology logic; categorical logic} 
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+%\PACS{J0101}
+%\MSC{}
+%\JEL{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Different journals have different requirements. Please check the specific journal guidelines in the "Instructions for Authors" on the journal's official website.
+%\addhighlights{yes}
+%\renewcommand{\addhighlights}{%
+%
+%\noindent The goal is to increase the discoverability and readability of the article via search engines and other scholars. Highlights should not be a copy of the abstract, but a simple text allowing the reader to quickly and simplified find out what the article is about and what can be cited from it. Each of these parts should be devoted up to 2~bullet points.\vspace{3pt}\\
+%\textbf{What are the main findings?}
+% \begin{itemize}[labelsep=2.5mm,topsep=-3pt]
+% \item First bullet.
+% \item Second bullet.
+% \end{itemize}\vspace{3pt}
+%\textbf{What is the implication of the main finding?}
+% \begin{itemize}[labelsep=2.5mm,topsep=-3pt]
+% \item First bullet.
+% \item Second bullet.
+% \end{itemize}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{-1} %% Remove this when starting to work on the template.
+%\section{How to Use this Template}
+
+% For any questions, please contact the editorial office of the journal or support@mdpi.com. For LaTeX-related questions please contact latex@mdpi.com.
+
+%\endnote{This is an endnote.} % To use endnotes, please un-comment \printendnotes below (before References). Only journal Laws uses \footnote.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Category Theory}
+\label{sec:category-theory}
+
+\noindent
+In this section, we cover the parts of category theory that we will use in the remainder of the paper. Readers familiar with category theory can skip this section.
+
+Since at least Aristotle's time, philosophers have been interested in placing objects of the same kind into categories. Modern category theorists do this too: a category is a collection of objects that are all the same in kind. But category theory has a further requirement: not only must you tell us what the objects are in your category, you must also tell us about the maps between them, so that we know how to relate/compare those objects. Further, those maps must compose in well-behaved ways.
+
+% ----------------------------------------
+\begin{Definition}[Categories]
+ 
+A category $\category{C}$ consists of the following data:
+ 
+\begin{enumerate}
+ 
+\item A collection of objects $X$, $Y$, $Z$, and so on, denoted $\objects/(\category{C})$
+\item A collection of morphisms $f : X \to Y$, $g : Y \to Z$, and so on, denoted $\morphisms/(\category{C})$, each with a designated domain (an object) and codomain (an object), such that:
+
+  \begin{enumerate}
+    \item There is an identity morphism $\ident{X} : X \to X$ for each object $X$.
+    \item Morphisms compose, i.e., if $f : X \to Y$ and $g : Y \to Z$ are morphisms in $\category{C}$ such that $f$'s codomain matches $g$'s domain, then their composite $g \compose/ f : X \to Z$ (pronounced ``$g$ after $f$'') is a morphism in $\category{C}$ too.
+  \end{enumerate}
+ 
+\end{enumerate}
+ 
+ \noindent
+The objects and morphisms of $\category{C}$ must satisfy the following conditions: 
+
+\begin{enumerate}
+
+\item [(K1)] Composing with an identity has no effect, i.e. for any morphism $f : X \to Y$,
+$$\ident{Y} \compose/ f = f \text{ and } f = f \compose/ \ident{X}.$$
+
+\item [(K2)] Composition is associative, i.e., for any morphisms $f : X \to Y$, $g : Y \to Z$, and $h : Z \to W$,
+$$(h \compose/ g) \compose/ f = h \compose/ (g \compose/ f).$$
+
+\end{enumerate}
+ 
+\end{Definition}
+
+% ----------------------------------------
+\begin{Example}
+
+The category $\category{S}et$ of sets and total maps has all sets for its objects and all total function between them for its morphisms. To check that it is a category, we need to confirm that it satisfies all the requirements. 
+
+First, does every object have an identity? Yes, because for every set $X$, there is an identity function $\ident{X} : X \to X$ given by $\ident{X}(x) = x$.  For instance, take the following set $X$:
+
+\begin{diagram}
+
+  \node at (-1, -0.75) {$X$};
+  \draw (-0.15, 0) ellipse (0.5cm and 1cm);
+  \node[dot, label=left:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=left:{$b$}] (b) at (0, -0.5) {};
+
+\end{diagram}
+
+There is an identity function that sends each point of $X$ to itself:
+
+\begin{diagram}
+
+  \node at (-1, -0.75) {$X$};
+  \draw (-0.15, 0) ellipse (0.5cm and 1cm);
+  \node[dot, label=left:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=left:{$b$}] (b) at (0, -0.5) {};
+  
+  \node at (1, 0) {$\ident{X}$};
+  \draw[arrow, ->] (a) to[out=330, in=30, looseness=35] (a);
+  \draw[arrow, ->] (b) to[out=330, in=30, looseness=35] (b);
+
+\end{diagram}
+
+Do morphisms compose? Yes: the morphisms of this category are functions, and functions compose. For instance, take the following $f : X \to Y$ and $g : Y \to Z$: 
+
+\begin{diagram}
+
+  \draw (0, 0.15) ellipse (0.5cm and 1cm);
+  \node[dot, label=above:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=above:{$b$}] (b) at (0, -0.5) {};
+  
+  \draw (4, -0.85) ellipse (0.75cm and 1.25cm);
+  \node[dot, label=above:{$1$}] (1) at (4, -0.25) {};
+  \node[dot, label=above:{$2$}] (2) at (4, -1) {};
+  \node[dot, label=above:{$3$}] (3) at (4, -1.75) {};
+
+  \draw (8.25, 0.15) ellipse (0.5cm and 1cm);
+  \node[dot, label=above:{$p$}] (p) at (8.25, 0.5) {};
+  \node[dot, label=above:{$q$}] (q) at (8.25, -0.5) {};
+
+  \node at (-0.925, -0.85) {$X$};
+  \node at (3.25, -2) {$Y$};
+  \node at (8.75, -0.85) {$Z$};
+
+  \node at (1.75, -1.5) {$f$};
+  \draw[arrow,->] (a) to (1);
+  \draw[arrow,->] (b) to (3);
+  
+  \node at (6.25, -1.5) {$g$};
+  \draw[arrow,->] (1) to (p);
+  \draw[arrow,->] (2) to (p);
+  \draw[arrow,->] (3) to (q);
+
+\end{diagram}
+
+Their composite $g \compose/ f : X \to Z$ is a function too:
+
+\begin{diagram}
+
+  \draw (0, 0.15) ellipse (0.5cm and 1cm);
+  \node[dot, label=above:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=above:{$b$}] (b) at (0, -0.5) {};
+  
+  \draw (4, -0.85) ellipse (0.75cm and 1.25cm);
+  \node[dot, label=above:{$1$}] (1) at (4, -0.25) {};
+  \node[dot, label=above:{$2$}] (2) at (4, -1) {};
+  \node[dot, label=above:{$3$}] (3) at (4, -1.75) {};
+
+  \draw (8.25, 0.15) ellipse (0.5cm and 1cm);
+  \node[dot, label=above:{$p$}] (p) at (8.25, 0.5) {};
+  \node[dot, label=above:{$q$}] (q) at (8.25, -0.5) {};
+
+  \node at (-0.925, -0.85) {$X$};
+  \node at (3.25, -2) {$Y$};
+  \node at (8.75, -0.85) {$Z$};
+
+  \node at (1.75, -1.5) {$f$};
+  \draw[arrow,->] (a) to (1);
+  \draw[arrow,->] (b) to (3);
+  
+  \node at (6.25, -1.5) {$g$};
+  \draw[arrow,->] (1) to (p);
+  \draw[arrow,->] (2) to (p);
+  \draw[arrow,->] (3) to (q);
+
+  \node at (4, 1) {$g \compose/ f$};
+  \draw[arrow,->] (a) to[out=30, in=150] (p);
+  \draw[arrow,->] (b) to[out=45, in=135] (q);
+
+\end{diagram}
+
+Further, it is clear that composing with an identity has no effect, since identity functions do not shuffle around any points. It is also clear that function composition is associative: it does not matter if I take $f$ first and then $h \compose/ g$, or $g \compose/ f$ first and then $h$. I get to the same results either way. So $\category{S}et$ is a genuine category.
+
+\end{Example}
+
+% ----------------------------------------
+\begin{Example}
+
+The category $\category{T}op$ of topological spaces and continuous maps is the category whose objects are all topological spaces and whose morphisms are the continuous maps between them.
+
+\end{Example}
+
+% ----------------------------------------
+\begin{Example}
+
+The category $\category{F}rm$ of frames and frame homomorphisms is the category whose objects are frames and whose morphisms are frame homomorphisms, i.e., maps that preserve arbitrary joins and finite meets.
+
+\end{Example}
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:poset-category}
+
+A poset can be seen as a category. For example, consider the powerset of $\{ a, b \}$, ordered by inclusion. The Hasse Diagram looks like this:
+
+\begin{diagram}
+
+  \node (ab) at (0, 3) {$\{ a, b \}$};
+  \node (a) at (-1.5, 1.5) {$\{ a \}$};
+  \node (b) at (1.5, 1.5) {$\{ b \}$};
+  \node (bottom) at (0, 0) {$\EmptySet/$};
+  
+  \draw (bottom) to (a);
+  \draw (bottom) to (b);
+  \draw (a) to (ab);
+  \draw (b) to (ab);
+
+\end{diagram}
+
+The fact that the elements of this diagram are sets is inessential. We could relabel them with arbitrary names to make the structure of the underlying poset obvious:
+
+\begin{diagram}
+
+  \node[dot] (ab) at (0, 3) [label=above:$s$] {};
+  \node[dot] (a) at (-1.5, 1.5) [label=left:$p$] {};
+  \node[dot] (b) at (1.5, 1.5) [label=right:$q$] {};
+  \node[dot] (bottom) at (0, 0) [label=below:$r$] {};
+  
+  \draw (bottom) to (a);
+  \draw (bottom) to (b);
+  \draw (a) to (ab);
+  \draw (b) to (ab);
+
+\end{diagram}
+
+Hasse diagrams only show the minimal information needed to understand the poset. A poset is reflexive and transitive, but we don't draw lines for the reflexive and transitive steps, to avoid clutter. Thus, for instance, in this case, although $p \leqslant p$, we don't draw a line to represent it in the Hasse diagram. However, if we were to draw the full poset, we would get something that looks like this:
+
+\begin{diagram}
+
+  \node[dot, label=above:{$s$}] (ab) at (0, 3) {};
+  \node[dot, label=left:{$p$}] (a) at (-1.5, 1.5) {};
+  \node[dot, label=right:{$q$}] (b) at (1.5, 1.5) {};
+  \node[dot, label=below:{$r$}] (bottom) at (0, 0) {};
+  
+  \draw[arrow, ->] (bottom) to (a);
+  \draw[arrow, ->] (bottom) to (b);
+  \draw[arrow, ->] (a) to (ab);
+  \draw[arrow, ->] (b) to (ab);
+
+  \draw[arrow, ->] (bottom) to[out=120, in=240, looseness=1.5] (ab);
+  \draw[arrow, ->] (bottom) to[out=60, in=300, looseness=1.5] (ab);
+
+  \draw[arrow, ->] (ab) to[out=40, in=140, looseness=30] (ab);
+  \draw[arrow, ->] (a) to[out=230, in=120, looseness=30] (a);
+  \draw[arrow, ->] (b) to[out=320, in=60, looseness=30] (b);
+  \draw[arrow, ->] (bottom) to[out=320, in=220, looseness=30] (bottom);
+
+\end{diagram}
+
+\noindent
+This is category. It's objects are the points ($r$, $p$, $q$, and $s$), and its morphisms are the arrows in the picture. It has identities (each reflexive loop), morphisms compose (because a poset is transitive), and so on.
+
+This illustrates that the morphisms in a category need not be functions, nor do they need to be function-like. Here, we put a morphism between two objects just to state a fact about the poset: a morphism from $p$ to $s$ simply means $p \leqslant s$, i.e., that ''$p$ is lower than $s$ in the ordering.''
+
+\end{Example}
+
+
+% ----------------------------------------
+\begin{Definition}[Opposite categories]
+
+For any category $\category{C}$, define the opposite category $\oppCategory{C}$ as the category with the same objects as $\category{C}$, but whose morphisms and composition are turned around. That is:
+
+\begin{enumerate}
+
+\item For any morphism $f : X \to Y$ in $\category{C}$, the corresponding morphism in $\oppCategory{C}$ is $f^{op} : Y \to X$.
+
+\item For any morphisms $f : X \to Y$, $g : Y \to Z$, and their composite $g \compose/ f : X \to Z$ in $\category{C}$, the correspond morphisms and composite in $\oppCategory{C}$ are $f^{op} : Y \to X$, $g^{op} : Z \to Y$, and $(g \compose/ f)^{op}$ = $f^{op} \compose/ g^{op} : Z \to X$.
+
+\end{enumerate}
+
+\end{Definition}
+
+% ----------------------------------------
+\begin{Example}
+
+The category $\category{L}oc$ of locales is defined as the opposite category of $\category{F}rm$. Thus, the objects of $\category{L}oc$ are the same objects as $\category{F}rm$, which is why we can call a frame a locale or vice versa.
+
+\end{Example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Functors}
+
+\noindent
+Functors are maps between categories that preserve categorical structure. That is, a functor maps one category to another in such a way that it preserves the identities and composition of the original category, so that you end up picking out a kind of ``image'' of the first category in the second category.
+
+% ----------------------------------------
+\begin{Definition}[Functors]
+
+A functor $\functor{F} : \category{J} \to \category{C}$ is comprised of the following data:
+
+\begin{enumerate}
+
+  \item A mapping of objects to objects, i.e., for each object $X \in \category{J}$, $\functor{F}(X)$ is an object in $\category{C}$.
+  
+  \item A mapping of morphisms to morphisms, i.e., for each morphism $f : X \to Y$ in $\category{J}$, $\functor{F}(f) : \functor{F}(X) \to \functor{F}(Y)$ is a morphism in $\category{C}$.
+
+\end{enumerate}
+
+\noindent
+Further, these mappings must satisfy the following conditions:
+
+\begin{enumerate}
+
+\item [(F1)] $\functor{F}$ preserves identities, i.e.,
+$$\functor{F}(\ident{X}) = \ident{\functor{F}(X)}.$$
+
+\item [(F2)] $\functor{F}$ preserves composition, i.e. for any $f : X \to Y$ and $g : Y \to Z$ in $\category{C}$,
+$$\functor{F}(g \compose/ f) = \functor{F}(f) \compose/ \functor{F}(g).$$
+
+\end{enumerate}
+
+\noindent
+A functor $\functor{F} : \category{J} \to \category{C}$ is also called a diagram, because it picks out $\category{J}$-shaped figures of $\category{C}$. $\category{J}$ is then called the indexing category, because the objects and morphisms of $\functor{F}$'s image are indexed by the objects and morphisms of $\functor{J}$.
+
+A functor to or from an opposite category (e.g., $\functor{F} : \oppCategory{J} \to \category{C}$ or $\functor{F} : \category{J} \to \oppCategory{C}$) is called a contravariant functor because the morphisms go in opposite directions on either side of the functor.
+
+\end{Definition}
+
+
+% ----------------------------------------
+\begin{Example}
+
+Suppose $\category{J}$ consists of two objects and one non-trival morphism, something like this (we do not draw identity morphisms):
+
+\begin{diagram}
+  \node at (-3, 0) {$\category{J}$};
+  \node (A) at (0, 0) {$A$};
+  \node (B) at (4, 0) {$B$};
+  \draw[arrow,->] (A) to (B);
+  \node at (2, -0.25) {$f$};
+\end{diagram}
+
+\noindent
+Then a functor $\functor{F}$ from $\category{J}$ to $\category{S}et$ uses $\category{J}$ as a kind of template: it picks out a set $\functor{F}(A)$ for $A$, a set $\functor{F}(B)$ for $B$, and a function $\functor{F}(f) : \functor{F}(A) \to \functor{F}(B)$ for $f$. For instance, to build such an $\functor{F}$, for $A$ we might pick the set $\{ a, b \}$: 
+
+\begin{diagram}
+
+  \node (A) at (0, 2.5) {$A$};
+  \node (B) at (4, 2.5) {$B$};
+  \draw[arrow,->] (A) to (B);
+  \node (f) at (2, 2.25) {$f$};
+
+  \node at (-3, 2.5) {$\category{J}$};
+  \draw[dotted] (-3, 1.5) to (8, 1.5);
+  \node at (-3, 1) {$\category{S}et$};
+
+  \draw (-0.15, 0) ellipse (0.5cm and 1cm);
+  \node[dot, label=left:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=left:{$b$}] (b) at (0, -0.5) {};
+
+  \node at (-1.5, 0) {$\functor{F}(A)$};
+
+  \draw[arrow, ->, dashed] (A) to[out=240, in=100] (-0.25, 1);
+
+\end{diagram}
+
+\noindent
+Then for $B$ we might pick the set $\{ 1, 2, 3 \}$:
+
+\begin{diagram}
+
+  \node (A) at (0, 2.5) {$A$};
+  \node (B) at (4, 2.5) {$B$};
+  \draw[arrow,->] (A) to (B);
+  \node (f) at (2, 2.25) {$f$};
+
+  \node at (-3, 2.5) {$\category{J}$};
+  \draw[dotted] (-3, 1.5) to (8, 1.5);
+  \node at (-3, 1) {$\category{S}et$};
+
+  \draw (-0.15, 0) ellipse (0.5cm and 1cm);
+  \node[dot, label=left:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=left:{$b$}] (b) at (0, -0.5) {};
+  
+  \draw (4.15, 0) ellipse (0.75cm and 1.25cm);
+  \node[dot, label=right:{$1$}] (1) at (4, 0.75) {};
+  \node[dot, label=right:{$2$}] (2) at (4, 0) {};
+  \node[dot, label=right:{$3$}] (3) at (4, -0.75) {};
+
+  \node at (-1.5, 0) {$\functor{F}(A)$};
+  \node at (5.75, 0) {$\functor{F}(B)$};
+
+  \draw[arrow, ->, dashed] (A) to[out=240, in=100] (-0.25, 1);
+  \draw[arrow, ->, dashed] (B) to[out=300, in=80] (4.25, 1.25);
+
+\end{diagram}
+
+\noindent
+Finally, for $f$ we might pick the function that sends $a$ to 2 and $b$ to $3$:
+
+\begin{diagram}
+
+  \node (A) at (0, 2.5) {$A$};
+  \node (B) at (4, 2.5) {$B$};
+  \draw[arrow,->] (A) to (B);
+  \node (f) at (2, 2.25) {$f$};
+
+  \node at (-3, 2.5) {$\category{J}$};
+  \draw[dotted] (-3, 1.5) to (8, 1.5);
+  \node at (-3, 1) {$\category{S}et$};
+
+  \draw (-0.15, 0) ellipse (0.5cm and 1cm);
+  \node[dot, label=left:{$a$}] (a) at (0, 0.5) {};
+  \node[dot, label=left:{$b$}] (b) at (0, -0.5) {};
+  
+  \draw (4.15, 0) ellipse (0.75cm and 1.25cm);
+  \node[dot, label=right:{$1$}] (1) at (4, 0.75) {};
+  \node[dot, label=right:{$2$}] (2) at (4, 0) {};
+  \node[dot, label=right:{$3$}] (3) at (4, -0.75) {};
+
+  \draw[arrow, ->] (a) to (2);
+  \draw[arrow, ->] (b) to (3);
+
+  \node at (-1.5, 0) {$\functor{F}(A)$};
+  \node at (5.75, 0) {$\functor{F}(B)$};
+  \node at (2, -1) {$\functor{F}(f)$};
+
+  \draw[arrow, ->, dashed] (A) to[out=240, in=100] (-0.25, 1);
+  \draw[arrow, ->, dashed] (B) to[out=300, in=80] (4.25, 1.25);
+  \draw[arrow, ->, dashed] (f) to[out=255, in=90] (1.75, 0.5);
+
+\end{diagram}
+
+\noindent
+Or, to draw the same picture without the internal details:
+
+\begin{diagram}
+
+  \node (A) at (0, 2.5) {$A$};
+  \node (B) at (4, 2.5) {$B$};
+  \draw[arrow,->] (A) to (B);
+  \node (f) at (2, 2.25) {$f$};
+
+  \node at (-3, 2.5) {$\category{J}$};
+  \draw[dotted] (-3, 1.5) to (8, 1.5);
+  \node at (-3, 1) {$\category{S}et$};
+
+  \node (FA) at (0, 0) {$\functor{F}(A)$};
+  \node (FB) at (4, 0) {$\functor{F}(B)$};
+  \node at (2, -0.25) {$\functor{F}(f)$};
+
+  \draw[arrow, ->] (FA) to (FB);
+
+  \draw[arrow, ->, dashed] (A) to[out=240, in=100] (-0.25, 0.25);
+  \draw[arrow, ->, dashed] (B) to[out=300, in=80] (4.25, 0.25);
+  \draw[arrow, ->, dashed] (f) to[out=255, in=100] (1.825, 0.25);
+  \node at (5, 1.5) {$\functor{F}$};
+
+\end{diagram}
+
+\noindent
+This makes it clear that $\functor{F}$ picks out a $\category{J}$-shaped piece of $\category{S}et$: namely, a piece of $\category{S}et$ that consists of two objects with one non-trivial morphism between them.
+
+We could construct a different functor $\functor{G} : \category{J} \to \category{S}et$ by picking different sets with a different morphism between them, in which case we would thereby pick out a different $\category{J}$-shaped piece of $\category{S}et$.
+
+\end{Example}
+
+\begin{Remark}
+
+Functors do not always pick out \emph{isomorphic} $\category{J}$-figures. A functor can collapse parts of $\category{J}$ and still preserve its identities and composition. For instance, a functor can send all objects of $\category{J}$ to the one-element set $\{ \ast \}$ in $\category{S}et$ and all morphisms of $\category{J}$ to its identity $\ast \mapsto \ast$.
+
+\end{Remark}
+
+\begin{Remark}
+
+A contravariant functor from an indexing category $\category{J}$ to $\category{S}et$ is a presheaf. The signature of such a functor is $F: \oppCategory{J} \to \category{S}et$. To see why this is a presheaf, consider the following. $\oppCategory{J}$ is the base category, and $F$ assigns to each object $U \in \oppCategory{J}$ a set. This is the data over the fiber of $U$. For each morphism $f : V \to U$ in $\oppCategory{J}$, $F$ sends $f$ to a morphism going the other direction: $F(f): F(U) \to F(V)$. These are the restriction maps. The functor laws F1 and F2 ensure that the restriction maps are unital and transitive as required.
+
+\end{Remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Natural transformations}
+
+\noindent
+A natural transformation maps one $\category{J}$-figure to another. It does this by connecting up all of the objects of the first figure with those of the second in lock-step.
+
+Visually, we can think of constructing a natural transformation as follows. Suppose we have an indexing category $\category{J}$ that looks something like this:
+
+\begin{diagram}
+
+  \node (X) at (2, 3) {$X$};
+  \node (Y) at (2, 2) {$Y$};
+  \node (Z) at (2, 1) {$Y$};
+  \draw[arrow,->] (X) to (Y);
+  \draw[arrow,->] (Y) to (Z);
+  \node (f) at (1.75, 2.5) {$f$};
+  \node (g) at (1.75, 1.5) {$g$};
+
+  \node at (-3, 1) {$\category{J}$};
+
+\end{diagram}
+
+\noindent
+Next, suppose we have a diagram $\functor{F}$ of $\category{J}$ over on the left:
+
+\begin{diagram}
+
+  \node (X) at (2, 3) {$X$};
+  \node (Y) at (2, 2) {$Y$};
+  \node (Z) at (2, 1) {$Y$};
+  \draw[arrow,->] (X) to (Y);
+  \draw[arrow,->] (Y) to (Z);
+  \node (f) at (1.75, 2.5) {$f$};
+  \node (g) at (1.75, 1.5) {$g$};
+
+  \node at (-3, 1) {$\category{J}$};
+  \draw[dotted] (-3, 0.5) to (8, 0.5);
+  \node at (-3, 0) {$\category{C}$};
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  
+  \node (FZ) at (0, -3) {$\functor{F}(Z)$};
+
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (-1, -2.5) {$\functor{F}(g)$};
+  \draw[arrow, ->] (FY) to (FZ);
+
+  \node at (-1, 1) {$\functor{F}$};
+  \draw[arrow, ->, dotted] (X) to[out=200,in=120] (FX);
+  \draw[arrow, ->, dotted] (Y) to[out=190,in=130] (FY);
+  \draw[arrow, ->, dotted] (Z) to[out=180,in=170, looseness=2] (FZ);
+
+\end{diagram}
+
+\noindent
+Then suppose we have another diagram $\functor{G}$ of $\category{J}$ over on the right:
+
+\begin{diagram}
+
+  \node (X) at (2, 3) {$X$};
+  \node (Y) at (2, 2) {$Y$};
+  \node (Z) at (2, 1) {$Y$};
+  \draw[arrow,->] (X) to (Y);
+  \draw[arrow,->] (Y) to (Z);
+  \node (f) at (1.75, 2.5) {$f$};
+  \node (g) at (1.75, 1.5) {$g$};
+
+  \node at (-3, 1) {$\category{J}$};
+  \draw[dotted] (-3, 0.5) to (8, 0.5);
+  \node at (-3, 0) {$\category{C}$};
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (4, 0) {$\functor{G}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  \node (GY) at (5, -1.5) {$\functor{G}(Y)$};
+  
+  \node (FZ) at (0, -3) {$\functor{F}(Z)$};
+  \node (GZ) at (4, -3) {$\functor{G}(Z)$};
+
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (-1, -2.5) {$\functor{F}(g)$};
+  \draw[arrow, ->] (FY) to (FZ);
+  \node at (5, -0.5) {$\functor{G}(f)$};
+  \draw[arrow, ->] (GX) to (GY);
+  \node at (5, -2.5) {$\functor{G}(g)$};
+  \draw[arrow, ->] (GY) to (GZ);
+
+  \node at (5, 1) {$\functor{G}$};
+  \draw[arrow, ->, dotted] (X) to[out=340,in=60] (GX);
+  \draw[arrow, ->, dotted] (Y) to[out=350,in=50] (GY);
+  \draw[arrow, ->, dotted] (Z) to[out=0,in=10, looseness=2] (GZ);
+
+\end{diagram}
+
+\noindent
+in other words, we have two diagrams of $\category{J}$ side by side in $\category{C}$:
+
+\begin{diagram}
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (4, 0) {$\functor{G}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  \node (GY) at (5, -1.5) {$\functor{G}(Y)$};
+  
+  \node (FZ) at (0, -3) {$\functor{F}(Z)$};
+  \node (GZ) at (4, -3) {$\functor{G}(Z)$};
+
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (-1, -2.5) {$\functor{F}(g)$};
+  \draw[arrow, ->] (FY) to (FZ);
+  \node at (5, -0.5) {$\functor{G}(f)$};
+  \draw[arrow, ->] (GX) to (GY);
+  \node at (5, -2.5) {$\functor{G}(g)$};
+  \draw[arrow, ->] (GY) to (GZ);
+
+\end{diagram}
+
+\noindent
+We can map the one diagram ($F$) to the other ($G$) as follows. First, for each object in the left-hand $\category{J}$-figure, pick a morphism that goes over to the corresponding object in the right-hand $\category{J}$-figure. For instance, for the $X$-component, pick a morphism that goes from $\functor{F}(X)$ to $\functor{G}(X)$ (call it $\natTrans{\alpha}{X}$):
+
+\begin{diagram}
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (4, 0) {$\functor{G}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  \node (GY) at (5, -1.5) {$\functor{G}(Y)$};
+  
+  \node (FZ) at (0, -3) {$\functor{F}(Z)$};
+  \node (GZ) at (4, -3) {$\functor{G}(Z)$};
+
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (-1, -2.5) {$\functor{F}(g)$};
+  \draw[arrow, ->] (FY) to (FZ);
+  \node at (5, -0.5) {$\functor{G}(f)$};
+  \draw[arrow, ->] (GX) to (GY);
+  \node at (5, -2.5) {$\functor{G}(g)$};
+  \draw[arrow, ->] (GY) to (GZ);
+  
+  \node at (2, -0.25) {$\natTrans{\alpha}{X}$};
+  \draw[arrow, ->, dashed] (FX) to (GX);
+
+\end{diagram}
+
+\noindent
+Then, for the $Y$-component, pick a morphism that connects $\functor{F}(Y)$ to $\functor{G}(Y)$:
+
+\begin{diagram}
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (4, 0) {$\functor{G}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  \node (GY) at (5, -1.5) {$\functor{G}(Y)$};
+  
+  \node (FZ) at (0, -3) {$\functor{F}(Z)$};
+  \node (GZ) at (4, -3) {$\functor{G}(Z)$};
+
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (-1, -2.5) {$\functor{F}(g)$};
+  \draw[arrow, ->] (FY) to (FZ);
+  \node at (5, -0.5) {$\functor{G}(f)$};
+  \draw[arrow, ->] (GX) to (GY);
+  \node at (5, -2.5) {$\functor{G}(g)$};
+  \draw[arrow, ->] (GY) to (GZ);
+  
+  \node at (2, -0.25) {$\natTrans{\alpha}{X}$};
+  \draw[arrow, ->, dashed] (FX) to (GX);
+  \node at (2, -1.75) {$\natTrans{\alpha}{Y}$};
+  \draw[arrow, ->, dashed] (FY) to (GY);
+
+\end{diagram}
+
+\noindent
+Finally, for the $Z$-component, pick a morphism that connects $\functor{F}(Z)$ to $\functor{G}(Z)$:
+
+\begin{diagram}
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (4, 0) {$\functor{G}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  \node (GY) at (5, -1.5) {$\functor{G}(Y)$};
+  
+  \node (FZ) at (0, -3) {$\functor{F}(Z)$};
+  \node (GZ) at (4, -3) {$\functor{G}(Z)$};
+
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (-1, -2.5) {$\functor{F}(g)$};
+  \draw[arrow, ->] (FY) to (FZ);
+  \node at (5, -0.5) {$\functor{G}(f)$};
+  \draw[arrow, ->] (GX) to (GY);
+  \node at (5, -2.5) {$\functor{G}(g)$};
+  \draw[arrow, ->] (GY) to (GZ);
+  
+  \node at (2, -0.25) {$\natTrans{\alpha}{X}$};
+  \draw[arrow, ->, dashed] (FX) to (GX);
+  \node at (2, -1.75) {$\natTrans{\alpha}{Y}$};
+  \draw[arrow, ->, dashed] (FY) to (GY);
+  \node at (2, -3.25) {$\natTrans{\alpha}{Z}$};
+  \draw[arrow, ->, dashed] (FZ) to (GZ);
+
+\end{diagram}
+
+\noindent
+By doing this, we connect each object from the left-hand figure with an object on the right-hand figure. 
+
+A natural transformation is just such a family of connecting wires. It is a family because there are many of them: there is one such connecting wire for each ``component'' (object) of the figure. Thus, it is a family $\{ \natTrans{\alpha}{i} \}_{i \in \objects/(\category{J})}$. We can think of it as a stack of bridges: each ``bridge'' (morphism) lets us travel from a component in the left-hand figure to the corresponding component in the right-hand figure.
+
+However, we cannot pick just any set of ``bridges'' and call it a natural transformation. The choice of bridges has to be ``natural,'' which means that our choice of bridges has to keep paths through the two figures in lock-step. In other words, we must be able to travel along a morphism in either figure, and it won't matter if we go over the bridge before or after we go down. We'll get to the same place either way.
+
+For instance, in our picture, if we selected our connecting bridges correctly, then it won't matter if we go down $\functor{F}(f)$ in the left figure and then go over the bridge $\natTrans{\alpha}{Y}$, or whether we go over the bridge $\natTrans{\alpha}{X}$ first and then go down $\functor{G}(f)$. Either way, we'll get the same results. In other words, this square of the picture must commute (i.e., both paths through the diagram must be equal):
+
+\begin{diagram}
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (4, 0) {$\functor{G}(X)$};
+  
+  \node (FY) at (-1, -1.5) {$\functor{F}(Y)$};
+  \node (GY) at (5, -1.5) {$\functor{G}(Y)$};
+  
+  \node at (-1, -0.5) {$\functor{F}(f)$};
+  \draw[arrow, ->] (FX) to (FY);
+  \node at (5, -0.5) {$\functor{G}(f)$};
+  \draw[arrow, ->] (GX) to (GY);
+  
+  \node at (2, -0.25) {$\natTrans{\alpha}{X}$};
+  \draw[arrow, ->, dashed] (FX) to (GX);
+  \node at (2, -1.75) {$\natTrans{\alpha}{Y}$};
+  \draw[arrow, ->, dashed] (FY) to (GY);
+  
+\end{diagram}
+
+In order to qualify as a natural transformation, our choice of bridges has to be such that \emph{all} such squares in the stack of bridges commute. This requirement is called the naturality condition. It is a fairly strict requirement. It is not always possible to find a natural transformation from one diagram to another. 
+
+% ----------------------------------------
+\begin{Definition}[Natural transformations]
+
+Given two diagrams $\functor{F}, \functor{G} : \category{J} \to \category{C}$, a natural transformation $\natTrans{\alpha}{}$ is a family of morphisms $\{ \natTrans{\alpha}{i} : \functor{F}(i) \to \functor{G}(i) \}_{i \in \objects/(\category{J})}$ in $\category{C}$. Each such $\natTrans{\alpha}{i}$ is called a ``component'' of $\natTrans{\alpha}{}$, or the ``$i$-component'' of $\natTrans{\alpha}{}$.
+
+Further, the components of $\natTrans{\alpha}{}$ must be chosen in such a way that they satisfy the following naturality condition. For any morphism $f : X \to Y$ in $\category{J}$, $\natTrans{\alpha}{Y} \compose/ \functor{F}(f)$ = $\functor{G}(f) \compose/ \natTrans{\alpha}{X}$. In other words, for every morphism $f : X \to Y$ in $\category{J}$, the following must commute:
+
+\begin{diagram}
+
+  \node (FX) at (0, 0) {$\functor{F}(X)$};
+  \node (GX) at (3, 0) {$\functor{G}(X)$};
+  \node (FY) at (0, -3) {$\functor{F}(Y)$};
+  \node (GY) at (3, -3) {$\functor{G}(Y)$};
+
+  \draw[arrow, ->] (FX) to (FY);
+  \draw[arrow, ->] (GX) to (GY);
+  \draw[arrow, ->, dashed] (FX) to (GX);
+  \draw[arrow, ->, dashed] (FY) to (GY);
+  
+  \node at (-0.5, -1.5) {$\functor{F}(f)$};
+  \node at (3.5, -1.5) {$\functor{G}(f)$};
+  \node at (1.5, -0.25) {$\natTrans{\alpha}{X}$};
+  \node at (1.5, -3.25) {$\natTrans{\alpha}{Y}$};
+
+\end{diagram}
+
+\end{Definition}
+
+\begin{Remark}
+
+Given an indexing category $\category{J}$ and another category $\category{C}$, the diagrams (functors) from $\category{J}$ to $\category{C}$ form a category, denoted $\category{C}^{\category{J}}$ or $[\category{J}, \category{C}]$. The objects of the category are the diagrams, and the morphisms are natural transformations. Since functors of the shape $F : \oppCategory{J} \to \category{S}et$ are presheaves, a category of $\category{S}et$-valued diagrams $\category{S}et^{\oppCategory{J}}$ (alternatively written $[\oppCategory{J}, \category{S}et]$) is called a presheaf category, or a category of presheaves.
+
+\end{Remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Limits}
+
+\noindent
+TODO.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{(Co)Terminals, (Co)Products, (Co)Pullbacks}
+
+\noindent
+TODO.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exponentials}
+
+\noindent
+TODO? I think the fibrational setting is easier to describe. Maybe do that instead.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Topos Theory}
+\label{sec:topos-theory}
+
+\noindent
+In this section, we cover the parts of topos theory that we will utilize in the rest of the paper. Readers familiar with topos theory can skip this section.
+
+A topos is often described as a category that has enough internal structure to it that you can do ``sets''-like reasoning in it. In other words, it has an internal logic that very much resembles the kind of first-order logic that we often model in universes of sets. 
+
+However, it is important to recognize that the key feature of first-order logic is its ability to speak about \emph{subsets} of sets. Indeed, in first-order logic, a predicate $P(x)$ is typically said to hold when $x$ belongs to the subset of things that satisfy $P$. This is why one can say that first-order logic really boils down to a system for reasoning about the ``parts'' of sets (their subsets).
+
+Topos theory generalizes this considerably. Topos theory characterizes categories in which we can reason not just about sets and their ``parts'' (subsets), but about a great variety of other kinds of objects and their ``parts'' (subobjects). In the category $\category{S}et$, the objects are sets, and the ``parts'' or subobjects of a set are its subsets. But in other categories the appropriate ``part'' or subobject might be different. For instance, in the category of directed multi-graphs, the objects are directed multi-graphs, and the ``parts'' or subobjects of such a graph are its subgraphs. 
+
+Whatever sort of objects they may be, if they are the objects of a topos, then the topos has an internal logic that provides a consistent way to reason about those objects and their ``parts'' (subobjects). So, it is perhaps more appropriate to say that a topos is a category that has enough internal structure that we can do ``parts''-like reasoning in it. A topos is a category that has an internal ``parts''-like reasoning system built-in for free.
+
+We will not give a definition of a topos, since the details are not important for our purposes. There are a number of different equivalent definitions of a topos, and all are easy to find in the literature (see, for instance, \cite{Goldblatt:1984}, \cite{MacLaneAndMoerdijk:1994}, or \cite{Borceux:1994}). All we need to know is that a topos has a rich structure: in particular, it has all limits and colimits (hence a terminal object, an initial object, products, coproducts, pullbacks, etc), it has all exponentials, and it has a subobject classifier (which we will introduce and discuss below). In what follows, we will focus on explaining how notions like predicates and logical connectives are realized in the internal logic of a topos.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subobjects}
+
+\noindent
+In the category $\category{S}et$, it is natural to think of a ``part'' of a set as a subset. For example, suppose $D = \{ a, b, c \}$: 
+
+\begin{diagram}
+
+  \node at (-4.75, -2) {$D$};
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+
+\end{diagram}
+
+Now consider the ``parts'' of $D$.  For instance, take $C = \{ a, b \}$. We can picture the fact that $C$ is a ``part'' of $D$ by drawing a circle around $C$'s elements to make it clear that the elements of $C$ live ``inside'' $D$:
+
+\begin{diagram}
+
+  \node at (-4.75, -2) {$D$};
+  \draw[wire2] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+
+  \node (C) at (-1.5, -0.5) {$C$};
+  \draw[arrow, ->, wire2] (C) to (-2.5, -1.75);
+
+\end{diagram}
+
+Thinking of $C$ as a ``part'' of $D$ in this way is fine, but it is very specific to the way that sets work. We can generalize by thinking about $C$ as an insertion map $i : C \to D$ that injects $C$ into $D$:
+
+\begin{diagram}
+
+  \node at (-4.75, 1) {$C$};
+  \draw (-3.25, 1) ellipse (1cm and 0.5cm);
+  \node[dot, label=left:{$a$}] (Ca) at (-3.5, 1) {};
+  \node[dot, label=left:{$b$}] (Cb) at (-2.75, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Ca) to node[midway, left] {$i$} (Da);
+  \draw[arrow, ->] (Cb) to (Db);
+
+\end{diagram}
+
+Once we think of a subset as an insertion map, it becomes clear that the names of the elements in $C$ are irrelevant. In order to pick out the subset $\{ a, b \}$, a function from any two-element set that picks out $a$ and $b$ will do: 
+
+\begin{diagram}
+
+  \draw (-3.125, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ca) at (-3.5, 1) {};
+  \node[dot] (Cb) at (-2.75, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Ca) to node[midway, left] {$i$} (Da);
+  \draw[arrow, ->] (Cb) to (Db);
+
+\end{diagram}
+
+Further, we can pick another subset of $D$ with a different insertion map. For instance, we can pick out $\{ b, c \}$ as follows:
+
+\begin{diagram}
+
+  \draw (-3.125, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ca) at (-3.5, 1) {};
+  \node[dot] (Cb) at (-2.75, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed] (-2.5, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Ca) to node[midway, left] {$j$} (Db);
+  \draw[arrow, ->] (Cb) to (Dc);
+
+\end{diagram}
+
+The essential feature of an insertion map is that it does not collapse any information. In other words, it is a mere pass-through: i.e., it keeps things distinct and doesn't equate things that aren't already equated. Or, to put it the other way around, if two things aren't already equal, an insertion map won't make them equal. A morphism that has this property is called a monomorphism.
+
+
+% ----------------------------------------
+\begin{Definition}[Monomorphism]
+
+A morphism $i : C \to D$ in $\category{C}$ is a monomorphism iff:
+
+\[
+\forall B \in \category{C} \text{ and } \forall f, g : B \to C \in \category{C}, f \not = g \text{ implies } i \compose/ f \not = i \compose/ g.
+\]
+
+\noindent
+Equivalently:
+
+\[
+\forall B \in \category{C} \text{ and } \forall f, g : B \to C \in \category{C}, i \compose/ f = i \compose/ g \text{ implies } f = g.
+\]
+
+\end{Definition}
+
+
+% ----------------------------------------
+\begin{Example}
+
+Consider a function $f : B \to C$ that looks like this:
+
+\begin{diagram}
+
+\node at (0, 1.25) {$B$};
+\draw (0, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$r$}] (r) at (0, 0.5) {};
+\node[dot, label=below:{$s$}] (s) at (0, -0.5) {};
+
+\node at (4, 1.25) {$C$};
+\draw (4, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$t$}] (t) at (4, 0.5) {};
+\node[dot, label=below:{$u$}] (u) at (4, -0.5) {};
+
+\node at (2, 1) {\textcolor{wire2}{$f$}};
+\draw[arrow, ->, wire2] (r) to (t);
+\draw[arrow, ->, wire2] (s) to (u);
+
+\end{diagram}
+
+\noindent
+Suppose we also have another, non-equal function $g : B \to C$:
+
+\begin{diagram}
+
+\node at (0, 1.25) {$B$};
+\draw (0, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$r$}] (r) at (0, 0.5) {};
+\node[dot, label=below:{$s$}] (s) at (0, -0.5) {};
+
+\node at (4, 1.25) {$C$};
+\draw (4, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$t$}] (t) at (4, 0.5) {};
+\node[dot, label=below:{$u$}] (u) at (4, -0.5) {};
+
+\node at (2, 1) {\textcolor{wire2}{$f$}};
+\draw[arrow, ->, wire2] (r) to (t);
+\draw[arrow, ->, wire2] (s) to (u);
+
+\node at (2, -1) {\textcolor{wire3}{$g$}};
+\draw[arrow, ->, wire3] (r) to (u);
+\draw[arrow, ->, wire3] (s) to (t);
+
+\end{diagram}
+
+\noindent
+Since $f$ and $g$ are not equal, they send their inputs to different places. However, if we compose them with a function that collapses points, we can make them send their inputs to the same place. For instance, suppose we follow $f$ and $g$ with the following function $h : C \to D$:
+
+\begin{diagram}
+
+\node at (0, 1.25) {$B$};
+\draw (0, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$r$}] (r) at (0, 0.5) {};
+\node[dot, label=below:{$s$}] (s) at (0, -0.5) {};
+
+\node at (4, 1.25) {$C$};
+\draw (4, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$t$}] (t) at (4, 0.5) {};
+\node[dot, label=below:{$u$}] (u) at (4, -0.5) {};
+
+\node at (8, 1.5) {$D$};
+\draw (8, -0.125) ellipse (0.5cm and 1.25cm);
+\node[dot, label=below:{$v$}] (v) at (8, 0.75) {};
+\node[dot, label=below:{$w$}] (w) at (8, 0) {};
+\node[dot, label=below:{$z$}] (z) at (8, -0.75) {};
+
+\node at (2, 1) {\textcolor{wire2}{$f$}};
+\draw[arrow, ->, wire2] (r) to (t);
+\draw[arrow, ->, wire2] (s) to (u);
+
+\node at (2, -1) {\textcolor{wire3}{$g$}};
+\draw[arrow, ->, wire3] (r) to (u);
+\draw[arrow, ->, wire3] (s) to (t);
+
+\node at (6, 1) {$h$};
+\draw[arrow, ->] (t) to (w);
+\draw[arrow, ->] (u) to (w);
+
+\end{diagram}
+
+\noindent
+Since, $h$ collapses information --- that is to say, since it sends both $t$ and $u$ to the same output $w$ --- by composing $f$ and $g$ with $h$, we can make them send their inputs to the same place too (namely, $w$). Since we can make a non-equal $f$ and $g$ yield equal results by composing them with $h$, we know that $h$ therefore collapses information, and so $h$ is \emph{not} a monomorphism.
+
+Now consider what happens when we compose $f$ and $g$ with a monomorphism $i : C \to D$:
+
+\begin{diagram}
+
+\node at (0, 1.25) {$B$};
+\draw (0, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$r$}] (r) at (0, 0.5) {};
+\node[dot, label=below:{$s$}] (s) at (0, -0.5) {};
+
+\node at (4, 1.25) {$C$};
+\draw (4, -0.125) ellipse (0.5cm and 1cm);
+\node[dot, label=below:{$t$}] (t) at (4, 0.5) {};
+\node[dot, label=below:{$u$}] (u) at (4, -0.5) {};
+
+\node at (8, 1.5) {$D$};
+\draw (8, -0.125) ellipse (0.5cm and 1.25cm);
+\node[dot, label=below:{$v$}] (v) at (8, 0.75) {};
+\node[dot, label=below:{$w$}] (w) at (8, 0) {};
+\node[dot, label=below:{$z$}] (z) at (8, -0.75) {};
+
+\node at (2, 1) {\textcolor{wire2}{$f$}};
+\draw[arrow, ->, wire2] (r) to (t);
+\draw[arrow, ->, wire2] (s) to (u);
+
+\node at (2, -1) {\textcolor{wire3}{$g$}};
+\draw[arrow, ->, wire3] (r) to (u);
+\draw[arrow, ->, wire3] (s) to (t);
+
+\node at (6, 1) {$i$};
+\draw[arrow, ->] (t) to (v);
+\draw[arrow, ->] (u) to (w);
+
+\end{diagram}
+
+\noindent
+Here, we can see that $i$ is just a pass-through: it does not collapse any points but rather simply passes on whatever $f$ and $g$ give it, keeping the inputs it receives distinct. So unlike $h$, $i$ cannot ever help $f$ and $g$ send their inputs to the same place. 
+
+Further, we can see that $i$ will behave this way with \emph{any} pair of non-equal morphisms $f$ and $g$: if they already result in distinct outputs, $i$ will keep them distinct. That is what it means for $i$ to be a monomorphism.
+
+\end{Example}
+
+The previous examples were taken from the category $\category{S}et$, but the definition of a monomorphism does not depend on the nature of the sets and functions involved. It works in any category. 
+
+Monomorphisms therefore give us a general way to talk about the subobjects of objects, in any category whatever. We can thus identify the subobjects of any object with the monomorphisms into it.
+
+% ----------------------------------------
+\begin{Definition}[Subobject]
+
+Given an object $D$ in a category $\category{C}$, a subobject $i$ of $D$ is a monomorphism $i: C \to D$.
+
+\end{Definition}
+
+Different monomorphisms can pick out the same subobject. For instance, in the following picture, both $j$ and $k$ pick out the same subobject of $D$:
+
+\begin{diagram}
+
+  \node at (-5, 1) {$B$};
+  \draw (-3.625, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ca) at (-4, 1) {};
+  \node[dot] (Cb) at (-3.25, 1) {};
+
+  \node at (1.75, 1) {$C$};
+  \draw (0.325, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ba) at (0, 1) {};
+  \node[dot] (Bb) at (0.75, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed] (-2.5, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Ca) to node[midway, below left] {$j$} (Db);
+  \draw[arrow, ->] (Cb) to (Dc);
+  
+  \draw[arrow, ->] (Ba) to (Db);
+  \draw[arrow, ->] (Bb) to node[midway, below right] {$k$} (Dc);
+
+\end{diagram}
+
+However, we can treat these two monomorphisms as equivalent subobjects if there is a way to translate back and forth between them. In particular, if there are morphisms between $B$ and $C$ that let us go back and forth, so that it doesn't matter which monomorphism we use, then we say $j \equiv k$.
+
+% ----------------------------------------
+\begin{Definition}[Equivalent Subojbects]
+\label{def:equivalent-subobjects}
+
+Given subobjects $j : B \to D$ and $k : C \to D$, we say $j$ and $k$ are equivalent, denoted $j \equiv k$, iff there are morphisms $f : B \to C$ and $g : C \to B$ such that:
+
+\[
+k \compose/ f = j \quad\text{ and }\quad k = j \compose/ g.
+\]
+
+\end{Definition}
+
+% ----------------------------------------
+\begin{Example}
+
+Consider the pair of functions $f$ and $g$ that ``translate'' between $B$ and $C$:
+
+\begin{diagram}
+
+  \node at (-5, 1) {$B$};
+  \draw (-3.625, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ca) at (-4, 1) {};
+  \node[dot] (Cb) at (-3.25, 1) {};
+
+  \node at (1.75, 1) {$C$};
+  \draw (0.325, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ba) at (0, 1) {};
+  \node[dot] (Bb) at (0.75, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed] (-2.5, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Ca) to node[midway, below left] {$j$} (Db);
+  \draw[arrow, ->] (Cb) to (Dc);
+  
+  \draw[arrow, ->] (Ba) to (Db);
+  \draw[arrow, ->] (Bb) to node[midway, below right] {$k$} (Dc);
+
+  \draw[arrow, ->, wire2] (Ca) to[out=30, in=150] node[midway, above] {$f$} (Ba);
+  \draw[arrow, ->, wire2] (Cb) to[out=30, in=150] (Bb);
+
+  \draw[arrow, ->, wire3] (Ba) to[out=210, in=330] node[midway, below] {$g$} (Ca);
+  \draw[arrow, ->, wire3] (Bb) to[out=210, in=330] (Cb);
+
+\end{diagram}
+
+\noindent
+Here, you can go over $f$ and then down $k$ and that yields the same result as just going down $j$. Similarly, you can go over $g$ and then down $j$, and that yields the same result as just going down $k$. Hence, $j$ and $k$ are equivalent subobjects.
+t
+\end{Example}
+
+\begin{Remark}
+
+\cref{def:equivalent-subobjects} identifies an equivalence relation on the subobjects of any given object. Hence, we can partition all of the subobjects of that object into equivalence classes. Then we can pick any monomorphism from any such class and we can speak of it as ``the'' subobject, even though there are actually many equivalent such monomorphisms that pick out the same subobject. For convenience, in what follows we will usually speak of individual monomorphisms in this way, even though we often mean the equivalence class of such monomorphisms.
+
+\end{Remark}
+
+Some subobjects are smaller parts of bigger subobjects. If we think of sets, this is natural: some subsets are subsets of other subsets, e.g., $\{ a \}$ is a subset of $\{ a, b \}$, which in turn is a subset of $\{ a, b, c \}$. So, $\{ a \}$ and $\{ a, b \}$ are both subobjects of $\{ a, b, c \}$, but $\{ a \}$ is in a certain sense ``smaller'' than $\{ a, b \}$ and thus contained in it.
+
+This generalizes to the monomorphism-theoretic approach to subobjects too. One subobject $j : B \to D$ is contained in another one $k : C \to D$ if the smaller one can be routed through the bigger one. If you can route the smaller one through the bigger one, then the smaller one must be a part of the larger one, since whatever else the bigger one inserts into $D$, it at least inserts the smaller one's contents.
+
+% ----------------------------------------
+\begin{Definition}[Subobject Containment]
+
+Given monomorphisms $j : B \to D$ and $k : C \to D$, we say that $j$ is contained in $k$ (or $j$ is ``in'' $k$ for short), denoted $j \subseteq k$, iff there is a morphism $f : B \to C$ such that
+
+\[
+j = k \compose/ f.
+\]
+
+\end{Definition}
+
+
+% ----------------------------------------
+\begin{Example}
+
+Consider the following monomorphisms $j$ and $k$ that pick out two different subobjects of $D$:
+
+\begin{diagram}
+
+  \node at (-5, 1) {$B$};
+  \draw (-3.625, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ba) at (-4, 1) {};
+  \node[dot] (Bb) at (-3.25, 1) {};
+
+  \node at (2, 1) {$C$};
+  \draw (0.625, 1) ellipse (1.25cm and 0.5cm);
+  \node[dot] (Ca) at (0, 1) {};
+  \node[dot] (Cb) at (0.75, 1) {};
+  \node[dot] (Cc) at (1.5, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed, wire2] (-2.5, -2) ellipse (0.75cm and 0.425cm);
+  \draw[dashed, wire3] (-2.125, -2) ellipse (1.25cm and 0.575cm);
+  \draw (-2.5, -2) ellipse (1.75cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  \node[dot, label=left:{$d$}] (Dd) at (-1.25, -2) {};
+  
+  \draw[arrow, ->, wire2] (Ba) to node[midway, below left] {$j$} (Db);
+  \draw[arrow, ->, wire2] (Bb) to (Dc);
+  
+  \draw[arrow, ->, wire3] (Ca) to (Db);
+  \draw[arrow, ->, wire3] (Cb) to (Dc);
+  \draw[arrow, ->, wire3] (Cc) to node[midway, below right] {$k$} (Dd);
+
+\end{diagram}
+
+\noindent
+Now suppose we have a morphism $f: B \to C$ as follows:
+
+\begin{diagram}
+
+  \node at (-5, 1) {$B$};
+  \draw (-3.625, 1) ellipse (1cm and 0.5cm);
+  \node[dot] (Ba) at (-4, 1) {};
+  \node[dot] (Bb) at (-3.25, 1) {};
+
+  \node at (2, 1) {$C$};
+  \draw[dashed, wire2] (0.4, 1) ellipse (0.75cm and 0.425cm);
+  \draw (0.625, 1) ellipse (1.25cm and 0.5cm);
+  \node[dot] (Ca) at (0, 1) {};
+  \node[dot] (Cb) at (0.75, 1) {};
+  \node[dot] (Cc) at (1.5, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw[dashed, wire2] (-2.5, -2) ellipse (0.75cm and 0.425cm);
+  \draw[dashed, wire3] (-2.125, -2) ellipse (1.25cm and 0.575cm);
+  \draw (-2.5, -2) ellipse (1.75cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, -2) {};
+  \node[dot, label=left:{$d$}] (Dd) at (-1.25, -2) {};
+  
+  \draw[arrow, ->] (Ba) to[out=20, in=160] node[midway, above] {$f$} (Ca);
+  \draw[arrow, ->] (Bb) to[out=20, in=160] (Cb);
+  
+  \draw[arrow, ->, wire2] (Ba) to node[midway, below left] {$j$} (Db);
+  \draw[arrow, ->, wire2] (Bb) to (Dc);
+  
+  \draw[arrow, ->, wire3] (Ca) to (Db);
+  \draw[arrow, ->, wire3] (Cb) to (Dc);
+  \draw[arrow, ->, wire3] (Cc) to node[midway, below right] {$k$} (Dd);
+
+\end{diagram}
+
+\noindent
+Here, $f$ routes $j$ through $k$: if you go over $f$ and then down $k$, you pick out the same subobject as $j$. So, whatever else $k$ might inject into $D$, it at least injects the contents of $j$. Hence, we can say that $j$ is contained in $k$, i.e. $j \subseteq k$.
+
+\end{Example}
+
+If you take all of the subobjects of an object and order them by inclusion, the result is a lattice. Thus, in any given topos, each object has an associated lattice of subobjects, ordered by inclusion. The meets and joins are as expected, namely the intersection and union of subobjects. There are even largest and smallest subobjects at the top and bottom ends of the lattice.
+
+The largest subobject of an object is of course the whole object itself. In other words, it is just the identity (which is a monomorphism). For instance, in the following picture, $\ident{D}$ picks out the largest subobject of $D$, namely all of $D$:
+
+\begin{diagram}
+
+  \node at (-4.75, 1) {$D$};
+  \draw (-2.75, 1) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da) at (-3.5, 1) {};
+  \node[dot, label=left:{$b$}] (Db) at (-2.75, 1) {};
+  \node[dot, label=left:{$c$}] (Dc) at (-2, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da2) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db2) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc2) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Da) to node[midway, left] {$\ident{D}$} (Da2);
+  \draw[arrow, ->] (Db) to (Db2);
+  \draw[arrow, ->] (Dc) to (Dc2);
+
+\end{diagram}
+
+By contrast, the smallest subobject of $D$ is the monomorphism that inserts the least amount of information into $D$, namely no information at all. In other words, the smallest subobject of $D$ is the empty one. This corresponds to the morphism from $0$, the initial (empty) object of the topos, to $D$.
+
+For example, in $\category{S}et$, the initial/empty object is the empty set $\EmptySet/$, and there is exactly one morphism from $\EmptySet/$ to any other object $D$, namely the empty function $nil$ that inserts nothing:
+
+\begin{diagram}
+
+  \node at (-4, 1) {$0 = \EmptySet/$};
+  \draw (-2.75, 1) ellipse (0.5cm and 0.4cm);
+  \node (Da) at (-2.75, 1) {};
+
+  \node at (-4.75, -2) {$D$};
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Da2) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Db2) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Dc2) at (-2, -2) {};
+  
+  \draw[arrow, ->] (Da) to node[midway, left] {$nil$} (-2.75, -1);
+
+\end{diagram}
+
+% ----------------------------------------
+\begin{Definition}[Largest and smallest subobjects]
+\label{def:biggest-and-smallest-of-omega}
+
+For any given object $D$ in a topos, the smallest subobject of $D$ is the empty one, namely $nil : 0 \to D$, while the largest subobject is the identity $\ident{D} : D \to D$.
+
+\end{Definition}
+
+\begin{Remark}
+
+Given an object $D$, the lattice of its subobjects is typically external to the topos that $D$ lives in. For instance, suppose $D$ is an object in $\category{S}et$. The lattice of $D$'s subobjects is not an object of $\category{S}et$, since it is a lattice. It lives in a category of lattices, not the category of sets. It also counts as a category in its own right, since a lattice is a poset and every poset can be seen as a category (see \cref{{ex:poset-category}}). However, the lattice of $D$'s subobjects is isomorphic to the exponential object $\Omega^{D}$. So, although the lattice itself is external to the category, an internal version of it lives inside the topos as the exponential.
+
+\end{Remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subobject classifiers}
+
+\noindent
+A predicate $P$ on a domain $B$ is often defined as a function, let's call it $\characteristic{P}$, from $B$ to $2 = \{ true, false \}$, where elements of $B$ that satisfy the predicate $P$ are sent to ``$true$'' and those that don't are sent to ``$false$.'' For instance, suppose we have a set $B = \{ a, b, c \}$, and a predicate $P$ with $P(a) = true$, $P(b) = true$, and $P(c) = false$. For concreteness, suppose $B$ is the set of students in a class, and $P(x)$ is the predicate expressing that a student is passing the class. As a picture:
+
+\begin{diagram}
+
+  \node at (-4.75, -2) {$B$};
+  \draw[dashed] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Ba) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Bb) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Bc) at (-2, -2) {};
+  
+  \node at (5, -2) {$2$};  
+  \draw (3, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=right:{$true$}] (true) at (2, -2) {};
+  \node[dot, label=right:{$false$}] (false) at (3.25, -2) {};
+
+  \node at (0, -2) {$\characteristic{P}$};
+  \draw[arrow, ->] (Ba) to[out=30, in=145] (true);
+  \draw[arrow, ->] (Bb) to[out=45, in=120] (true);
+  \draw[arrow, ->] (Bc) to[out=330, in=220] (false);
+
+\end{diagram}
+
+In essence, $\characteristic{P}$ is a characteristic function: it ``classifies'' a subset $A$ of $B$ by telling us which elements of $B$ belong in that subset $A$ and which ones do not. In this case, the subset that gets classified by $\characteristic{P}$ is $A = \{ a, b \}$, i.e., the subset of students who are passing the class. This subset is precisely the extension of the predicate $P$ --- it is the set of elements in $B$ that satisfy the predicate $P$, i.e., the set of students in the class who are passing.
+
+Categorically, we can find $A$ through a pullback. The key feature of a characteristic function like $\characteristic{P}$ is that it sends the elements that it classifies to $true$. So, let's use a morphism from $1$ (call this morphism $\top$ for ``true'') to pick out $true$ in $2$:
+
+\begin{diagram}
+
+  \node at (3, 1) {$1$};
+  \draw (2, 1) ellipse (0.6cm and 0.5cm);
+  \node[dot, label=right:{$\ast$}] (1) at (2, 1) {};
+
+  \node at (-4.75, -2) {$B$};
+  \draw[dashed] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Ba) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Bb) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Bc) at (-2, -2) {};
+  
+  \node at (5, -2) {$2$};  
+  \draw (3, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=right:{$true$}] (true) at (2, -2) {};
+  \node[dot, label=right:{$false$}] (false) at (3.25, -2) {};
+
+  \node at (0, -2) {$\characteristic{P}$};
+  \draw[arrow, ->] (Ba) to[out=30, in=145] (true);
+  \draw[arrow, ->] (Bb) to[out=45, in=120] (true);
+  \draw[arrow, ->] (Bc) to[out=330, in=220] (false);
+
+  \node at (2.25, -0.825) {$\top$};
+  \draw[arrow, ->] (1) to (true);  
+
+\end{diagram}
+
+Next, pull back $\top : 1 \to 2$ along $\characteristic{P}$ to get the preimage of $\characteristic{P}$ on $true$:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (2, 0) -- (2, -0.5) -- (-2.25, -0.5) -- (-2.25, -0.75) -- 
+     (-2.5, -0.25) -- (-2.25, 0.25) -- (-2.25, 0) -- cycle;
+  \node at (0, -0.25) {\textsf{pull back}};
+
+  \node at (-4.75, 1) {$A$};
+  \draw (-3.25, 1) ellipse (1cm and 0.5cm);
+  \node[dot, label=left:{$a$}] (Aa) at (-3.5, 1) {};
+  \node[dot, label=left:{$b$}] (Ab) at (-2.75, 1) {};
+
+  \node at (3, 1) {$1$};
+  \draw (2, 1) ellipse (0.6cm and 0.5cm);
+  \node[dot, label=right:{$\ast$}] (1) at (2, 1) {};
+
+  \node at (-4.75, -2) {$B$};
+  \draw[dashed] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Ba) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Bb) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Bc) at (-2, -2) {};
+  
+  \node at (5, -2) {$2$};  
+  \draw (3, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=right:{$true$}] (true) at (2, -2) {};
+  \node[dot, label=right:{$false$}] (false) at (3.25, -2) {};
+
+  \node at (0, -2) {$\characteristic{P}$};
+  \draw[arrow, ->] (Ba) to[out=30, in=145] (true);
+  \draw[arrow, ->] (Bb) to[out=45, in=120] (true);
+  \draw[arrow, ->] (Bc) to[out=330, in=220] (false);
+
+  \draw[arrow, ->] (Aa) to[out=20, in=160] (1);
+  \draw[arrow, ->] (Ab) to[out=20, in=160] (1);
+
+  \draw[arrow, ->] (Aa) to (Ba);
+  \draw[arrow, ->] (Ab) to (Bb);
+
+  \node at (2.25, -0.825) {$\top$};
+  \draw[arrow, ->] (1) to (true);  
+
+\end{diagram}
+
+This gives us another way to think about the predicate $P$. It is the map on the left-hand side of the pullback square that inserts $A$ into $B$. In other words, it is the subobject (monomorphism) on the left-hand side of the pullback. Let's call it $P : A \to B$:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (2, 0) -- (2, -0.5) -- (-2.25, -0.5) -- (-2.25, -0.75) -- 
+     (-2.5, -0.25) -- (-2.25, 0.25) -- (-2.25, 0) -- cycle;
+  \node at (0, -0.25) {\textsf{pull back}};
+
+  \node at (-4.75, 1) {$A$};
+  \draw (-3.25, 1) ellipse (1cm and 0.5cm);
+  \node[dot, label=left:{$a$}] (Aa) at (-3.5, 1) {};
+  \node[dot, label=left:{$b$}] (Ab) at (-2.75, 1) {};
+
+  \node at (3, 1) {$1$};
+  \draw (2, 1) ellipse (0.6cm and 0.5cm);
+  \node[dot, label=right:{$\ast$}] (1) at (2, 1) {};
+
+  \node at (-4.75, -2) {$B$};
+  \draw[dashed] (-3.25, -2) ellipse (0.825cm and 0.5cm);
+  \draw (-2.75, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=left:{$a$}] (Ba) at (-3.5, -2) {};
+  \node[dot, label=left:{$b$}] (Bb) at (-2.75, -2) {};
+  \node[dot, label=left:{$c$}] (Bc) at (-2, -2) {};
+  
+  \node at (5, -2) {$2$};  
+  \draw (3, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=right:{$true$}] (true) at (2, -2) {};
+  \node[dot, label=right:{$false$}] (false) at (3.25, -2) {};
+
+  \node at (0, -2) {$\characteristic{P}$};
+  \draw[arrow, ->] (Ba) to[out=30, in=145] (true);
+  \draw[arrow, ->] (Bb) to[out=45, in=120] (true);
+  \draw[arrow, ->] (Bc) to[out=330, in=220] (false);
+
+  \draw[arrow, ->] (Aa) to[out=20, in=160] (1);
+  \draw[arrow, ->] (Ab) to[out=20, in=160] (1);
+
+  \node at (-4, -0.825) {$P$};
+  \draw[arrow, ->] (Aa) to (Ba);
+  \draw[arrow, ->] (Ab) to (Bb);
+
+  \node at (2.25, -0.825) {$\top$};
+  \draw[arrow, ->] (1) to (true);  
+
+\end{diagram}
+
+$P$ and $\characteristic{P}$ give us two perspectives on the same thing. Taken in itself, $P$ identifies a subset of $B$ (e.g., a subset of students in the class). By contrast, $\characteristic{P}$ has more of a logical interpretation: given a student $x$ in $B$, it tells you if they satisfy the predicate $P$ (i.e., it tells you if it is true that they are passing or not). The pullback makes it clear how these two maps --- $P$ and $\characteristic{P}$ --- are essentially related to truth values.
+
+What is crucial about this pullback construction is the object $2$ of truth-values on the right, along with the monomorphism $\top$ that picks out the ``true'' part of $2$. In $\category{S}et$, we can pull back $\top$ along any morphism into $2$ to identify the corresponding predicate on $2$. 
+
+This construction generalizes to other categories beyond $\category{S}et$. In other categories too, it often happens that we have an object of truth values, call it $\Omega$, and a monomorphism $\top : 1 \to \Omega$ that picks out the ``true'' part of $\Omega$, which is such that we can pull back along any morphism into $\Omega$ to get a predicate on it. 
+
+
+% ----------------------------------------
+\begin{Definition}[Subobject Classifier]
+
+In a topos $\category{E}$, a subobject classifier is an object, denoted $\Omega$, along with a morphism $\top : 1 \to \Omega$ which is such that, for any monomorphism $P : A \to B$, there is a unique morphism $\characteristic{P} : B \to \Omega$ that makes the following a pullback:
+
+\begin{diagram}
+
+  \node (A) at (-3, 3) {$A$};
+  \node (B) at (-3, 0) {$B$};
+  \node (1) at (0, 3) {$1$};
+  \node (Omega) at (0, 0) {$\Omega$};
+
+  \draw[arrow, ->] (A) to node[midway, left] {$P$}  (B);
+  \draw[arrow, ->] (B) to node[midway, below] {$\characteristic{P}$} (Omega);
+  \draw[arrow, ->] (A) to (1);
+  \draw[arrow, ->] (1) to node[midway, right] {$\top$} (Omega);
+
+\end{diagram}
+
+\end{Definition}
+
+
+% ----------------------------------------
+\begin{Example}
+
+In $\category{S}et$, as we saw, $\Omega$ is the set of boolean truth values $\{ true, false \}$, with $\top : 1 \to \Omega$ picking out $true$:
+
+\begin{diagram}
+
+  \node at (3, 0) {$1$};
+  \draw (2, 0) ellipse (0.6cm and 0.5cm);
+  \node[dot, label=right:{$\ast$}] (1) at (2, 0) {};
+
+  \node at (5, -2) {$\Omega$};  
+  \draw (3, -2) ellipse (1.5cm and 0.75cm);
+  \node[dot, label=right:{$true$}] (true) at (2, -2) {};
+  \node[dot, label=right:{$false$}] (false) at (3.25, -2) {};
+
+  \node at (2.25, -0.825) {$\top$};
+  \draw[arrow, ->] (1) to (true);  
+
+\end{diagram}
+
+\noindent
+Note that $\top$ is a monomorphism. It picks out a genuine subset of $\Omega$: namely $\{ true \} \subseteq \Omega$.
+
+\end{Example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{An Extended Example}
+
+\noindent
+In more complicated categories, the subobject classifier works just as it does in $\category{S}et$, but the set of truth values might be different, and the morphisms may be more complex. This is particularly useful when it is so binary a matter whether something satisfies a predicate.
+
+In this section, we will consider how the subobject classifier works in a category of diagrams. We will omit proofs, and proceed in an expositional style. Readers familiar with subobject classifiers can skip this section.
+
+The diagrams we are interested in here are the ones whose indexing category $\category{J}$ has the following shape:
+
+\begin{diagram}
+
+  \node (E) at (0, 0) {$E$};
+  \node (V) at (2, 0) {$V$};
+  \draw[arrow, ->] (0.2, 0.1) to node[midway, above] {$s$}  (1.8, 0.1);
+  \draw[arrow, ->] (0.2, -0.1) to node[midway, below] {$t$} (1.8, -0.1);
+
+\end{diagram}
+
+$\category{S}et$-valued diagrams of this shape (i.e., functors from $\category{J}$ to $\category{S}et$) correspond to directed multi-graphs. Each such functor sends $E$ to a set of edges, it sends $V$ to a set of vertices, and what it picks for $s$ and $t$ send edges to their respective source and target vertices. For instance, let $F: \category{J} \to \category{S}et$ be given as follows:
+
+\begin{itemize}
+
+\item $F(E) = \{ e_{1}, e_{2} \}$
+\item $F(V) = \{ p, q, r \}$
+\item $F(s)(e_{1}) = p$, $F(s)(e_{2}) = p$
+\item $F(t)(e_{1}) = r$, $F(t)(e_{2}) = q$
+
+\end{itemize}
+
+If we draw that graph, we get this:
+
+\begin{diagram}
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=above:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$}  (r);
+
+\end{diagram}
+
+Now suppose we have another functor $G: \category{J} \to \category{S}et$, given as follows:
+
+\begin{itemize}
+
+\item $G(E) = \{ e_{3} \}$
+\item $G(V) = \{ w, v \}$
+\item $G(s)(e_{3}) = w$
+\item $G(t)(e_{3}) = v$
+
+\end{itemize}
+
+If we draw $G$ as a graph, we get this:
+
+\begin{diagram}
+
+  \node at (-3, 0.75) {$G$};
+  \draw (-2.75, -0.5) rectangle (-0.25, 1);
+  \node[dot, label=above left:{$w$}] (w) at (-2, 0.5) {};
+  \node[dot, label=below right:{$v$}] (v) at (-1, 0) {};
+  \draw[arrow, ->] (w) to node[midway, above] {$e_{3}$} (v);
+
+\end{diagram}
+
+$G$ can be inserted into $F$ as a subgraph. Since $F$ and $G$ are diagrams in the category $\category{S}et^{\category{J}}$, morphisms between them are natural transformations. Hence, an insertion map $\natTrans{\alpha}{} : G \to F$ will be a natural transformation that inserts $G$ directly into $F$ without collapsing any of $G$. There are two such insertions here, but let us pick the one that sends $w$ to $p$, $v$ to $r$, and $e_{3}$ to $e_{1}$:
+
+\begin{diagram}
+
+  \node at (-3, 3.75) {$G$};
+  \draw (-2.75, 2.5) rectangle (-0.25, 4);
+  \node[dot, label=above left:{$w$}] (w) at (-2, 3.5) {};
+  \node[dot, label=below right:{$v$}] (v) at (-1, 3) {};
+  \draw[arrow, ->] (w) to node[midway, above] {$e_{3}$}  (v);
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=below:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$} (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+  
+  \node at (-2.5, 2) {$\natTrans{\alpha}{}$};
+  \draw[arrow, ->, wire1] (w) to[out=250, in=110] (p);
+  \draw[arrow, ->, wire1] (v) to[out=250, in=110] (r);
+  \draw[arrow, ->, wire2] (-1.5, 3.425) to[out=250, in=110] (-1.6, 0.7);
+    
+\end{diagram}
+
+Now that we have picked out a subobject $G$ of $F$, suppose next that we want to define a predicate $P$ on $F$ whose extension is precisely the subobject $G$. For instance, suppose $F$ describes a fork $p$ on a bike path, with $e_{1}$ going to the park $r$ and $e_{2}$ going to the museum $q$. Given this interpretation of $F$, let us introduce a predicate $P$ that means something like ``is on the route to the park.'' The extension of this predicate is exactly the subgraph $G$.
+
+But how exactly do we define such a predicate, formally? With sets, a predicate takes a point (an element of a set) as input and then it tells you in response whether that point satisfies the predicate or not. More exactly, it takes a point $x$ and returns ``$true$'' or ``$false$,'' depending on whether $x$ is in the extension (subobject) of the predicate.
+
+To do something similar for graphs, we have to generalize:
+
+\begin{itemize}
+
+\item A predicate on sets takes only \emph{one} kind of input (a point in a set), but a predicate on graphs needs to take \emph{two} kinds of inputs (vertices and edges). 
+
+\item A predicate on sets tells you if a point is in the \emph{subset} of the predicate's domain, but a predicate on graphs needs to tell you if a vertex or edge is in the \emph{subgraph} of the predicate's domain.
+
+\item A predicate on sets gives you a binary ``in'' or ``out'' answer (either the point is \emph{in} the predicate's extension or it is \emph{out}), but a predicate on graphs needs to give a more variegated answer:
+
+\begin{itemize}
+
+\item With respect to vertices, a given vertex is either inside or outside of a subgraph.
+
+\item With respect to edges, we have five options:
+
+\begin{itemize}
+
+\item The edge lives entirely outside of the subgraph (its source and target vertices are not part of the subgraph at all). 
+\item The edge starts outside the subgraph and ends up inside the subgraph (its source is outside the subgraph, and its target is inside the subgraph).
+\item The edge starts inside the subgraph and ends up outside the subgraph (its source is inside the subgraph, but its target is outside the subgraph).
+\item The edge travels outside the subgraph and then comes back in (its source and target are inside the subgraph, but the edge itself is outside the subgraph).
+\item The edge lives entirely inside the subgraph (its source and target vertices are inside the subgraph, and the edge itself stays inside the subgraph and does not travel outside the subgraph). 
+
+\end{itemize}
+
+\end{itemize}
+
+\end{itemize}
+
+This makes it clear that the logic of graphs is more discriminating than the logic of sets. With a predicate on sets, if you ask it whether a given input satisfies a predicate, it gives you a simple yes or no answer, because the given element either is or is not inside the given subset. This makes sense, of course. There is no more structure to sets than the points, so there is no more to say about the matter beyond stating whether the given point is or is not in the extension of the predicate.
+
+A graph is different. There is much more structure to a directed graph, and so if you ask a predicate whether a given input (a vertex or an edge) satisfies that predicate, it cannot give you such a simple answer. It can tell you whether a given vertex falls inside the extension of the predicate with a yes/no answer, but if you ask it about an edge, it cannot give you a simple yes/no answer. It must instead tell you the degree to which the edge falls inside the extension of the predicate, since an edge can be partly in, partly out, etc.
+
+A simple binary set $\{ true, false \}$ is thus not sufficient to serve as the object of truth values in this category of directed multi-graphs. Instead, $\Omega$ in this category has to look like the following:
+
+\begin{diagram}
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+\end{diagram}
+
+There are two vertices in this graph, labeled ``$in$'' and ``$out$,'' and they represent whether a given vertex is inside or outside of the given subgraph. There are five edges, each of which represents one of the five options described above:
+
+\begin{itemize}
+
+\item The edge labeled ``$all\mhyphen out$'' represents an edge that is outside the given subgraph and whose vertices are outside it too. Notice that both its source and target vertices are ``$out$,'' i.e., they are vertices that live outside the given subgraph.
+
+\item The edge labeled ``$ends\mhyphen in$'' represents an edge that starts outside the given subgraph and ends inside the subgraph. Notice that its source vertex is ``$out$'' and its target vertex is ``$in$.''
+
+\item The edge labeled ``$ends\mhyphen out$'' represents an edge that starts inside the given subgraph and ends outside the subgraph. Notice that its source vertex is ``$in$'' and its target vertex is ``$out$.''
+
+\item The edge labeled ``$edge\mhyphen out$'' represents an edge that starts inside the given subgraph, travels outside the subgraph, and then travels back in. Notice that its source and target vertices are both ``$in$.''
+
+\item The edge labeled ``$all\mhyphen in$'' represents an edge that lives inside the given subgraph and whose vertices are also inside the subgraph.
+
+\end{itemize}
+
+With this version of $\Omega$, we can classify all of the different ways a vertex or edge in a predicate's domain can be part of a a given subgraph. For instance, consider $F$ and the subgraph $G$:
+
+\begin{diagram}
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=below:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$} (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+
+\end{diagram}
+
+With sets, we can define a characteristic morphism into $\Omega$ that ``classifies'' which points in the predicate's domain belong in the given subset. But in this setting, how do we define a characteristic morphism $\characteristic{\alpha}$ into $\Omega$ that ``classifies'' which parts of $F$ belong in $G$?
+
+\begin{diagram}
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=below:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$} (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+  \draw[arrow, ->, wire2] (0, 0.5) to node[midway, below] {$\characteristic{\alpha}?$} (3.5, 0.5);
+
+\end{diagram}
+
+First, we send the vertices $p$ and $r$ to ``$in$'' (since they are inside $G$) and we send the vertex $q$ to ``$out$,'' since it is outside $G$:
+
+\begin{diagram}
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=below:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$} (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+  \node at (2, -0.25) {$\characteristic{\alpha}$};
+  \draw[arrow, ->, wire1] (q) to[out=340, in=240] (0);
+  \draw[arrow, ->, wire1] (p) to[out=20, in=160] (1);
+  \draw[arrow, ->, wire1] (r) to[out=10, in=170] (1);
+
+\end{diagram}
+
+Hence, by this classification, $p$ and $r$ fall under the extension of the predicate, while $q$ does not. This matches what we expect. Is the fork $p$ on the route to the park (i.e., does $P(p)$ hold)? Yes, and the same goes for the park $q$ ($P(q)$ holds). But the museum $q$ is not on the route to the park, so $P(q)$ does not hold.
+
+Next, we send $e_{1}$ to ``$all\mhyphen in$'' because it lives inside $G$:
+
+\begin{diagram}
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=below:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$} (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+  \node at (2, -0.25) {$\characteristic{\alpha}$};
+  \draw[arrow, ->, wire1] (q) to[out=340, in=240] (0);
+  \draw[arrow, ->, wire1] (p) to[out=20, in=160] (1);
+  \draw[arrow, ->, wire1] (r) to[out=10, in=170] (1);
+  \draw[arrow, ->, wire2] (-1.4, 0.5) to[out=30, in=160] (4.425, 1);
+
+\end{diagram}
+
+This matches our intuitions about the meaning of the predicate ``is on the route to the park'' too. Since $e_{1}$ is the path from the fork $p$ to the park $r$, it makes sense that $P(e_{1})$ holds.
+
+Finally, we send $e_{2}$ to ``$ends\mhyphen out$'' because although it begins \emph{inside} of $G$ (at $p$), it leaves $G$ and ends up outside of $G$ (at $q$):
+
+\begin{diagram}
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=below:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{2}$} (q);
+  \draw[arrow, ->] (p) to node[midway, above] {$e_{1}$} (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+  \node at (2, -0.25) {$\characteristic{\alpha}$};
+  \draw[arrow, ->, wire1] (q) to[out=340, in=240] (0);
+  \draw[arrow, ->, wire1] (p) to[out=20, in=160] (1);
+  \draw[arrow, ->, wire1] (r) to[out=10, in=170] (1);
+  \draw[arrow, ->, wire2] (-1.4, 0.5) to[out=30, in=160] (4.425, 1);
+  \draw[arrow, ->, wire2] (-2.5, 0.2) to[out=325, in=230] (6.175, -0.625);
+
+\end{diagram}
+
+This also classifies $e_{2}$ appropriately. Does the path to the museum fall on the route to the park? Well, the beginning part of it does, at the fork $p$. But after that, it does not. So $P(e_{2})$ does not hold unequivocally. But nor does it fail to hold unequivocally. The edge $e_{2}$ is classified as being partly in and partly out of the extension of the predicate.
+
+What is the unequivocal ``true'' part of $\Omega$? That is to say, what is the subobject of $\Omega$ that represents ``true'' unequivocally? With sets, we pick out the ``$\{ true \}$'' subobject of $\Omega$ with a monomorphism from the terminal object $1$. In this category, the terminal object is the one-vertex graph with a single edge:
+
+\begin{diagram}
+
+  \node at (5.75, 3.75) {$1$};
+  \draw (4.5, 2.5) rectangle (5.5, 4);
+  \node[dot, label=below:{$\ast$}] (term_1) at (5, 3) {};
+  \draw[arrow, ->] (term_1) to[out=50, in=130, looseness=30] (term_1);
+
+\end{diagram}
+
+The $\top$ monomorphism from $1$ into $\Omega$ has to pick out the ``true'' subobject of $\Omega$, but in this case that means it will have to pick out the subgraph of $\Omega$ that represents when a given input (vertex or edge) is unequivocally inside the extension of the predicate. 
+
+Some of the possible cases represented by $\Omega$ are not entirely ``in'' the extension of the predicate, e.g. when an edge is partly in, and partly out. The only \emph{unequivocal} case is when an edge and both of its vertices are \emph{entirely} inside the given subgraph. Thus, $\top$ must pick out the subgraph consisting of the vertex labeled ``$in$'' and the edge labeled ``$all\mhyphen in$'': 
+
+\begin{diagram}
+
+  \node at (5.75, 3.75) {$1$};
+  \draw (4.5, 2.5) rectangle (5.5, 4);
+  \node[dot, label=below:{$\ast$}] (term_1) at (5, 3) {};
+  \draw[arrow, ->] (term_1) to[out=50, in=130, looseness=30] (term_1);
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+  
+  \node at (5.825, 1.875) {$\top$};
+  \draw[arrow, ->, wire1] (5, 2.625) to[out=265, in=105] (1);
+  \draw[arrow, ->, wire2] (5.25, 3.25) to[out=300, in=60] (5.25, 1);
+  
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+  \draw[dashed, rounded corners=5pt]
+    (5, -0.575) -- (5.425, -0.25) -- (5.425, 1.25) -- (4.175, 1.25) -- (4.175, -0.25) -- (5, -0.575);
+
+\end{diagram}
+
+\noindent
+This is the subobject classifier for the category at hand, and it yields the correct characteristic morphisms when we pull $\top$ back. For instance, in the case of $F$ and $G$:
+
+\begin{diagram}
+
+  \node at (-3, 3.75) {$G$};
+  \draw (-2.75, 2.5) rectangle (-0.25, 4);
+  \node[dot, label=above left:{$w$}] (w) at (-2, 3.5) {};
+  \node[dot, label=below right:{$v$}] (v) at (-1, 3) {};
+  \draw[arrow, ->] (w) to (v);
+
+  \node at (5.75, 3.75) {$1$};
+  \draw (4.5, 2.5) rectangle (5.5, 4);
+  \node[dot, label=below:{$\ast$}] (term_1) at (5, 3) {};
+  \draw[arrow, ->] (term_1) to[out=50, in=130, looseness=30] (term_1);
+
+  \node at (-3.75, 1) {$F$};
+  \draw (-3.5, -0.625) rectangle (-0.5, 1.25);
+  \node[dot, label=above left:{$p$}] (p) at (-2, 0.5) {};
+  \node[dot, label=below:{$q$}] (q) at (-3, 0) {};
+  \node[dot, label=below:{$r$}] (r) at (-1, 0) {};
+  \draw[arrow, ->] (p) to (q);
+  \draw[arrow, ->] (p) to (r);
+  
+  \draw[dashed, rounded corners=3pt] 
+    (-2.5, 1.25) -- (-0.75, 0.25) -- (-0.75, -0.75) -- (-2.5, 0.325) -- (-2.5, 1.25);
+
+  \node at (9.375, 1) {$\Omega$};
+  \draw (4, -1.5) rectangle (9, 1.5);
+  \node[dot, label=below:{\small{$in$}}] (1) at (5, 0) {};
+  \node[dot, label=right:{\small{$out$}}] (0) at (7, 0) {};
+  
+  \draw[arrow, ->, wire1] (w) to[out=10, in=160] (term_1);
+  \draw[arrow, ->, wire1] (v) to[out=5, in=170] (term_1);
+  \draw[arrow, ->, wire2] (-1.5, 3.4) to[out=15, in=160] (4.7, 3.5);
+ 
+  \node at (5.825, 1.875) {$\top$};
+  \draw[arrow, ->, wire1] (5, 2.625) to[out=265, in=105] (1);
+  \draw[arrow, ->, wire2] (5.25, 3.25) to[out=300, in=60] (5.25, 1);
+
+  \node at (-2.5, 2) {$\natTrans{\alpha}{}$};
+  \draw[arrow, ->, wire1] (w) to[out=250, in=110] (p);
+  \draw[arrow, ->, wire1] (v) to[out=250, in=110] (r);
+  \draw[arrow, ->, wire2] (-1.5, 3.25) to[out=250, in=110] (-1.6, 0.4);
+  
+  \node at (2, -0.25) {$\characteristic{\alpha}$};
+  \draw[arrow, ->, wire1] (q) to[out=340, in=240] (0);
+  \draw[arrow, ->, wire1] (p) to[out=20, in=160] (1);
+  \draw[arrow, ->, wire1] (r) to[out=10, in=170] (1);
+  \draw[arrow, ->, wire2] (-1.6, 0.3) to[out=30, in=160] (4.425, 1);
+  \draw[arrow, ->, wire2] (-2.5, 0.2) to[out=325, in=230] (6.175, -0.625);
+  
+  \draw[arrow, ->] 
+    (1) 
+    to[out=60, in=150, looseness=30]  
+    node[midway, above] {\small{$all\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=310, in=210, looseness=30] 
+    node[midway, below] {\small{$edge\mhyphen out$}} 
+    (1);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=60, in=300, looseness=35] 
+    node[midway, above right] {\small{$all\mhyphen out$}} 
+    (0);
+  \draw[arrow, ->] 
+    (0) 
+    to[out=160, in=20] 
+    node[midway, above] {\small{$ends\mhyphen in$}} 
+    (1);
+  \draw[arrow, ->] 
+    (1) 
+    to[out=340, in=200] 
+    node[midway, below] {\small{$ends\mhyphen out$}} 
+    (0);
+
+  \draw[dashed, rounded corners=5pt]
+    (5, -0.575) -- (5.425, -0.25) -- (5.425, 1.25) -- (4.175, 1.25) -- (4.175, -0.25) -- (5, -0.575);
+
+\end{diagram}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Logical Connectives}
+
+\noindent
+Logical connectives like ``$and$'' and ``$or$'' operate on pairs of formulas. For instance, ``$and$'' takes two formulas and returns ``$true$'' if both are true. In a topos, formulas can be thought of as morphisms into $\Omega$ (in a sense we will make precise later). Accordingly, the topos-theoretic versions of ``$and$''  and ``$or$'' are morphisms from $\Omega \times \Omega$ to $\Omega$. Similarly, negation (i.e., ``$\lnot$'') operates on a single formula, and its topos-theoretic version is likewise a morphism from $\Omega$ to $\Omega$. 
+
+In general, each of the connective operations can be defined as the characteristic morphisms of the expected combinatorial operations on $\Omega$. For instance, ``$and$'' is the characteristic morphism of the subobject that picks both true parts of $\Omega \times \Omega$, while ``$or$'' is the characteristic morphism of the subobject that picks either of the true parts of $\Omega \times \Omega$.
+
+These operations impose a Heyting algebra structure on $\Omega$: there are operations that correspond to top, bottom, join (''$or$''), meet (''$and$''), complement (``$\lnot$''), and so on. This of course is also the case for the operations with set-based logic, except that the algebraic structure of the logic is Heyting (intuitionistic) for toposes in general, and not Boolean (although there are toposes that are Boolean).
+
+In the rest of this section, we will describe some of these operations. For further details, see for instance \cite[pp. TODO: find the pages (chapter 6, I think)]{Goldblatt:1984} or \cite[pp. 349--352]{Borceux:1994}.
+
+
+% ----------------------------------------
+% ----------------------------------------
+\subsubsection{$\top$ and $\bottom/$ in $\Omega$}
+
+\noindent
+One of the themes of category theory is that morphisms into objects serve as probes that we use to study those objects. For instance, a morphism $f : B \to C$ is a probe: $f$ gives us one way to look at $C$ through $B$'s eyes, so to speak.
+
+This also means that the probe you pick determines how discriminating your observations can be. A coarse probe will only reveal coarse information about the object under scrutiny, whereas a more finely variegated object will be able to make finer observations.
+
+In a topos, the terminal object $1$ is special because it is the coarsest non-trivial probe. $0$ is the coarsest probe, since it provides no information at all, but $1$ provides the next step up. $1$ can tell you only if an object has something or not. Other objects will see information indexed by their own further distinctions. But $1$ is entirely unrefined, so to speak.
+
+Because of this, we can think of $1$ as the ``global'' lens. Anything we can see with $1$ is a ``global'' fact about the topos rather than something that holds only relative to some finer level of contextualization. 
+
+If we use $1$ as a lens to probe $\Omega$, we will only be able to see global facts about $\Omega$. That is to say, $1$ simply cannot see anything finer than that when it interacts with $\Omega$.
+
+In some categories, $\Omega$ is very simple. For instance, in $\category{S}et$, it contains only two elements: ``$true$'' and ``$false$.'' But in other categories, it is more complex. For example, as we saw with the category of directed multi-graphs, $\Omega$ carries a number of intermediate notions of partial truth.
+
+However sophisticated $\Omega$'s handling of truth may be, $1$ cannot perceive anything except for the extremes. It can only see the ``entirely true'' and ``entirely false'' cases, even if $\Omega$ itself can discriminate many other cases in between.
+
+We can use the subobject classifier itself to identify which parts of itself $1$ picks out as the ``entirely true'' and ``entirely false.'' The subobject classifier classifies the subobjects of objects. In particular, for any object $X$, the morphisms $X \to \Omega$ correspond exactly to the subobjects of $X$ because each such morphism is the characteristic arrow that classifies the corresponding suboject. If we substitute $1$ in for $X$, it follows that the morphisms $1 \to \Omega$ correspond exactly to the subobjects of $1$.
+
+First, consider the largest subobject of $1$. As noted in \cref{def:biggest-and-smallest-of-omega}, the largest subobject of an object is selected by its identity morphism. So, $\ident{1}$ is the monomorphism that picks out the largest subobject of $1$:
+
+\begin{diagram}
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (1-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\ident{1}$} (1-bottom-left);
+  
+\end{diagram}
+
+If we pull back from the subobject classifier, there will be a unique characteristic morphism that classifies that subobject:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (1-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\ident{1}$} (1-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (1-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (1-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{\ident{1}}$?}
+    (omega-bottom-right);
+
+\end{diagram}
+
+What could $\characteristic{\ident{1}}$ be? In order to make the pullback square commute, it has to send all of $1$ on the bottom left to the same thing that $\top$ picks out in $\Omega$ on the right. But that is exactly what $\top$ does. Hence, $\characteristic{\ident{1}}$ just \emph{is} the morphism $\top$:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (1-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\ident{1}$} (1-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (1-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (1-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{\ident{1}}$ = $\top$}
+    (omega-bottom-right);
+
+\end{diagram}
+
+Now return to the idea that $1$ can only discern the global elements of $\Omega$. What this means is that $\top$ picks out exactly that part of $\Omega$ that represents being ``entirely true.'' 
+
+What about the smallest subobject of $1$? As noted in \cref{def:biggest-and-smallest-of-omega}, morphisms from $0$ pick out the smallest subobjects. Hence, $nil: 0 \to 1$ will pick out the smallest subobject of $1$:
+
+\begin{diagram}
+
+  \node (0-top-left) at (-5, 1) {$0$};  
+  \node (1-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (0-top-left) to node[midway, left] {$nil$} (1-bottom-left);
+  
+\end{diagram}
+
+If we pull back from the subobject classifier, there will be a unique characteristic morphism that classifies this subobject:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (0-top-left) at (-5, 1) {$0$};  
+  \node (1-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (0-top-left) to node[midway, left] {$nil$} (1-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (0-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (1-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{nil}$?}
+    (omega-bottom-right);
+
+\end{diagram}
+
+What could $\characteristic{nil}$ be? A pullback is a preimage. This mean that the subobject on the left has to consist exactly of those parts of $1$ that $\characteristic{nil}$ sends to $\top$. But since $nil$ selects nothing, it follows that $\characteristic{nil}$ cannot send anything at all to $\top$, on pain of contradiction. So, $\characteristic{nil}$ has to \emph{avoid} the ``entirely true'' part of $\Omega$ entirely. When it sends pieces of $1$ on the left over to $\Omega$ on the right, it cannot send anything into the part of $\Omega$ that $\top$ touches.
+
+At this point, it might be tempting to think that although $\characteristic{nil}$ cannot send pieces of $1$ to $\top$, nothing prevents it from send pieces of $1$ to other parts of $\Omega$. For instance, if $\Omega$ can discriminate partial truths, then perhaps $\characteristic{nil}$ sends pieces of $1$ to any of those parts in $\Omega$ that represent partial truth.
+
+But this cannot be, because $1$ is too course to discriminate anything except the entirely true and entirely false. So, $\characteristic{nil}$ has no choice but to send pieces of $1$ to the part of $\Omega$ that represents being ``entirely false.'' In other words, $\characteristic{nil}$ is the $\bottom/$ arrow:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (0-top-left) at (-5, 1) {$0$};  
+  \node (1-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (0-top-left) to node[midway, left] {$nil$} (1-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (0-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (1-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{nil}$ = $\bottom/$}
+    (omega-bottom-right);
+
+\end{diagram}
+
+Thus, the two morphisms from $1$ to $\Omega$ pick out the two ``global'' elements of $\Omega$. Even if there are many more grades and variations of partial truth encoded inside $\Omega$, $\top : 1 \to \Omega$ picks out the top element (being entirely true), and $\bottom/ : 1 \to \Omega$ picks out the bottom element (being entirely false). 
+
+
+% ----------------------------------------
+% ----------------------------------------
+\subsubsection{Conjunction}
+
+\noindent
+Intuitively, conjunction is a binary operator: it takes two formulas and then it tells us whether they are both true. Thus, the characteristic morphism for conjunction will be a morphism from $\Omega \times \Omega$ to $\Omega$. 
+
+The truth table for conjunction is of course well known: both conjuncts have to be true, otherwise the conjunction is false. To characterize conjunction in a topos, we want to do the same thing: we want to select the subobject of $\Omega \times \Omega$ that has both components true. This can be done with the morphism $\tuple{\top, \top}$:
+
+\begin{diagram}
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (omega-squared-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\tuple{\top, \top}$} (omega-squared-bottom-left);
+  
+\end{diagram}
+
+If we pull back from the subobject classifier, there will be a unique characteristic morphism that classifies that subobject:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (omega-squared-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\tuple{\top, \top}$} (omega-squared-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (1-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (omega-squared-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{\tuple{\top, \top}}$?}
+    (omega-bottom-right);
+
+\end{diagram}
+
+This $\characteristic{\tuple{\top, \top}}$ classifies the subobject that has both components true, so it will send the parts of $\Omega \times \Omega$ that are both entirely true to $\top$, just like the truth table in classical logic. Hence, $\characteristic{\tuple{\top, \top}}$ characterizes the conjunction operation:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (omega-squared-bottom-left) at (-5, -2) {$1$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\tuple{\top, \top}$} (omega-squared-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (1-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (omega-squared-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{\tuple{\top, \top}}$ = $and$}
+    (omega-bottom-right);
+
+\end{diagram}
+
+
+% ----------------------------------------
+% ----------------------------------------
+\subsubsection{Negation}
+
+Negation $\lnot : \Omega \to \Omega$ intuitively corresponds to the complement. If we have a predicate $P(x)$, say the students in the class who are passing, then $\lnot P(x)$ should pick out the complement: those remaining students who fall outside the extension of $P(x)$. In other words, we want to send the ``false'' part of $\Omega$ to the ``true'' part of $\Omega$, as if to say ``those who fail to satisfy the predicate are the ones we want to pick out.''
+
+To do that, we simply need to classify $\bottom/ : 1 \to \Omega$. Since $\bottom/$ picks out the subobject of $\Omega$ that corresponds to ``entirely false,'' its characteristic morphism will send that part to $\top$. So, start with $\bottom/$, i.e., the monomorphism that picks out the false part of $\Omega$:
+
+\begin{diagram}
+
+  \node (1-top-left) at (-5, 1) {$1$};  
+  \node (omega-bottom-left) at (-5, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\bottom/$} (omega-bottom-left);
+  
+\end{diagram}
+
+If we pull back from the subobject classifier, there will be a unique characteristic morphism that classifies this subobject:
+
+\begin{diagram}
+
+  \draw[fill=lightgray]
+     (0, 0) -- (0, -0.5) -- (-4.25, -0.5) -- (-4.25, -0.75) -- 
+     (-4.5, -0.25) -- (-4.25, 0.25) -- (-4.25, 0) -- cycle;
+  \node at (-2, -0.25) {\textsf{pull back}};
+
+  \node (1-top-left) at (-5, 1) {$0$};  
+  \node (omega-bottom-left) at (-5, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-left) to node[midway, left] {$\bottom/$} (omega-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (0-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (omega-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{\bottom/}$?}
+    (omega-bottom-right);
+
+\end{diagram}
+
+What could $\characteristic{\bottom/}$ be? Since $\bottom/$ picks out the false part of $\Omega$, $\characteristic{\bottom/}$ will send that part of $\Omega$ to $\top$. Thus, $\characteristic{\bottom/}$ will select the part of $\Omega$ that corresponds to false and make it true, just as $\lnot P(x)$ takes those who fail to satisfy $P(x)$ and it then selects them. In other words, $\characteristic{\bottom/}$ characterizes logical negation (complement):
+
+\begin{diagram}
+
+  \node (1-top-left) at (-5, 1) {$0$};  
+  \node (omega-bottom-left) at (-5, -2) {$\Omega$};
+  \draw[arrow, ->] (0-top-left) to node[midway, left] {$\bottom/$} (1-bottom-left);
+  
+  \node (1-top-right) at (0, 1) {$1$};
+  \node (omega-bottom-right) at (0, -2) {$\Omega$};
+  \draw[arrow, ->] (1-top-right) to node[midway, right] {$\top$} (omega-bottom-right);
+
+  \draw[arrow, ->] (0-top-left) to (1-top-right);
+  \draw[arrow, ->] 
+    (omega-bottom-left) 
+    to
+    node[midway, below] {$\characteristic{nil} = \lnot$}
+    (omega-bottom-right);
+
+\end{diagram}
+
+Note that taking the complement in a topos is not in general a Boolean operation. It sends a truth-value representing ``this part is in P'' to the truth-value representing ``this part is in no part of P.'' But that amounts to the largest subobject disjoint from P, and that may not be the Boolean complement. It may be the interior of the Boolean complement, or a sub-part of the Boolean complement. In general, $\lnot$ is the Heyting complement, although it is Boolean in Boolean toposes.
+
+The graph example from earlier offers an example of a non-Boolean negation. There, the extension of $\lnot P$ is the graph consisting only of the point $q$. Note in particular that the edge $e_{2}$ is not part of the complement. This is due to the fact that $e_{2}$ begins inside the extension of $P$ but then leaves $P$ and ends up outside of $P$'s extension. When we take the complement of $P$, it is therefore not part of the largest part of $F$ that is disjoint from $P$.)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Quantifiers}
+
+\noindent
+TODO
+
+I still think I should be doing this from the fibrational perspective. Quantifiers are way easier to understand that way. Can we get away with not discussing quantifiers at all?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Internal Language of the Topos}
+
+\noindent
+TODO
+
+
+% ----------------------------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mereological Reasoning in Toposes}
+\label{sec:logic-in-toposes}
+
+\noindent
+TODO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Parts and Wholes, Logically}
+
+\noindent
+TODO: define wholes in the internal language, and define the parthood relation in the internal language. Formulate some definitions like overlap.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mereological Logics For Free}
+\label{sec:mereology-logics}
+
+\noindent
+TODO: prove some theorems like reflexivity, antisymmetry, and transitivity. discuss supplementation? extensionality? atoms?
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\isPreprints{}{% This command is only used for ``preprints''.
+\begin{adjustwidth}{-\extralength}{0cm}
+%} % If the paper is ``preprints'', please uncomment this parenthesis.
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+
+% Please provide the correct journal abbreviation (e.g. according to the “List of Title Word Abbreviations” http://www.issn.org/services/online-services/access-to-the-ltwa/).
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\bibliography{references}
+
+%=====================================
+% References, variant B: internal bibliography
+%=====================================
+
+% ACS format
+% \begin{thebibliography}{999}
+% Reference 1
+% \bibitem{ref-journal}
+% Author~1, T. The title of the cited article. {\em Journal Abbreviation} {\bf 2008}, {\em 10}, 142--149.
+% Reference 2
+% \bibitem{ref-book1}
+% Author~2, L. The title of the cited contribution. In {\em The Book Title}; Editor 1, F., Editor 2, A., Eds.; % Publishing House: City, Country, 2007; pp. 32--58.
+% Reference 3
+% \bibitem{ref-book2}
+% Author 1, A.; Author 2, B. \textit{Book Title}, 3rd ed.; Publisher: Publisher Location, Country, 2008; pp. 154--196.
+% Reference 4
+% \bibitem{ref-unpublish}
+% Author 1, A.B.; Author 2, C. Title of Unpublished Work. \textit{Abbreviated Journal Name} year, \textit{phrase indicating stage of publication (submitted; accepted; in press)}.
+% Reference 5
+% \bibitem{ref-url}
+% Title of Site. Available online: URL (accessed on Day Month Year).
+% Reference 6
+% \bibitem{ref-proceeding}
+% Author 1, A.B.; Author 2, C.D.; Author 3, E.F. Title of presentation. In Proceedings of the Name of the Conference, Location of Conference, Country, Date of Conference (Day Month Year); Abstract Number (optional), Pagination (optional).
+% Reference 7
+% \bibitem{ref-thesis}
+% Author 1, A.B. Title of Thesis. Level of Thesis, Degree-Granting University, Location of University, Date of Completion.
+% \end{thebibliography}
+
+% For the MDPI journals use author-date citation, please follow the formatting guidelines on http://www.mdpi.com/authors/references
+% To cite two works by the same author: \citeauthor{ref-journal-1a} (\citeyear{ref-journal-1a}, \citeyear{ref-journal-1b}). This produces: Whittaker (1967, 1975)
+% To cite two works by the same author with specific pages: \citeauthor{ref-journal-3a} (\citeyear{ref-journal-3a}, p. 328; \citeyear{ref-journal-3b}, p.475). This produces: Wong (1999, p. 328; 2000, p. 475)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PublishersNote{}
+%\isPreprints{}{% This command is only used for ``preprints''.
+\end{adjustwidth}
+%} % If the paper is ``preprints'', please uncomment this parenthesis.
+\end{document}
+

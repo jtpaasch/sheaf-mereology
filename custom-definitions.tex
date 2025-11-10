@@ -1,0 +1,58 @@
+%-----------------------------------------------------------------
+% Tikz
+
+\usepackage{tikz}
+
+\tikzstyle{dot} = [circle, fill=black, inner sep=0pt, minimum width=4pt]
+\tikzstyle{arrow} = [shorten <=1mm, shorten >=1mm,thick=2pt]
+
+\newenvironment{diagram}
+  {\begin{center}\begin{tikzpicture}}
+  {\end{tikzpicture}\end{center}}
+
+
+%-----------------------------------------------------------------
+% Custom commands/definitions
+
+\definecolor{faded}{HTML}{AAAAAA}
+\definecolor{selected}{HTML}{DDBB88}
+\definecolor{wrong}{HTML}{CC3445}
+\definecolor{wire1}{HTML}{ABABAB}
+\definecolor{wire2}{HTML}{AB56BC}
+\definecolor{wire3}{HTML}{348967}
+
+
+\mathchardef\mhyphen="2D % math hyphen
+\def\EmptySet/{\varnothing}
+\def\Nat/{\mathbb{N}}
+\def\bottom/{\perp}
+\def\meet/{\wedge}
+\def\bigmeet/{\bigwedge}
+\def\join/{\vee}
+\def\bigjoin/{\bigvee}
+\def\compose/{\circ}
+\def\childOf/{\preccurlyeq}
+
+\def\openTuple/{\langle}
+\def\closeTuple/{\rangle}
+\newcommand\tuple[1]{\openTuple/ #1 \closeTuple/}
+\newcommand\preimage[1]{#1^{-1}}
+
+\newcommand\ident[1]{id_{#1}}
+\newcommand\category[1]{\mathbb{#1}}
+\newcommand\oppCategory[1]{\mathbb{#1}^{op}}
+\def\objects/{Objs}
+\def\morphisms/{Morphs}
+\newcommand\functor[1]{#1}
+\newcommand\natTrans[2]{#1_{#2}}
+\newcommand\characteristic[1]{\chi_{#1}}
+
+\newcommand\atomsOf[1]{Atoms(#1)}
+\newcommand\restrict[2]{\rho^{#1}_{#2}}
+\def\Index/{\mathbb{A}}
+\def\support/{I}
+\newcommand\glues[1]{\mathcal{G}_{#1}}
+\def\Gsheaf/{$\glues{}$-sheaf}
+\def\Gsheaves/{$\glues{}$-sheaves}
+
+\newcommand\jop[1]{j_{#1}}

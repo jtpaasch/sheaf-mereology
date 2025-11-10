@@ -1,0 +1,450 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[philosophies,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+%\documentclass[preprints,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+% For posting an early version of this manuscript as a preprint, you may use "preprints" as the journal. Changing "submit" to "accept" before posting will remove line numbers.
+
+%--------------------
+% Class Options:
+%--------------------
+%----------
+% journal
+%----------
+% Choose between the following MDPI journals:
+% ...  philosophies, ...
+
+%---------
+% article
+%---------
+% The default type of manuscript is "article", but can be replaced by: 
+% abstract, addendum, article, benchmark, book, bookreview, briefcommunication, briefreport, casereport, changes, clinicopathologicalchallenge, comment, commentary, communication, conceptpaper, conferenceproceedings, correction, conferencereport, creative, datadescriptor, discussion, entry, expressionofconcern, extendedabstract, editorial, essay, erratum, fieldguide, hypothesis, interestingimages, letter, meetingreport, monograph, newbookreceived, obituary, opinion, proceedingpaper, projectreport, reply, retraction, review, perspective, protocol, shortnote, studyprotocol, supfile, systematicreview, technicalnote, viewpoint, guidelines, registeredreport, tutorial,  giantsinurology, urologyaroundtheworld
+% supfile = supplementary materials
+
+%----------
+% submit
+%----------
+% The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g., the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
+
+%------------------
+% moreauthors
+%------------------
+% If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
+
+%---------
+% pdftex
+%---------
+% The option pdftex is for use with pdfLaTeX. Remove "pdftex" for (1) compiling with LaTeX & dvi2pdf (if eps figures are used) or for (2) compiling with XeLaTeX.
+
+%=================================================================
+% MDPI internal commands - do not modify
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2025}
+\copyrightyear{2025}
+%\externaleditor{Firstname Lastname} % More than 1 editor, please add `` and '' before the last editor name
+\datereceived{ } 
+\daterevised{ } % Comment out if no revised date
+\dateaccepted{ } 
+\datepublished{ } 
+%\datecorrected{} % For corrected papers: "Corrected: XXX" date in the original paper.
+%\dateretracted{} % For retracted papers: "Retracted: XXX" date in the original paper.
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+%\pdfoutput=1 % Uncommented for upload to arXiv.org
+%\CorrStatement{yes}  % For updates
+%\longauthorlist{yes} % For many authors that exceed the left citation part
+%\IsAssociation{yes} % For association journals
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, float, amsmath, amssymb, lineno, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, colortbl, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, array, tabularx, pbox, ragged2e, tocloft, marginnote, marginfix, enotez, amsthm, natbib, hyperref, cleveref, scrextend, url, geometry, newfloat, caption, draftwatermark, seqsplit
+% cleveref: load \crefname definitions after \begin{document}
+
+% Import custom definitions
+\input{custom-definitions}
+
+
+%=================================================================
+% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{Sheaf Mereology: Parts and Wholes in a Topos-Theoretic Setting}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{Title}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0000-0000-000X} % Add \orcidA{} behind the author's name
+%\newcommand{\orcidauthorB}{0000-0000-0000-000X} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Firstname Lastname $^{1}$\orcidA{}, Firstname Lastname $^{2}$ and Firstname Lastname $^{2,}$*}
+
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Firstname Lastname, Firstname Lastname and Firstname Lastname}
+
+% Author citation:  
+\AuthorCitation{Lastname, F.; Lastname, F.; Lastname, F.}
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Affiliation 1; e-mail@e-mail.com\\
+$^{2}$ \quad Affiliation 2; e-mail@e-mail.com}
+
+% Contact information of the corresponding author
+\corres{Correspondence: e-mail@e-mail.com; Tel.: (optional; include country code; if there are multiple corresponding authors, add author initials) +xx-xxxx-xxx-xxxx (F.L.)}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation.}  
+% Current address should not be the same as any items in the Affiliation section.
+
+%\secondnote{These authors contributed equally to this work.}
+% The commands \thirdnote{} till \eighthnote{} are available for further notes.
+
+%\simplesumm{} % Simple summary
+
+%\conference{} % An extended version of a conference paper
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{A single paragraph of about 200 words maximum. For research articles, abstracts should give a pertinent overview of the work. We strongly encourage authors to use the following style of structured abstracts, but without headings: (1) Background: place the question addressed in a broad context and highlight the purpose of the study; (2) Methods: describe briefly the main methods or treatments applied; (3) Results: summarize the article's main findings; (4) Conclusions: indicate the main conclusions or interpretations. The abstract should be an objective representation of the article, it must not contain results which are not presented and substantiated in the main text and should not exaggerate the main conclusions.}
+
+% Keywords
+\keyword{mereology; fusions and integral wholes; sheaves; point-free topology; frames and locales; toposes; modality; merology logic; categorical logic} 
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+%\PACS{J0101}
+%\MSC{}
+%\JEL{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Different journals have different requirements. Please check the specific journal guidelines in the "Instructions for Authors" on the journal's official website.
+%\addhighlights{yes}
+%\renewcommand{\addhighlights}{%
+%
+%\noindent The goal is to increase the discoverability and readability of the article via search engines and other scholars. Highlights should not be a copy of the abstract, but a simple text allowing the reader to quickly and simplified find out what the article is about and what can be cited from it. Each of these parts should be devoted up to 2~bullet points.\vspace{3pt}\\
+%\textbf{What are the main findings?}
+% \begin{itemize}[labelsep=2.5mm,topsep=-3pt]
+% \item First bullet.
+% \item Second bullet.
+% \end{itemize}\vspace{3pt}
+%\textbf{What is the implication of the main finding?}
+% \begin{itemize}[labelsep=2.5mm,topsep=-3pt]
+% \item First bullet.
+% \item Second bullet.
+% \end{itemize}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{-1} %% Remove this when starting to work on the template.
+%\section{How to Use this Template}
+
+% For any questions, please contact the editorial office of the journal or support@mdpi.com. For LaTeX-related questions please contact latex@mdpi.com.
+
+%\endnote{This is an endnote.} % To use endnotes, please un-comment \printendnotes below (before References). Only journal Laws uses \footnote.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:introduction}
+
+% The introduction should briefly place the study in a broad context and highlight why it is important. It should define the purpose of the work and its significance. The current state of the research field should be reviewed carefully and key publications cited. Please highlight controversial and diverging hypotheses when necessary. Finally, briefly mention the main aim of the work and highlight the principal conclusions. As far as possible, please keep the introduction comprehensible to scientists outside your particular field of research. 
+
+Standard presentations of mereology tend to take what we might call a ``parts-first'' approach. You start by taking the parthood relation as primitive, and then you proceed by stipulating axioms that govern the relation. The goal is to choose your axioms well enough that the resulting models that satisfy your theory align nicely with the actual part-whole complexes that we encounter in the world around us. 
+
+By most standard accounts (e.g., \cite{Simons:1987}, \cite{Varzi:2011}, or \cite{CotnoirAndVarzi:2021}), partisans of the parts-first approach have more or less agreed on a common (minimal) ``core'' known as ``classical mereology.'' First, classicists adopt the following principles that govern the ordering of the parts:
+
+\begin{itemize}
+
+\item Parthood is reflexive, antisymmetric, and transitive (i.e., it is a partial order).
+
+\end{itemize}
+
+\noindent
+Second, classicists adopt the following decomposition principle that governs how wholes decompose:
+
+\begin{itemize}
+
+\item Wholes decompose into more than one proper part (i.e., parthood obeys some form of so-called ``supplementation,'' ``remainder,'' or ``complementation'' principle which says that no whole consists of only a single proper part --- there must be some remainder or relative complement).
+
+\end{itemize}
+
+\noindent
+Third, classicists adopt the following principle that governs how parts fuse into wholes:
+
+\begin{itemize}
+
+\item Any collection of parts whatever forms a fusion (i.e. unrestricted fusion).
+
+\end{itemize}
+
+Classicists also require (either as an explicit axiom or as a consequence of the other axioms) some version of extensionality (TODO: consult Contoir's article on this and maybe cite it):
+
+\begin{itemize}
+
+\item If wholes have the same parts, then they're the same wholes.
+
+\end{itemize}
+
+With the above axioms fixed, the classicist can then define a number of other useful notions in the obvious ways, e.g.:
+
+\begin{itemize}
+
+\item Overlap and underlap
+\item Complement/difference
+\item Etc.
+
+\end{itemize}
+
+At first site, most of the classicist's principles can feel deeply intuitive. However, philosophers have objected to virtually all of them. Take for instance that parthood is transitive: if $x$ is a part of $y$ and $y$ is a part of $z$, then surely $x$ is a part of $z$. But there appear to be counter-examples. For example, my appendix is a part of me, and I am a member of the orchestra, but my appendix is not a member of the orchestra.
+
+A standard response is to point out that this sort of objection exploits an ambiguity: we utilize different, more specialized notions of ``parthood'' when we talk about the integration of the parts of biological organisms vs. those of orchestras. My appendix is a part of me under one description (as a part of a biological organism), while I am a part of the orchestra under another (as a member of a musical ensemble). 
+
+Defenders of the classical axioms have said that the fact that we can partition the general notion of parthood into more specialized versions only shows that the above axioms do in fact characterize a general notion of parthood, characterized precisely by the above classical notions (TODO: cite Simons, Varzi, etc).
+
+However, one can't help but feel that there is something circular about this response, since it turns on the assumption that the different notions of functional unity are species (or determinations, or partitions, or what have you) of a more generic relation. But the existence of that generic relation hasn't been established, and there is no reason to think that mereological pluralism isn't correct --- namely, that there are many parthood relations, not one (TODO: cite Fine, etc.).
+
+Another common objection to the classical approach revolves around composition principles. In particular, if we adopt unrestricted fusion, as the classical mereologist does, then we seem to get too many fusions. For instance, take the pencil on the table in front of me and your left knee. Are we really to believe that there is a fusion of that pencil and your left knee? Such a fusion would have two parts that live quite far apart (possibly even on different sides of the globe). 
+
+Defenders of the classical approach do have a response though: just because we may not have a word or concept that names the pencil+knee fusion, that doesn't mean it doesn't exist. (TODO: cite Varzi, etc.) Indeed, just as Moore attempt to show that extramental things exist by holding up his two hands and saying, ``Here is one hand, here is the other,'' so too might one try to show that the pencil+knee fusion exists by saying, ``there is the pencil, there is the knee.''
+
+Again though, one can't help but feel that there is something circular about this response. To appeal to the pencil+knee's fusion after its fused-ness has been questioned just brings the principle under scrutiny back into the mix. A better response would provide an independent reason to think that pencil+knee qualifies as more than a ``mere Cambridge'' fusion.
+
+Whether these objections/responses constitute any real conceptual clarification or are inexorably stuck in semantic circularities is not something we want to decide here. We mention these points only because they illustrate something else: they illustrate that we seem to have intuitions not just about parts, but also about fusions. In the two objections just mentioned, we seem to have certain conceptions of integrated fusions somewhere in the back of our minds, and those seem to be driving the objections. 
+
+For example, the reason it seems wrong to say my appendix is not part of the orchestra is because we seem to think that biological organisms are integrated in a different way than orchestras. Similarly, the reason we can so easily think that a pencil and a hand don't fuse is because they don't integrate in one of the ways that we ambiently accept as legitimate.
+
+That leads to the following question: if we have ambient intuitions about which collections count as fusions and which ones don't, then why not take a ``fusions-first'' approach to mereology? Instead of taking parthood as the primitive relation, and then try to work up to a notion of fusions, why not take fusions as the primitive relation, and then work backwards to parts?
+
+Such an approach is far less common in the technical mereological literature. That raises yet another question: why has the ``fusions-first'' approach been so neglected? One proposal is that it might seem to be too unwieldy. One might say that there are just too many different ways that things can integrate into wholes/fusions, and so it is a hopeless task to try and enumerate them and offer any sort of a unifying taxonomy. (TODO: Cite Simons.)
+
+Another reason might be that such a view would be inelegant and perhaps would even fail to qualify as an ``explanation'' of the part-whole phenomenon altogether. If you ask me to explain why various $X$s seem to exhibit the same (or sufficiently similar) properties, it would be quite dissatisfying if I said, ``that's easy, there is no unifying explanation.'' 
+
+TODO: remove/rewrite these last two paragraphs. The ``fusions-first'' approach is not so uncommon in the literature as I just made it out to be. Mereotopology exists as a branch of hereology, for all intensive purposes, precisely because it is the fusions-first response to the classical parts-first approach. Cite Casati and Varzi, chapter 3 and others.
+
+Fortunately, a ``fusions-first'' approach need not be as doomed as it may seem. In this paper, we claim that there is a satisfying ``fusions-first'' approach to mereology, and we present it in what follows. To accomplish this, we will build a bridge between category theory and philosophy. In particular, we will take well-known techniques used to manage the gluing-together of parts in algebraic geometry and topos theory, and we will apply those techniques to the realm of mereology.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{From Parts to Sheaves}
+
+To begin, we want to suggest that it is useful to draw a distinction between what one might call the algebra of parts on the one hand, and the integrity or gluing-together of the parts on the other. To get a sense of what this distinction means, and why it is useful, fix a part-whole complex to analyze (a statue of Dion, let's say), and let an enumeration of its parts be given. The classical principle of unrestricted fusion says that any combination of those parts glues into a fusion. In essence, this generates all possible combinations of parts. As such, it nearly yields a complete lattice, with overlap and underlap serving as the meet and join operators. 
+
+However, it only \emph{nearly} yields a complete lattice because mereologists have been relunctant to allow a bottom element. Since mereologists are ontologists, they find a null element to be ontologically suspect. And indeed, what could an empty thing that is part of all other things possibly \emph{be}? So, instead of admitting it into their mereological systems, classical mereologists have simply omitted it altogether. David Lewis (\cite{Lewis:1991}) even went so far as to formulate a version of set theory that had no empty set. 
+
+Yet despite their suspicion of a null element, classical mereologists have not shied away from allowing all possible fusions to exist, as noted already. Since the bottom element of a lattice is the empty join, we can put the point like this: classical mereologists are ontologically conservative about empty joins, and ontologically permissive about non-empty joins. As Tarski pointed out long ago, the principles of classical mereology thus yield a boolean algebra, with the bottom element removed (TODO: cite).
+
+But it is difficult to see the motivation here. On the one hand, if you want to be ontologically conservative, then why allow so many fusions? If we are going to be suspicious of an empty join, then wouldn't we also be suspicious of the fusion of (say) Dion's left hand and right knee? Conversely, if we are happy to admit the existence of entities like the fusion of Dion's left hand and right knee, then why not an empty join? 
+
+One way to diagnose the problem is to say that we, as classical mereologists, have confused the algebra of parts with the integrity of the wholes. We have defined the algebra of parts in a combinatorial way, but then at the same time, we tried to make that algebra do ontological work. But this inevitably pulls us in two directions. So, we end up letting the algebraic aspects of our parthood relation do ontological work (creating any fusion whatever), until it goes too far (e.g. the null element), at which point we try to pull back on the ontological reigns.
+
+For another point of tension, consider extensionality. The classicist's axiom says if $x$ and $y$ have the same parts, then $x$ = $y$. This is ontologically conservative: ``no difference without a difference maker'' (TODO cite Lewis). However, this flattens all structure, and so it judges that ``tip'' and ``pit'' cannot be different words, since they have the same parts, after flattening. But that of course feels wrong. These two words have a different ordering of letters, so why would we neglect that in determining their identity? Here too we don't want the combinatorics to do any ontological work, even though we're happy to let the join operation freely generate entities.
+
+We can free ourselves from these sorts of tensions if we separate the algebra of parts from the integrity or gluing of the parts. Let us think of the lattice of parts merely as the abstract ``parts space,'' i.e., as the set of all \emph{possible} combinations of the given parts into larger pieces. Moreover, let us be clear that this does not do any ontological work. A ``parts space'' is just an abstract description of the various combinations of parts that could be. Think of it as a kind of mold that has slots that could be filled in with actual pieces. To specify an \emph{actual} part-whole complex that occupies that parts space, we need to take a second step and fill in certain of those slots with actual stuff, and specify which of those pieces glue together into bigger pieces. 
+
+Once we have made this distinction, we can let the algebra of parts be an algebra, and we can even allow a bottom element without worry. As a component of the abstract parts space, the bottom element is no more a real thing than the join of any other arbitrary regions of the parts space. At the same time, when we specify which pieces really occupy the parts space, we can be as ontologically conservative or as permissive as we like. We have the freedom to provide gluing conditions that are as fine-grained as we need. For instance, we can say that certain pieces glue together, while others do not (e.g., Dion's right knee glues directly to his right femur, but not directly to his left hand). Moreover, we can let the identity conditions be determined by the gluing conditions, and so maintain structured extensionality (a difference in fusions comes from different parts, or different gluings).
+
+Once we make the distinction between the background algebra of parts and the foreground integrity of the fusion, our task takes on a distinctive shape: now we find ourselves trying to coherently glue pieces together over an ambient space. And that is something known well to algebraic geometers and topos theorists: it is the task of constructing a sheaf over a space. For the algebraic geometer and topos theorist, sheaf theory provides a systematic framework for gluing together pieces over a space in such a way that the gluing is done coherently and consistently against the ambient structure of the underlying space. It stands to reason, then, that the mathematician's sheaf-theoretic techniques can be used profitably in mereology.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Central Thesis}
+
+In this paper, we want to build a bridge between sheaf theory and mereology by importing some of those sheaf-theoretic techniques into the mereological setting. The central claim of this paper is thus: part-whole complexes can be usefully modeled as sheaves over locales. The key ideas are as follows:
+
+\begin{itemize}
+
+\item An algebra of parts tells us all the ways that parts can combine to form bigger wholes. In this sense, an algebra of parts generates the ambient ``parts space'' of an object, i.e. the abstract lattice-theoretic structure of \emph{possible} combinations. But not all possible combinations actually glue together to form \emph{actual} fusions. In many cases, we want to allow that only some of the parts glue together into an integrated whole/fusion. 
+
+\item So, we then require a separate step where we, the mereologists, have to ``fill in'' the abstract parts space with actual parts: we have to specify which bits of stuff fill in or occupy which slots in that ambient parts space, and we have to specify how those various bits of stuff glue together to form integrated fusions.
+
+\item It is tempting to try to model the ambient parts space as a topology. However, topologies have points, and it is not clear that all of the part-whole complexes that we might wish to consider are usefully modeled with points. This limitation is easy to overcome if we generalize and move to the point-free setting: instead of a topology, we choose to model the ambient parts space as a locale (a point-free generalization of a topology). 
+
+\item We use a sheaf to specify which bits of stuff inhabit an ambient locale and also to stipulate how those bits glue together. A sheaf is precisely an assignment of data to a topology or locale that coherently glues that data together. So, we choose to model the actual part-whole complex as a sheaf over the ambient locale. 
+
+\item To specify a part-whole complex, then, we (the mereologists) simply need to define a sheaf over the given locale. The ``data'' that we assign to the ambient locale are the bits of actual stuff that inhabit that parts space, and the gluing condition specifies how those pieces glue together.
+
+\item This yields a straightforward procedure that can be used to model any part-whole complex: first, specify the ambient locale, i.e., the abstract space of parts that the part-whole complex in question inhabits; second, fill in that ambient space with actual pieces and say how they glue together; third, let the sheaf framework do the rest of the work. Then the glued sections of the sheaf turn out to be the fusions, whose parts are the smaller sections each fusion is glued from. This is an honest ``fusions-first'' approach. 
+
+\end{itemize}
+
+\noindent
+There are two important benefits that come along for free when we take this approach.
+
+\begin{itemize}
+
+\item The sheaves over a locale form a topos. A topos is a special kind of category that you can do ``parts''-like logic in. Indeed, every topos comes equipped with just such an internal logic. It turns out that this internal logic corresponds exactly to the correct mereological logic that governs the part-whole complexes that can be formed over that locale. So, there is no need to manually create a mereological logic to reason about the part-whole complexes that occupy the ambient locale. We get that for free. 
+
+\item Modalities are natural operators that occur in sheaves, where they are easily defined and managed. These modalities interact correctly with the internal logic of the topos (and in fact are part of that internal logic). So we get mereological modalities for free too.
+
+\end{itemize}
+
+To our mind, the fact that these benefits come for free offers a compelling reason to adopt a sheaf-theoretic approach to part-whole complexes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Literature}
+
+The literature on mereology is vast. What we might think of as formal mereology (axiomatized systems) goes back at least to Le\'{s}niewski's system called ``Mereology'' [cite] and Leonard and Goodman's ``Calculus of Individuals'' [cite], along with other contributions by Whitehead [cite], Tarski [cite], and others. Surveys of the resulting literature and ideas can be found in the now standard works by Simons and others (e.g. \cite{Simons:1987}, \cite{Varzi:2011}, or \cite{CotnoirAndVarzi:2021}).
+
+Topological concepts have been used in mereology for a long time (see the historical coverage and discussion in \cite{Simons:1987}). So-called ``mereotopology'' explicitly aims to characterize mereological questions in topological ways, especially using notions like boundaries, interiors, and connectedness. A standard introduction to modern mereotopology is \cite{CasatiAndVarzi:1999}.
+
+However, despite its heavy reliance on topology, mereotopology has not (to our knowledge) utilized sheaf-theory in any significant way (nor has classical mereology). TODO: discuss Spivak's behavioral mereology/seven-sketches/temporal type theory (\cite{SchultzAndSpivak:2019}, Moltmann's trope sheaves, Moltmann's mereology.
+
+For sheaves, see \cite{Tennison:1975}, \cite{MacLaneAndMoerdijk:1994}, \cite{Rosiak:2022}, or \cite{Wedhorn:2016}.
+
+For toposes, see \cite{Goldblatt:1984}, \cite{McLarty:1992}, \cite{Borceux:1994}, \cite{MacLaneAndMoerdijk:1994}, \cite{LawvereAndSchanuel:1997}. TODO: discuss the idea of ``deriving'' the logic from the underlying structure, rather than ``inventing'' it axiomatically. Perhaps Moltmann's mereology is to be cited here.
+
+TODO: discuss how mereological concepts are used in certain ``fusion-first'' approaches, e.g., Peter Simons and using ``connectedness.'' Discuss Van Inwagen's special composition question (\cite{VanInwagen:1990}). 
+
+TODO: discuss non-boolean approaches. Discuss boolean algebra stuff from Protow, the survey ``Logic in Heyting Algebras,''  Moltmann's Heyting mereology.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Contributions}
+
+The contributions of this paper are as follows:
+
+\begin{itemize}
+
+\item We demonstrate a viable ``fusions-first'' approach to mereology.
+\item We separate the algebra of parts from the integrity of fusions.
+\item We build a bridge between mereological techniques of mathematics and philosophy. In particular:
+
+\begin{itemize}
+
+\item We utilize sheaves to systematically manage coherence and gluing over parts spaces.
+\item We acquire the correct mereological logics for free from the internal language of the underlying topos.
+
+\end{itemize}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Plan of the Paper}
+
+The plan of this paper is as follows. 
+
+\begin{itemize}
+
+\item Part 1: Sheaves
+
+\begin{itemize}
+
+\item In \cref{sec:sheaf-theory}, we introduce the relevant parts of sheaf theory that will be used in the rest of the paper.
+
+\item In \cref{sec:sheaf-mereology}, we define part and whole in sheaf-theoretic terms, and we show how to model different kinds of part-whole complexes as sheaves. 
+
+\item In \cref{sec:modalities}, we show how mereological modalities arise naturally in sheaves.
+
+\item In \cref{sec:classical-mereology-in-sheaves}, we discuss what classical mereological notions look like in the sheaf-theoretic setting.
+
+\end{itemize}
+
+\item Part 2: Toposes
+
+\begin{itemize}
+
+\item In \cref{sec:category-theory}, we introduce the relevant parts of category theory that are needed for topos theory.
+
+\item In \cref{sec:topos-theory}, we introduce topos theory and topos logic.
+
+\item in \cref{sec:logic-in-toposes}, we show how to do mereological logic with topos logic. 
+
+\item In \cref{sec:mereology-logics}, we show how the mereological logic of any given setting arises (for free) from the internal logic of the underlying topos.
+
+\end{itemize}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Optional
+
+% \abbreviations{Abbreviations}{
+% The following abbreviations are used in this manuscript:
+% \\
+
+% \noindent 
+% \begin{tabular}{@{}ll}
+% MDPI & Multidisciplinary Digital Publishing Institute\\
+% DOAJ & Directory of open access journals\\
+% TLA & Three letter acronym\\
+% LD & Linear dichroism
+% \end{tabular}
+% }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\isPreprints{}{% This command is only used for ``preprints''.
+\begin{adjustwidth}{-\extralength}{0cm}
+%} % If the paper is ``preprints'', please uncomment this parenthesis.
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+
+% Please provide the correct journal abbreviation (e.g. according to the “List of Title Word Abbreviations” http://www.issn.org/services/online-services/access-to-the-ltwa/).
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\bibliography{references}
+
+%=====================================
+% References, variant B: internal bibliography
+%=====================================
+
+% ACS format
+% \begin{thebibliography}{999}
+% Reference 1
+% \bibitem{ref-journal}
+% Author~1, T. The title of the cited article. {\em Journal Abbreviation} {\bf 2008}, {\em 10}, 142--149.
+% Reference 2
+% \bibitem{ref-book1}
+% Author~2, L. The title of the cited contribution. In {\em The Book Title}; Editor 1, F., Editor 2, A., Eds.; % Publishing House: City, Country, 2007; pp. 32--58.
+% Reference 3
+% \bibitem{ref-book2}
+% Author 1, A.; Author 2, B. \textit{Book Title}, 3rd ed.; Publisher: Publisher Location, Country, 2008; pp. 154--196.
+% Reference 4
+% \bibitem{ref-unpublish}
+% Author 1, A.B.; Author 2, C. Title of Unpublished Work. \textit{Abbreviated Journal Name} year, \textit{phrase indicating stage of publication (submitted; accepted; in press)}.
+% Reference 5
+% \bibitem{ref-url}
+% Title of Site. Available online: URL (accessed on Day Month Year).
+% Reference 6
+% \bibitem{ref-proceeding}
+% Author 1, A.B.; Author 2, C.D.; Author 3, E.F. Title of presentation. In Proceedings of the Name of the Conference, Location of Conference, Country, Date of Conference (Day Month Year); Abstract Number (optional), Pagination (optional).
+% Reference 7
+% \bibitem{ref-thesis}
+% Author 1, A.B. Title of Thesis. Level of Thesis, Degree-Granting University, Location of University, Date of Completion.
+% \end{thebibliography}
+
+% For the MDPI journals use author-date citation, please follow the formatting guidelines on http://www.mdpi.com/authors/references
+% To cite two works by the same author: \citeauthor{ref-journal-1a} (\citeyear{ref-journal-1a}, \citeyear{ref-journal-1b}). This produces: Whittaker (1967, 1975)
+% To cite two works by the same author with specific pages: \citeauthor{ref-journal-3a} (\citeyear{ref-journal-3a}, p. 328; \citeyear{ref-journal-3b}, p.475). This produces: Wong (1999, p. 328; 2000, p. 475)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PublishersNote{}
+%\isPreprints{}{% This command is only used for ``preprints''.
+\end{adjustwidth}
+%} % If the paper is ``preprints'', please uncomment this parenthesis.
+\end{document}
+
