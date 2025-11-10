@@ -1635,7 +1635,7 @@ Note that $\top$ is a monomorphism. It picks out a genuine subset of $\Omega$: n
 \subsection{An Extended Example}
 
 \noindent
-In more complicated categories, the subobject classifier works just as it does in $\category{S}et$, but the set of truth values might be different, and the morphisms may be more complex. This is particularly useful when it is so binary a matter whether something satisfies a predicate.
+In more complicated categories, the subobject classifier works just as it does in $\category{S}et$, but the set of truth values might be different, and the morphisms may be more complex. This is particularly useful when it is not so binary a matter whether something satisfies a predicate.
 
 In this section, we will consider how the subobject classifier works in a category of diagrams. We will omit proofs, and proceed in an expositional style. Readers familiar with subobject classifiers can skip this section.
 
@@ -2218,7 +2218,7 @@ In the rest of this section, we will describe some of these operations. For furt
 \noindent
 One of the themes of category theory is that morphisms into objects serve as probes that we use to study those objects. For instance, a morphism $f : B \to C$ is a probe: $f$ gives us one way to look at $C$ through $B$'s eyes, so to speak.
 
-This also means that the probe you pick determines how discriminating your observations can be. A coarse probe will only reveal coarse information about the object under scrutiny, whereas a more finely variegated object will be able to make finer observations.
+This also means that the probe you pick determines how discriminating your observations can be. A coarse probe will only reveal coarse information about the object under scrutiny, whereas a more sophisticated object will be able to make finer observations.
 
 In a topos, the terminal object $1$ is special because it is the coarsest non-trivial probe. $0$ is the coarsest probe, since it provides no information at all, but $1$ provides the next step up. $1$ can tell you only if an object has something or not. Other objects will see information indexed by their own further distinctions. But $1$ is entirely unrefined, so to speak.
 
@@ -2377,7 +2377,7 @@ The truth table for conjunction is of course well known: both conjuncts have to 
 \begin{diagram}
 
   \node (1-top-left) at (-5, 1) {$1$};  
-  \node (omega-squared-bottom-left) at (-5, -2) {$1$};
+  \node (omega-squared-bottom-left) at (-5, -2) {$\Omega \times \Omega$};
   \draw[arrow, ->] (1-top-left) to node[midway, left] {$\tuple{\top, \top}$} (omega-squared-bottom-left);
   
 \end{diagram}
@@ -2392,7 +2392,7 @@ If we pull back from the subobject classifier, there will be a unique characteri
   \node at (-2, -0.25) {\textsf{pull back}};
 
   \node (1-top-left) at (-5, 1) {$1$};  
-  \node (omega-squared-bottom-left) at (-5, -2) {$1$};
+  \node (omega-squared-bottom-left) at (-5, -2) {$\Omega \times \Omega$};
   \draw[arrow, ->] (1-top-left) to node[midway, left] {$\tuple{\top, \top}$} (omega-squared-bottom-left);
   
   \node (1-top-right) at (0, 1) {$1$};
@@ -2418,7 +2418,7 @@ This $\characteristic{\tuple{\top, \top}}$ classifies the subobject that has bot
   \node at (-2, -0.25) {\textsf{pull back}};
 
   \node (1-top-left) at (-5, 1) {$1$};  
-  \node (omega-squared-bottom-left) at (-5, -2) {$1$};
+  \node (omega-squared-bottom-left) at (-5, -2) {$\Omega \times \Omega$};
   \draw[arrow, ->] (1-top-left) to node[midway, left] {$\tuple{\top, \top}$} (omega-squared-bottom-left);
   
   \node (1-top-right) at (0, 1) {$1$};
@@ -2439,6 +2439,7 @@ This $\characteristic{\tuple{\top, \top}}$ classifies the subobject that has bot
 % ----------------------------------------
 \subsubsection{Negation}
 
+\noindent
 Negation $\lnot : \Omega \to \Omega$ intuitively corresponds to the complement. If we have a predicate $P(x)$, say the students in the class who are passing, then $\lnot P(x)$ should pick out the complement: those remaining students who fall outside the extension of $P(x)$. In other words, we want to send the ``false'' part of $\Omega$ to the ``true'' part of $\Omega$, as if to say ``those who fail to satisfy the predicate are the ones we want to pick out.''
 
 To do that, we simply need to classify $\bottom/ : 1 \to \Omega$. Since $\bottom/$ picks out the subobject of $\Omega$ that corresponds to ``entirely false,'' its characteristic morphism will send that part to $\top$. So, start with $\bottom/$, i.e., the monomorphism that picks out the false part of $\Omega$:
