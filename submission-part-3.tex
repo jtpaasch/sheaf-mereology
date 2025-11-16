@@ -1633,6 +1633,7 @@ Note that $\top$ is a monomorphism. It picks out a genuine subset of $\Omega$: n
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{An Extended Example}
+\label{sec:extended-subobject-example}
 
 \noindent
 In more complicated categories, the subobject classifier works just as it does in $\category{S}et$, but the set of truth values might be different, and the morphisms may be more complex. This is particularly useful when it is not so binary a matter whether something satisfies a predicate.
@@ -2119,6 +2120,11 @@ This is the subobject classifier for the category at hand, and it yields the cor
 
 \begin{diagram}
 
+  \draw[fill=lightgray]
+     (4.75, 2.25) -- (4.75, 1.75) -- (0.5, 1.75) -- (0.5, 1.5) -- 
+     (0.25, 2) -- (0.5, 2.5) -- (0.5, 2.25) -- cycle;
+  \node at (2, 2) {\textsf{pull back}};
+
   \node at (-3, 3.75) {$G$};
   \draw (-2.75, 2.5) rectangle (-0.25, 4);
   \node[dot, label=above left:{$w$}] (w) at (-2, 3.5) {};
@@ -2199,21 +2205,7 @@ This is the subobject classifier for the category at hand, and it yields the cor
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Logical Connectives}
-
-\noindent
-Logical connectives like ``$and$'' and ``$or$'' operate on pairs of formulas. For instance, ``$and$'' takes two formulas and returns ``$true$'' if both are true. In a topos, formulas can be thought of as morphisms into $\Omega$ (in a sense we will make precise later). Accordingly, the topos-theoretic versions of ``$and$''  and ``$or$'' are morphisms from $\Omega \times \Omega$ to $\Omega$. Similarly, negation (i.e., ``$\lnot$'') operates on a single formula, and its topos-theoretic version is likewise a morphism from $\Omega$ to $\Omega$. 
-
-In general, each of the connective operations can be defined as the characteristic morphisms of the expected combinatorial operations on $\Omega$. For instance, ``$and$'' is the characteristic morphism of the subobject that picks both true parts of $\Omega \times \Omega$, while ``$or$'' is the characteristic morphism of the subobject that picks either of the true parts of $\Omega \times \Omega$.
-
-These operations impose a Heyting algebra structure on $\Omega$: there are operations that correspond to top, bottom, join (''$or$''), meet (''$and$''), complement (``$\lnot$''), and so on. This of course is also the case for the operations with set-based logic, except that the algebraic structure of the logic is Heyting (intuitionistic) for toposes in general, and not Boolean (although there are toposes that are Boolean).
-
-In the rest of this section, we will describe some of these operations. For further details, see for instance \cite[pp. TODO: find the pages (chapter 6, I think)]{Goldblatt:1984} or \cite[pp. 349--352]{Borceux:1994}.
-
-
-% ----------------------------------------
-% ----------------------------------------
-\subsubsection{$\top$ and $\bottom/$ in $\Omega$}
+\subsection{Global ``truth values''}
 
 \noindent
 One of the themes of category theory is that morphisms into objects serve as probes that we use to study those objects. For instance, a morphism $f : B \to C$ is a probe: $f$ gives us one way to look at $C$ through $B$'s eyes, so to speak.
@@ -2365,6 +2357,20 @@ But this cannot be, because $1$ is too course to discriminate anything except th
 Thus, the two morphisms from $1$ to $\Omega$ pick out the two ``global'' elements of $\Omega$. Even if there are many more grades and variations of partial truth encoded inside $\Omega$, $\top : 1 \to \Omega$ picks out the top element (being entirely true), and $\bottom/ : 1 \to \Omega$ picks out the bottom element (being entirely false). 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Logical Connectives}
+
+\noindent
+Logical connectives like ``$and$'' and ``$or$'' operate on pairs of formulas. For instance, ``$and$'' takes two formulas and returns ``$true$'' if both are true. In a topos, formulas can be thought of as morphisms into $\Omega$ (in a sense we will make precise later). Accordingly, the topos-theoretic versions of ``$and$''  and ``$or$'' are morphisms from $\Omega \times \Omega$ to $\Omega$. Similarly, negation (i.e., ``$\lnot$'') operates on a single formula, and its topos-theoretic version is likewise a morphism from $\Omega$ to $\Omega$. 
+
+In general, each of the connective operations can be defined as the characteristic morphisms of the expected combinatorial operations on $\Omega$. For instance, ``$and$'' is the characteristic morphism of the subobject that picks both true parts of $\Omega \times \Omega$, while ``$or$'' is the characteristic morphism of the subobject that picks either of the true parts of $\Omega \times \Omega$.
+
+These operations impose a Heyting algebra structure on $\Omega$: there are operations that correspond to top, bottom, join (''$or$''), meet (''$and$''), complement (``$\lnot$''), and so on. This of course is also the case for the operations with set-based logic, except that the algebraic structure of the logic is Heyting (intuitionistic) for toposes in general, and not Boolean (although there are toposes that are Boolean).
+
+In the rest of this section, we will describe some of these operations. For further details, see for instance \cite[pp. TODO: find the pages (chapter 6, I think)]{Goldblatt:1984} or \cite[pp. 349--352]{Borceux:1994}.
+
+
 % ----------------------------------------
 % ----------------------------------------
 \subsubsection{Conjunction}
@@ -2501,7 +2507,7 @@ What could $\characteristic{\bottom/}$ be? Since $\bottom/$ picks out the false 
 
 Note that taking the complement in a topos is not in general a Boolean operation. It sends a truth-value representing ``this part is in P'' to the truth-value representing ``this part is in no part of P.'' But that amounts to the largest subobject disjoint from P, and that may not be the Boolean complement. It may be the interior of the Boolean complement, or a sub-part of the Boolean complement. In general, $\lnot$ is the Heyting complement, although it is Boolean in Boolean toposes.
 
-The graph example from earlier offers an example of a non-Boolean negation. There, the extension of $\lnot P$ is the graph consisting only of the point $q$. Note in particular that the edge $e_{2}$ is not part of the complement. This is due to the fact that $e_{2}$ begins inside the extension of $P$ but then leaves $P$ and ends up outside of $P$'s extension. When we take the complement of $P$, it is therefore not part of the largest part of $F$ that is disjoint from $P$.)
+The graph example from \cref{sec:extended-subobject-example} offers an example of a non-Boolean negation. There, the extension of $P$ is the sub-graph $G$ that is inserted into $F$. By contrast, the extension of $\lnot P$ is the graph consisting only of the point $q$. Note in particular that the edge $e_{2}$ is not part of the complement. This is due to the fact that $e_{2}$ begins inside the extension of $P$ but then leaves $P$ and ends up outside of $P$'s extension. When we take the complement of $P$, $e_{2}$ is therefore not part of the largest part of $F$ that is disjoint from $P$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
