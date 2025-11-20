@@ -10,6 +10,13 @@
   {\begin{center}\begin{tikzpicture}}
   {\end{tikzpicture}\end{center}}
 
+%-----------------------------------------------------------------
+% Todos
+
+\usepackage[obeyDraft,obeyFinal]{todonotes}
+\setuptodonotes{inline}
+\newcommand{\addcite}[1]{\todo[color=green!40]{\textbf{cite} #1}}
+
 
 %-----------------------------------------------------------------
 % Custom commands/definitions
