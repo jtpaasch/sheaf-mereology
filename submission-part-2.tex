@@ -492,7 +492,7 @@ A frame (synonymously, a locale) $\category{L}$ is a partially ordered set $L$ (
 
 \item [(L2)] Finite meets distribute over arbitrary joins:
 $$
-  a \meet/ \bigmeet/\limits_{i \in I} b_{i} = \bigmeet/\limits_{i \in I} (a \meet/ b_{i}),
+  a \meet/ \bigjoin/\limits_{i \in I} b_{i} = \bigjoin/\limits_{i \in I} (a \meet/ b_{i}),
   \text{ for all } a \in L \text{ and all families } \{ b_{i} \}_{i \in I} \subseteq L.
 $$
 
@@ -541,6 +541,13 @@ A presentation $\tuple{G, R}$ of a locale $\category{L}$ is comprised of:
 The locale $\category{L}$ presented by $\tuple{G, R}$ is the smallest one freely generated from $G$ which satisfies $R$.
 
 \end{Definition}
+
+% ----------------------------------------
+\begin{Remark}
+
+Every locale has a presentation, and a locale can have multiple presentations.
+
+\end{Remark}
 
 To calculate the locale that corresponds to a presentation, start with the generators, then take all finite meets and all arbitrary joins that satisfy $R$ (and of course L1 and L2).
 
@@ -672,16 +679,21 @@ We have three generators ($U_{1}$, $U_{2}$, and $U_{3}$), and there are no relat
 
 A presentation provides the most ``minimal'' information from which the rest of the locale is generated. It might be tempting to think that each generator is an atomic region, but that is not quite right. Some generators are reducible to others.
 
+
 % ----------------------------------------
 \begin{Definition}[Meet-irreducibility]
 
 Given a presentation $\category{L} = \tuple{G, R}$, a region $U \in G$ is meet-reducible (``reducible'' for short) if it is the non-trivial meet of other regions:
 \[ 
-U = W \meet/ V \implies (V = U \text{ or } W = U).
+\exists W, V \in \category{L}, U \not = W, U \not = V, \text{ and } U = W \meet/ V.
 \]
 
 \noindent
-$U$ is meet-irreducible (``irreducible'' for short) if it is not meet-reducible.
+$U$ is meet-irreducible (``irreducible'' for short) if it is not meet-reducible, i.e.:
+
+\[
+\forall W, V \in \category{L}, U = W \meet/ V \implies (V = U \text{ or } W = U).
+\]
 
 \end{Definition}
 
@@ -711,6 +723,8 @@ Given a presentation $\category{L} = \tuple{G, R}$, define the atomic regions of
 \end{enumerate}
 
 \end{Definition} 
+
+\todo{use ``primitive'' or ``fundamental'' instead of ``atomic''? An atomic thing can't be broken down, but a meet-irreducible element does have a part!}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1375,7 +1389,7 @@ A selection of patch candidates is a choice of one section (element) from each f
 
 \end{diagram}
 
-Similarly, we might pick $\{ a, d \}$, $\{ b, d \}$, or $\{a, c \}$, each of which is a valid selection of patching candidates.
+Similarly, we might pick $\{ a, d \}$, $\{ b, d \}$, or $\{a, c \}$, each of which is a valid selection of patch candidates.
 
 \end{Example}
 
@@ -1708,7 +1722,7 @@ These are not compatible. They do not agree on their overlap:
 
 Consider the empty cover. Since any selection of patch candidates for the empty cover is empty, compatibility is satisfied vacuously. 
 
-As an analogy, if you ask your class to turn off all cell phones but nobody brought a cell phone to glass, then your request is satisfied vacuously: there is simply nothing that needs to be done to make it happen. It's similar with the empty cover: since there are patch candidates to check, compatibility is achieved vacuously.
+As an analogy, if you ask your class to turn off all cell phones but nobody brought a cell phone to glass, then your request is satisfied vacuously: there is simply nothing that needs to be done to make it happen. It's similar with the empty cover: since there are no patch candidates to check, compatibility is achieved vacuously.
 
 \end{Remark}
 
@@ -1724,7 +1738,7 @@ Given a presheaf $F$ and a selection of compatible patch candidates $\{ s_{i} \}
 \]
 
 \noindent
-As a matter of terminology, if a section $s \in F(U)$ is glued from patches $\{ s_{i} \}_{i \in I}$, we say that $s$ is a global section of the cover, and each $s_{i}$ is a local section of the cover. We may also say variously that $s$ is \emph{glued from} those patches, that $s$ is \emph{composed} of those pathes, that those patches \emph{compose} $s$, or that gluing those patches \emph{yields} $s$.
+As a matter of terminology, if a section $s \in F(U)$ is glued from patches $\{ s_{i} \}_{i \in I}$, we say that $s$ is a global section of the cover, and each $s_{i}$ is a local section of the cover. We may also say variously that $s$ is \emph{glued from} those patches, that $s$ is \emph{composed} of those patches, that those patches \emph{compose} $s$, or that gluing those patches \emph{yields} $s$.
 
 A selection of patches $\{ s_{i} \}_{i \in I}$ glues uniquely if there is one and only one such section $s \in F(U)$ that is glued from them.
  
@@ -2065,9 +2079,9 @@ For a presheaf, let's assign to each region the behaviors that are locally obser
 \begin{itemize}
 
 \item The drive controller $D$ can either $drive$ (turn) or sit $idle$. 
-\item The left track assembly can each either $rotate_{L}$ or $stand_{L}$ still.
-\item The right track assembly can also either $rotate_{R}$ or $stand_{R}$ still.
-\item The entire robot can either $move$ (forward) or $sit$ stationary.
+\item The left track assembly can each either $move_{L}$ or $stand\mhyphen still_{L}$.
+\item The right track assembly can also either $move_{R}$ or $stand\mhyphen still_{R}$.
+\item The entire robot can either move $forward$ or $sit$ stationary.
 
 \end{itemize}
 
@@ -2089,17 +2103,17 @@ In a picture:
 \draw (0, 3.25) to (0, 3.75);
 \draw (0, 4.5) ellipse (0.75cm and 1cm);
 \node[dot, label=above:{\small{$sit$}}] (sit) at (0, 4.75) {};
-\node[dot, label=above:{\small{$move$}}] (move) at (0, 4) {};
+\node[dot, label=above:{\small{$forward$}}] (move) at (0, 4) {};
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=left:{\small{$rotate_{L}$}}] (left-turn) at (-2, 2.6) {};
-\node[dot, label=left:{\small{$stand_{L}$}}] (left-stand) at (-2, 3.25) {};
+\node[dot, label=left:{\small{$move_{L}$}}] (left-turn) at (-2, 2.6) {};
+\node[dot, label=left:{\small{$stand\mhyphen still_{L}$}}] (left-stand) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=right:{\small{$rotate_{R}$}}] (right-turn) at (2, 2.6) {};
-\node[dot, label=right:{\small{$stand_{R}$}}] (right-stand) at (2, 3.25) {};
+\node[dot, label=right:{\small{$move_{R}$}}] (right-turn) at (2, 2.6) {};
+\node[dot, label=right:{\small{$stand\mhyphen still_{R}$}}] (right-stand) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.5);
 \draw (0, 1.5) ellipse (0.75cm and 1cm);
@@ -2108,14 +2122,14 @@ In a picture:
 
 \end{diagram}
 
-For the restriction maps, let's say that they restrict the observable behavior of a larger region to the observable behavior of the smaller region. For instance, if you are observing the whole robot moving forward ($move$), and you then ``zoom in'' on the left track assembly, you'll see those tracks rotating ($rotate_{L}$).
+For the restriction maps, let's say that they restrict the observable behavior of a larger region to the observable behavior of the smaller region. For instance, if you are observing the whole robot moving forward ($forward$), and you then ``zoom in'' on the left track assembly, you'll see those tracks rotating ($move_{L}$).
 
 \begin{itemize}
 
-\item $\restrict{R}{LT}(sit) = stand_{L}$, $\restrict{R}{LT}(move) = rotate_{L}$.
-\item $\restrict{R}{RT}(sit) = stand_{R}$, $\restrict{R}{RT}(move) = rotate_{R}$.
-\item $\restrict{LT}{D}(stand_{L}) = idle$, $\restrict{LT}{D}(rotate_{L}) = drive$.
-\item $\restrict{RT}{D}(stand_{R}) = idle$, $\restrict{RT}{D}(rotate_{R}) = drive$.
+\item $\restrict{R}{LT}(sit) = stand\mhyphen still_{L}$, $\restrict{R}{LT}(forward) = move_{L}$.
+\item $\restrict{R}{RT}(sit) = stand\mhyphen still_{R}$, $\restrict{R}{RT}(forward) = move_{R}$.
+\item $\restrict{LT}{D}(stand\mhyphen still_{L}) = idle$, $\restrict{LT}{D}(move_{L}) = drive$.
+\item $\restrict{RT}{D}(stand\mhyphen still_{R}) = idle$, $\restrict{RT}{D}(move_{R}) = drive$.
 
 \end{itemize}
 
@@ -2136,17 +2150,17 @@ In a picture:
 \draw (0, 3.25) to (0, 3.75);
 \draw (0, 4.5) ellipse (0.75cm and 1cm);
 \node[dot, label=above:{\small{$sit$}}] (sit) at (0, 4.75) {};
-\node[dot, label=above:{\small{$move$}}] (move) at (0, 4) {};
+\node[dot, label=above:{\small{$forward$}}] (move) at (0, 4) {};
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=left:{\small{$rotate_{L}$}}] (left-turn) at (-2, 2.6) {};
-\node[dot, label=left:{\small{$stand_{L}$}}] (left-stand) at (-2, 3.25) {};
+\node[dot, label=left:{\small{$move_{L}$}}] (left-turn) at (-2, 2.6) {};
+\node[dot, label=left:{\small{$stand\mhyphen still_{L}$}}] (left-stand) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=right:{\small{$rotate_{R}$}}] (right-turn) at (2, 2.6) {};
-\node[dot, label=right:{\small{$stand_{R}$}}] (right-stand) at (2, 3.25) {};
+\node[dot, label=right:{\small{$move_{R}$}}] (right-turn) at (2, 2.6) {};
+\node[dot, label=right:{\small{$stand\mhyphen still_{R}$}}] (right-stand) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.5);
 \draw (0, 1.5) ellipse (0.75cm and 1cm);
@@ -2171,9 +2185,9 @@ In a picture:
 
 \end{diagram}
 
-Now take the cover $\{ LT, RT \}$ of $R$. The patch candidates $\{ rotate_{L}, rotate_{R} \}$ are compatible, because they agree on overlap (they both restrict down to $drive$). But they also glue uniquely, yielding $move$. In other words, the robot's forward motion is patched together precisely from the two pieces of its cover, namely the left tracks rotating ($rotate_{L}$) and the right tracks rotating ($rotate_{R}$).
+Now take the cover $\{ LT, RT \}$ of $R$. The patch candidates $\{ move_{L}, move_{R} \}$ are compatible, because they agree on overlap (they both restrict down to $drive$). But they also glue uniquely, yielding $forward$. In other words, the robot's forward motion is patched together precisely from the two pieces of its cover, namely the left tracks rotating ($move_{L}$) and the right tracks rotating ($move_{R}$).
 
-Similarly, the Robot's $sit$ behavior is also glued from the two pieces of its cover, namely the left track assembly standing still ($stand_{L}$) and the right track assembly standing still ($stand_{R}$).
+Similarly, the Robot's sitting still ($sit$) behavior is also glued from the two pieces of its cover, namely the left track assembly standing still ($stand\mhyphen still_{L}$) and the right track assembly standing still ($stand\mhyphen still_{R}$).
 
 Thus, there are two global sections of $R$'s behavior: moving forwards (patched together from its left and right motions), or standing still (patched together from its left and right lack of motion). 
 
@@ -2181,6 +2195,7 @@ Thus, there are two global sections of $R$'s behavior: moving forwards (patched 
  
 We can now state what it is to be a sheaf. A sheaf is a presheaf that satisfies a special gluing condition: namely, that for every cover, every compatible selection of patch candidates glues together uniquely.
  
+
 % ----------------------------------------
 \begin{Definition}[Sheaf]
  
@@ -2188,7 +2203,7 @@ A presheaf $F$ is a sheaf iff it satisfies the following condition (called ``the
 
 \begin{enumerate}
 
-\item [(G0)] For every cover $\{ U_{i} \}_{i \in I}$ of a region $U$ and every selection of patch candidates $\{ s_{i} \}_{i \in I}$ for that cover, if $\{ s_{i} \}_{i \in I}$ can glue, then $\{ s_{i} \}_{i \in I}$ glue to yield a unique $s \in F(U)$.
+\item [(G0)] For every cover $\{ U_{i} \}_{i \in I}$ of a region $U$ and every selection of patch candidates $\{ s_{i} \}_{i \in I}$ for that cover, if $\{ s_{i} \}_{i \in I}$ are compatible, then there exists a unique gluing $s \in F(U)$ of $\{ s_{i} \}_{i \in I}$.
 
 \end{enumerate}
  
@@ -2344,6 +2359,15 @@ Then $U$ can be written canonically as $U_{\support/(U)}$, the join of its atomi
 
 \end{Definition}
 
+
+\todo{Say something along the lines that there are many kinds of sheafs, and the fibers can have many different shapes. For instance, a standard example of a sheaf over a topological space is the set of real-valued functions defined over each region of that topology.}
+
+We're going to focus on a simple kind of sparse sheaf. We will build this sheaf by assigning to atomic regions some basic data: to each atomic region $U_{k}$, we assign some piece of data $\{ \tuple{ b_{k} } \}$. What $b_{k}$ is doesn't matter for our purposes at the moment. It just needs to be some piece of atomic data.
+
+Then, we will glue together a selection of patch candidates $\{ \tuple{ b_{1} } \}$, $\{ \tuple{ b_{2} } \}$, and so on of atomic pieces of data to form $\{ \tuple{b_{1}, b_{2}, \ldots } \}$. To decide when to glue such tuples together, we will define a gluing condition.
+
+\todo{Talk about how we are going to imagine that each ``$b_{k}$'' represents something that occupies the region $U_{k}$. E.g., it's a chunk of matter, or a mechanical gadget, or whatever. But it is the part or stuff in that atomic region. The larger whole will then be built up by fusing together these parts according to the gluing condition.}
+
 A gluing condition is a family of predicates that say when a selection of patch candidates glue.
 
 % ----------------------------------------
@@ -2356,7 +2380,7 @@ A gluing condition $\glues{}$ is a family of predicates
 \]
 
 \noindent
-one for each region $U \in \category{L}$, that collectively satisfy the following coherence conditions:
+i.e. for each region $U \in \category{L}$ a predicate over the Cartesian product of the fibers of the atomic support of $U$, that collectively satisfy the following coherence conditions:
 
 \begin{enumerate}
 
@@ -3491,11 +3515,11 @@ Let us say that $\Sigma^{\leqslant n}$ is the set of all finite sequences less t
 \noindent
 Given sequences $w, v \in \Sigma^{\leqslant n}$ with $length(w) \leqslant length(v)$, let us write $w \subseteq v$ to denote that $w$ is a prefix of $v$, as in $aab \subseteq aabc$.
 
-Next, define a topology over $\Sigma^{\leqslant}$ by setting the open sets to be sequences that share a prefix:
+Next, define a topology over $\Sigma^{\leqslant n}$ by setting the open sets to be sequences that share a prefix:
 
 \begin{itemize}
 
-\item $U_{w} = \{ v \in \Sigma^{\leqslant} \mid w \subseteq v \}$.
+\item $U_{w} = \{ v \in \Sigma^{\leqslant n} \mid w \subseteq v \}$.
 
 \end{itemize}
 
@@ -3838,6 +3862,8 @@ TODO:
 
 \item Note Spivak et al's behavioral mereology is an example of a \Gsheaf/ (and check the details to make sure that's really true).
 
+\item Mormann's ``structural mereology'' is basically just our thesis. Add examples from his similarity structures.
+  
 \end{itemize}
 
 
