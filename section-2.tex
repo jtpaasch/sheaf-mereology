@@ -2,10 +2,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Sheaf-Theory}
+\section{Sheaf Theory}
 \label{sec:sheaf-theory}
 
-In this section, we cover the parts of sheaf theory that we will utilize in the rest of the paper. Readers familiar with sheaf theory can skip this section.
+In this section, we introduce the parts of sheaf theory needed for the sequel.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -146,11 +146,11 @@ This gives rise to the idea of the ``fibers'' of a map. The fibers of a map are 
 % ----------------------------------------
 \begin{Definition}[Fibers]
 
-Given a map $f : E \to B$ and a point $y \in B$, the fiber over $y$ is its pre-image $\preimage{f}(y)$ = $\{ x \mid f(x) = y \}$. $B$ is called the ``base space'' (or ``base'' for short) of $f$, while the point $y$ is called the ``base point'' (or ``base'' for short) of the fiber.
+Given a map $f : E \to B$ and a point $y \in B$, the fiber over $y$ is its pre-image $\preimage{f}(y)$ = $\{ x \mid f(x) = y \}$. $B$ is called the base space of $f$, and $y$ the base point of the fiber.
 
 \end{Definition}
 
-We can select a cross-section of one or more fibers by selecting a point from each of the fibers in question. For instance, we can take $3$, $4$, and $7$ as a cross-section of the fibers $\preimage{f}(a)$, $\preimage{f}(b)$, and $\preimage{f}(c)$:
+We can take a cross-section of one or more fibers by selecting a point from each of the fibers in question. For instance, we can take $3$, $4$, and $7$ as a cross-section of the fibers $\preimage{f}(a)$, $\preimage{f}(b)$, and $\preimage{f}(c)$:
 
 \begin{diagram}
 
@@ -183,11 +183,11 @@ We can select a cross-section of one or more fibers by selecting a point from ea
 
 \end{diagram}
 
-We can also take cross-sections local to only some of the fibers. For instance, we can take $1$ as a cross-section just of $\preimage{f}(a)$:
+We can also take cross-sections local to only some of the fibers. For instance, we can take $1$ and $4$ as a cross-section of $\preimage{f}(a)$ and $\preimage{f}(b)$:
 
 \begin{diagram}
 
-\draw[rounded corners=4pt,fill=selected] (-2.75, 1.4) rectangle (-0.75, 1.10);
+\draw[rounded corners=4pt,fill=selected] (-2.5, 1.05) -- (0.7, 2.45) -- (0.8, 2.2) -- (-2.4, 0.8) -- cycle;
 
 \node at (2.825, 1.5) {$E$};
 \draw (-1.75, 1.75) ellipse (0.5cm and 1cm);
@@ -219,7 +219,7 @@ We can also take cross-sections local to only some of the fibers. For instance, 
 % ----------------------------------------
 \begin{Definition}[Sections]
 
-Given a map $f : E \to B$ and a subset $C \subseteq B$ (i.e., a selection of base points in $B$), a section of $f$ (over $C$) is a choice of one element from each fiber over each base $x \in C$.
+Given a map $f : E \to B$ and a subset of base points $C \subseteq B$, a section of $f$ (over $C$) is a choice of one element from each fiber over each base point $x \in C$.
 
 \end{Definition}
 
@@ -227,7 +227,7 @@ Given a map $f : E \to B$ and a subset $C \subseteq B$ (i.e., a selection of bas
 \begin{Remark}
 \label{remark:section-terminology}
 
-Since each point in a fiber amounts to a section over the fiber's base, the elements of a fiber are often just called the ``sections'' of the fiber. 
+Since each point in a fiber amounts to a section over the fiber's base, the elements of a fiber are often just called the sections of the fiber. 
 
 \end{Remark}
 
@@ -243,7 +243,7 @@ In traditional topology, spaces are built out of the points of the space. Given 
 % ----------------------------------------
 \begin{Definition}[Topology]
 
-Let $X$ be a non-empty set, thought of as the ``points'' of the space. A topology on X is a collection $T$ of subsets of $X$, thought of as the ``regions'' of the space (called the ``open sets'' or just the ``opens'' of $T$), that satisfy the following conditions:
+Let $X$ be a non-empty set, thought of as the points of the space. A topology on X is a collection $T$ of subsets of $X$, thought of as the regions of the space and called the open sets (or just the opens) of $T$, that satisfy the following conditions:
 
 \begin{enumerate}
 
@@ -263,11 +263,11 @@ $$\text{if } U_{1}, \ldots, U_{n} \in T, \text{ then } \bigcap\limits_{i=1}^{n} 
 
 \end{Definition}
 
-These conditions encode the way that spatial regions are put together. For instance, it ensures that if two regions overlap, then their overlapping area is a region too (and indeed, that's what it means for regions to \emph{overlap}: there's a region of space they have in common).
+These conditions encode the way that spatial regions are put together. For instance, it ensures that if two regions overlap, then their overlapping area is a region too.
 
 \begin{Remark}
 
-  The regions of a topology, ordered by inclusion, form a complete lattice. Since the topology includes arbitrary unions, the join of this lattice is set union, but since the topology includes only finite intersections, the meet of this lattice is the \emph{interior} of set intersection.
+The regions of a topology, ordered by inclusion, form a complete lattice. Since the topology includes arbitrary unions, the join of this lattice is set union, but since the topology includes only finite intersections, the meet of this lattice is the \emph{interior} of set intersection.
 
 \end{Remark}
 
@@ -276,7 +276,7 @@ These conditions encode the way that spatial regions are put together. For insta
 \begin{Example}
 \label{ex:topology}
 
-Let $X = \{ a, b, c \}$. One possible topology is: $T = \{ \EmptySet/, \{ b \}, \{ a, b \}, \{ b, c \}, \{a, b, c \} \}$. If we draw dashed circles around each of the opens (regions), ignoring the empty set, we get:
+Let $X = \{ a, b, c \}$. One possible topology is $T = \{ \EmptySet/, \{ b \}, \{ a, b \}, \{ b, c \}, \{a, b, c \} \}$. If we draw dashed circles around each of the opens (regions), we get:
 
 \begin{diagram}
 
@@ -319,7 +319,7 @@ The lattice structure suggests that much of what is important about a space is n
 % ----------------------------------------
 \begin{Definition}[Frames/locales]
 
-A frame (synonymously, a locale) $\category{L}$ is a partially ordered set $L$ (we call its elements ``opens'' or ``regions'') that satisfies the following conditions:
+A frame (synonymously, a locale) $\category{L}$ is a partially ordered set $L$ (whose elements are called opens or regions) that satisfies the following conditions:
 
 \begin{enumerate}
 
@@ -338,6 +338,7 @@ $$
 
 \end{enumerate}
 
+\noindent
 Define $V \childOf/ U$ (read ``$V$ is included in $U$'') by $a = a \meet/ b$.
 
 \end{Definition}
@@ -352,7 +353,7 @@ The fact that $V \childOf/ U$ is equivalent to $a = a \meet/ b$ means we can dea
 
 \begin{Remark}
 
-The category of locales is defined as the dual/opposite of the category of frames (see \cref{def:opposite-category} below), and so frames and locales are quite literally the very same objects. In practice, frames are often used for algebraic purposes, and locales are used for (generalized) spatial purposes. Here, we will have no reason to distinguish these two roles, and so we will use the names ``frame'' and ``locale'' interchangeably. 
+The category of locales is defined as the dual/opposite of the category of frames, and so frames and locales are quite literally the very same objects. In practice, frames are often used for algebraic purposes, and locales are used for (generalized) spatial purposes. Here, we will have no reason to distinguish these two roles, and so we will use the names ``frame'' and ``locale'' interchangeably. 
 
 \end{Remark}
 
@@ -517,48 +518,110 @@ We have three generators ($U_{1}$, $U_{2}$, and $U_{3}$), and there are no relat
 
 \end{Example}
 
-A presentation provides the most ``minimal'' information from which the rest of the locale is generated. It might be tempting to think that each generator is an atomic region, but that is not quite right. Some generators are reducible to others.
+A presentation provides the most ``minimal'' information from which the rest of the locale is generated. At first glance, it might be tempting to think that these generators are ``atomic'' or indivisible regions --- the fundamental pieces of the locale.
 
+But this intuition is misleading. A generator in a presentation can sometimes be expressed as the nontrivial meet or join of other generators. In this sense, some generators are actually composite rather than truly atomic.
+
+The genuinely indivisible generators — the true primitives — are exactly those that cannot be built nontrivially from other generators using meet and join. These are the elements that serve as the irreducible building blocks of the locale.
+
+To make this precise, we first define what it means to be built trivially or nontrivially from other generators via meet and join.
 
 % ----------------------------------------
-\begin{Definition}[Meet-irreducibility]
+\begin{Definition}[Trivial meet-constructions]
 
-Given a presentation $\category{L} = \tuple{G, R}$, a region $U \in G$ is meet-reducible (``reducible'' for short) if it is the non-trivial meet of other regions:
-\[ 
-\exists W, V \in \category{L}, U \not = W, U \not = V, \text{ and } U = W \meet/ V.
+Given a presentation $\category{L} = \tuple{G, R}$, a meet construction of generators, i.e.
+
+\[
+U = \bigmeet/^{n}_{i = 1} U_{i}
 \]
 
 \noindent
-$U$ is meet-irreducible (``irreducible'' for short) if it is not meet-reducible, i.e.:
+with each $U_{i} \in G$, is a trivial meet-construction if the meet is equal to one of its factors, i.e. if
 
 \[
-\forall W, V \in \category{L}, U = W \meet/ V \implies (V = U \text{ or } W = U).
+U = U_{i} \text{ for some } i.
 \]
 
 \end{Definition}
 
-Intuitively, a generator is reducible if it can be expressed as the meet of strictly larger regions, which occurs exactly when it is their overlap.
+% ----------------------------------------
+\begin{Definition}[Trivial join-constructions]
+
+Given a presentation $\category{L} = \tuple{G, R}$, a join construction of generators, i.e.
+
+\[
+U = \bigjoin/^{n}_{i = 1} U_{i}
+\]
+
+\noindent
+with each $U_{i} \in G$, is a trivial join-construction if the join is equal to one of its factors, i.e. if
+
+\[
+U = U_{i} \text{ for some } i.
+\]
+
+\end{Definition}
+
+Intuitively, trivial meet- and join-constructions do not genuinely combine multiple pieces. The result is already contained in the inputs.
+
+% ----------------------------------------
+\begin{Definition}[Meet-primitive generators]
+
+Given a presentation $\category{L} = \tuple{G, R}$, a region $U \in G$ is meet-primitive (primitive for short) if every meet-construction 
+
+\[
+U = \bigmeet/^{n}_{i = 1} U_{i}
+\]
+
+\noindent
+with each $U_{i} \in G$ is trivial.
+
+\end{Definition}
+
+Intuitively, a generator is meet-primitive if it cannot be assembled from larger ones by taking meets.
+
+% ----------------------------------------
+\begin{Definition}[Join-primitive generators]
+
+Given a presentation $\category{L} = \tuple{G, R}$, a region $U \in G$ is join-primitive (primitive for short) if every join-construction 
+
+\[
+U = \bigmeet/^{n}_{i = 1} U_{i}
+\]
+
+\noindent
+with each $U_{i} \in G$ is trivial.
+
+\end{Definition}
+
+Intuitively, a generator is join-primitive if it cannot be assembled from smaller ones by taking joins.
+
+\begin{Remark}
+
+In the technical literature, meet-primitive generators are often called meet-irreducible.
+
+\end{Remark}
 
 \begin{Example}
 
-Take the locale from \cref{ex:locale-with-overlap-and-bottom}. $U_{1}$ is the overlap of $U_{2}$ and $U_{3}$, and $U_{2}$ and $U_{3}$ are strictly larger regions than $U_{1}$, so $U_{1}$ is reducible.
+Take the locale from \cref{ex:locale-with-overlap-and-bottom}. $U_{1}$ is the overlap of $U_{2}$ and $U_{3}$, and $U_{2}$ and $U_{3}$ are strictly larger regions than $U_{1}$, so $U_{1}$ is not primitive.
 
-By contrast, $U_{2}$ and $U_{3}$ are irreducible, because they cannot be expressed as the meet of two strictly larger regions. Similarly, $\bottom/$ is irreducible, because it is not the meet of two strictly larger regions either (it is the meet of only one strictly larger region, namely $U_{1}$). 
+By contrast, $U_{2}$ and $U_{3}$ are primitive, because they cannot be obtained as the meet of two strictly larger regions. Similarly, $\bottom/$ is primitive, because it is not the meet of two strictly larger regions either (it is the meet of only one strictly larger region, namely $U_{1}$). 
 
 \end{Example}
 
-We can see the minimal irreducible generators of a locale as its atomic regions.
+We can see the minimal meet-primitive generators of a locale as its atomic regions.
 
 % ----------------------------------------
 \begin{Definition}[Atomic regions]
 
-Given a presentation $\category{L} = \tuple{G, R}$, define the atomic regions of $\category{L}$, denoted $\atomsOf{\category{L}}$, as the minimal irreducible generators, i.e. those generators $g \in G$ that satisfy the following two conditions:
+Given a presentation $\category{L} = \tuple{G, R}$, the atomic regions of $\category{L}$, denoted $\atomsOf{\category{L}}$, are the minimal primitive generators of $\category{L}$, i.e. those generators $g \in G$ that satisfy the following two conditions:
 
 \begin{enumerate}
 
-\item [(A1)] \emph{Meet-irreducibility}. $g$ is meet-irreducible.
+\item [(A1)] \emph{Meet-primitive}. $g$ is meet-primitive.
 
-\item [(A2)] \emph{Minimality}. There is no strictly smaller meet-irreducible $h$ with $h \childOf/ g$.
+\item [(A2)] \emph{Minimality}. There is no strictly smaller meet-primitive $h$ with $h \childOf/ g$.
 
 \end{enumerate}
 
@@ -1562,7 +1625,7 @@ These are not compatible. They do not agree on their overlap:
 
 Consider the empty cover. Since any selection of patch candidates for the empty cover is empty, compatibility is satisfied vacuously. 
 
-As an analogy, if you ask your class to turn off all cell phones but nobody brought a cell phone to glass, then your request is satisfied vacuously: there is simply nothing that needs to be done to make it happen. It's similar with the empty cover: since there are no patch candidates to check, compatibility is achieved vacuously.
+As an analogy, if you ask your class to turn off all cell phones but nobody brought a cell phone to class, then your request is satisfied vacuously: there is simply nothing that needs to be done to make it happen. It's similar with the empty cover: since there are no patch candidates to check, compatibility is achieved vacuously.
 
 \end{Remark}
 
@@ -2034,6 +2097,8 @@ Thus, there are two global sections of $R$'s behavior: moving forwards (patched 
 \end{Example}
  
 We can now state what it is to be a sheaf. A sheaf is a presheaf that satisfies a special gluing condition: namely, that for every cover, every compatible selection of patch candidates glues together uniquely.
+ 
+\todo{Define separated presheaf here.}
  
 
 % ----------------------------------------

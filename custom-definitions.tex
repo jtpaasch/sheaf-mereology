@@ -40,9 +40,8 @@
 
 
 \mathchardef\mhyphen="2D % math hyphen
+\newcommand\e[1]{\mathsf{#1}}
 \def\EmptySet/{\varnothing}
-\def\InitialObject/{0}
-\def\TerminalObject/{1}
 \def\Nat/{\mathbb{N}}
 \def\bottom/{\perp}
 \def\meet/{\wedge}
@@ -52,26 +51,18 @@
 \def\compose/{\circ}
 \def\childOf/{\preccurlyeq}
 
-\def\subobjectMeet/{\sqcap}
-\def\subobjectJoin/{\sqcup}
-
 \def\openTuple/{\langle}
 \def\closeTuple/{\rangle}
 \newcommand\tuple[1]{\openTuple/ #1 \closeTuple/}
-\newcommand\preimage[1]{#1^{-1}}
+\newcommand\preimage[1]{#1^{\mhyphen 1}}
 
-\newcommand\topos[1]{\mathcal{#1}}
-\newcommand\subobjectsOf[1]{Sub(#1)}
-\newcommand\ident[1]{id_{#1}}
+\newcommand\ident[1]{\e{id}_{#1}}
 \newcommand\category[1]{\mathbb{#1}}
 \newcommand\oppCategory[1]{\mathbb{#1}^{op}}
-\def\objects/{Objs}
-\def\morphisms/{Morphs}
-\newcommand\functor[1]{#1}
-\newcommand\natTrans[2]{#1_{#2}}
-\newcommand\characteristic[1]{\chi_{#1}}
+\def\objects/{\e{Ob}}
+\def\morphisms/{\e{Arr}}
 
-\newcommand\atomsOf[1]{Atoms(#1)}
+\newcommand\atomsOf[1]{\e{Atoms}(#1)}
 \newcommand\restrict[2]{\rho^{#1}_{#2}}
 \def\Index/{\mathbb{A}}
 \def\support/{I}
@@ -80,21 +71,3 @@
 \def\Gsheaves/{$\glues{}$-sheaves}
 
 \newcommand\jop[1]{j_{#1}}
-
-\def\Set/{\category{S}\mathsf{et}}
-\def\Graph/{\category{G}\mathsf{raph}}
-
-\def\monicIn/{\subseteq}
-\newcommand\imageOf[1]{im~#1}
-
-\def\firstProj/{\pi_{1}}
-\def\secondProj/{\pi_{2}}
-\newcommand\productMorphism[2]{\tuple{#1, #2}}
-
-\def\injectLeft/{in\mhyphen l}
-\def\injectRight/{in\mhyphen r}
-\newcommand\coproduct[2]{#1 + #2}
-\newcommand\coproductMorphism[2]{[#1, #2]}
-
-\def\Lang/{\mathcal{L}}
-\newcommand\sem[1]{\llbracket #1 \rrbracket}
