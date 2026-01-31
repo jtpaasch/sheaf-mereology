@@ -1,0 +1,1363 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modeling Part-Whole Complexes as Sheaves}
+\label{sec:sheaf-mereology}
+
+\noindent
+As noted in \cref{sec:introduction}, the central claim of this paper is that we can model part-whole complexes as sheaves over locales. In particular, the locale provides the abstract parts space of ``regions'' the pieces can occupy, the sheaf assigns actual pieces to those regions, and the gluing condition determines when pieces fuse.
+
+We can thus define the core mereological concepts of part and whole in sheaf-theoretic terms. Regarding wholes, we can identify fusion with gluing: to say that some pieces fuse or form a ``fusion'' is just to say that they are glued together. Regarding parts, to say that a piece is a ``part'' is just to say that it is a part of a fusion. In other words, the parts of a fusion are just the pieces from which it is glued together.
+
+\def\partOf/{\sqsubseteq}
+
+\begin{Definition}[Fusions and parts]
+
+We say that a section $s \in F(U)$ is a fusion iff 
+
+\[
+\glues{U}(s) = \mathrm{true}.
+\]
+
+\noindent
+Given $t \in F(V)$ and $s \in F(U)$ with $V \childOf/ U$ and $V \not = \bottom/$, we say $t$ is a part of $s$, denoted $t \partOf/ s$, iff
+
+\[
+\glues{U}(s) \quad\text{ and }\quad \restrict{U}{V}(s) = t.
+\]
+
+\end{Definition}
+
+\begin{Remark}
+
+$V \not = \bottom/$ because no parts can occupy $\bottom/$. The least region of the locale represents the combinatorial idea of no regions at all, and so it cannot be populated by any parts (hence in a \Gsheaf/ the sole section over $\bottom/$ is the singleton $\tuple{}$).
+
+\end{Remark}
+
+Sheaf theory thus provides a systematic framework with which to model a large variety of part-whole complexes in a ``fusions-first'' manner. In the rest of this section, we illustrate with examples.
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:wr-h-er}
+
+Consider a building with a west room, an east room, and a hallway between them. For simplicity, let us consider only the floors of the building (ignore walls, ceilings, and so on). The ambient locale is given by the presentation
+
+\begin{itemize}
+
+\item $\category{L} = \tuple{G, R} = \tuple{\{ WR, H, ER \}, \EmptySet/}$
+
+\end{itemize}
+
+\noindent
+where
+
+\begin{itemize}
+
+\item $WR$ = west room
+\item $H$ = hallway
+\item $ER$ = east room
+
+\end{itemize}
+
+\noindent
+As a Hasse diagram:
+
+\begin{diagram}
+
+\node (WR_v_H_v_ER) at (0, 3) {$WR \join/ H \join/ ER$};
+\node (WR_v_H) at (-2, 2) {$WR \join/ H$};
+\node (WR_v_ER) at (0, 2) {$WR \join/ ER$};
+\node (H_v_ER) at (2, 2) {$H \join/ ER$};
+\node (WR) at (-2, 1) {$WR$};
+\node (H) at (0, 1) {$H$};
+\node (ER) at (2, 1) {$ER$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw (bottom) to (WR);
+\draw (bottom) to (H);
+\draw (bottom) to (ER);
+\draw (WR) to (WR_v_H);
+\draw (WR) to (WR_v_ER);
+\draw (H) to (WR_v_H);
+\draw (H) to (H_v_ER);
+\draw (ER) to (WR_v_ER);
+\draw (ER) to (H_v_ER);
+\draw (WR_v_H) to (WR_v_H_v_ER);
+\draw (WR_v_ER) to (WR_v_H_v_ER);
+\draw (H_v_ER) to (WR_v_H_v_ER);
+
+\end{diagram}
+
+\noindent
+All of the generators are atomic, since none overlap (there are no meets among the generators):
+
+\begin{itemize}
+
+\item $\atomsOf{\category{L}} = \{ WR, H, ER \}$
+
+\end{itemize}
+
+\noindent
+Let us define a \Gsheaf/ $F$ that models the flooring of this building. For data, let there be the following available flooring materials:
+
+\begin{itemize}
+
+\item $M = \{ \text{wood}, \text{tile}, \ldots \}$
+
+\end{itemize}
+
+\noindent
+For a gluing condition, let us say that sections glue if they contain the same materials:
+
+\begin{itemize}
+
+\item $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true}$ 
+  iff $b_{i} = b_{j}$ for every $i, j \in \support/(U)$.
+\item $\mathrm{false}$ otherwise
+
+\end{itemize}
+
+\noindent
+We must check that this is a legitimate gluing condition.
+
+\begin{proof}
+
+We must show that $\glues{}$ satisfies the coherence conditions (G1)--(G3).
+
+\begin{itemize}
+
+\item [G1] \emph{Local atomic data}. Trivial.
+
+\item [G2] \emph{Downward stability}. We must show that if $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)})$ = $\mathrm{true}$, then $\glues{V}(\restrict{U}{V}(\tuple{b_{i}}_{i \in \support/(U)}))$ = $\mathrm{true}$ for every $V \childOf/ U$.  Assume the antecedent. Then $\restrict{U}{V}(\tuple{b_{i}}_{i \in \support/(U)})$ = $\tuple{b_{i}}_{i \in \support/(V)}$.
+  \begin{itemize}
+      \item \emph{Case 1}: if the length of $\tuple{b_{i}}_{i \in \support/(V)} = 1$, it glues by (G1).
+      \item \emph{Case 2}: if the length of $\tuple{b_{i}}_{i \in \support/(V)} \geqslant 2$, then by the assumption, $b_{i}$ = $b_{j}$ for every $i, j \in \support/(V)$, so they glue.
+  \end{itemize}
+
+\item [G3] \emph{Upward stability}. Given a selection of compatible patch candidates $\tuple{b_{i}}_{i \in \support/(U)}$, we must show that if $\glues{U_{i}}(\tuple{b_{i}, b_{j}})$ = $\mathrm{true}$ for each $i, j \in \support/(U)$, then $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)})$ = $\mathrm{true}$. Assume the antecedent. Since for every $i, j \in \support/(U)$, $b_{i} = b_{j}$ by the assumption, $\tuple{b_{i}}_{i \in \support/(U)}$ glues. \qedhere
+
+\end{itemize}
+
+\end{proof}
+
+\noindent
+For the atomic regions, fix a choice of local data:
+
+\begin{itemize}
+
+\item $F(WR) = \{ \tuple{wood} \}$
+\item $F(H) = \{ \tuple{wood} \}$
+\item $F(ER) = \{ \tuple{tile} \}$
+
+\end{itemize}
+
+\noindent
+Extend compatible data to meets, of which there is only $\bottom/$, so:
+
+\begin{itemize}
+
+\item $F(\bottom/) = \{ \tuple{} \}$
+
+\end{itemize}
+
+\noindent
+Recursively extend data to joins via gluing:
+
+\begin{itemize}
+
+\item $F(WR \join/ H)$ = $\{ \tuple{wood, wood} \}$, since $F(WR)$ = $F(H)$ = $\{ \tuple{wood} \}$,
+and $wood$ = $wood$.
+
+\item $F(WR \join/ ER) = \EmptySet/$, since $F(WR)$ = $\{ \tuple{wood} \}$, $F(ER) = \{ \tuple{tile} \}$, and $wood \not = tile$.
+
+\item $F(H \join/ ER)$ = $\EmptySet/$, since $F(H)$ = $\{ \tuple{wood} \}$, $F(ER)$ = $\{ \tuple{tile} \}$, $wood \not = tile$.
+
+\item $F(WR \join/ H \join/ ER)$ = $\EmptySet/$, since $F(WR \join/ H)$ = $\{ \tuple{wood, wood} \}$, $F(H \join/ ER)$ = $F(WR \join/ ER)$ = $\EmptySet/$, and $wood \not = \EmptySet/$.
+
+\end{itemize}
+
+\noindent
+In this building, there are two maximal fusions:
+
+\begin{itemize}
+
+\item The flooring of the west room and the hallway glue into one piece that covers both.
+\item The flooring that covers the east room is (trivially) glued into a single piece, namely itself.
+
+\end{itemize}
+
+\noindent
+Thus, the flooring of this building is really a collection of two independent fusions: the wooden floor that covers the east room and hallway, and the tiled floor that covers the east room. That implies: 
+
+\begin{itemize}
+
+\item To separate the floors of the east room and hallway, you would have to use a saw to cut them, since they are fused. They are not merely sitting next to each other. Rather, they make up a single (fused) piece.
+
+\item By contrast, to separate the hallway and the east room, you would not need to cut them, since they are not fused. They simply happen to be sitting next to each other.
+
+\end{itemize}
+
+\noindent
+The parts of the fusions are clear:
+
+\begin{itemize}
+
+\item The wooden floor that covers the west room and the hallway has two parts: the wooden floor that covers the west room, and the wooden floor that covers the hallway.
+
+\item The tiled floor of the east room has no parts (in this locale), since it is not the fusion of other fusions.
+
+\end{itemize}
+
+\end{Example}
+
+In the previous example, none of the atomic regions overlapped. The locale was discrete, and thus the sheaf was free to glue or not glue pieces as it saw fit. The story is different if there are overlaps in the locale itself. Overlaps in the locale require overlaps in the sheaf.
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:wh-o-eh}
+
+Consider the floor of a single room. Let us say that the regions of interest are its west half, its east half, and a six inch span where they overlap.
+
+The ambient locale of this kind of space can be given by the presentation
+
+\begin{itemize}
+
+\item $L = \tuple{G, R} = 
+  \tuple{\{ \bottom/, WH, O, EH \}, \{\bottom/ \childOf/ O, O \childOf/ WH, O \childOf/ EH\}}$
+
+\end{itemize}
+
+\noindent
+where
+
+\begin{itemize}
+
+\item $WH$ = west half
+\item $O$ = overlap
+\item $EH$ = east half
+
+\end{itemize}
+
+\noindent
+The atomic sections of this locale are:
+
+\begin{itemize}
+
+\item $WH$
+\item $EH$
+\item $\bottom/$
+
+\end{itemize}
+
+\noindent
+In particular, $O$ is not an atomic region, because it is the non-trivial overlap of $WH$ and $EH$.
+
+Here is the Hasse diagram:
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+\node (bottom) at (0, -1) {$\bottom/$};
+
+\draw (bottom) to (O);
+\draw (O) to (WH);
+\draw (O) to (EH);
+\draw (WH) to (WH_v_EH);
+\draw (EH) to (WH_v_EH);
+
+\end{diagram}
+
+Let us define a \Gsheaf/ $F$ that models the flooring of this room, using the same gluing condition from \cref{ex:wr-h-er}.
+
+For the atomic regions, let us assign wood to both halves:
+
+\begin{itemize}
+
+\item $F(WH) = \{ \tuple{wood} \}$
+\item $F(EH) = \{ \tuple{wood} \}$
+
+\end{itemize}
+
+\noindent
+In a picture (omitting $\bottom/$ for simplicity):
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$wood$}}] (wood_EH) at (2, 2.75) {};
+
+\end{diagram}
+
+\noindent
+For the meet (the overlap $O$), the two halves restrict to the same thing:
+
+\begin{itemize}
+
+\item $F(O) = \{ \tuple{wood} \}$
+    
+\end{itemize}
+
+\noindent
+Thus:
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$wood$}}] (wood_EH) at (2, 2.75) {};
+
+\draw (0, 0.25) to (0, 0.5);
+\draw (0, 1.5) ellipse (0.85cm and 0.75cm);
+\node[dot, label=below:{\small{$wood$}}] (wood_O) at (0, 1.5) {};
+
+\draw[arrow, ->] (wood_WH) to (wood_O);
+\draw[arrow, ->] (wood_EH) to (wood_O);
+
+\end{diagram}
+
+\noindent
+For the join, the west and east halves glue, since they're made from the same flooring materials and agree on their overlap:
+
+\begin{itemize}
+
+\item $F(WH \join/ EH) = \{ \tuple{wood} \}$
+
+\end{itemize}
+
+\noindent
+Thus:
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$wood$}}] (wood_EH) at (2, 2.75) {};
+
+\draw (0, 0.25) to (0, 0.5);
+\draw (0, 1.5) ellipse (0.85cm and 0.75cm);
+\node[dot, label=below:{\small{$wood$}}] (wood_O) at (0, 1.5) {};
+
+\draw (0, 3.25) to (0, 3.75);
+\draw (0, 4.25) ellipse (0.75cm and 0.75cm);
+\node[dot, label=above:{\small{$wood$}}] (wood_WH_v_EH) at (0, 4) {};
+
+\draw[arrow, ->] (wood_WH_v_EH) to (wood_WH);
+\draw[arrow, ->] (wood_WH_v_EH) to (wood_EH);
+\draw[arrow, ->] (wood_WH) to (wood_O);
+\draw[arrow, ->] (wood_EH) to (wood_O);
+
+\end{diagram}
+
+The maximal fusion is a single piece of wooden flooring that covers the whole room. Its parts are the west and east halves, and (transitively) their overlap. The west and east halves themselves have a shared part, the strip of overlap.
+
+\end{Example}
+
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:wh-o-eh-fail}
+
+To illustrate a failed attempt to build a sheaf, let us take the locale and gluing condition from \cref{ex:wh-o-eh}, but let's assign different flooring materials to the atomic regions:
+
+\begin{itemize}
+
+\item $F(WH) = \{ \tuple{wood} \}$
+\item $F(EH) = \{ \tuple{tile} \}$
+
+\end{itemize}
+
+\noindent
+As a picture:
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$tile$}}] (tile_EH) at (2, 2.75) {};
+
+\end{diagram}
+
+Next, we attempt to extend this data to meets, which requires that we restrict to the overlap, and then filter out anything that can't glue. Here, $F(WH)$ restricts to $\{ \tuple{wood} \}$, and $F(EH)$ restricts to $\{ \tuple{tile} \}$:
+
+\begin{itemize}
+
+\item $\restrict{WH}{O}(\tuple{wood}) = \tuple{wood}$
+\item $\restrict{EH}{O}(\tuple{tile}) = \tuple{tile}$
+
+\end{itemize}
+
+\noindent
+Thus:
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$tile$}}] (tile_EH) at (2, 2.75) {};
+
+\draw (0, 0.25) to (0, 0.5);
+\draw (0, 1.5) ellipse (1cm and 1cm);
+\node[dot, label=below:{\small{$wood$}}] (wood_O) at (0, 1.25) {};
+\node[dot, label=below:{\small{$tile$}}] (tile_O) at (0, 2.1) {};
+
+\draw[arrow, ->] (wood_WH) to (wood_O);
+\draw[arrow, ->] (tile_EH) to (tile_O);
+
+\end{diagram}
+
+However, these cannot glue, because they are not the same. We see here that the data of WH and EH disagree on the overlap. Hence, we are unable to construct a coherent sheaf. This illustrates how sheaf theory requires and manages coherent gluing at all levels. Because it requires that pieces glue together coherently at every level of ``zoom,'' it prevents us from ever putting together an incoherent part-whole complex in the first place.
+
+It is worth spelling the failure out explicitly. Since $WH$ and $EH$ disagree on their overlap, $F$ cannot assign anything to $O$, so:
+
+\begin{itemize}
+
+\item $F(O) = \EmptySet/$
+
+\end{itemize}
+
+\noindent
+But that renders the restrictions $\restrict{WH}{O}$ and $\restrict{EH}{O}$ undefined, thereby severing our ability to zoom in and out. Thus, the system as a whole becomes incoherent.
+
+Intuitively, this makes sense. If the western and eastern halves of a room were truly floored with different materials, then they would not overlap. There would be some sort of boundary between them where the one's materials end and the other's materials begin. But here, the ambient locale doesn't allow that possibility. In \emph{this} particular locale, the western and eastern halves \emph{do} overlap, so the sheaf must assign pieces to the different regions coherently, i.e., it must assign pieces that agree on their overlap.
+
+\end{Example}
+
+The previous two examples were spatial. But parts come in non-spatial guises too, and sheaves can model them just as well.
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:human-society}
+
+Suppose we say that human society (under some description) consists of the mesh of a specified set of relationships between the people that participate in that society.
+
+Let $P$ be the population in question (a finite set of individual people), and let the regions of our locale be subsets of such individuals. Then the ambient locale is given by the presentation:
+
+\begin{itemize}
+
+\item $\category{L} = \tuple{G, R} = \tuple{P, \EmptySet/}$
+
+\end{itemize}
+
+\noindent
+For concreteness, suppose:
+
+\begin{itemize}
+
+\item $P = \{ A$ (Alice), $B$ (Bob), $C$ (Carol), $D$ (Denny) $\}$
+
+\end{itemize}
+
+\noindent
+Then the Hasse diagram is isomorphic to the powerset of $P$:
+
+\begin{diagram}
+
+\node (ABCD) at (0, 6) {$A \join/ B \join/ C \join/ D$};
+\node (ABC) at (-3, 4.5) {$A \join/ B \join/ C$};
+\node (ABD) at (-1, 4.5) {$A \join/ B \join/ D$};
+\node (ACD) at (1, 4.5) {$A \join/ C \join/ D$};
+\node (BCD) at (3, 4.5) {$B \join/ C \join/ D$};
+\node (AB) at (-5, 3) {$A \join/ B$};
+\node (AC) at (-3, 3) {$A \join/ C$};
+\node (AD) at (-1, 3) {$A \join/ D$};
+\node (BC) at (1, 3) {$B \join/ C$};
+\node (BD) at (3, 3) {$B \join/ D$};
+\node (CD) at (5, 3) {$C \join/ D$};
+\node (A) at (-3, 1.5) {$A$};
+\node (B) at (-1, 1.5) {$B$};
+\node (C) at (1, 1.5) {$C$};
+\node (D) at (3, 1.5) {$D$}; 
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw (bottom) to (A);
+\draw (bottom) to (B);
+\draw (bottom) to (C);
+\draw (bottom) to (D);
+\draw (A) to (AB);
+\draw (A) to (AC);
+\draw (A) to (AD);
+\draw (B) to (AB);
+\draw (B) to (BC);
+\draw (B) to (BD);
+\draw (C) to (AC);
+\draw (C) to (BC);
+\draw (C) to (CD);
+\draw (D) to (AD);
+\draw (D) to (BD);
+\draw (D) to (CD);
+\draw (AB) to (ABC);
+\draw (AB) to (ABD);
+\draw (AC) to (ABC);
+\draw (AC) to (ACD);
+\draw (AD) to (ABD);
+\draw (AD) to (ACD);
+\draw (BC) to (ABC);
+\draw (BC) to (BCD);
+\draw (BD) to (ABD);
+\draw (BD) to (BCD);
+\draw (CD) to (ACD);
+\draw (CD) to (BCD);
+\draw (ABC) to (ABCD);
+\draw (ABD) to (ABCD);
+\draw (ACD) to (ABCD);
+\draw (BCD) to (ABCD);
+
+\end{diagram}
+
+\noindent
+All of the generators are atomic, since there are no meets among the generators:
+
+\begin{itemize}
+
+\item $\atomsOf{\category{L}} = \{ A, B, C, D \}$
+
+\end{itemize}
+
+\noindent
+Let us define a \Gsheaf/ $F$ that models the mesh of a selected set of relationships over $P$. To do that, let us first specify a set $R$ that picks out the (binary, symmetric) relationships of interest:
+
+\begin{itemize}
+
+\item $R = \{ f$ (friends), $m$ (married), $\ldots \}$
+
+\end{itemize}
+
+\noindent
+For convenience, if $U, V \in P$, $r \in R$, and $U$ and $V$ stand in relationship $r$, we
+will write $r(U, V)$.
+
+For a gluing condition, let us say that sections glue if they are connected by the same relations:
+
+\begin{itemize}
+
+\item $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true}$ iff for every $r \in R$, 
+      $r(U_{i}, U_{j}) \in b_{i}$ iff $r(U_{j}, U_{i}) \in b_{j}$, for every $i, j \in \support/(U)$
+\item $\mathrm{false}$ otherwise
+
+\end{itemize}
+
+\noindent
+We must check that this is a legitimate gluing condition.
+
+\begin{proof}
+
+The proof is the same as before. \qedhere
+
+\end{proof}
+
+\noindent
+For the atomic regions, let us fix a choice of local data by assigning to each person the relations they stand in, e.g.:
+
+\begin{itemize}
+
+\item $F(A) = \{\tuple{\{ f(A, B), f(A, C), m(A, B) \}} \}$
+\item $F(B) = \{\tuple{\{ f(B, A), m(B, A), f(B, D) \}} \}$
+\item $F(C) = \{\tuple{\{ f(C, A), m(C, D) \}} \}$
+\item $F(D) = \{\tuple{\{ f(D, B), m(D, C) \}} \}$
+
+\end{itemize}
+
+\noindent
+To visualize this data, we can picture each fiber as a mini-graph:
+
+\begin{diagram}
+
+\node[dot] (Cf_over_A) at (-4.25, 3.25) [label=right:{\small{$C$}}] {};
+\node[dot] (Bm_over_A) at (-5, 3.75) [label=above:{\small{$B$}}] {};
+\node[dot] (Bf_over_A) at (-5.75, 3.25) [label=left:{\small{$B$}}] {};
+\node[dot] (anchor_over_A) at (-5, 3) [label=below:{\small{$A$}}] {};
+\node (A) at (-5, 1.5) {$A$};
+\draw (A) to (-5, 2.25);
+\draw (anchor_over_A) to node[midway, below left] {\small{$f$}} (Bf_over_A);
+\draw (anchor_over_A) to node[midway, left] {\small{$m$}} (Bm_over_A);
+\draw (anchor_over_A) to node[midway, below right] {\small{$f$}} (Cf_over_A);
+
+\node[dot] (Df_over_B) at (-1.25, 3.25) [label=right:{\small{$D$}}] {};
+\node[dot] (Am_over_B) at (-2, 3.75) [label=above:{\small{$A$}}] {};
+\node[dot] (Af_over_B) at (-2.75, 3.25) [label=left:{\small{$A$}}] {};
+\node[dot] (anchor_over_B) at (-2, 3) [label=below:{\small{$B$}}] {};
+\node (B) at (-2, 1.5) {$B$};
+\draw (B) to (-2, 2.25);
+\draw (anchor_over_B) to node[midway, below left] {\small{$f$}} (Af_over_B);
+\draw (anchor_over_B) to node[midway, left] {\small{$m$}} (Am_over_B);
+\draw (anchor_over_B) to node[midway, below right] {\small{$f$}} (Df_over_B);
+
+\node[dot] (Af_over_C) at (0.5, 3.5) [label=left:{\small{$A$}}] {};
+\node[dot] (Dm_over_C) at (1.5, 3.5) [label=right:{\small{$D$}}] {};
+\node[dot] (anchor_over_C) at (1, 3) [label=below:{\small{$C$}}] {};
+\node (C) at (1, 1.5) {$C$};
+\draw (C) to (1, 2.25);
+\draw (anchor_over_C) to node[midway, below left] {\small{$f$}} (Af_over_C);
+\draw (anchor_over_C) to node[midway, below right] {\small{$m$}} (Dm_over_C);
+
+\node[dot] (Bf_over_D) at (3.5, 3.5) [label=left:{\small{$B$}}] {};
+\node[dot] (Cm_over_D) at (4.5, 3.5) [label=right:{\small{$C$}}] {};
+\node[dot] (anchor_over_D) at (4, 3) [label=below:{\small{$D$}}] {};
+\node (D) at (4, 1.5) {$D$};
+\draw (D) to (4, 2.25);
+\draw (anchor_over_D) to node[midway, below left] {\small{$f$}} (Bf_over_D);
+\draw (anchor_over_D) to node[midway, below right] {\small{$m$}} (Cm_over_D);
+
+\end{diagram}
+
+\noindent
+For example, in the fiber over $A$:
+
+\begin{itemize}
+
+\item The $f$-labeled edge from $A$ to $B$ represents $f(A, B)$: $A$ and $B$ are friends.
+\item The $m$-labeled edge from $A$ to $B$ represents $m(A, B)$: $A$ and $B$ are married.
+\item The $f$-labeled edge from $A$ to $C$ represents $f(A, C)$: $A$ and $C$ are friends.
+
+\end{itemize}
+
+\noindent
+Next, we must extend compatible data to meets, of which there is only $\bottom/$, so:
+
+\begin{itemize}
+
+\item $F(\bottom/) = \{ \tuple{} \}$
+
+\end{itemize}
+
+\noindent
+Finally, we must extend atomic data to binary joins via gluing. The gluing condition essentially says that mini-graphs can be glued along shared edges, provided that they share exactly the same edges. To see how this works, consider (for example) the mini-graphs over $A$ and $C$:
+
+\begin{diagram}
+
+\node[dot] (Cf_over_A) at (-1.25, 3.25) [label=right:{\small{$C$}}] {};
+\node[dot] (Bm_over_A) at (-2, 3.75) [label=above:{\small{$B$}}] {};
+\node[dot] (Bf_over_A) at (-2.75, 3.25) [label=left:{\small{$B$}}] {};
+\node[dot] (anchor_over_A) at (-2, 3) [label=below:{\small{$A$}}] {};
+\draw (anchor_over_A) to node[midway, below left] {\small{$f$}} (Bf_over_A);
+\draw (anchor_over_A) to node[midway, left] {\small{$m$}} (Bm_over_A);
+\draw (anchor_over_A) to node[midway, below right] {\small{$f$}} (Cf_over_A);
+
+\node[dot] (Af_over_C) at (1.5, 3.5) [label=left:{\small{$A$}}] {};
+\node[dot] (Dm_over_C) at (2.5, 3.5) [label=right:{\small{$D$}}] {};
+\node[dot] (anchor_over_C) at (2, 3) [label=below:{\small{$C$}}] {};
+\draw (anchor_over_C) to node[midway, below left] {\small{$f$}} (Af_over_C);
+\draw (anchor_over_C) to node[midway, below right] {\small{$m$}} (Dm_over_C);
+
+\end{diagram}
+
+\noindent
+Can these be glued? The answer is yes, because they share exactly one edge, namely the one labeled $f$. If you rotate the graphs sideways a bit, you can see how they can be merged along $f(A, C)$:
+
+\begin{diagram}
+
+\node[dot] (Cf_over_A) at (-1.15, 3) [label=below right:{\small{$C$}}] {};
+\node[dot] (Bm_over_A) at (-1.65, 3.75) [label=above:{\small{$B$}}] {};
+\node[dot] (Bf_over_A) at (-2.5, 3.5) [label=left:{\small{$B$}}] {};
+\node[dot] (anchor_over_A) at (-2, 3) [label=below left:{\small{$A$}}] {};
+\draw (anchor_over_A) to node[midway, below left] {\small{$f$}} (Bf_over_A);
+\draw (anchor_over_A) to node[midway, above left] {\small{$m$}} (Bm_over_A);
+\draw (anchor_over_A) to node[midway, below] {\small{$f$}} (Cf_over_A);
+
+\node[dot] (Af_over_C) at (1.15, 3) [label=below left:{\small{$A$}}] {};
+\node[dot] (Dm_over_C) at (2, 3.75) [label=right:{\small{$D$}}] {};
+\node[dot] (anchor_over_C) at (2, 3) [label=below right:{\small{$C$}}] {};
+\draw (anchor_over_C) to node[midway, below] {\small{$f$}} (Af_over_C);
+\draw (anchor_over_C) to node[midway, right] {\small{$m$}} (Dm_over_C);
+
+\draw[dashed] (-2, 2.5) -- (-2, 2.35) -- (-1.15, 2.35) -- (-1.14, 2.5);
+\draw[dashed] (1.15, 2.5) -- (1.15, 2.35) -- (2, 2.35) -- (2, 2.5);
+\draw[dashed] (-1.65, 2.35) -- (-1.65, 2) -- (1.65, 2) -- (1.65, 2.35);
+\node at (0, 1.75) {\small{merge these edges}};
+
+\end{diagram}
+ 
+\noindent
+Merging along $f(A, C)$ yields the following glued graph:
+
+\begin{diagram}
+
+\node[dot] (Cf_over_A) at (-1.15, 3) [label=below right:{\small{$C$}}] {};
+\node[dot] (Bm_over_A) at (-2, 3.75) [label=above:{\small{$B$}}] {};
+\node[dot] (Bf_over_A) at (-2.75, 3.25) [label=left:{\small{$B$}}] {};
+\node[dot] (anchor_over_A) at (-2, 3) [label=below left:{\small{$A$}}] {};
+\node[dot] (Dm_over_Cf) at (-0.75, 3.75) [label=right:{\small{$D$}}] {};
+\draw (anchor_over_A) to node[midway, below left] {\small{$f$}} (Bf_over_A);
+\draw (anchor_over_A) to node[midway, left] {\small{$m$}} (Bm_over_A);
+\draw (anchor_over_A) to node[midway, below] {\small{$f$}} (Cf_over_A);
+\draw (Cf_over_A) to node[midway, below right] {\small{$m$}} (Dm_over_Cf);
+
+\end{diagram}
+
+\noindent
+By gluing binary joins in this fashion, we get:
+
+\begin{itemize}
+
+\item $F(A \join/ B) = \{\tuple{\{ f(A, B), m(A, B), f(A, C) \}, \{ f(B, A), m(B, A), f(B, D) \}} \}$
+\item $F(A \join/ C) = \{\tuple{\{ f(B, A), m(B, A), f(B, D) \}}, \{ f(C, A), m(C, D) \} \}$
+\item $F(A \join/ D) = \EmptySet/$
+\item $F(B \join/ C) = \EmptySet/$
+\item $F(B \join/ D) = \{\tuple{\{ f(B, A), m(B, A), f(B, D) \}, \{ f(D, B), m(D, C) \}} \}$
+\item $F(C \join/ D) = \{\tuple{\{ f(C, A), m(C, D) \}, \{ f(D, B), m(D, C) \}} \}$
+
+\end{itemize}
+
+\noindent
+As pictures:
+
+\begin{diagram}
+
+\node[dot] (A_over_A_v_B) at (-4.4, 1.5) [label=below left:{\small{$A$}}] {};
+\node[dot] (B_over_A_v_B) at (-3.6, 1.5) [label=below right:{\small{$B$}}] {};
+\node[dot] (Cf_over_A_v_B) at (-4.6, 2.1) [label=above:{\small{$C$}}] {};
+\node[dot] (Df_over_A_v_B) at (-3.4, 2.1) [label=above:{\small{$D$}}] {};
+\node (A_v_B) at (-4, 0) {$A \join/ B$};
+\draw (A_v_B) to (-4, 0.75);
+\draw (A_over_A_v_B) to node[midway, left] {\small{$f$}} (Cf_over_A_v_B);
+\draw (B_over_A_v_B) to node[midway, right] {\small{$f$}} (Df_over_A_v_B);
+\draw (A_over_A_v_B) to[out=30, in=150] node[midway, above] {\small{$f$}} (B_over_A_v_B);
+\draw (A_over_A_v_B) to[out=330, in=210] node[midway, below] {\small{$m$}} (B_over_A_v_B);
+
+\node[dot] (A_over_A_v_C) at (-1.4, 1.5) [label=below left:{\small{$A$}}] {};
+\node[dot] (C_over_A_v_C) at (-0.6, 1.5) [label=below right:{\small{$C$}}] {};
+\node[dot] (Bm_over_A_v_C) at (-1.4, 2.2) [label=above:{\small{$B$}}] {};
+\node[dot] (Bf_over_A_v_C) at (-2.1, 1.7) [label=left:{\small{$B$}}] {};
+\node[dot] (Dm_over_A_v_C) at (-0.4, 2.2) [label=right:{\small{$D$}}] {};
+\node (A_v_C) at (-1, 0) {$A \join/ C$};
+\draw (A_v_C) to (-1, 0.75);
+\draw (A_over_A_v_C) to node[midway, below left] {\small{$f$}} (Bf_over_A_v_C);
+\draw (A_over_A_v_C) to node[midway, left] {\small{$m$}} (Bm_over_A_v_C);
+\draw (A_over_A_v_C) to node[midway, below] {\small{$f$}} (C_over_A_v_C);
+\draw (C_over_A_v_C) to node[midway, below right] {\small{$m$}} (Dm_over_A_v_C);
+
+\node (empty_over_A_v_D_and_B_v_C) at (1, 1.25) {$\EmptySet/$};
+\node (A_v_D_and_B_v_C) at (1, 0) {$A \join/ D$/$B \join/ C$};
+\draw (A_v_D_and_B_v_C) to (1, 0.75);
+
+\node[dot] (B_over_B_v_D) at (3.1, 1.5) [label=below left:{\small{$B$}}] {};
+\node[dot] (D_over_B_v_D) at (3.9, 1.5) [label=below right:{\small{$D$}}] {};
+\node[dot] (Am_over_B_v_D) at (3.1, 2.2) [label=above:{\small{$A$}}] {};
+\node[dot] (Af_over_B_v_D) at (2.4, 1.7) [label=left:{\small{$A$}}] {};
+\node[dot] (Cm_over_B_v_D) at (4.1, 2.2) [label=right:{\small{$C$}}] {};
+\node (B_v_D) at (3.5, 0) {$B \join/ D$};
+\draw (B_v_D) to (3.5, 0.75);
+\draw (B_over_B_v_D) to node[midway, below left] {\small{$f$}} (Af_over_B_v_D);
+\draw (B_over_B_v_D) to node[midway, left] {\small{$m$}} (Am_over_B_v_D);
+\draw (B_over_B_v_D) to node[midway, below] {\small{$f$}} (D_over_B_v_D);
+\draw (D_over_B_v_D) to node[midway, below right] {\small{$m$}} (Cm_over_B_v_D);
+
+\node[dot] (C_over_C_v_D) at (5.6, 1.5) [label=below left:{\small{$C$}}] {};
+\node[dot] (D_over_C_v_D) at (6.4, 1.5) [label=below right:{\small{$D$}}] {};
+\node[dot] (Af_over_C_v_D) at (5.4, 2.1) [label=above:{\small{$A$}}] {};
+\node[dot] (Bf_over_C_v_D) at (6.6, 2.1) [label=above:{\small{$B$}}] {};
+\node (C_v_D) at (6, 0) {$C \join/ D$};
+\draw (C_v_D) to (6, 0.75);
+\draw (C_over_C_v_D) to node[midway, below] {\small{$m$}} (D_over_C_v_D);
+\draw (C_over_C_v_D) to node[midway, left] {\small{$f$}} (Af_over_C_v_D);
+\draw (D_over_C_v_D) to node[midway, right] {\small{$f$}} (Bf_over_C_v_D);
+
+\end{diagram}
+
+Having glued joins of two regions, we must next glue joins of three atomic regions. For instance, take $B \join/ C \join/ D$. We can glue $B \join/ C$ trivially (because they share no edges), we can glue $C \join/ D$ along their shared $f$-edge, and we can glue $B \join/ D$ along their shared $f$-edge. That yields:
+
+\begin{diagram}
+
+\node[dot] (B_over_B_v_C_v_D) at (-0.5, 1.5) [label=below right:{\small{$B$}}] {};
+\node[dot] (C_over_B_v_C_v_D) at (0.5, 1.5) [label=below:{\small{$C$}}] {};
+\node[dot] (D_over_B_v_C_v_D) at (0, 2) [label=above:{\small{$D$}}] {};
+\node[dot] (Af_from_B_over_B_v_C_v_D) at (-1.1, 2) [label=left:{\small{$A$}}] {};
+\node[dot] (Am_from_B_over_B_v_C_v_D) at (-1.2, 1) [label=left:{\small{$A$}}] {};
+\node[dot] (Af_from_C_over_B_v_C_v_D) at (1.1, 2) [label=right:{\small{$A$}}] {};
+\node (B_v_C_v_D) at (0, 0) {$B \join/ C \join/ D$};
+\draw (B_v_C_v_D) to (0, 0.75);
+\draw (B_over_B_v_C_v_D) to node[midway, above left] {\small{$f$}} (D_over_B_v_C_v_D);
+\draw (C_over_B_v_C_v_D) to node[midway, above right] {\small{$m$}} (D_over_B_v_C_v_D);
+\draw 
+  (C_over_B_v_C_v_D) 
+  to 
+  node[midway, below right] {\small{$f$}} 
+  (Af_from_C_over_B_v_C_v_D);
+\draw 
+  (B_over_B_v_C_v_D) 
+  to
+  node[midway, below left] {\small{$f$}} 
+  (Af_from_B_over_B_v_C_v_D);
+\draw 
+  (B_over_B_v_C_v_D) 
+  to
+  node[midway, below right] {\small{$m$}} 
+  (Am_from_B_over_B_v_C_v_D);
+
+\end{diagram}
+
+\noindent
+By gluing all joins of three atomic regions in this fashion, we get:
+
+\begin{itemize}
+
+\item
+  $F(A \join/ B \join/ C) =$
+    $\left\{
+      \begin{array}{l l}
+        \openTuple/ 
+          & \{ f(A, B), f(A, C), m(A, B) \}, \\
+          & \{ f(B, A), m(B, A), f(B, D) \}, \\
+	  & \{ f(C, A), m(C, D) \} \quad \closeTuple/
+      \end{array}
+    \right\}$
+
+\item 
+  $F(A \join/ B \join/ D) =$
+    $\left\{
+      \begin{array}{l l}
+        \openTuple/ 
+          & \{ f(A, B), f(A, C), m(A, B) \}, \\
+          & \{ f(B, A), m(B, A), f(B, D) \}, \\
+          & \{ f(D, B), m(D, C) \} \quad \closeTuple/
+      \end{array}
+    \right\}$
+
+\item
+  $F(A \join/ C \join/ D) =$
+    $\left\{
+      \begin{array}{l l}
+        \openTuple/
+          & \{ f(A, B), f(A, C), m(A, B) \}, \\
+	  & \{ f(C, A), m(C, D) \}, \\
+          & \{ f(D, B), m(D, C) \} \quad \closeTuple/
+      \end{array}
+    \right\}$
+
+\item $F(B \join/ C \join/ D) =$
+    $\left\{
+      \begin{array}{l l}
+        \openTuple/
+          & \{ f(B, A), m(B, A), f(B, D) \}, \\
+          & \{ f(C, A), m(C, D) \}, \\
+          & \{ f(D, B), m(D, C) \} \quad \closeTuple/
+      \end{array}
+    \right\}$
+
+\end{itemize}
+
+\noindent
+At the top-most join, gluing four regions, we get:
+
+\begin{itemize}
+
+\item
+  $F(A \join/ B \join/ C \join/ D) =$
+    $\left\{
+      \begin{array}{l l}
+        \openTuple/ 
+          & \{ f(A, B), f(A, C), m(A, B) \}, \\
+          & \{ f(B, A), m(B, A), f(B, D) \}, \\
+	  & \{ f(C, A), m(C, D) \}, \\
+	  & \{ f(D, B), m(D, C) \} \quad \closeTuple/
+      \end{array}
+    \right\}$
+
+\end{itemize}
+
+\noindent
+As a picture:
+
+\begin{diagram}
+
+\node[dot] (B_over_A_v_B_v_C_v_D) at (-0.5, 1.5) [label=left:{\small{$B$}}] {};
+\node[dot] (C_over_A_v_B_v_C_v_D) at (0.5, 1.5) [label=right:{\small{$C$}}] {};
+\node[dot] (D_over_A_v_B_v_C_v_D) at (0, 2) [label=above:{\small{$D$}}] {};
+\node[dot] (A_over_A_v_B_v_C_v_D) at (0, 1) [label=below:{\small{$A$}}] {};
+\node (A_v_B_v_C_v_D) at (0, -0.5) {$A \join/ B \join/ C \join/ D$};
+\draw (A_v_B_v_C_v_D) to (0, 0.25);
+\draw 
+  (B_over_A_v_B_v_C_v_D) 
+  to 
+  node[midway, above left] {\small{$f$}} 
+  (D_over_A_v_B_v_C_v_D);
+\draw 
+  (C_over_A_v_B_v_C_v_D) 
+  to 
+  node[midway, above right] {\small{$m$}} 
+  (D_over_A_v_B_v_C_v_D);
+\draw 
+  (C_over_A_v_B_v_C_v_D) 
+  to 
+  node[midway, below right] {\small{$f$}} 
+  (A_over_A_v_B_v_C_v_D);
+\draw 
+  (B_over_A_v_B_v_C_v_D) 
+  to[out=280, in=170] 
+  node[midway, below left] {\small{$f$}} 
+  (A_over_A_v_B_v_C_v_D);
+\draw 
+  (B_over_A_v_B_v_C_v_D) 
+  to[out=340, in=110] 
+  node[midway, above right] {\small{$m$}} 
+  (A_over_A_v_B_v_C_v_D);
+
+\end{diagram}
+
+\noindent
+The resulting sheaf yields a fused mesh of relationships over the population, which is glued together from smaller meshes over smaller subsets of the population. 
+
+\begin{itemize}
+
+\item Each atomic fiber is a part of the whole (human society), and its data encodes the internal (relational) structure of that part.
+
+\item Mereological overlap is then modeled by shared relationships: two parts overlap if their relational graphs intersect coherently.
+
+\item Failure to glue (as in $F(A \join/ D) = \EmptySet/$ and $F(B \join/ C) = \EmptySet/$) reflects mereological separation: the atomic regions in question cannot be fused because they are not related in this mesh.
+
+\end{itemize}
+
+\end{Example}
+
+
+For another example, consider processes. A process (or more generally any sequence of events, states, etc.) can be seen as a part-whole complex too. 
+
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:simple-processes}
+
+Imagine a scenario where something can do one of two things repeatedly: at each step, it can do one thing (``option $a$'') or another thing (``option $b$''), and then repeat the choice again.
+
+To model this, fix a finite alphabet $\Sigma = \{ a, b \}$, with ``$a$'' for ``option $a$'' and ``$b$'' for ``option $b$.'' Then let $\Sigma^{\ast}$ be the set of all finite sequences (words) over $\Sigma$, with $\epsilon$ denoting the empty sequence. For instance, the sequence $aab$ represents the sequence of length 3 that picks ``option $a$'' first, then ``option $a$'' again, and then finally ``option $b$.''
+
+Let us say that $\Sigma^{\leqslant n}$ is the set of all finite sequences less than length $n$, and let us say that $\Sigma^{=n}$ is the set of finite sequences of exactly length $n$. Hence:
+
+\begin{itemize}
+
+\item $\Sigma^{=0} = \{ \epsilon \}$.
+\item $\Sigma^{=1} = \Sigma^{\leqslant 1} = \{ \epsilon, a, b \}$.
+\item $\Sigma^{\leqslant 2} = \{ \epsilon, a, b, aa, bb, ab, ba \}$.
+\item $\Sigma^{=2} = \{ aa, bb, ab, ba \}$.
+\item Etc.
+
+\end{itemize}
+
+\noindent
+Given sequences $w, v \in \Sigma^{\leqslant n}$ with $length(w) \leqslant length(v)$, let us write $w \subseteq v$ to denote that $w$ is a prefix of $v$, as in $aab \subseteq aabc$.
+
+Next, define a topology over $\Sigma^{\leqslant n}$ by setting the open sets to be sequences that share a prefix:
+
+\begin{itemize}
+
+\item $U_{w} = \{ v \in \Sigma^{\leqslant n} \mid w \subseteq v \}$.
+
+\end{itemize}
+
+\noindent
+So $U_{w}$ consists of all sequences that continue $w$. For instance, if $w = aab$, then we might picture $U_{w}$ as a kind of bouquet or bundle of sequences that are all bound at their shared stem ($aab$) but then branch out in different directions:
+
+\begin{diagram}
+
+\node at (0.1, -0.75) {$U_{aab}$};
+\draw (-0.4, -0.4) rectangle (0.6, -1.15);
+
+\node (1) at (0, 0) {$a$};
+\node (2) at (0, 0.5) {$a$};
+\node (3) at (0, 1) {$b$};
+\draw (1) to (2) to (3);
+
+\node (4) at (-0.35, 1.65) {$a$};
+\node (5) at (-0.75, 2.25) {$b$};
+\node (6) at (-1.5, 2.75) {};
+\draw (3) to (4) to (5) to (6);
+
+\node (7) at (0, 1.5) {$b$};
+\node (8) at (0, 2) {$a$};
+\node (9) at (-0.1, 2.5) {$a$};
+\node (10) at (-0.25, 3) {$b$};
+\node (11) at (-0.35, 3.5) {};
+\draw (3) to (7) to (8) to (9) to (10) to (11);
+
+\node (12) at (0.2, 1.65) {$a$};
+\node (13) at (0.4, 2.25) {$a$};
+\node (14) at (0.75, 3) {};
+\draw (3) to (12) to (13) to (14);
+
+\node (15) at (0.5, 1.5) {$b$};
+\node (16) at (1, 1.75) {$b$};
+\node (17) at (1.5, 2) {};
+\draw (3) to (15) to (16) to (17);
+
+\draw (0.25, 0) -- (0.5, 0) -- (0.5, 1) -- (0.25, 1);
+\draw (0.5, 0.5) -- (1.25, 0.5);
+\node at (2.5, 0.5) {\small{shared prefix $aab$}};
+
+\end{diagram}
+
+\noindent
+We can form a locale from this topology. Let $\category{L}$ be the locale given by the presentation $\tuple{G, R}$, where:
+
+\begin{itemize}
+
+\item $G = \{ U_{w} \mid w \in \Sigma^{n} \}$, i.e., each open is a generator.
+\item $R = \{ U_{w} \childOf/ U_{v} \mid v \subseteq w \}$, i.e., bouquets with longer prefixes are lower.
+
+\end{itemize}
+
+\noindent
+For example, given $\Sigma^{\leqslant 2}$, we have the following generators:
+
+\begin{itemize}
+
+\item $G = \{ U_{\epsilon}, U_{a}, U_{b}, U_{aa}, U_{bb}, U_{ab}, U_{ba} \}$.
+
+\end{itemize}
+
+\noindent
+Here are some of the relations:
+
+\begin{itemize}
+
+\item $U_{aa} \childOf/ U_{a}$ and $U_{ab} \childOf/ U_{a}$, since ``$a$'' is a prefix of $aa$ and $ab$.
+\item $U_{bb} \childOf/ U_{b}$ and $U_{ba} \childOf/ U_{b}$, since ``$b$'' is a prefix of $bb$ and $ba$.
+\item Every generator is lower than $U_{\epsilon}$, since $\epsilon$ (the empty sequence) is a prefix of every sequence.
+
+\end{itemize}
+
+\noindent
+The Hasse diagram looks like this:
+
+\begin{diagram}
+
+\node (e) at (0, 3) {$U_{\epsilon}$};
+
+\node (a) at (-1.5, 2) {$U_{a}$};
+\node (b) at (1.5, 2) {$U_{b}$};
+
+\node (aa) at (-3, 1) {$U_{aa}$};
+\node (ab) at (-1, 1) {$U_{ab}$};
+\node (ba) at (1, 1) {$U_{ba}$};
+\node (bb) at (3, 1) {$U_{bb}$};
+
+\node (bottom) at (0, -0.5) {$\bottom/$};
+
+\draw (bottom) to (aa);
+\draw (bottom) to (ab);
+\draw (bottom) to (ba);
+\draw (bottom) to (bb);
+
+\draw (aa) to (a);
+\draw (ab) to (a);
+\draw (ba) to (b);
+\draw (bb) to (b);
+
+\draw (a) to (e);
+\draw (b) to (e);
+
+\end{diagram}
+
+Think of moving upwards in this locale as forgetting information about (or alternatively, as committing less to) the history of the sequence. For example, think of $U_{ab}$ as a region where we know that ``$a$'' happened first and then ``$b$'' happened, but think of $U_{a}$ as a region where we know only that ``$a$'' happened first and we don't know what happened after that. The top element is $U_{\epsilon}$, which means we don't know anything about the sequence of actions. The $\bottom/$ element indicates not that we know nothing, but that there is no sequence at all.
+
+Notice that implication moves upwards: $U_{ab}$ implies $U_{a}$ because if I know (at $U_{ab}$) that ``$a$'' happened first and then ``$b$'' happened, then I certainly know that ``$a$'' happened first. 
+
+Further, no generator is the non-trivial overlap of other generators, so every generator is an atomic region:
+
+\begin{itemize}
+
+\item $\atomsOf{\category{L}}$ = G
+
+\end{itemize}
+
+\noindent
+As with any locale, we can write each region canonically as the join of its atomic regions:
+
+\begin{itemize}
+
+\item $U_{\support/(U)} = \bigjoin/\limits_{i \in \support/(U)} U_{i}$
+
+\end{itemize}
+
+\noindent
+But here, what this means is that we can canonically write each region as the join of its ``most specified'' prefixes. For instance, $\support/(U_{a}) = \{ aa, ab \}$, so:
+
+\begin{itemize}
+
+\item $U_{a} = U_{\support/(U_{a})} = \bigjoin/ \{U_{aa}, U_{ab} \}$.
+
+\end{itemize}
+
+\noindent
+This makes sense. Since $U_{a}$ is a region where we know only that ``$a$'' happened first, it is the join of all maximal continuations that begin with ``$a$.''
+
+This particular locale is interesting because it models the ``process space'' of any 2-stage sequence that can make one of two choices at each stage. Let us now assign some actual processes to this ambient space, using a \Gsheaf/.
+
+Imagine a machine $m$ that can run multiple concurrent processes, all of whom share the same memory. For simplicity, let us suppose that the machine has two registers ($R = \{ r_{1}, r_{2} \}$), each of which can hold one bit ($1$ or $0$). So, at any point in time the machine's memory state $S : \{ 0, 1 \} \times \{ 0, 1 \}$ can be one of the following:
+
+\begin{itemize}
+
+\item $S = \{ \tuple{0, 0}, \tuple{1, 0}, \tuple{0, 1}, \tuple{1, 1} \}$, with initial state $s_{0} = \tuple{0, 0}$.
+
+\end{itemize}
+
+We can think of the concurrent processes of interest as a selection of programs that we want to run on the machine all at the same time. In terms of behavior, let us say that each program-run reads a word from its input stream, one character at a time, and in response to each character, it takes one of the following actions $A$: it writes a value ($1$ or $0$) to one of the registers, it writes (possibly distinct) values to both registers, or it does nothing and leaves the registers as they are:
+
+\begin{itemize}
+
+\item $A = \{ \{ r1 \mapsto v \}, \{ r2 \mapsto v \}, \{ r1 \mapsto v, r2 \mapsto w \}, \EmptySet/ \}$, where $v, w \in \{ 0, 1 \}$.
+
+\end{itemize}
+
+We can define a process (program trace) as a map from $n$-length words to $n$-length sequences of write actions, where we require that such maps agree on prefixes (since a process responding to $ab$ and $aa$ would do the same thing on the first $a$). This way, a program trace records for each input stream the sequence of write actions that result. For concreteness, here are two such traces:
+
+\begin{itemize}
+
+\item $f : \Sigma^{=2} \to A \times A$
+
+  \begin{itemize}
+    \item $f(aa) = \tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}$
+    \item $f(ab) = \tuple{\{ r1 \mapsto 1 \}, \{ r2 \mapsto 0 \} \}}$
+    \item $f(bb) = \tuple{\{ \{ r2 \mapsto 0 \}, \{ r2 \mapsto 1 \} \}}$
+    \item $f(ba) = \tuple{\{ \{ r2 \mapsto 0 \}, \{ r1 \mapsto 1 \} \}}$
+  \end{itemize}
+
+\item $g : \Sigma^{=2} \to A \times A$
+
+  \begin{itemize}
+    \item $g(aa) = \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} \}}$
+    \item $g(ab) = \tuple{\{ r2 \mapsto 0 \}, \EmptySet/ \}}$
+    \item $g(bb) = \tuple{\{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}$
+    \item $g(ba) = \tuple{\{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 1 \} \}}$
+  \end{itemize}
+
+\end{itemize}
+
+\noindent
+Let us now say that concurrent processes are compatible if they ``play well'' together, i.e., they share resources (memory) consistently. In particular, given two processes $f$ and $g$, let us say:
+
+\begin{itemize}
+
+\item $f$ and $g$ are compatible at stage $n$ if they write to different registers.
+\item $f$ and $g$ are compatible at stage $n$ if they write the same value to the same register.
+\item $f$ and $g$ conflict at stage $n$ if they write different values to the same register.
+
+\end{itemize}
+
+\noindent
+We can formalize this notion as a gluing condition that says a selection of patch candidates glue at $U_{w}$ if they play well up to $w$. Fix a selection of programs $P = \{ f, g, \ldots \}$ to run on the machine, then:
+
+\begin{itemize}
+
+\item Given a selection of patch candidates $\tuple{(b_{i,p})_{p \in P}}_{i \in \support/(U_{w})}$ over a region $U_{w}$ with trace length $|w|$, $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{true}$ iff the following condition holds. Write $b_{i,p}[m]$ to denote the write actions of process $p$ in region $i$ at stage $m$. Then, require that at each stage $m \leqslant |w|$ and every register $r \in R$, the set 
+
+\[
+\{ v \in \{ 0, 1 \} \mid \exists i \in \support/(U_{w}), p \in P \text{ where } r \mapsto v \in b_{i,p}[m] \}
+\]
+
+has cardinality at most 1. In other words, two values are not written to the same register.
+
+\item $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{false}$ otherwise.
+
+\end{itemize}
+
+\noindent
+We must check that this is a legitimate gluing condition.
+
+\begin{proof}
+
+We must check that $\glues{U_{w}}$ is downwards and upwards stable. 
+
+\begin{itemize}
+
+\item \emph{Downwards stability}. Assume that $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{true}$. Then $\glues{U_{i}}(\tuple{b_{i}}) = \mathrm{true}$ for each $i \in \support/(U_{w})$ since by $\glues{U_{w}}$, every $b_{i}, b_{j}$ play well on their prefixes.
+
+\item \emph{Upwards stability}. Assume $\glues{U_{\{i, j\}}}(\tuple{b_{i}, b_{j}}) = \mathrm{true}$ for all $i, j \in \support/(U_{w})$. Then $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{true}$ since no $i, j$ conflict on writes. \qedhere
+
+\end{itemize}
+
+\end{proof}
+
+\noindent
+With a gluing condition at hand, we can now define a \Gsheaf/ $F$. Let our selection of processes be $P = \{ f, g, \ldots \}$. Then, we can fix the atomic data (omitting outer brackets to avoid clutter):
+
+\begin{itemize}
+
+\item $F(U_{aa}) = (f(aa), g(aa))
+  = 
+  (
+        \tuple{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} },
+        \tuple{ \{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} } 
+  )
+  .$
+  
+\item $F(U_{ab}) = (f(ab), g(ab))
+  = 
+  (
+        \tuple{ \{ r1 \mapsto 1 \}, \{ r2 \mapsto 0 \} },
+        \tuple{ \{ r2 \mapsto 0 \}, \EmptySet/ } 
+  )
+  .$
+
+\item $F(U_{bb}) = (f(bb), g(bb))
+  = 
+  (
+        \tuple{ \{ r2 \mapsto 0 \}, \{ r2 \mapsto 1 \} },
+        \tuple{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} } 
+  )
+  .$
+
+\item $F(U_{ba}) = (f(ba), g(ba))
+  = 
+  (
+        \tuple{ \{ r2 \mapsto 0 \}, \{ r1 \mapsto 1 \} },
+        \tuple{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 1 \} } 
+  )
+  .$
+
+\end{itemize}
+
+\noindent
+There are no meets among the generators beyond $\bottom/$, so:
+
+\begin{itemize}
+
+\item $F(\bottom/) = \{ \tuple{} \}.$
+
+\end{itemize}
+
+\noindent
+Next, we must extend $F$ to joins via gluing. So, for each $U_{w}$, we must assign:
+
+\begin{itemize}
+
+\item $F(U_{w}) = \{ \tuple{(b_{i,p})_{p \in P}}_{i \in \support/(U_{w})} \mid \glues{U_{w}}(\tuple{(b_{i,p})_{p \in P}}_{i \in \support/(U_{w})}) = \mathrm{true} \}.$
+
+\end{itemize}
+
+\noindent
+Let's compute $F(U_{a})$ = $F(U_{aa} \join/ U_{ab})$. To determine if $(f(aa), g(aa))$ and $(f(ab), g(ab))$ glue, we need to check that they do not write conflicting values.
+
+\begin{itemize}
+
+\item Stage 1 (at the shared prefix ``$a$''): $f(aa)$ and $f(ab)$ write $1$ to $r1$, while $g(aa)$ and $g(ab)$ write $0$ to $r2$. Since $f$ and $g$ write to different registers, there is no conflict.
+
+\item Stage 2: $f(ab)$ and $g(aa)$ write the same value (namely, $0$) to $r2$, $f(aa)$ writes $0$ to $r1$, and $g(ab)$ does nothing, so there are no conflicts. 
+
+\end{itemize}
+
+\noindent
+Hence, $(f(aa), g(aa))$ and $(f(ab), g(ab))$ glue to form a unique section:
+
+\begin{itemize}
+
+\item $F(U_{a}) = (f(aa), g(aa)), (f(ab), g(ab))$
+
+\end{itemize}
+
+\noindent
+Now let's compute $F(U_{b})$ = $F(U_{bb} \join/ U_{ba})$. To determine if $(f(bb), g(bb))$ and $(f(ba), g(ba))$ glue, we need to again check for conflicting writes:
+
+\begin{itemize}
+
+\item Stage 1 (at the shared prefix ``$b$''): $f(bb)$ and $f(ba)$ write $0$ to $r2$, while $g(bb)$ and $g(ba)$ write $1$ to $r1$, so there is no conflict.
+
+\item Stage 2: $f(bb)$ and $f(ba)$ write $1$ to different registers, so they do not conflict with each other, while $f(ba)$ and $g(ba)$ write $1$ to $r1$, so they do not conflict either. However, $g(bb)$ writes $0$ to $r1$, which conflicts with $g(ba)$'s and $f(ba)$'s attempt to write $1$ to the same register.
+
+\end{itemize}
+
+\noindent
+Since we have a conflict, $(f(bb), g(bb))$ and $(f(ba), g(ba))$ fail to glue over $U_{b}$. Notice:
+
+\begin{itemize}
+
+\item The processes $f$ and $g$ agree locally at $U_{a}$.
+\item By contrast, they disagree locally at $U_{b}$.
+\item There is no global section that glues together all of $f$ and $g$'s behavior at the top $U_{\epsilon}$, thus $f$ and $g$ are not globally compatible processes. 
+
+\end{itemize}
+
+This sort of example illustrates how sheaves can model processes, concurrency, and resource conflicts. Here the processes were programs running on a simple machine, but they could just as easily be biological processes competing for resources, etc.
+
+Whatever the concrete details may be, this example captures how local behavior can be integrated and extended over larger regions of the process space. One might naively think that the ``parts'' of such systems are the processes. But there is a different way to slice it: if you want to talk about the integrity of the ``whole'' of a concurrent system, you need to talk about how that involves coherent, integrated behavior that is functionally united locally across the various ``regions'' and ``stages'' of the system's evolution.
+
+\end{Example}
+
+
+% ----------------------------------------
+TODO:
+\begin{itemize}
+
+\item Add example: something over a continuous interval/timeline? E.g., maybe something over a timeline (the frame of opens taken from  the usual topology of R)? Maybe we can define a gluing condition for a mass of clay over time that says pieces glue if they agree on overlaps, so that the whole lump of clay can have parts replaced over time but as a whole it never breaks into fragments? Maybe the "closure" is even a modality.
+
+\item Add example: Socrates and seated Socrates?
+
+\item Note Spivak et al's behavioral mereology is an example of a \Gsheaf/ (and check the details to make sure that's really true).
+
+\item Mormann's ``structural mereology'' is basically just our thesis. Add examples from his similarity structures.
+  
+\end{itemize}

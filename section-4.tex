@@ -1,0 +1,351 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modalities in the Sheaf-theoretic Setting}
+\label{sec:modalities}
+
+\noindent
+In the context of sheaves, modalities manifest as $j$-operators (also called local operators). A $j$-operator is a closure operator on the underlying locale.
+
+% ----------------------------------------
+\begin{Definition}[$j$-operators]
+
+Given a locale $\category{L}$, a $j$-operator on $\category{L}$ is a closure operator $\jop{} : \category{L} \to \category{L}$ satisfying the following conditions:
+
+\begin{enumerate}
+
+\item [(J1)] \emph{Inflation}. $U \childOf/ \jop{}(U)$.
+
+\item [(J2)] \emph{Idempotence}. $\jop{}(\jop{}(U)) = \jop{}(U)$.
+
+\item [(J3)] \emph{Meet-preservation}. $\jop{}(U \meet/ V) = \jop{}(U) \meet/ \jop{}(V)$.
+
+\end{enumerate} 
+
+\end{Definition}
+
+
+A $j$-operator induces a $j$-sheaf.
+
+% ----------------------------------------
+\begin{Definition}[$j$-sheaves]
+
+Given a sheaf $F$ over a locale $\category{L}$ and a $j$-operator $\jop{} : \category{L} \to \category{L}$, the corresponding $j$-sheaf, denoted $F_{\jop{}}$, is given by:
+\[
+  F_{\jop{}} = F(\jop{}(U)).
+\]
+
+\end{Definition}
+
+\begin{Remark}
+
+In a sheaf, there are a variety of other modalities beyond the traditional alethic ones (necessity and possibility). Any closure operator qualifies as a modality of some description.
+
+\end{Remark}
+
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:reachability-modality-on-human-society}
+
+From \cref{ex:human-society}, recall the mesh of human relationships modeled by a \Gsheaf/ $F$ defined over the presented locale $\category{L}$ = $\tuple{P := \{ A, B, C, D \}, \EmptySet/}$. Let us define a family of ``reachability'' modalities over this mesh.
+
+For each $r \in R$, write $\rightsquigarrow_{r}$ for the reflexive and transitive closure of $r$ on the generators. Hence, $\rightsquigarrow_{f}$ is the transitive closure of friendship on the generators, and $\rightsquigarrow_{m}$ is the transitive closure on marriage. 
+
+Then for each $r \in R$, define $\jop{r}$ inductively:
+
+\begin{itemize}
+
+\item \emph{Base case}. For each generator $U \in G$, set $\jop{r}$ to the join of all other generators reachable via $r$:
+
+\[
+  \jop{r}(U) := \bigjoin/ \{ V \mid U \rightsquigarrow_{r} V \}
+\]
+
+\item \emph{Inductive step}. Extend to arbitrary joins $U_{\support/(U)}$:
+
+\[
+  \jop{r}(U_{\support/(U)}) := \bigjoin/\limits_{i \in \support/(U)} \jop{r}(U_{i})
+\]
+
+\end{itemize}
+
+\noindent
+We need to check that this is a $j$-operator.
+
+\begin{proof}
+
+We check (J1)--(J3) from the definition.
+
+\todo{Do the base case, then the inductive step.} \qedhere
+
+\end{proof}
+
+Intuitively, this operator expands every region $U$ to the largest region that is reachable from $U$ by $r$. In other words, it expands each subset of society to the largest subset of society that is connected by $r$. Hence, $\jop{f}(U)$ yields all those who are connected to $U$ through a chain of friends, while $\jop{m}(U)$ yields all those who are connected to $U$ through a chain of marriage (which in a monogamous society will yield only married couples but in a polygamous society may be more revealing).
+
+Applying $\jop{f}$ (for instance) to $\category{L}$ yields the following:
+
+\begin{itemize}
+
+\item $\jop{f}(A) = A \join/ B \join/ C \join/ D$, because $A \rightsquigarrow_{f} A$, $A \rightsquigarrow_{f} B$, $A \rightsquigarrow_{f} D$, and $A \rightsquigarrow_{f} C$.
+
+\item $\jop{f}(B) = A \join/ B \join/ C \join/ D$, because $B \rightsquigarrow_{f} B$, $B \rightsquigarrow_{f} D$, $B \rightsquigarrow_{f} A$, and $B \rightsquigarrow_{f} C$.
+
+\item Similar for $\jop{f}(C)$ ad $\jop{f}(D)$.
+
+\item $\jop{f}(\bottom/) = \bottom/$.
+
+\end{itemize}
+
+\noindent
+Hence, everyone in this mini-society is connected through friends (or friends-of-friends, etc.). Notice also that everyone is connected \emph{immediately}, i.e., at the first application of $\jop{f}$.
+
+When it comes to marriage, the situation is different. Applying $\jop{m}$ yields:
+
+\begin{itemize}
+
+\item $\jop{m}(A) = A \join/ B$, because $A \rightsquigarrow_{m} A$ and $A \rightsquigarrow_{m} B$.
+
+\item $\jop{m}(B) = A \join/ B$, because $B \rightsquigarrow_{m} B$ and $B \rightsquigarrow_{m} A$.
+
+\item $\jop{m}(C) = C \join/ D$, because $C \rightsquigarrow_{m} C$ and $C \rightsquigarrow_{m} D$.
+
+\item Similar for $\jop{m}(D)$.
+
+\item $\jop{m}(A \join/ B) = A \join/ B$, since $A$ and $B$ are already connected.
+
+\item $\jop{m}(C \join/ D) = C \join/ D$, since $C$ and $D$ are already connected.
+
+\item $\jop{m}(A \join/ C) = A \join/ B \join/ C \join/ D$, since from $A$, $A$ can reach $B$ (i.e., $A \rightsquigarrow_{m} B$) and from $C$, $C$ can reach $D$ (i.e., $C \rightsquigarrow_{m} D$).
+
+\item Similar for the rest.
+
+\end{itemize}
+
+\noindent
+In contrast to the $\jop{f}$ modality, the $\jop{m}$ modality keeps the $A, B$ component separate from the $C, D$ component at all regions (sub-populations) that don't include a member of both couples, just as we would expect.
+
+Now that we have defined $\jop{f}$ and $\jop{m}$, we can construct a modal overlay for each that we can use to filter the original mesh:
+
+\begin{itemize}
+
+\item Define the friendship mesh as $F_{f}$, filtered by $\jop{f}$, i.e., set $F_{f}(U) := F(\jop{f}(U))$.
+
+\item Define the marriage mesh as $F_{m}$, filtered by $\jop{m}$, i.e., $F_{m}(U) := F(\jop{m}(U))$.
+
+\end{itemize}
+
+\end{Example}
+
+
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:already-happened-modality-on-simple-processes}
+
+Recall the example of concurrent processes $f$ and $g$ from \cref{ex:simple-processes}. We can define an \emph{``already happened''} modality that captures what has definitely occurred so far. 
+
+\begin{Definition}[Already-happened operator]
+
+Let $\jop{H}$ be given by:
+
+\[
+  \jop{H}(U_{w}) := \bigjoin/ \{ U_{v} \mid v \subseteq w \},
+\]
+
+\noindent
+i.e., the join of all opens corresponding to prefixes of $w$ (including $w$ itself).
+
+\end{Definition}
+
+Intuitively, $\jop{H}(U_{w})$ is the region that remembers everything that has already happened along $w$. It is a closure operator that closes upwards by collecting all shorter prefixes.
+
+We must check that this is a legitimate $j$-operator.
+
+\begin{proof}
+
+We check (J1)--(J3).
+
+\begin{itemize}
+
+\item [J1] \emph{Inflation}. $U_{w} \childOf/ \jop{H}(U_{w})$ holds because $U_{w}$ is included among the prefixes being joined.  
+
+\item [J2] \emph{Idempotence}. Applying $\jop{H}$ again adds no new prefixes, so $\jop{H}(\jop{H}(U_{w})) = \jop{H}(U_{w})$.
+
+\item [J3] \emph{Meet-preservation}. The meet of two regions corresponds to their longest shared prefix, whose prefixes are all of the prefixes collected by $\jop{H}$. Hence, $\jop{H}(U_{w} \meet/ U_{v}) = \jop{H}(U_{w}) \meet/ \jop{H}(U_{v})$. \qedhere
+
+\end{itemize}
+
+\end{proof}
+
+\noindent
+Applying $\jop{H}$ to the generators of $\category{L}$:
+
+\begin{itemize}
+
+\item For $U_{aa}$: $\jop{H}(U_{aa}) = U_{\epsilon} \join/ U_{a} \join/ U_{aa}$.  
+\item For $U_{ab}$: $\jop{H}(U_{ab}) = U_{\epsilon} \join/ U_{a} \join/ U_{ab}$.  
+\item For $U_{ba}$: $\jop{H}(U_{ba}) = U_{\epsilon} \join/ U_{b} \join/ U_{ba}$.  
+\item For $U_{bb}$: $\jop{H}(U_{bb}) = U_{\epsilon} \join/ U_{b} \join/ U_{bb}$.  
+\item For $U_{a}$: $\jop{H}(U_{a}) = U_{\epsilon} \join/ U_{a}$.  
+\item For $U_{b}$: $\jop{H}(U_{b}) = U_{\epsilon} \join/ U_{b}$.  
+\item For $U_{\epsilon}$: $\jop{H}(U_{\epsilon}) = U_{\epsilon}$.  
+
+\end{itemize}
+
+\noindent
+Since $\jop{H}$ filters each region to everything that is already determined in that region, we can use it to define an overlay of $F$
+
+\[
+  F_{H}(U_{w}) := F(\jop{H}(U_{w})),
+\]
+
+\noindent
+so that sections at $U_{w}$ remember only what has happened along all prefixes of $w$.
+
+\end{Example}
+
+
+% ----------------------------------------
+\begin{Example}
+\label{ex:safety-modality-on-simple-processes}
+
+Recall the example of concurrent processes $f$ and $g$ from \cref{ex:simple-processes}. We can define a safety (``nothing bad happens'') modality as a $j$-operator that identifies the largest safe extensions of a given region.
+
+\begin{Definition}[Safety operator]
+
+Let us say that a region $U$ is safe if all processes in $F(U)$ play well together, i.e., if there are no write conflicts. Then let $\jop{S} : \category{L} \to \category{L}$ be given by:
+
+\[
+  \jop{S}(U) := 
+    \begin{cases}
+      \bigjoin/ \{ V \mid U \childOf/ V \text{ and } V \text{ is safe} \} & \text{if this join is non-empty} \\
+      U & \text{otherwise}.
+    \end{cases}
+\]
+
+\end{Definition}
+
+\noindent
+Intuitively, $\jop{S}(U)$ inflates $U$ to the largest region that is guaranteed safe starting from $U$.
+
+We must check that $\jop{S}(U)$ is a legitimate $j$-operator.
+
+\begin{proof}
+
+We check (J1)--(J3).
+
+\begin{itemize}
+
+\item [J1] \emph{Inflation}. By construction, $U \childOf/ \jop{S}(U)$ whenever $U$ has any safe parent regions, otherwise $\jop{S}(U) = U$.
+
+\item [J2] \emph{Idempotence}. Applying $\jop{S}$ more than once does not change the result, since appyling it once takes the join of all safe parents. Hence, $\jop{S}(\jop{S}(U)) = \jop{S}(U)$.
+
+\item [J3] \emph{Meet-preservation}. For any $U$ and $V$, since $U \meet/ V$ is $U$ or $V$, 
+\[
+  \jop{S}(U \meet/ V) = 
+  \bigjoin/ \{ W \mid U \meet/ V \childOf/ W \text{ and } W \text{ safe} \} = 
+  \jop{S}(U) \meet/ \jop{S}(V).  \qedhere
+\]
+
+\end{itemize}
+
+\end{proof}
+
+\noindent
+Let's apply $\jop{S}$ to the generators of $\category{L}$:
+
+\begin{itemize}
+
+\item $\jop{S}(U_{aa}) = U_{a}$ since its safe parent regions are $U_{aa}$ and $U_{a}$.
+
+\item Similarly, $\jop{S}(U_{ab}) = U_a$.
+
+\item $\jop{S}(U_{ba}) = U_{ba}$ because the only safe parent of $U_{ba}$ is $U_{ba}$ itself.
+
+\item Similarly, $\jop{S}(U_{bb}) = U_{bb}$.
+
+\end{itemize}
+
+\noindent
+Now extend it to joins:
+
+\begin{itemize}
+
+\item $\jop{S}(U_{a}) = \jop{S}(U_{aa}) \join/ \jop{S}(U_{ab}) = U_{a} \join/ U_{a} = U_{a}$.
+
+\item $\jop{S}(U_{b})= U_{b}$ since $U_{b}$ is unsafe (there are conflicts among its generators) and thus no further extension can be safe.
+
+\item $\bottom/$ is trivially fixed: $\jop{S}(\bottom/) = \bottom/$.
+
+\end{itemize}
+
+\noindent
+Notice:
+
+\begin{itemize}
+
+\item Each generator $U_{w}$ represents a part of a process's history.
+
+\item The operator $\jop{S}$ identifies the largest safe fusion containing $U_{w}$, i.e., the maximal extension of the part where processes play well together.  
+
+\item If no safe extensions exist (as in $U_{b}$), then $\jop{S}(U_b)$ doesn't get bigger, indicating that safety cannot be guaranteed any further beyond this part.
+
+\item Hence, $\jop{S}$ captures a mereological notion of integrity, showing which combinations of parts form consistent wholes and which do not.
+
+\end{itemize}
+
+\end{Example}
+
+
+% ----------------------------------------
+\noindent
+TODOs:
+
+\begin{itemize}
+
+\item Add example: A statue and the lump of clay?
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classical Mereological Notions in the Sheaf-theoretic Setting}
+\label{sec:classical-mereology-in-sheaves}
+
+\noindent
+In this section, we provide a discussion of what classical notions of mereology look like in the sheaf-theoretic setting.
+
+\begin{itemize}
+
+\item \emph{Cambridge fusions}. Sheaves handle Cambridge fusions correctly.
+
+\item \emph{Mere collections}. The collection of all dogs. Is that a ``whole''? Well, we could build a sheaf whose atomic regions are filled with dogs, none of which glue. Then we have a collection of dogs, but no glued object. That matches exactly the intuition: yes, we have a ``collection'' (we built a sheaf for it, after all), but the internals of that sheaf reveal that it's \emph{merely} a collection, i.e., that its parts are not glued.
+
+\item \emph{Co-habitating fusions}. Sheaves allow multiple fusions to occupy the same locale, without being glued. For instance, in the sheaf of real-valued functions over real number line, there are many functions that glue together, and occupy the same locale. 
+
+\item \emph{Non-boolean algebra}. The parts space is Heyting, not Boolean. We're not saddled with such a strong complement operation. You can pick a locale that is Boolean if you need it, but this framework doesn't require it. In fact, the positive logic of a locale is ``geometric logic.''
+
+\item \emph{Reflexivity, antisymmetry, and transitivity}. These are guaranteed. Locally, of course, you may not have transitivity. But globally, it's a theorem. [Check that.]
+
+\item \emph{Distributivity}. \todo{do the glued sections of a sheaf have to be distrubitive? Only inside what glues (since we glue pairwise, so every $i \join/ j$ of the cover.}
+
+\item \emph{An empty element}. There is a need for a bottom element in the \emph{algebra} of parts, but a sheaf need not contain any such thing. There is no need here to try and construct awkward mathematical structures that do algebra on parts but yet don't have a bottom element because our ontological intuitions tell us there can be no such thing. That confuses two issues: algebra and integrity. So here we separate those cleanly, and the algebra can do algebra while the sheaf can do integrity. [In a sheaf you CAN'T assign an empty element to bottom, for coherence, so the bottom element is special...need to say more about that and figure it out.]
+
+\item \emph{Supplementation principles}. Sheaves don't constrain one way or another. [Is that really true? Maybe it's better to say that it doesn't force any supplementation principles, which might provide a reason to call into question whether supplementation is another one of those ideas that is about integrity of parts but has been confused with the algebra of parts.]
+
+\item \emph{Ordering of parts}. Consider that ``pit'' and ``tip'' have the same parts but are different words. These differences can be handled by different sheaves over a 3-stage prefix-ordered locale as in the example of concurrent processes. Note that we retain extensionality.
+
+\item \emph{Extensionality}. Classical mereology's notion of extensionality essentially flattens any structure and is thus overly aggressive. This is why extensionality is so controversial. The sheaf-theoretic perspective retains extensionality, but is much more nuanced. [Here too, I suspect that mereological discussions of extensionality have confused the algebra of parts and the integrity of wholes.]
+
+\item \emph{Gunk and atoms}. You can model continuity and gunky parts if you so desire. You just need a sober space to do it. \todo{check that we can model continuity in the locale in this way.} \todo{can you do continuity only in the sheaf data, without an underlying continuous decompositon in the locale? I would think that if you can't infinitely decompose into smaller opens around a point in the locale, you couldn't do such a thing in the sheaf data?}
+
+\item \emph{Priority of wholes}. The framework is agnostic as to whether you take an  Aristotelian-Thomistic approach\addcite{Aquinas, Arlig, and that guy who wrote that recent book defending the Aristotelian view}.
+
+\item \emph{The whole is greater than its parts}. The framework is agnostic as to whether you want to be a Scotist and say that the whole is something over and above its parts (cite Cross) or an Ockhamist who says it is not\addcite{Normore, Arlig}.
+
+\end{itemize}

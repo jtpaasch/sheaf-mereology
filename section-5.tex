@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classical Mereological Notions in the Sheaf-theoretic Setting}
+\label{sec:classical-mereology-in-sheaves}
+
+\noindent
+In this section, we provide a discussion of what classical notions of mereology look like in the sheaf-theoretic setting.
+
+\begin{itemize}
+
+\item \emph{Cambridge fusions}. Sheaves handle Cambridge fusions correctly.
+
+\item \emph{Mere collections}. The collection of all dogs. Is that a ``whole''? Well, we could build a sheaf whose atomic regions are filled with dogs, none of which glue. Then we have a collection of dogs, but no glued object. That matches exactly the intuition: yes, we have a ``collection'' (we built a sheaf for it, after all), but the internals of that sheaf reveal that it's \emph{merely} a collection, i.e., that its parts are not glued.
+
+\item \emph{Co-habitating fusions}. Sheaves allow multiple fusions to occupy the same locale, without being glued. For instance, in the sheaf of real-valued functions over real number line, there are many functions that glue together, and occupy the same locale. 
+
+\item \emph{Non-boolean algebra}. The parts space is Heyting, not Boolean. We're not saddled with such a strong complement operation. You can pick a locale that is Boolean if you need it, but this framework doesn't require it. In fact, the positive logic of a locale is ``geometric logic.''
+
+\item \emph{Reflexivity, antisymmetry, and transitivity}. These are guaranteed. Locally, of course, you may not have transitivity. But globally, it's a theorem. [Check that.]
+
+\item \emph{Distributivity}. \todo{do the glued sections of a sheaf have to be distrubitive? Only inside what glues (since we glue pairwise, so every $i \join/ j$ of the cover.}
+
+\item \emph{An empty element}. There is a need for a bottom element in the \emph{algebra} of parts, but a sheaf need not contain any such thing. There is no need here to try and construct awkward mathematical structures that do algebra on parts but yet don't have a bottom element because our ontological intuitions tell us there can be no such thing. That confuses two issues: algebra and integrity. So here we separate those cleanly, and the algebra can do algebra while the sheaf can do integrity. [In a sheaf you CAN'T assign an empty element to bottom, for coherence, so the bottom element is special...need to say more about that and figure it out.]
+
+\item \emph{Supplementation principles}. Sheaves don't constrain one way or another. [Is that really true? Maybe it's better to say that it doesn't force any supplementation principles, which might provide a reason to call into question whether supplementation is another one of those ideas that is about integrity of parts but has been confused with the algebra of parts.]
+
+\item \emph{Ordering of parts}. Consider that ``pit'' and ``tip'' have the same parts but are different words. These differences can be handled by different sheaves over a 3-stage prefix-ordered locale as in the example of concurrent processes. Note that we retain extensionality.
+
+\item \emph{Extensionality}. Classical mereology's notion of extensionality essentially flattens any structure and is thus overly aggressive. This is why extensionality is so controversial. The sheaf-theoretic perspective retains extensionality, but is much more nuanced. [Here too, I suspect that mereological discussions of extensionality have confused the algebra of parts and the integrity of wholes.]
+
+\item \emph{Gunk and atoms}. You can model continuity and gunky parts if you so desire. You just need a sober space to do it. \todo{check that we can model continuity in the locale in this way.} \todo{can you do continuity only in the sheaf data, without an underlying continuous decompositon in the locale? I would think that if you can't infinitely decompose into smaller opens around a point in the locale, you couldn't do such a thing in the sheaf data?}
+
+\item \emph{Priority of wholes}. The framework is agnostic as to whether you take an  Aristotelian-Thomistic approach\addcite{Aquinas, Arlig, and that guy who wrote that recent book defending the Aristotelian view}.
+
+\item \emph{The whole is greater than its parts}. The framework is agnostic as to whether you want to be a Scotist and say that the whole is something over and above its parts (cite Cross) or an Ockhamist who says it is not\addcite{Normore, Arlig}.
+
+\end{itemize}
