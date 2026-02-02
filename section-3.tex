@@ -2,11 +2,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Modeling Part-Whole Complexes as Sheaves}
+\section{Modeling Part-Whole Complexes as Presheaves}
 \label{sec:sheaf-mereology}
 
 \noindent
-As noted in \cref{sec:introduction}, the central claim of this paper is that we can model part-whole complexes as sheaves over locales. In particular, the locale provides the abstract parts space of ``regions'' the pieces can occupy, the sheaf assigns actual pieces to those regions, and the gluing condition determines when pieces fuse.
+As noted in \cref{sec:introduction}, the central claim of this paper is that we can model part-whole complexes as presheaves over locales, with varying gluing conditions. In particular, the locale provides the abstract parts space of ``regions'' that the pieces can occupy, the presheaf assigns actual pieces to those regions, and the gluings determine which pieces fuse.
 
 We can thus define the core mereological concepts of part and whole in sheaf-theoretic terms. Regarding wholes, we can identify fusion with gluing: to say that some pieces fuse or form a ``fusion'' is just to say that they are glued together. Regarding parts, to say that a piece is a ``part'' is just to say that it is a part of a fusion. In other words, the parts of a fusion are just the pieces from which it is glued together.
 
@@ -14,28 +14,22 @@ We can thus define the core mereological concepts of part and whole in sheaf-the
 
 \begin{Definition}[Fusions and parts]
 
-We say that a section $s \in F(U)$ is a fusion iff 
+We say that a section $s \in F(U)$ is a fusion iff there exists a cover $\{ U_{i} \}_{i \in I}$ of $U$ and a selection of patch candidates $\{ s_{i} \}_{i \in I}$ such that:
 
-\[
-\glues{U}(s) = \mathrm{true}.
+\[ 
+\restrict{U}{U_{i}}(s) = s_{i}, \quad \text{ for each } U_{i}.
 \]
 
 \noindent
-Given $t \in F(V)$ and $s \in F(U)$ with $V \childOf/ U$ and $V \not = \bottom/$, we say $t$ is a part of $s$, denoted $t \partOf/ s$, iff
+Given $t \in F(V)$ and $s \in F(U)$ with $V \childOf/ U$ and $V \not = \bottom/$, we say $t$ is a part of $s$, denoted $t \partOf/ s$, iff $s$ is a fusion and:
 
 \[
-\glues{U}(s) \quad\text{ and }\quad \restrict{U}{V}(s) = t.
+\restrict{U}{V}(s) = t.
 \]
 
 \end{Definition}
 
-\begin{Remark}
-
-$V \not = \bottom/$ because no parts can occupy $\bottom/$. The least region of the locale represents the combinatorial idea of no regions at all, and so it cannot be populated by any parts (hence in a \Gsheaf/ the sole section over $\bottom/$ is the singleton $\tuple{}$).
-
-\end{Remark}
-
-Sheaf theory thus provides a systematic framework with which to model a large variety of part-whole complexes in a ``fusions-first'' manner. In the rest of this section, we illustrate with examples.
+Because fusions do not freely arise here, but rather only exist where parts are explicitly glued together, sheaf theory thus provides a systematic framework with which to model a large variety of part-whole complexes in a ``fusions-first'' manner. In the rest of this section, we illustrate with examples. In each case, we construct a custom presheaf designed to model a particular part-whole complex. Our choices of presheaves should be interpreted as modeling choices. One could construct different presheaves, and each can be evaluated on its own merits. 
 
 % ----------------------------------------
 \begin{Example}
@@ -90,90 +84,71 @@ As a Hasse diagram:
 \end{diagram}
 
 \noindent
-All of the generators are atomic, since none overlap (there are no meets among the generators):
+For the presheaf $F$, let it assign to each region whatever materials (if any) cover its floor uniformly. Let us say that the west room's and hallway's floors are each covered uniformly by wood, while the east room's floor is covered uniformly by tiles:
 
 \begin{itemize}
 
-\item $\atomsOf{\category{L}} = \{ WR, H, ER \}$
+\item $F(WR) = \{ wood \}$
+\item $F(H) = \{ wood \}$
+\item $F(ER) = \{ tile \}$
 
 \end{itemize}
 
 \noindent
-Let us define a \Gsheaf/ $F$ that models the flooring of this building. For data, let there be the following available flooring materials:
+Since the west room's and hallway's floors are covered uniformly by wood, their join is too:
 
 \begin{itemize}
 
-\item $M = \{ \text{wood}, \text{tile}, \ldots \}$
+\item $F(WR \join/ H) = \{ wood \}$
 
 \end{itemize}
 
 \noindent
-For a gluing condition, let us say that sections glue if they contain the same materials:
+Since none of the other regions are covered uniformly by the same material, we assign nothing to them:
 
 \begin{itemize}
 
-\item $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true}$ 
-  iff $b_{i} = b_{j}$ for every $i, j \in \support/(U)$.
-\item $\mathrm{false}$ otherwise
+\item $F(WR \join/ ER) = \EmptySet/$
+\item $F(H \join/ ER) = \EmptySet/$
+\item $F(WR \join/ H \join/ ER) = \EmptySet/$
 
 \end{itemize}
 
 \noindent
-We must check that this is a legitimate gluing condition.
-
-\begin{proof}
-
-We must show that $\glues{}$ satisfies the coherence conditions (G1)--(G3).
+Finally, for the fiber over bottom, where there are no regions to cover with materials, let us assign the special symbol zero:
 
 \begin{itemize}
 
-\item [G1] \emph{Local atomic data}. Trivial.
-
-\item [G2] \emph{Downward stability}. We must show that if $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)})$ = $\mathrm{true}$, then $\glues{V}(\restrict{U}{V}(\tuple{b_{i}}_{i \in \support/(U)}))$ = $\mathrm{true}$ for every $V \childOf/ U$.  Assume the antecedent. Then $\restrict{U}{V}(\tuple{b_{i}}_{i \in \support/(U)})$ = $\tuple{b_{i}}_{i \in \support/(V)}$.
-  \begin{itemize}
-      \item \emph{Case 1}: if the length of $\tuple{b_{i}}_{i \in \support/(V)} = 1$, it glues by (G1).
-      \item \emph{Case 2}: if the length of $\tuple{b_{i}}_{i \in \support/(V)} \geqslant 2$, then by the assumption, $b_{i}$ = $b_{j}$ for every $i, j \in \support/(V)$, so they glue.
-  \end{itemize}
-
-\item [G3] \emph{Upward stability}. Given a selection of compatible patch candidates $\tuple{b_{i}}_{i \in \support/(U)}$, we must show that if $\glues{U_{i}}(\tuple{b_{i}, b_{j}})$ = $\mathrm{true}$ for each $i, j \in \support/(U)$, then $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)})$ = $\mathrm{true}$. Assume the antecedent. Since for every $i, j \in \support/(U)$, $b_{i} = b_{j}$ by the assumption, $\tuple{b_{i}}_{i \in \support/(U)}$ glues. \qedhere
-
-\end{itemize}
-
-\end{proof}
-
-\noindent
-For the atomic regions, fix a choice of local data:
-
-\begin{itemize}
-
-\item $F(WR) = \{ \tuple{wood} \}$
-\item $F(H) = \{ \tuple{wood} \}$
-\item $F(ER) = \{ \tuple{tile} \}$
+\item $F(\bottom/) = \{ 0 \}$
 
 \end{itemize}
 
 \noindent
-Extend compatible data to meets, of which there is only $\bottom/$, so:
+For the restrictions, let us say that the materials that cover a larger region are restricted down to the materials that cover the smaller region. Hence, the non-empty fibers restrict by identity:
 
 \begin{itemize}
 
-\item $F(\bottom/) = \{ \tuple{} \}$
+\item $\restrict{WR \join/ H}{WR}(wood) = \restrict{WR \join/ H}{H}(wood) = wood$
 
 \end{itemize}
 
 \noindent
-Recursively extend data to joins via gluing:
+The empty fibers restrict via the empty function (there is nothing to restrict):
 
 \begin{itemize}
 
-\item $F(WR \join/ H)$ = $\{ \tuple{wood, wood} \}$, since $F(WR)$ = $F(H)$ = $\{ \tuple{wood} \}$,
-and $wood$ = $wood$.
+\item $\restrict{WR \join/ H \join/ ER}{WR \join/ H} = \restrict{WR \join/ H \join/ ER}{WR \join/ ER} = \restrict{WR \join/ H \join/ ER}{H \join/ ER} = \text{ empty function }$
+\item $\restrict{WR \join/ ER}{WR} = \restrict{WR \join/ ER}{ER} = \text{ empty function }$
+\item $\restrict{H \join/ ER}{H} = \restrict{H \join/ ER}{ER} = \text{ empty function }$
 
-\item $F(WR \join/ ER) = \EmptySet/$, since $F(WR)$ = $\{ \tuple{wood} \}$, $F(ER) = \{ \tuple{tile} \}$, and $wood \not = tile$.
+\end{itemize}
 
-\item $F(H \join/ ER)$ = $\EmptySet/$, since $F(H)$ = $\{ \tuple{wood} \}$, $F(ER)$ = $\{ \tuple{tile} \}$, $wood \not = tile$.
+\noindent
+Finally, fibers restrict to bottom via the constant function: 
 
-\item $F(WR \join/ H \join/ ER)$ = $\EmptySet/$, since $F(WR \join/ H)$ = $\{ \tuple{wood, wood} \}$, $F(H \join/ ER)$ = $F(WR \join/ ER)$ = $\EmptySet/$, and $wood \not = \EmptySet/$.
+\begin{itemize}
+
+\item $\restrict{WR}{\bottom/}(wood) = \restrict{H}{\bottom/}(wood) = \restrict{ER}{\bottom/}(tile) = 0$
 
 \end{itemize}
 
@@ -183,16 +158,16 @@ In this building, there are two maximal fusions:
 \begin{itemize}
 
 \item The flooring of the west room and the hallway glue into one piece that covers both.
-\item The flooring that covers the east room is (trivially) glued into a single piece, namely itself.
+\item The flooring that covers the east room.
 
 \end{itemize}
 
 \noindent
-Thus, the flooring of this building is really a collection of two independent fusions: the wooden floor that covers the east room and hallway, and the tiled floor that covers the east room. That implies: 
+Thus, the flooring of this building is really a collection of two independent fusions: the wooden floor that covers the west room and hallway, and the tiled floor that covers the east room. That implies: 
 
 \begin{itemize}
 
-\item To separate the floors of the east room and hallway, you would have to use a saw to cut them, since they are fused. They are not merely sitting next to each other. Rather, they make up a single (fused) piece.
+\item To separate the floors of the west room and hallway, you would have to use a saw to cut them, since they are fused. They are not merely sitting next to each other. Rather, they make up a single (fused) piece.
 
 \item By contrast, to separate the hallway and the east room, you would not need to cut them, since they are not fused. They simply happen to be sitting next to each other.
 
@@ -209,9 +184,14 @@ The parts of the fusions are clear:
 
 \end{itemize}
 
+\noindent
+This is particular example fails to be a sheaf, because everything that can glue does not glue. In particular, $F(WR \join/ H \join/ ER)$ is covered by $\{ WR, H, ER \}$, and the patch candidates $\{ wood, wood, tile \}$ are compatible (they pair-wise restrict to $0$). However, there is nothing in $F(WR \join/ H \join/ ER)$ that is glued together from those patch candidates (indeed, $F(WR \join/ H \join/ ER)$ is empty). Hence, this is not a sheaf. Rather, it is a monopresheaf.
+
+But this is precisely what one would expect when modeling two discrete pieces of flooring that happen to sit next to each other. The west room and hallway do glue together here, as expected. But the maximal wood and tile pieces do not glue together, also as expected (there is a boundary between them, where the wood ends and the tile begins). 
+
 \end{Example}
 
-In the previous example, none of the atomic regions overlapped. The locale was discrete, and thus the sheaf was free to glue or not glue pieces as it saw fit. The story is different if there are overlaps in the locale itself. Overlaps in the locale require overlaps in the sheaf.
+In the previous example, none of the regions overlapped. The presheaf was free to glue or not glue pieces as it saw fit. The story is different if there are overlaps in the locale itself. Overlaps in the locale require overlaps in the presheaf, wherever you want gluings.
 
 % ----------------------------------------
 \begin{Example}
@@ -240,20 +220,19 @@ where
 \end{itemize}
 
 \noindent
-The atomic sections of this locale are:
+For a presheaf $F$, let us say that it behaves much like in the previous example: it assigns to each region the materials (if any) that cover the floor uniformly. 
+
+For instance, let us assign wood to both halves:
 
 \begin{itemize}
 
-\item $WH$
-\item $EH$
-\item $\bottom/$
+\item $F(WH) = \{ wood \}$
+\item $F(EH) = \{ wood \}$
 
 \end{itemize}
 
 \noindent
-In particular, $O$ is not an atomic region, because it is the non-trivial overlap of $WH$ and $EH$.
-
-Here is the Hasse diagram:
+In a picture:
 
 \begin{diagram}
 
@@ -261,37 +240,9 @@ Here is the Hasse diagram:
 \node (WH) at (-2, 1.5) {$WH$};
 \node (EH) at (2, 1.5) {$EH$};
 \node (O) at (0, 0) {$O$};
-\node (bottom) at (0, -1) {$\bottom/$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
 
-\draw (bottom) to (O);
-\draw (O) to (WH);
-\draw (O) to (EH);
-\draw (WH) to (WH_v_EH);
-\draw (EH) to (WH_v_EH);
-
-\end{diagram}
-
-Let us define a \Gsheaf/ $F$ that models the flooring of this room, using the same gluing condition from \cref{ex:wr-h-er}.
-
-For the atomic regions, let us assign wood to both halves:
-
-\begin{itemize}
-
-\item $F(WH) = \{ \tuple{wood} \}$
-\item $F(EH) = \{ \tuple{wood} \}$
-
-\end{itemize}
-
-\noindent
-In a picture (omitting $\bottom/$ for simplicity):
-
-\begin{diagram}
-
-\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
-\node (WH) at (-2, 1.5) {$WH$};
-\node (EH) at (2, 1.5) {$EH$};
-\node (O) at (0, 0) {$O$};
-
+\draw[dashed] (O) to (bottom);
 \draw[dashed] (O) to (WH);
 \draw[dashed] (O) to (EH);
 \draw[dashed] (WH) to (WH_v_EH);
@@ -308,11 +259,11 @@ In a picture (omitting $\bottom/$ for simplicity):
 \end{diagram}
 
 \noindent
-For the meet (the overlap $O$), the two halves restrict to the same thing:
+By construction $O = WH \meet/ EH$, and the two halves restrict to the same material there:
 
 \begin{itemize}
 
-\item $F(O) = \{ \tuple{wood} \}$
+\item $F(O) = \{ wood \}$
     
 \end{itemize}
 
@@ -325,7 +276,9 @@ Thus:
 \node (WH) at (-2, 1.5) {$WH$};
 \node (EH) at (2, 1.5) {$EH$};
 \node (O) at (0, 0) {$O$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
 
+\draw[dashed] (O) to (bottom);
 \draw[dashed] (O) to (WH);
 \draw[dashed] (O) to (EH);
 \draw[dashed] (WH) to (WH_v_EH);
@@ -353,7 +306,7 @@ For the join, the west and east halves glue, since they're made from the same fl
 
 \begin{itemize}
 
-\item $F(WH \join/ EH) = \{ \tuple{wood} \}$
+\item $F(WH \join/ EH) = \{ wood \}$
 
 \end{itemize}
 
@@ -366,7 +319,9 @@ Thus:
 \node (WH) at (-2, 1.5) {$WH$};
 \node (EH) at (2, 1.5) {$EH$};
 \node (O) at (0, 0) {$O$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
 
+\draw[dashed] (O) to (bottom);
 \draw[dashed] (O) to (WH);
 \draw[dashed] (O) to (EH);
 \draw[dashed] (WH) to (WH_v_EH);
@@ -395,7 +350,66 @@ Thus:
 
 \end{diagram}
 
-The maximal fusion is a single piece of wooden flooring that covers the whole room. Its parts are the west and east halves, and (transitively) their overlap. The west and east halves themselves have a shared part, the strip of overlap.
+\noindent
+Finally, for the fiber over bottom, where there are no regions to cover with materials, assign the special symbol zero:
+
+\begin{itemize}
+
+\item $F(\bottom/) = \{ 0 \}$
+
+\end{itemize}
+
+\noindent
+In a picture:
+
+
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
+
+\draw[dashed] (O) to (bottom);
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$wood$}}] (wood_EH) at (2, 2.75) {};
+
+\draw (0, 0.25) to (0, 0.5);
+\draw (0, 1.5) ellipse (0.85cm and 0.75cm);
+\node[dot, label=below:{\small{$wood$}}] (wood_O) at (0, 1.5) {};
+
+\draw (0, 3.25) to (0, 3.75);
+\draw (0, 4.25) ellipse (0.75cm and 0.75cm);
+\node[dot, label=above:{\small{$wood$}}] (wood_WH_v_EH) at (0, 4) {};
+
+\draw[arrow, ->] (wood_WH_v_EH) to (wood_WH);
+\draw[arrow, ->] (wood_WH_v_EH) to (wood_EH);
+\draw[arrow, ->] (wood_WH) to (wood_O);
+\draw[arrow, ->] (wood_EH) to (wood_O);
+
+\draw (0.25, -1.5) to (0.65, -1.1);
+\draw (0.75, -0.65) ellipse (0.35cm and 0.5cm);
+\node[dot, label=below:{\small{$0$}}] (0) at (0.75, -0.575) {};
+
+\draw[arrow, ->] (wood_O) to[out=350, in=85] (0);
+
+\end{diagram}
+
+\noindent
+The maximal fusion here is a single piece of wooden flooring (namely, $wood \in F(WH \join/ EH)$) that covers the whole room. Its parts are the west and east halves, and (transitively) their overlap. The west and east halves themselves have a shared part, the strip of overlap.
+
+This particular example is a sheaf: the parts glue together coherently in a single manner across the entire parts space. This is exactly as one would expect when modeling a floor that is covered uniformly in its entirety by wood flooring: as you restrict down to smaller parts of the room, you get smaller pieces of wood flooring. In contrast to \cref{ex:wr-h-er}, here the regions have a nontrivial overlap. By the sheaf condition, agreement on that overlap forces a unique fusion of the parts, just as expected.
 
 \end{Example}
 
@@ -404,12 +418,12 @@ The maximal fusion is a single piece of wooden flooring that covers the whole ro
 \begin{Example}
 \label{ex:wh-o-eh-fail}
 
-To illustrate a failed attempt to build a sheaf, let us take the locale and gluing condition from \cref{ex:wh-o-eh}, but let's assign different flooring materials to the atomic regions:
+To illustrate a failed attempt to build a sheaf, let us take the locale and gluing condition from \cref{ex:wh-o-eh}, but suppose that we assign different flooring materials to the east and west halves of the room:
 
 \begin{itemize}
 
-\item $F(WH) = \{ \tuple{wood} \}$
-\item $F(EH) = \{ \tuple{tile} \}$
+\item $F(WH) = \{ wood \}$
+\item $F(EH) = \{ tile \}$
 
 \end{itemize}
 
@@ -422,7 +436,9 @@ As a picture:
 \node (WH) at (-2, 1.5) {$WH$};
 \node (EH) at (2, 1.5) {$EH$};
 \node (O) at (0, 0) {$O$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
 
+\draw[dashed] (O) to (bottom);
 \draw[dashed] (O) to (WH);
 \draw[dashed] (O) to (EH);
 \draw[dashed] (WH) to (WH_v_EH);
@@ -438,17 +454,18 @@ As a picture:
 
 \end{diagram}
 
-Next, we attempt to extend this data to meets, which requires that we restrict to the overlap, and then filter out anything that can't glue. Here, $F(WH)$ restricts to $\{ \tuple{wood} \}$, and $F(EH)$ restricts to $\{ \tuple{tile} \}$:
+Next, at the overlap, allow both $wood$ and $tile$:
 
 \begin{itemize}
 
-\item $\restrict{WH}{O}(\tuple{wood}) = \tuple{wood}$
-\item $\restrict{EH}{O}(\tuple{tile}) = \tuple{tile}$
+\item $F(O) = \{ wood, tile \}$
+\item $\restrict{WH}{O}(wood) = wood$
+\item $\restrict{EH}{O}(tile) = tile$
 
 \end{itemize}
 
 \noindent
-Thus:
+Thus, as a picture:
 
 \begin{diagram}
 
@@ -480,24 +497,63 @@ Thus:
 
 \end{diagram}
 
-However, these cannot glue, because they are not the same. We see here that the data of WH and EH disagree on the overlap. Hence, we are unable to construct a coherent sheaf. This illustrates how sheaf theory requires and manages coherent gluing at all levels. Because it requires that pieces glue together coherently at every level of ``zoom,'' it prevents us from ever putting together an incoherent part-whole complex in the first place.
+Note, however, that the wood and tile in the west and east halves cannot glue, because they do not agree on their overlap. Hence, there cannot be a single kind of flooring material that uniformly covers the maximal join $WH \join/ EH$. This illustrates how the sheaf condition is a very strong condition, but also a helpful one: it requires and manages coherent gluing at all levels. Because it requires that pieces glue together coherently at every level of ``zoom,'' it prevents us from ever putting together an incoherent part-whole sheaf in the first place.
 
-It is worth spelling the failure out explicitly. Since $WH$ and $EH$ disagree on their overlap, $F$ cannot assign anything to $O$, so:
+It is worth spelling the failure out explicitly. If we want to model this room as a sheaf, then we are requiring coherent, unique gluing across all of the regions: wherever pieces can coherently glue together, they must do so. But here, since $WH$ and $EH$ disagree on their overlap, there is no way to make them cohere into a single piece.
 
-\begin{itemize}
+Intuitively, this makes sense. If the western and eastern halves of a room were truly floored with different materials, then they could not overlap. Imagine if two builders started at opposite ends of the room: one flooring with wood and the other flooring with tile. When they reach the mid-point, they'd realize they made a mistake. In such a scenario, it would be impossible to complete the original vision of having a single, uniform flooring across the entire room.
 
-\item $F(O) = \EmptySet/$
+However, what if we weaken our requirements and consider this as a presheaf? In a presheaf, nothing disallows the two halves from restricting differently on an overlap. The full presheaf looks like this:
 
-\end{itemize}
+\begin{diagram}
+
+\node (WH_v_EH) at (0, 3) {$WH \join/ EH$};
+\node (WH) at (-2, 1.5) {$WH$};
+\node (EH) at (2, 1.5) {$EH$};
+\node (O) at (0, 0) {$O$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
+
+\draw[dashed] (O) to (bottom);
+\draw[dashed] (O) to (WH);
+\draw[dashed] (O) to (EH);
+\draw[dashed] (WH) to (WH_v_EH);
+\draw[dashed] (EH) to (WH_v_EH);
+
+\draw (0, 3.25) to (0, 3.75);
+\draw (0, 4.25) ellipse (0.75cm and 0.75cm);
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.55, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=left:{\small{$wood$}}] (wood_WH) at (-2, 2.75) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.5, 2.75) ellipse (1cm and 0.75cm);
+\node[dot, label=right:{\small{$tile$}}] (tile_EH) at (2, 2.75) {};
+
+\draw (0, 0.25) to (0, 0.5);
+\draw (0, 1.5) ellipse (1cm and 1cm);
+\node[dot, label=below:{\small{$wood$}}] (wood_O) at (0, 1.25) {};
+\node[dot, label=below:{\small{$tile$}}] (tile_O) at (0, 2.1) {};
+
+\draw[arrow, ->] (wood_WH) to (wood_O);
+\draw[arrow, ->] (tile_EH) to (tile_O);
+
+\draw (0.25, -1.5) to (0.65, -1.1);
+\draw (0.75, -0.65) ellipse (0.35cm and 0.5cm);
+\node[dot, label=below:{\small{$0$}}] (0) at (0.75, -0.575) {};
+
+\draw[arrow, ->] (wood_O) to[out=350, in=85] (0);
+
+\end{diagram}
 
 \noindent
-But that renders the restrictions $\restrict{WH}{O}$ and $\restrict{EH}{O}$ undefined, thereby severing our ability to zoom in and out. Thus, the system as a whole becomes incoherent.
+Interpreted as a presheaf, there is a sensible interpretation of this structure. Nothing sits in the fiber over $WH \join/ EH$, since a single coherent piece of flooring cannot be glued from wood and tile. The wood and tile from the two halves each extend into the overlap though, but since they don't agree, one of them must sit on top of the other in that overlapping area. It is like when two area rugs overlap: one sits on top of the other.
 
-Intuitively, this makes sense. If the western and eastern halves of a room were truly floored with different materials, then they would not overlap. There would be some sort of boundary between them where the one's materials end and the other's materials begin. But here, the ambient locale doesn't allow that possibility. In \emph{this} particular locale, the western and eastern halves \emph{do} overlap, so the sheaf must assign pieces to the different regions coherently, i.e., it must assign pieces that agree on their overlap.
+As a final point, note that this fails to be monopresheaf, because there are two sections in $F(O)$ that restrict to $\bottom/$. The gluings are trivial here, but nonetheless, gluing is not unique precisely in the overlap. Hence, this is a presheaf, but not a monopresheaf. This illustrates how presheaves allow multiple assemblies of parts, but monopresheaves do not.
 
 \end{Example}
 
-The previous two examples were spatial. But parts come in non-spatial guises too, and sheaves can model them just as well.
+The previous two examples were spatial. But parts come in non-spatial guises too, and sheaf theory can model them just as well.
 
 % ----------------------------------------
 \begin{Example}
@@ -518,7 +574,7 @@ For concreteness, suppose:
 
 \begin{itemize}
 
-\item $P = \{ A$ (Alice), $B$ (Bob), $C$ (Carol), $D$ (Denny) $\}$
+\item $P = \{ A, B, C, D \}$, with $A$ short for Alice, $B$ for Bob, $C$ for Carol, and $D$ for Denny.
 
 \end{itemize}
 
@@ -580,20 +636,11 @@ Then the Hasse diagram is isomorphic to the powerset of $P$:
 \end{diagram}
 
 \noindent
-All of the generators are atomic, since there are no meets among the generators:
+Let us next define a presheaf $F$ that models the mesh of a selected set of relationships over $P$. To do that, let us first specify a set $R$ that picks out the (binary, symmetric) relationships of interest:
 
 \begin{itemize}
 
-\item $\atomsOf{\category{L}} = \{ A, B, C, D \}$
-
-\end{itemize}
-
-\noindent
-Let us define a \Gsheaf/ $F$ that models the mesh of a selected set of relationships over $P$. To do that, let us first specify a set $R$ that picks out the (binary, symmetric) relationships of interest:
-
-\begin{itemize}
-
-\item $R = \{ f$ (friends), $m$ (married), $\ldots \}$
+\item $R = \{ f, m, \ldots \}$, with $f$ short for being friends, $m$ for being married, etc.
 
 \end{itemize}
 
@@ -601,27 +648,7 @@ Let us define a \Gsheaf/ $F$ that models the mesh of a selected set of relations
 For convenience, if $U, V \in P$, $r \in R$, and $U$ and $V$ stand in relationship $r$, we
 will write $r(U, V)$.
 
-For a gluing condition, let us say that sections glue if they are connected by the same relations:
-
-\begin{itemize}
-
-\item $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true}$ iff for every $r \in R$, 
-      $r(U_{i}, U_{j}) \in b_{i}$ iff $r(U_{j}, U_{i}) \in b_{j}$, for every $i, j \in \support/(U)$
-\item $\mathrm{false}$ otherwise
-
-\end{itemize}
-
-\noindent
-We must check that this is a legitimate gluing condition.
-
-\begin{proof}
-
-The proof is the same as before. \qedhere
-
-\end{proof}
-
-\noindent
-For the atomic regions, let us fix a choice of local data by assigning to each person the relations they stand in, e.g.:
+For the generators, let us fix a choice of local data by assigning to each person the relations they stand in, e.g.:
 
 \begin{itemize}
 
@@ -687,16 +714,16 @@ For example, in the fiber over $A$:
 \end{itemize}
 
 \noindent
-Next, we must extend compatible data to meets, of which there is only $\bottom/$, so:
+In the bottom fiber, over the region of no people to carry relationships, assign the special symbol $0$:
 
 \begin{itemize}
 
-\item $F(\bottom/) = \{ \tuple{} \}$
+\item $F(\bottom/) = \{ 0 \}$
 
 \end{itemize}
 
 \noindent
-Finally, we must extend atomic data to binary joins via gluing. The gluing condition essentially says that mini-graphs can be glued along shared edges, provided that they share exactly the same edges. To see how this works, consider (for example) the mini-graphs over $A$ and $C$:
+Next, let us extend the above data to binary joins by merging mini-graphs along shared edges, wherever the components share exactly the same edges. To see how this works, consider (for example) the mini-graphs over $A$ and $C$:
 
 \begin{diagram}
 
@@ -717,7 +744,7 @@ Finally, we must extend atomic data to binary joins via gluing. The gluing condi
 \end{diagram}
 
 \noindent
-Can these be glued? The answer is yes, because they share exactly one edge, namely the one labeled $f$. If you rotate the graphs sideways a bit, you can see how they can be merged along $f(A, C)$:
+Can these be merged? The answer is yes, because they share exactly one edge, namely the one labeled $f$. If you rotate the graphs sideways a bit, you can see how they can be merged along $f(A, C)$:
 
 \begin{diagram}
 
@@ -743,7 +770,7 @@ Can these be glued? The answer is yes, because they share exactly one edge, name
 \end{diagram}
  
 \noindent
-Merging along $f(A, C)$ yields the following glued graph:
+Merging along $f(A, C)$ yields the following graph:
 
 \begin{diagram}
 
@@ -760,7 +787,7 @@ Merging along $f(A, C)$ yields the following glued graph:
 \end{diagram}
 
 \noindent
-By gluing binary joins in this fashion, we get:
+By merging all binary joins in this fashion, we get:
 
 \begin{itemize}
 
@@ -829,7 +856,7 @@ As pictures:
 
 \end{diagram}
 
-Having glued joins of two regions, we must next glue joins of three atomic regions. For instance, take $B \join/ C \join/ D$. We can glue $B \join/ C$ trivially (because they share no edges), we can glue $C \join/ D$ along their shared $f$-edge, and we can glue $B \join/ D$ along their shared $f$-edge. That yields:
+Having merged the graphs from joins of two regions, we must next merge the graphs of joins from three regions. For instance, take $B \join/ C \join/ D$. We can merge the graphs of $B \join/ C$ trivially (because they share no edges), we can merge the graphs of $C \join/ D$ along their shared $f$-edge, and we can merge the graphs of $B \join/ D$ along their shared $f$-edge. That yields:
 
 \begin{diagram}
 
@@ -862,7 +889,7 @@ Having glued joins of two regions, we must next glue joins of three atomic regio
 \end{diagram}
 
 \noindent
-By gluing all joins of three atomic regions in this fashion, we get:
+By merging the graphs of all joins of three regions in this fashion, we get:
 
 \begin{itemize}
 
@@ -912,7 +939,7 @@ By gluing all joins of three atomic regions in this fashion, we get:
 \end{itemize}
 
 \noindent
-At the top-most join, gluing four regions, we get:
+At the top-most join of the locale, if we merge the graphs of all four regions, we get:
 
 \begin{itemize}
 
@@ -970,20 +997,23 @@ As a picture:
 \end{diagram}
 
 \noindent
-The resulting sheaf yields a fused mesh of relationships over the population, which is glued together from smaller meshes over smaller subsets of the population. 
+In effect, the fiber over each region $U$ is a consistent assignment of relationships involving exactly the people in $U$, obtained by restriction from the full society. A restriction from $F(U)$ to $F(V)$ in effect forget any edges and vertices not involving people in $V$. It truly restricts the relationships mesh from those people in $U$ to only those in $V$.
+
+This is in fact a sheaf. The sheaf condition requires that the relationship meshes over two opens agrees precisely on their overlap: when you restrict the meshes down to their overlap, you get the same sub-mesh. 
+
+The result is a sheaf: a fused mesh of relationships over the population, which is glued together from smaller meshes over smaller subsets of the population. 
 
 \begin{itemize}
 
-\item Each atomic fiber is a part of the whole (human society), and its data encodes the internal (relational) structure of that part.
+\item Each fiber is a part of the whole (human society), and its data encodes the internal (relational) structure of that part.
 
 \item Mereological overlap is then modeled by shared relationships: two parts overlap if their relational graphs intersect coherently.
 
-\item Failure to glue (as in $F(A \join/ D) = \EmptySet/$ and $F(B \join/ C) = \EmptySet/$) reflects mereological separation: the atomic regions in question cannot be fused because they are not related in this mesh.
+\item Regions that are not covered by a mesh (as in $F(A \join/ D) = \EmptySet/$ and $F(B \join/ C) = \EmptySet/$) reflect mereological separation: the regions in question are simple not related, so there is nothing to glue.
 
 \end{itemize}
 
 \end{Example}
-
 
 For another example, consider processes. A process (or more generally any sequence of events, states, etc.) can be seen as a part-whole complex too. 
 
@@ -1126,36 +1156,7 @@ Think of moving upwards in this locale as forgetting information about (or alter
 
 Notice that implication moves upwards: $U_{ab}$ implies $U_{a}$ because if I know (at $U_{ab}$) that ``$a$'' happened first and then ``$b$'' happened, then I certainly know that ``$a$'' happened first. 
 
-Further, no generator is the non-trivial overlap of other generators, so every generator is an atomic region:
-
-\begin{itemize}
-
-\item $\atomsOf{\category{L}}$ = G
-
-\end{itemize}
-
-\noindent
-As with any locale, we can write each region canonically as the join of its atomic regions:
-
-\begin{itemize}
-
-\item $U_{\support/(U)} = \bigjoin/\limits_{i \in \support/(U)} U_{i}$
-
-\end{itemize}
-
-\noindent
-But here, what this means is that we can canonically write each region as the join of its ``most specified'' prefixes. For instance, $\support/(U_{a}) = \{ aa, ab \}$, so:
-
-\begin{itemize}
-
-\item $U_{a} = U_{\support/(U_{a})} = \bigjoin/ \{U_{aa}, U_{ab} \}$.
-
-\end{itemize}
-
-\noindent
-This makes sense. Since $U_{a}$ is a region where we know only that ``$a$'' happened first, it is the join of all maximal continuations that begin with ``$a$.''
-
-This particular locale is interesting because it models the ``process space'' of any 2-stage sequence that can make one of two choices at each stage. Let us now assign some actual processes to this ambient space, using a \Gsheaf/.
+This particular locale is interesting because it models the ``process space'' of any 2-stage sequence that can make one of two choices at each stage. Let us now assign some actual processes to this ambient space, using a presheaf.
 
 Imagine a machine $m$ that can run multiple concurrent processes, all of whom share the same memory. For simplicity, let us suppose that the machine has two registers ($R = \{ r_{1}, r_{2} \}$), each of which can hold one bit ($1$ or $0$). So, at any point in time the machine's memory state $S : \{ 0, 1 \} \times \{ 0, 1 \}$ can be one of the following:
 
@@ -1182,8 +1183,8 @@ We can define a process (program trace) as a map from $n$-length words to $n$-le
   \begin{itemize}
     \item $f(aa) = \tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}$
     \item $f(ab) = \tuple{\{ r1 \mapsto 1 \}, \{ r2 \mapsto 0 \} \}}$
-    \item $f(bb) = \tuple{\{ \{ r2 \mapsto 0 \}, \{ r2 \mapsto 1 \} \}}$
-    \item $f(ba) = \tuple{\{ \{ r2 \mapsto 0 \}, \{ r1 \mapsto 1 \} \}}$
+    \item $f(bb) = \tuple{\{ \{ r1 \mapsto 0 \}, \{ r2 \mapsto 1 \} \}}$
+    \item $f(ba) = \tuple{\{ \{ r1 \mapsto 0 \}, \{ r1 \mapsto 1 \} \}}$
   \end{itemize}
 
 \item $g : \Sigma^{=2} \to A \times A$
@@ -1191,170 +1192,289 @@ We can define a process (program trace) as a map from $n$-length words to $n$-le
   \begin{itemize}
     \item $g(aa) = \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} \}}$
     \item $g(ab) = \tuple{\{ r2 \mapsto 0 \}, \EmptySet/ \}}$
-    \item $g(bb) = \tuple{\{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}$
-    \item $g(ba) = \tuple{\{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 1 \} \}}$
+    \item $g(bb) = \tuple{\{ \{ r1 \mapsto 1 \}, \EmptySet/ \}}$
+    \item $g(ba) = \tuple{\{ \{ r1 \mapsto 1 \}, \EmptySet/ \}}$
   \end{itemize}
 
 \end{itemize}
 
 \noindent
-Let us now say that concurrent processes are compatible if they ``play well'' together, i.e., they share resources (memory) consistently. In particular, given two processes $f$ and $g$, let us say:
+Let us say that we now want to run $f$ and $g$ concurrently on the machine. For each word $w \in \Sigma^{=2}$, let us write $\jointRun{w}$ for 
 
-\begin{itemize}
-
-\item $f$ and $g$ are compatible at stage $n$ if they write to different registers.
-\item $f$ and $g$ are compatible at stage $n$ if they write the same value to the same register.
-\item $f$ and $g$ conflict at stage $n$ if they write different values to the same register.
-
-\end{itemize}
-
-\noindent
-We can formalize this notion as a gluing condition that says a selection of patch candidates glue at $U_{w}$ if they play well up to $w$. Fix a selection of programs $P = \{ f, g, \ldots \}$ to run on the machine, then:
-
-\begin{itemize}
-
-\item Given a selection of patch candidates $\tuple{(b_{i,p})_{p \in P}}_{i \in \support/(U_{w})}$ over a region $U_{w}$ with trace length $|w|$, $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{true}$ iff the following condition holds. Write $b_{i,p}[m]$ to denote the write actions of process $p$ in region $i$ at stage $m$. Then, require that at each stage $m \leqslant |w|$ and every register $r \in R$, the set 
-
-\[
-\{ v \in \{ 0, 1 \} \mid \exists i \in \support/(U_{w}), p \in P \text{ where } r \mapsto v \in b_{i,p}[m] \}
+\[ 
+  (f(w), g(w)), 
 \]
 
-has cardinality at most 1. In other words, two values are not written to the same register.
+\noindent
+i.e., the joint run of $f$ and $g$ on $w$. For instance:
 
-\item $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{false}$ otherwise.
+\[
+  \jointRun{aa} = (f(aa), g(aa)) = (\tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}, \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} \}}).
+\]
+
+Next, let us say that two joint runs $\jointRun{w}$ and $\jointRun{v}$ are prefix-compatible iff:
+
+\begin{itemize}
+  \item 
+    For every stage $k$ such that $w$ and $v$ share their first $k$ letters,
+    the combined writes of $f$ and $g$ at stage $k$ 
+    do not assign different values to the same register.
+\end{itemize}
+
+\noindent
+For instance, $\jointRun{aa}$ and $\jointRun{ab}$ are prefix-compatible because at stage 1 (at letter $a$), their writes do not conflict: 
+
+\begin{itemize}
+  \item $f(aa)$ and $f(ab)$ write $1$ to $r1$, while $g(aa)$ and $g(ab)$ write $0$ to $r2$, and this is no conflict because they write to different registers.
+\end{itemize}
+
+By contrast, $\jointRun{bb}$ and $\jointRun{ba}$ are not prefix-compatible because at stage 1 (at letter $b$) their writes do conflict:
+
+\begin{itemize}
+  \item $f(bb)$ and $f(ba)$ write $0$ to $r1$, while $g(bb)$ and $g(ba)$ write $1$ to $r1$, so they attempt to write conflicting values to the same register.
+\end{itemize}
+
+For a region $U_{w}$ with $|w| \leq 2$, let $\extensions/(U_{w})$ be the set of length-$2$ words that extend $w$. For instance, $\extensions/(U_{a}) = \{ aa, ab \}$, since $aa$ and $ab$ extend $a$, and $\extensions/(U_{ab}) = \{ ab \}$, since $ab$ is already a fully extended length-$2$ word.
+
+Now let us define a presheaf $F$ as follows. For each region $U_{w}$, let us provide an execution model that describes how $f$ and $g$ execute $w$ and then continue on. More specifically, we need to assign prefix-compatible program runs for the extensions of $w$. The idea is that $F(U_{w})$ will present a coherent description of how the machine will behave, as $f$ and $g$ jointly execute $w$ and then continue on to their continuations. 
+
+At the most specified regions ($aa$, $ab$, $bb$, and $ba$), everything is fully specified, so the joint runs are fully determined already:
+
+\begin{itemize}
+  \item $F(U_{aa}) = \{ aa \mapsto \jointRun{aa} \}$
+  \item $F(U_{ab}) = \{ ab \mapsto \jointRun{ab} \}$
+  \item $F(U_{bb}) = \{ bb \mapsto \jointRun{bb} \}$
+  \item $F(U_{ba}) = \{ ba \mapsto \jointRun{ba} \}$
+\end{itemize}
+
+\noindent
+The more complicated case involves a less specified region, e.g. $U_{a}$. At this region, we know that the first step $a$ happened, but we don't yet know whether the second step will be $a$ or $b$. So, from the point of view of $U_{a}$, both continuations are possible. 
+
+Thus, what we need for $F(U_{a})$ is a coherent description of how the machine will behave no matter which continuation actually occurs next. We must therefore:
+
+\begin{itemize}
+
+\item Pick a joint run of $aa$.
+\item Pick a joint run of $ab$.
+\item But these two choices must be prefix-compatible, since they are supposed to represent the same joint run that has two different futures.
 
 \end{itemize}
 
 \noindent
-We must check that this is a legitimate gluing condition.
-
-\begin{proof}
-
-We must check that $\glues{U_{w}}$ is downwards and upwards stable. 
+Are there any joint runs of $f$ and $g$ on $aa$ and $ab$ that are prefix-compatible at $a$? Yes:
 
 \begin{itemize}
-
-\item \emph{Downwards stability}. Assume that $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{true}$. Then $\glues{U_{i}}(\tuple{b_{i}}) = \mathrm{true}$ for each $i \in \support/(U_{w})$ since by $\glues{U_{w}}$, every $b_{i}, b_{j}$ play well on their prefixes.
-
-\item \emph{Upwards stability}. Assume $\glues{U_{\{i, j\}}}(\tuple{b_{i}, b_{j}}) = \mathrm{true}$ for all $i, j \in \support/(U_{w})$. Then $\glues{U_{w}}(\tuple{b_{i}}_{i \in \support/(U_{w})}) = \mathrm{true}$ since no $i, j$ conflict on writes. \qedhere
-
-\end{itemize}
-
-\end{proof}
-
-\noindent
-With a gluing condition at hand, we can now define a \Gsheaf/ $F$. Let our selection of processes be $P = \{ f, g, \ldots \}$. Then, we can fix the atomic data (omitting outer brackets to avoid clutter):
-
-\begin{itemize}
-
-\item $F(U_{aa}) = (f(aa), g(aa))
-  = 
-  (
-        \tuple{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} },
-        \tuple{ \{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} } 
-  )
-  .$
-  
-\item $F(U_{ab}) = (f(ab), g(ab))
-  = 
-  (
-        \tuple{ \{ r1 \mapsto 1 \}, \{ r2 \mapsto 0 \} },
-        \tuple{ \{ r2 \mapsto 0 \}, \EmptySet/ } 
-  )
-  .$
-
-\item $F(U_{bb}) = (f(bb), g(bb))
-  = 
-  (
-        \tuple{ \{ r2 \mapsto 0 \}, \{ r2 \mapsto 1 \} },
-        \tuple{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} } 
-  )
-  .$
-
-\item $F(U_{ba}) = (f(ba), g(ba))
-  = 
-  (
-        \tuple{ \{ r2 \mapsto 0 \}, \{ r1 \mapsto 1 \} },
-        \tuple{ \{ r1 \mapsto 1 \}, \{ r1 \mapsto 1 \} } 
-  )
-  .$
-
+  \item $aa \mapsto \jointRun{aa}$
+  \item $ab \mapsto \jointRun{ab}$
 \end{itemize}
 
 \noindent
-There are no meets among the generators beyond $\bottom/$, so:
+For as we saw earlier, $\jointRun{aa}$ and $\jointRun{ab}$ are prefix-compatible. Hence, there is a coherent execution model for $f$ and $g$ at $U_{a}$:
 
 \begin{itemize}
-
-\item $F(\bottom/) = \{ \tuple{} \}.$
-
+  \item $F(U_{a}) = \{ aa \mapsto \jointRun{aa}, ab \mapsto \jointRun{ab} \}$
 \end{itemize}
 
 \noindent
-Next, we must extend $F$ to joins via gluing. So, for each $U_{w}$, we must assign:
+Now consider $U_{b}$. The continuations of $b$ are $bb$ and $ba$. Are there any joint runs of $f$ and $g$ on $bb$ and $ba$ that are prefix-compatible? Here, the answer is no, for as we saw above, $\jointRun{bb}$ and $\jointRun{ba}$ are not prefix-compatible. Hence, there is no execution model for $f$ and $g$ at $U_{b}$:
 
 \begin{itemize}
-
-\item $F(U_{w}) = \{ \tuple{(b_{i,p})_{p \in P}}_{i \in \support/(U_{w})} \mid \glues{U_{w}}(\tuple{(b_{i,p})_{p \in P}}_{i \in \support/(U_{w})}) = \mathrm{true} \}.$
-
+  \item $F(U_{b}) = \EmptySet/$
 \end{itemize}
 
 \noindent
-Let's compute $F(U_{a})$ = $F(U_{aa} \join/ U_{ab})$. To determine if $(f(aa), g(aa))$ and $(f(ab), g(ab))$ glue, we need to check that they do not write conflicting values.
+What about $U_{\epsilon}$? This would have to be an execution model of a joint run that is prefix compatible with the execution models at both $U_{a}$ and $U_{b}$. Since there is no possible execution model at $U_{b}$, no execution model is possible for $U_{\epsilon}$:
 
 \begin{itemize}
-
-\item Stage 1 (at the shared prefix ``$a$''): $f(aa)$ and $f(ab)$ write $1$ to $r1$, while $g(aa)$ and $g(ab)$ write $0$ to $r2$. Since $f$ and $g$ write to different registers, there is no conflict.
-
-\item Stage 2: $f(ab)$ and $g(aa)$ write the same value (namely, $0$) to $r2$, $f(aa)$ writes $0$ to $r1$, and $g(ab)$ does nothing, so there are no conflicts. 
-
+  \item $F(U_{\epsilon}) = \EmptySet/$
 \end{itemize}
 
 \noindent
-Hence, $(f(aa), g(aa))$ and $(f(ab), g(ab))$ glue to form a unique section:
+Formally, we can summarize the above description of $F$ as follows. Let $\jointRunSymbol/ = \{ \jointRun{v} \mid v \in \Sigma^{=2} \}$. Then:
 
-\begin{itemize}
-
-\item $F(U_{a}) = (f(aa), g(aa)), (f(ab), g(ab))$
-
-\end{itemize}
-
-\noindent
-Now let's compute $F(U_{b})$ = $F(U_{bb} \join/ U_{ba})$. To determine if $(f(bb), g(bb))$ and $(f(ba), g(ba))$ glue, we need to again check for conflicting writes:
-
-\begin{itemize}
-
-\item Stage 1 (at the shared prefix ``$b$''): $f(bb)$ and $f(ba)$ write $0$ to $r2$, while $g(bb)$ and $g(ba)$ write $1$ to $r1$, so there is no conflict.
-
-\item Stage 2: $f(bb)$ and $f(ba)$ write $1$ to different registers, so they do not conflict with each other, while $f(ba)$ and $g(ba)$ write $1$ to $r1$, so they do not conflict either. However, $g(bb)$ writes $0$ to $r1$, which conflicts with $g(ba)$'s and $f(ba)$'s attempt to write $1$ to the same register.
-
-\end{itemize}
+\[
+F(U_w)
+=
+\left\{
+  s : \extensions/(w) \to \jointRunSymbol/
+  \mid
+  \begin{array}{l}
+    \text{(i) } s(v) = \jointRun{v} \text{ for all } v \in \extensions/(w), \\[4pt]
+    \text{(ii) } \{ s(v) \mid v \in \extensions/(w) \}
+    \text{ is pairwise prefix-compatible}
+  \end{array}
+\right\}
+\]
 
 \noindent
-Since we have a conflict, $(f(bb), g(bb))$ and $(f(ba), g(ba))$ fail to glue over $U_{b}$. Notice:
+For the bottom fiber, where no processes occur, assign the special symbol zero:
 
 \begin{itemize}
 
-\item The processes $f$ and $g$ agree locally at $U_{a}$.
-\item By contrast, they disagree locally at $U_{b}$.
-\item There is no global section that glues together all of $f$ and $g$'s behavior at the top $U_{\epsilon}$, thus $f$ and $g$ are not globally compatible processes. 
+  \item $F(\bottom/) = \{ 0 \}$.
 
 \end{itemize}
 
-This sort of example illustrates how sheaves can model processes, concurrency, and resource conflicts. Here the processes were programs running on a simple machine, but they could just as easily be biological processes competing for resources, etc.
+To notate the restriction of a function $f : B \to D$ to a smaller domain $C \subseteq B$, write $f\funcRestrict/_{C}$. Then, whenever $U_{v} \childOf/ U_{w}$, the restriction maps are straightforward restrictions:
+\[
+  \restrict{U_{w}}{U_{v}}(s) = s\funcRestrict/_{\extensions/(U_v)}.
+\]
 
-Whatever the concrete details may be, this example captures how local behavior can be integrated and extended over larger regions of the process space. One might naively think that the ``parts'' of such systems are the processes. But there is a different way to slice it: if you want to talk about the integrity of the ``whole'' of a concurrent system, you need to talk about how that involves coherent, integrated behavior that is functionally united locally across the various ``regions'' and ``stages'' of the system's evolution.
+\noindent
+Hence, for example:
+
+\begin{itemize}
+
+\item 
+  $\restrict{U_{a}}{U_{ab}}(\{ aa \mapsto \jointRun{aa}, ab \mapsto \jointRun{ab} \}) =
+    \{ ab \mapsto \jointRun{ab} \}$.
+
+\item 
+  $\restrict{U_{a}}{U_{aa}}(\{ aa \mapsto \jointRun{aa}, ab \mapsto \jointRun{ab} \}) =
+    \{ aa \mapsto \jointRun{aa} \}$.
+
+\end{itemize}
+
+The maximal fusions in this presheaf occur over $U_{a}$: the execution model in $U_{a}$'s fiber is glued from those of $U_{aa}$ and $U_{ab}$, exactly as one would expect, since $f$ and $g$ can run concurrently without conflict at $a$. By contrast, there is no gluing over $U_{b}$, since $f$ and $g$ cannot run concurrently without conflict at $b$. 
+
+This is not a sheaf, because it is missing gluings (e.g., over $U_{b}$). However, it is a monopresheaf, because when gluings exist (over $U_{a}$), they are unique.
+
+This relevance of this example is t hat it illustrates how sheaf theory can model processes, concurrency, and resource conflicts. Here the processes are programs running on a simple machine, but they could just as easily be biological processes competing for resources, etc.
+
+Whatever the concrete details may be, this example captures how local behaviors integrate and extend  over larger regions of the process space. One might naively think that the ``parts'' of such systems are the processes. But there is a different way to slice it: if you want to talk about the integrity of the ``whole'' of a concurrent system, you need to talk about how that involves coherent, integrated behavior that is functionally united locally across the various ``regions'' and ``stages'' of the system's evolution.
+
+\end{Example}
+
+Sheaf theory works in continuous environments too.
+
+% ----------------------------------------
+\begin{Example}
+
+Suppose we want to model the inhabitants of an apartment building over time. Let $T = (0, 10) \subseteq \Reals/$ be an open interval representing a period of time (a span of 10 years, say). 
+
+Let $T$ have the standard Euclidean topology, and let $\category{L}$ be the locale of opens of the topology. This is the ambient locale we want to work with.
+
+Next, let $P$ be the set of people who at some point or other lived in the building:
+
+\[
+  P = \{ A, B, C, \ldots \}, \text{ with $A$ short for Alice, $B$ for Bob, $C$ for Carol, and so on. }
+\]
+
+Let $I$ assign to each person the set of intervals during which they lived in the building. For instance:
+
+\begin{itemize}
+  \item $I(A) = \{ (1, 3), (4, 7) \}$
+  \item $I(B) = \{ (4, 9) \}$
+  \item $I(C) = \{ (6, 10) \}$
+\end{itemize}
+
+Let $F$ be a presheaf given as follows. For each time span $U \in \category{L}$:
+
+\[
+  F(U) = \{ p \in P \mid U \subseteq V, \text{ for some } V \in I(p) \}
+\]
+
+In other words, $F(U)$ is the set of people who live in the building for the entire duration of $U$.
+
+For $V \childOf/ U$, the restriction maps are just inclusion:
+
+\[
+  \restrict{U}{V}(J) = J,
+\]
+
+\noindent
+since if the set of people $J$ lived in the building throughout the span $U$, then they most certainly lived there during the smaller interval $V$.
+
+This is a sheaf, since any compatible selection of patch candidates glues uniquely. For any cover $\{ U_{i} \}_{i \in I}$ of $U$:
+
+\[
+  F(U) = \bigcap_{i} F(U_{i}).
+\]
+
+A fusion in this sheaf is a glued section, and its parts are the patch candidates it is glued from. For example, take $U = (6, 7)$, with cover $\{ U_{1} = (6, 6.5), U_{2} = (6.4, 7) \}$. Any selection of compatible patch candidates from this cover glue uniquely.
+
+This is a particularly simple sheaf, but the sheaf's strong gluing conditions tell us why the parts glue together so straightforwardly here. Gluing is thoroughly integrated throughout the structure. 
 
 \end{Example}
 
 
 % ----------------------------------------
+\begin{Example}
+
+For another continuous example, let's model a lump of clay through time.
+
+Let $T = (0, 10)$ be a span of time, and let $\category{L}$ be the locale of the opens of $T$ with its standard Euclidean topology again.
+
+For simplicity, let us assume that 3-dimensional space is just $\Reals/^{3}$. Then fix a function
+
+\[
+  \phi : T \to \powerset/(\Reals/^{3})
+\]
+
+\noindent
+that, for each $t \in T$,
+
+\[
+  \phi(t) \subseteq \Reals/^{3}
+\]
+
+\noindent
+is the open region of space occupied by the clay at time $t$. 
+
+If we think of $\phi(t)$ as a snapshot of the clay at $t$, then at some $t$s, $\phi(t)$ might be shaped like a statue, at other times like a lump, at still other times like two disconnected lumps, and so on.
+
+With that background fixed, let us now define a presheaf $F$ that assigns material parts to each interval of $T$. In particular, for each interval $U \in \category{L}$:
+
+\[
+  F(U) = \{ S \subseteq \Reals/^{3} \mid S \text{ is open and } \forall t \in U, S \subseteq \phi(t) \}.
+\]
+
+\noindent
+In other words, F(U) is the set of the clay's material parts that persist through the duration of $U$. 
+
+Restriction is inclusion again, since persistence through a larger time span $U$ implies persistence through a smaller span $V \childOf/ U$:
+
+\[
+  \restrict{U}{V}(S) = S.
+\]
+
+This is a sheaf, since compatible local section glue by intersection. The fibers of this sheaf are typically infinite: each fiber includes the whole lump of clay, all of is sub-regions, and these regions are themselves spatially continuous.
+
+Given a time span $U$, if 
+
+\[
+  \bigcap_{t \in U} \phi(t)
+\]
+
+\noindent
+is connected, then there will be a maximal connected section $S \in F(U)$ such that all other sections in $F(U)$ sit inside it. This models a single lump of clay through time.
+
+By contrast, if
+
+\[
+  \bigcap_{t \in U} \phi(t)
+\]
+
+\noindent
+has two or more connected components, then there will not be a maximal connected section $S \in F(U)$ that all other sections of $F(U)$ fit inside. This models a fragmented lump of clay through time.
+ 
+ What exactly does the sheaf give us here that $\phi$ doesn't? What $\phi$ gives us is a time-indexed history of spatial occupation. It is like a movie: each frame is just a picture. It says nothing about what the material parts are, or which parts persist through time. That information has to be imposed on top of $\phi$. 
+ 
+ $F$ does exactly that, and makes it explicit. $F$ assigns to the locale precisely what the material parts are that persist through time, along with a principled notion of fusion. In short, $\phi$ gives us what points in space are occupied at each instant, whereas $F$ gives us which parts persist over regions of time, and how they compose.
+ 
+Examples like this can be enriched to model further features. For instance, we might allow multiple overlapping material parts in the same fiber, each tagged by a different modifier of some kind.
+
+With the lump of clay, each fiber only carried persistent material parts. But we might let the fibers carry persistent material parts tagged with an accidental mode (e.g., a posture, like seated or standing). 
+
+Let $\e{Posture} = \{ seated, standing, \ldots, \} \cup \{ unspecified \}$. Then for every $U \in \category{L}$, we can say that $F(U)$ is a set of pairs $\tuple{S, \pi}$ such that $\forall t \in U$, $S \subseteq \phi(t)$, and $\pi \in \e{Posture}$. Intuitively, these pairs are the material parts in standing-Socrates, seated-Socrates, and Socrates-simpliciter that persist in the given mode throughout $U$. This presheaf can have multiple, distinct persistent material fusions (e.g., Socrates-simpliciter and seated-Socrates) that simultaneously inhabit the same regions of space and differ only by their accidental mode.
+
+\end{Example}
+
+
+
+% ----------------------------------------
 TODO:
 \begin{itemize}
-
-\item Add example: something over a continuous interval/timeline? E.g., maybe something over a timeline (the frame of opens taken from  the usual topology of R)? Maybe we can define a gluing condition for a mass of clay over time that says pieces glue if they agree on overlaps, so that the whole lump of clay can have parts replaced over time but as a whole it never breaks into fragments? Maybe the "closure" is even a modality.
-
-\item Add example: Socrates and seated Socrates?
 
 \item Note Spivak et al's behavioral mereology is an example of a \Gsheaf/ (and check the details to make sure that's really true).
 

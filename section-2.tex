@@ -357,6 +357,7 @@ The category of locales is defined as the dual/opposite of the category of frame
 
 \end{Remark}
 
+By definition, every locale has a lowest element, which is the join of no regions at all. It represents the absence of any regions whatever. Hence, we typically denote it with the symbol ``$\bottom/$.'' Dually, every locale has a highest element, which is the join of all of the regions. Hence, when convenient we can denote it with the symbol ``$\top$.''
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -477,7 +478,7 @@ Similarly, all other non-trivial joins are also already accounted for:
 
 % ----------------------------------------
 \begin{Example}
-\label{ex:three-element-discrete-frame}
+\label{ex:three-element-free-frame}
 
 Let $\category{L} = \tuple{G, R}$ be given by:
 
@@ -518,116 +519,7 @@ We have three generators ($U_{1}$, $U_{2}$, and $U_{3}$), and there are no relat
 
 \end{Example}
 
-A presentation provides the most ``minimal'' information from which the rest of the locale is generated. At first glance, it might be tempting to think that these generators are ``atomic'' or indivisible regions --- the fundamental pieces of the locale.
-
-But this intuition is misleading. A generator in a presentation can sometimes be expressed as the nontrivial meet or join of other generators. In this sense, some generators are actually composite rather than truly atomic.
-
-The genuinely indivisible generators — the true primitives — are exactly those that cannot be built nontrivially from other generators using meet and join. These are the elements that serve as the irreducible building blocks of the locale.
-
-To make this precise, we first define what it means to be built trivially or nontrivially from other generators via meet and join.
-
-% ----------------------------------------
-\begin{Definition}[Trivial meet-constructions]
-
-Given a presentation $\category{L} = \tuple{G, R}$, a meet construction of generators, i.e.
-
-\[
-U = \bigmeet/^{n}_{i = 1} U_{i}
-\]
-
-\noindent
-with each $U_{i} \in G$, is a trivial meet-construction if the meet is equal to one of its factors, i.e. if
-
-\[
-U = U_{i} \text{ for some } i.
-\]
-
-\end{Definition}
-
-% ----------------------------------------
-\begin{Definition}[Trivial join-constructions]
-
-Given a presentation $\category{L} = \tuple{G, R}$, a join construction of generators, i.e.
-
-\[
-U = \bigjoin/^{n}_{i = 1} U_{i}
-\]
-
-\noindent
-with each $U_{i} \in G$, is a trivial join-construction if the join is equal to one of its factors, i.e. if
-
-\[
-U = U_{i} \text{ for some } i.
-\]
-
-\end{Definition}
-
-Intuitively, trivial meet- and join-constructions do not genuinely combine multiple pieces. The result is already contained in the inputs.
-
-% ----------------------------------------
-\begin{Definition}[Meet-primitive generators]
-
-Given a presentation $\category{L} = \tuple{G, R}$, a region $U \in G$ is meet-primitive (primitive for short) if every meet-construction 
-
-\[
-U = \bigmeet/^{n}_{i = 1} U_{i}
-\]
-
-\noindent
-with each $U_{i} \in G$ is trivial.
-
-\end{Definition}
-
-Intuitively, a generator is meet-primitive if it cannot be assembled from larger ones by taking meets.
-
-% ----------------------------------------
-\begin{Definition}[Join-primitive generators]
-
-Given a presentation $\category{L} = \tuple{G, R}$, a region $U \in G$ is join-primitive (primitive for short) if every join-construction 
-
-\[
-U = \bigmeet/^{n}_{i = 1} U_{i}
-\]
-
-\noindent
-with each $U_{i} \in G$ is trivial.
-
-\end{Definition}
-
-Intuitively, a generator is join-primitive if it cannot be assembled from smaller ones by taking joins.
-
-\begin{Remark}
-
-In the technical literature, meet-primitive generators are often called meet-irreducible.
-
-\end{Remark}
-
-\begin{Example}
-
-Take the locale from \cref{ex:locale-with-overlap-and-bottom}. $U_{1}$ is the overlap of $U_{2}$ and $U_{3}$, and $U_{2}$ and $U_{3}$ are strictly larger regions than $U_{1}$, so $U_{1}$ is not primitive.
-
-By contrast, $U_{2}$ and $U_{3}$ are primitive, because they cannot be obtained as the meet of two strictly larger regions. Similarly, $\bottom/$ is primitive, because it is not the meet of two strictly larger regions either (it is the meet of only one strictly larger region, namely $U_{1}$). 
-
-\end{Example}
-
-We can see the minimal meet-primitive generators of a locale as its atomic regions.
-
-% ----------------------------------------
-\begin{Definition}[Atomic regions]
-
-Given a presentation $\category{L} = \tuple{G, R}$, the atomic regions of $\category{L}$, denoted $\atomsOf{\category{L}}$, are the minimal primitive generators of $\category{L}$, i.e. those generators $g \in G$ that satisfy the following two conditions:
-
-\begin{enumerate}
-
-\item [(A1)] \emph{Meet-primitive}. $g$ is meet-primitive.
-
-\item [(A2)] \emph{Minimality}. There is no strictly smaller meet-primitive $h$ with $h \childOf/ g$.
-
-\end{enumerate}
-
-\end{Definition} 
-
-\todo{use ``primitive'' or ``fundamental'' instead of ``atomic''? An atomic thing can't be broken down, but a meet-irreducible element does have a part!}
+A presentation provides the most ``minimal'' information from which the rest of the locale is generated. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -645,7 +537,7 @@ Let $\category{L}$ be a locale, and let $\morphisms/(\category{L})$ be $\{ \tupl
 
 \item $F$ assigns to each region $U \in L$ some data $F(U)$.
 
-\item $\{ \restrict{B}{A} \}_{\tuple{A, B} \in \morphisms/(\category{L})}$ is a family of maps $\restrict{B}{A} : F(B) \to F(A)$ (called ``restriction maps''), each of which specifies how to restrict the data over $F(B)$ down to the data over $F(A)$.
+\item $\{ \restrict{B}{A} \}_{\tuple{A, B} \in \morphisms/(\category{L})}$ is a family of maps $\restrict{B}{A} : F(B) \to F(A)$ (called restriction maps), each of which specifies how to restrict the data over $F(B)$ down to the data over $F(A)$.
 
 \end{itemize}
 
@@ -665,6 +557,13 @@ $$\text{If } A \childOf/ B \text{ and } B \childOf/ C, \text{ then } \restrict{C
 \end{Definition}
 
 Since $F$ assigns data $F(U)$ to each region $U \in \category{L}$, we can think of the $F(U)$s as the ``fibers'' over $\category{L}$, and the restriction maps as ``zoom in'' maps that go from bigger fibers down to smaller fibers.
+
+% ----------------------------------------
+\begin{Remark}
+
+For the category-theoretically inclined, a presheaf is just a set-valued contravariant functor $F : \oppCategory{L} \to \Set/$. To each region $B$ of $\category{L}$, $F$ assigns to it a set $F(B)$. The contravariance comes from the fact that, to each arrow $B \childOf/ C$ of $\category{L}$, $F$ assigns a restriction map that goes the other way (i.e., that restricts the data from $F(C)$ down to $F(B)$). (R1) and (R2) are automatically satisfied by the fact that $F$ is a functor.
+
+\end{Remark}
 
 
 % ----------------------------------------
@@ -701,6 +600,8 @@ We can see $F$'s assignments as fibers over $\category{L}$ by drawing them over 
 
 \begin{diagram}
 
+% The locale
+
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
 \node (W) at (2, 1.5) {$W$};
@@ -711,12 +612,14 @@ We can see $F$'s assignments as fibers over $\category{L}$ by drawing them over 
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
 
 \end{diagram}
 
@@ -724,6 +627,8 @@ Similarly, over $V$ and $W$, we have $F(V) = \{ a, b \}$ and $F(W) = \{ c, d \}$
 
 \begin{diagram}
 
+% The locale
+
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
 \node (W) at (2, 1.5) {$W$};
@@ -734,22 +639,28 @@ Similarly, over $V$ and $W$, we have $F(V) = \{ a, b \}$ and $F(W) = \{ c, d \}$
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] at (-2, 3.25) {};
+\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
+\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+
+% Fiber over W
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$c$}] at (2, 2.5) {};
-\node[dot, label=above:{$d$}] at (2, 3.25) {};
+\node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
+\node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
 
 \end{diagram}
 
@@ -757,42 +668,7 @@ Finally, over $\bottom/$, we have a singleton set:
 
 \begin{diagram}
 
-\node (U) at (0, 3) {$U$};
-\node (V) at (-2, 1.5) {$V$};
-\node (W) at (2, 1.5) {$W$};
-\node (bottom) at (0, 0) {$\bottom/$};
-
-\draw[dashed] (bottom) to (V);
-\draw[dashed] (bottom) to (W);
-\draw[dashed] (V) to (U);
-\draw[dashed] (W) to (U);
-
-\draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] at (0.375, 4.85) {};
-
-\draw (-2, 1.75) to (-2, 2.275);
-\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] at (-2, 3.25) {};
-
-\draw (2, 1.75) to (2, 2.275);
-\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$c$}] at (2, 2.5) {};
-\node[dot, label=above:{$d$}] at (2, 3.25) {};
-
-\draw (0, 0.25) to (0, 0.75);
-\draw (0, 1.25) ellipse (0.375cm and 0.575cm);
-\node[dot, label=above:{$\ast$}] at (0, 1) {};
-
-\end{diagram}
-
-The restriction maps show how to ``zoom in'' on the parts (sub-fibers) of any given fiber. For instance, we can see that the fiber over $V$ is contained in the fiber over $U$. The restriction map just projects that sub-fiber out, thereby showing us how to ``zoom in'' on that sub-fiber:
-
-\begin{diagram}
+% The locale
 
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
@@ -804,31 +680,88 @@ The restriction maps show how to ``zoom in'' on the parts (sub-fibers) of any gi
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] (Ua) at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] (Ub) at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] (Uc) at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] (Ud) at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
 \node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
 
+% Fiber over W
+
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
 \node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
 
+% Fiber over bottom
+
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.25) ellipse (0.375cm and 0.575cm);
 \node[dot, label=above:{$\ast$}] (bottom) at (0, 1) {};
 
-\draw[dashed] (-0.375, 4.625) ellipse (0.375cm and 0.875cm);
-\draw[dashed] (-0.375, 3.25) to (-0.375, 3.85);
-\draw[arrow, ->] (Ub) to (Vb);
-\draw[arrow, ->] (Ua) to (Va);
+\end{diagram}
+
+The restriction maps show how to ``zoom in'' on the data over each region. For instance, $\restrict{U}{V}$ shows how to restrict the data in the fiber over $U$ down to the data in the fiber over $V$:
+
+\begin{diagram}
+
+% The locale
+
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed] (bottom) to (V);
+\draw[dashed] (bottom) to (W);
+\draw[dashed] (V) to (U);
+\draw[dashed] (W) to (U);
+
+% Fiber over U
+
+\draw (0, 3.25) to (0, 3.775);
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
+\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+
+% Fiber over W
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
+\node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
+
+% Fiber over bottom
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.25) ellipse (0.375cm and 0.575cm);
+\node[dot, label=above:{$\ast$}] (bottom) at (0, 1) {};
+
+% rho U, V
+
+\draw[arrow, ->] (Ud.west) to (Vb.east);
+\draw[arrow, ->] (Uc.west) to (Vb.east);
+\draw[arrow, ->] (Ub.west) to (Vb.east);
+\draw[arrow, ->] (Ua.west) to (Va.east);
 \node at (-1.675, 4.5) {$\restrict{U}{V}$};
 
 \end{diagram}
@@ -837,6 +770,8 @@ It's similar for the fiber over $W$:
 
 \begin{diagram}
 
+% The locale
+
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
 \node (W) at (2, 1.5) {$W$};
@@ -847,31 +782,41 @@ It's similar for the fiber over $W$:
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] (Ua) at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] (Ub) at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] (Uc) at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] (Ud) at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
 \node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
 
+% Fiber over W
+
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
 \node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
 
+% Fiber over bottom
+
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.25) ellipse (0.375cm and 0.575cm);
 \node[dot, label=above:{$\ast$}] (bottom) at (0, 1) {};
 
-\draw[dashed] (0.375, 4.625) ellipse (0.375cm and 0.875cm);
-\draw[dashed] (0.375, 3.25) to (0.375, 3.85);
-\draw[arrow, ->] (Ud) to (Wd);
-\draw[arrow, ->] (Uc) to (Wc);
+% rho U, W
+
+\draw[arrow, ->] (Ud.east) to (Wd.west);
+\draw[arrow, ->] (Uc.east) to (Wc.west);
+\draw[arrow, ->] (Ub.east) to (Wc.west);
+\draw[arrow, ->] (Ua.east) to (Wc.west);
 \node at (1.675, 4.5) {$\restrict{U}{W}$};
 
 \end{diagram}
@@ -880,6 +825,8 @@ Restricting a fiber to itself is just the identity on the fiber:
 
 \begin{diagram}
 
+% The locale
+
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
 \node (W) at (2, 1.5) {$W$};
@@ -890,26 +837,36 @@ Restricting a fiber to itself is just the identity on the fiber:
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] (Ua) at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] (Ub) at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] (Uc) at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] (Ud) at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
 \node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
 
+% Fiber over W
+
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
 \node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
 
+% Fiber over bottom
+
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.25) ellipse (0.375cm and 0.575cm);
 \node[dot, label=above:{$\ast$}] (bottom) at (0, 1) {};
+
+% rho V, V
 
 \draw[arrow, ->] (Vb) to[out=215,in=155,looseness=35] (Vb);
 \draw[arrow, ->] (Va) to[out=215,in=155,looseness=35] (Va);
@@ -921,6 +878,8 @@ The other restriction maps restrict down to the singleton set. For instance:
 
 \begin{diagram}
 
+% The locale
+
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
 \node (W) at (2, 1.5) {$W$};
@@ -931,29 +890,39 @@ The other restriction maps restrict down to the singleton set. For instance:
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] (Ua) at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] (Ub) at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] (Uc) at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] (Ud) at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
 \node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
 
+% Fiber over W
+
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
 \node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
 
+% Fiber over bottom
+
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.25) ellipse (0.375cm and 0.575cm);
 \node[dot, label=above:{$\ast$}] (bottom) at (0, 1) {};
 
-\draw[arrow, ->] (Vb) to (bottom);
-\draw[arrow, ->] (Va) to (bottom);
+% rho V, bottom
+
+\draw[arrow, ->] (Vb.east) to (bottom.west);
+\draw[arrow, ->] (Va.east) to (bottom.west);
 \node at (-0.45, 2.15) {$\restrict{V}{\bottom/}$};
 
 \end{diagram}
@@ -962,6 +931,8 @@ All of this makes it clear that the structure of the presheaf data that sits in 
 
 \begin{diagram}
 
+% The locale
+
 \node (U) at (0, 3) {$U$};
 \node (V) at (-2, 1.5) {$V$};
 \node (W) at (2, 1.5) {$W$};
@@ -972,62 +943,75 @@ All of this makes it clear that the structure of the presheaf data that sits in 
 \draw[dashed] (V) to (U);
 \draw[dashed] (W) to (U);
 
+% Fiber over U
+
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] (Ua) at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] (Ub) at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] (Uc) at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] (Ud) at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
+
+% Fiber over V
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
 \node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
 
+% Fiber over W
+
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
 \node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
 
+% Fiber over bottom
+
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.25) ellipse (0.375cm and 0.575cm);
 \node[dot, label=above:{$\ast$}] (bottom) at (0, 1) {};
 
-\draw[arrow, ->] (Ub) to (Vb);
-\draw[arrow, ->] (Ua) to (Va);
+% rho U, V
+
+\draw[arrow, ->] (Ud.west) to (Vb.east);
+\draw[arrow, ->] (Uc.west) to (Vb.east);
+\draw[arrow, ->] (Ub.west) to (Vb.east);
+\draw[arrow, ->] (Ua.west) to (Va.east);
 \node at (-1.675, 4.5) {$\restrict{U}{V}$};
 
-\draw[arrow, ->] (Ud) to (Wd);
-\draw[arrow, ->] (Uc) to (Wc);
+% rho U, W
+
+\draw[arrow, ->] (Ud.east) to (Wd.west);
+\draw[arrow, ->] (Uc.east) to (Wc.west);
+\draw[arrow, ->] (Ub.east) to (Wc.west);
+\draw[arrow, ->] (Ua.east) to (Wc.west);
 \node at (1.675, 4.5) {$\restrict{U}{W}$};
 
-\draw[arrow, ->] (Vb) to (bottom);
-\draw[arrow, ->] (Va) to (bottom);
+% rho V, bottom
+
+\draw[arrow, ->] (Vb.east) to (bottom.west);
+\draw[arrow, ->] (Va.east) to (bottom.west);
 \node at (-0.45, 2.15) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->] (Wd) to (bottom);
-\draw[arrow, ->] (Wc) to (bottom);
+% rho W, bottom
+
+\draw[arrow, ->] (Wd.west) to (bottom.east);
+\draw[arrow, ->] (Wc.west) to (bottom.east);
 \node at (0.45, 2.15) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
 
 \end{Example}
 
-% ----------------------------------------
-\begin{Remark}
-
-In line with \cref{remark:section-terminology}, the elements of each fiber $F(U)$ are usually just called the ``sections'' of $F(U)$. For instance, $c$ is a section of $F(W)$, as is $d$.
-
-\end{Remark}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Sheaves}
+\subsection{Gluing}
 
 \noindent
 The definition of a presheaf requires only that the data be stable under restriction (zooming in on a region). It does not require that the data fit together across different regions (fibers).
 
-A sheaf is a presheaf with an added gluing condition: whenever you have compatible data on overlapping fibers, there must be a unique way to glue it together into data over the union. In other words, the data in the fibers must agree on overlap and combine coherently.
+In some cases though, certain sections in different fibers turn out to be compatible (i.e., there is a coherent way to patch them together). When this occurs, those compatible sections can be glued together to form sections that stretch across fibers.
 
 To get at this idea, let's first define a cover. A cover of a region $U$ is a selection of sub-regions that covers $U$ in its entirety. The chosen sub-regions don't leave any part of $U$ exposed.
 
@@ -1057,7 +1041,7 @@ Another cover of $\{ a, b, c \}$ is $\{ \{ a, b \}, \{ b, c \}, \{ b \} \}$. Alt
 % ----------------------------------------
 \begin{Example}
 
-In the context of frames, where there are no points, a cover of $U$ is just a selection of sub-regions of $U$ that together join together to form $U$. Take the locale from \cref{ex:presheaf}:
+In the context of locales, where there are no points, a cover of $U$ is just a selection of sub-regions of $U$ that join together to form $U$. Take the locale from \cref{ex:presheaf}:
 
 \begin{diagram}
 
@@ -1128,9 +1112,7 @@ Given a presheaf $F$ over a locale $\category{L}$, if we have a cover $\{ U_{i} 
 % ----------------------------------------
 \begin{Definition}[Patch candidates]
 
-Given a presheaf $F$ and a cover $\{ U_{i} \}_{i \in I}$ with a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$, a selection of patch candidates $\{ s_{i} \}_{i \in I}$ is a choice of one section $s_{i}$ from each $F(U_{i})$:
-
-$$\{ s_{i} \}_{i \in I} = \{ s_{i} \mid s_{i} \in F(U_{i}) \text{ for each } F(U_{i}) \in \{ F(U_{i}) \}_{i \in I} \}.$$
+Given a presheaf $F$ and a cover $\{ U_{i} \}_{i \in I}$ with a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$, a selection of patch candidates $\{ s_{i} \}_{i \in I}$ is a choice of one section $s_{i}$ from each $F(U_{i})$.
 
 \end{Definition}
 
@@ -1153,11 +1135,11 @@ Take the presheaf from \cref{ex:presheaf}:
 \draw[dashed] (W) to (U);
 
 \draw (0, 3.25) to (0, 3.775);
-\draw (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{$a$}] at (-0.375, 4.1) {};
-\node[dot, label=above:{$b$}] at (-0.375, 4.85) {};
-\node[dot, label=above:{$c$}] at (0.375, 4.1) {};
-\node[dot, label=above:{$d$}] at (0.375, 4.85) {};
+\draw (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+\node[dot, label=above:{$d$}] (Ud) at (0, 6.25) {};
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
@@ -1193,11 +1175,11 @@ Let $\{ V, W \}$ be the cover of interest:
 \draw[dashed,faded] (W) to (U);
 
 \draw[faded] (0, 3.25) to (0, 3.775);
-\draw[faded] (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] at (-0.375, 4.1) {};
-\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] at (-0.375, 4.85) {};
-\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] at (0.375, 4.1) {};
-\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] at (0.375, 4.85) {};
+\draw[faded] (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] at (0, 5.5) {};
+\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] at (0, 6.25) {};
 
 \draw[faded] (-2, 1.75) to (-2, 2.275);
 \draw[faded] (-2, 3.1) ellipse (0.375cm and 0.875cm);
@@ -1230,11 +1212,11 @@ Over this cover, we have a corresponding family of fibers:
 \draw[dashed,faded] (W) to (U);
 
 \draw[faded] (0, 3.25) to (0, 3.775);
-\draw[faded] (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] at (-0.375, 4.1) {};
-\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] at (-0.375, 4.85) {};
-\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] at (0.375, 4.1) {};
-\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] at (0.375, 4.85) {};
+\draw[faded] (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] at (0, 5.5) {};
+\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] at (0, 6.25) {};
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
@@ -1270,11 +1252,11 @@ A selection of patch candidates is a choice of one section (element) from each f
 \draw[dashed,faded] (W) to (U);
 
 \draw[faded] (0, 3.25) to (0, 3.775);
-\draw[faded] (0, 4.625) ellipse (1.1cm and 1.1cm);
-\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] at (-0.375, 4.1) {};
-\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] at (-0.375, 4.85) {};
-\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] at (0.375, 4.1) {};
-\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] at (0.375, 4.85) {};
+\draw[faded] (0, 5.25) ellipse (0.5cm and 1.7cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] at (0, 5.5) {};
+\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] at (0, 6.25) {};
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
@@ -1297,11 +1279,11 @@ Similarly, we might pick $\{ a, d \}$, $\{ b, d \}$, or $\{a, c \}$, each of whi
 \end{Example}
 
 % ----------------------------------------
-\begin{Remark}
+\begin{Example}
 
 Consider the empty cover. Since there are no sub-regions below the least element of a locale, there are no patch candidates we could choose for the empty cover either. Hence, any selection of patch candidates for the empty cover is $\EmptySet/$.
 
-\end{Remark}
+\end{Example}
 
 
 A selection of patch candidates might fit together, or they might not. We say they are compatible if they fit together, i.e., if they agree on overlaps. To check this, take any pair of patch candidates, and check if they restrict to the same data on their overlap.
@@ -1346,35 +1328,35 @@ Consider the following presheaf $F$:
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->] (Uc) to (Vb);
-\draw[arrow, ->] (Ub) to (Vb);
-\draw[arrow, ->] (Ua) to (Va);
+\draw[arrow, ->] (Uc) to (Vr);
+\draw[arrow, ->] (Ub) to (Vr);
+\draw[arrow, ->] (Ua) to (Vs);
 \node at (-1.25, 4.5) {$\restrict{U}{V}$};
 
-\draw[arrow, ->] (Ua) to (Wb);
-\draw[arrow, ->] (Ub) to (Wb);
-\draw[arrow, ->] (Uc) to (Wc);
+\draw[arrow, ->] (Ua) to (Wu);
+\draw[arrow, ->] (Ub) to (Wu);
+\draw[arrow, ->] (Uc) to (Wt);
 \node at (1.675, 4.5) {$\restrict{U}{W}$};
 
-\draw[arrow, ->] (Vb) to (bottomq);
-\draw[arrow, ->] (Va) to (bottomp);
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->] (Wb) to (bottomq);
-\draw[arrow, ->] (Wc) to (bottomp);
+\draw[arrow, ->] (Wu) to (bottomq);
+\draw[arrow, ->] (Wt) to (bottomp);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
@@ -1395,17 +1377,17 @@ Take the cover $\{ V, W \}$ and its corresponding fibers:
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \end{diagram}
 
-Suppose we pick $\{ a, c \}$ for patch candidates:
+Suppose we pick $\{ s, t \}$ for patch candidates:
 
 \begin{diagram}
 
@@ -1424,17 +1406,17 @@ Suppose we pick $\{ a, c \}$ for patch candidates:
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \end{diagram}
 
-Is this selection compatible? We have to check if they agree on their overlap. The overlap $V \meet/ W$ is $\bottom/$. Where does $\restrict{V}{\bottom/}$ send our chosen patch candidate $a$? It sends it to $p$, since $\restrict{V}{\bottom/}(a) = p$. Where does $\restrict{W}{\bottom/}$ send our other chosen patch candidate $b$? It also sends it to $p$, since $\restrict{W}{\bottom/}(c) = p$. On the overlap $\bottom/$ then, $\restrict{V}{\bottom/}(a) = \restrict{W}{\bottom/}(c)$, so $a$ and $c$ are compatible. This is easy to see in the diagram, since $a$ and $b$ both get sent to the same place:
+Is this selection compatible? We have to check if they agree on their overlap. The overlap $V \meet/ W$ is $\bottom/$. Where does $\restrict{V}{\bottom/}$ send our chosen patch candidate $s$? It sends it to $p$, since $\restrict{V}{\bottom/}(s) = p$. Where does $\restrict{W}{\bottom/}$ send our other chosen patch candidate $t$? It also sends it to $p$, since $\restrict{W}{\bottom/}(t) = p$. On the overlap $\bottom/$ then, $\restrict{V}{\bottom/}(s) = \restrict{W}{\bottom/}(t)$, so $s$ and $t$ are compatible. This is easy to see in the diagram, since $s$ and $t$ both get sent to the same place:
 
 \begin{diagram}
 
@@ -1453,30 +1435,30 @@ Is this selection compatible? We have to check if they agree on their overlap. T
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->, faded] (Vb) to (bottomq);
-\draw[arrow, ->] (Va) to (bottomp);
+\draw[arrow, ->, faded] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wb) to (bottomq);
-\draw[arrow, ->] (Wc) to (bottomp);
+\draw[arrow, ->, faded] (Wu) to (bottomq);
+\draw[arrow, ->] (Wt) to (bottomp);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
 
-Now suppose we pick $\{ b, b \}$ for patch candidates:
+Now suppose we pick $\{ r, u \}$ for patch candidates:
 
 \begin{diagram}
 
@@ -1495,13 +1477,13 @@ Now suppose we pick $\{ b, b \}$ for patch candidates:
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \end{diagram}
 
@@ -1524,30 +1506,30 @@ These are also compatible. They agree on their overlap (both restrict to $q$):
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (bottomp) at (0, 1) {};
 \node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->] (Vb) to (bottomq);
-\draw[arrow, ->, faded] (Va) to (bottomp);
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->, faded] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wc) to (bottomp);
-\draw[arrow, ->] (Wb) to (bottomq);
+\draw[arrow, ->, faded] (Wt) to (bottomp);
+\draw[arrow, ->] (Wu) to (bottomq);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
 
-Finally, suppose we pick $\{ a, b \}$ for patch candidates:
+Finally, suppose we pick $\{ s, u \}$ for patch candidates:
 
 \begin{diagram}
 
@@ -1566,13 +1548,13 @@ Finally, suppose we pick $\{ a, b \}$ for patch candidates:
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \end{diagram}
 
@@ -1595,12 +1577,12 @@ These are not compatible. They do not agree on their overlap:
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
 \node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
@@ -1608,12 +1590,12 @@ These are not compatible. They do not agree on their overlap:
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->, faded] (Vb) to (bottomq);
-\draw[arrow, ->] (Va) to (bottomp);
+\draw[arrow, ->, faded] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wc) to (bottomp);
-\draw[arrow, ->] (Wb) to (bottomq);
+\draw[arrow, ->, faded] (Wt) to (bottomp);
+\draw[arrow, ->] (Wu) to (bottomq);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
@@ -1621,16 +1603,14 @@ These are not compatible. They do not agree on their overlap:
 \end{Example}
 
 % ----------------------------------------
-\begin{Remark}
+\begin{Example}
 
 Consider the empty cover. Since any selection of patch candidates for the empty cover is empty, compatibility is satisfied vacuously. 
 
-As an analogy, if you ask your class to turn off all cell phones but nobody brought a cell phone to class, then your request is satisfied vacuously: there is simply nothing that needs to be done to make it happen. It's similar with the empty cover: since there are no patch candidates to check, compatibility is achieved vacuously.
-
-\end{Remark}
+\end{Example}
 
 
-If a selection of patch candidates $s_{i}$, \ldots, $s_{k}$ across a cover of $U$ is compatible, we say those patches glue together if if there's a section $s$ in $F(U)$ that restricts down to exactly those patches.
+When selected patch candidates $s_{i}$, \ldots, $s_{k}$ across a cover of $U$ are compatible, we say those patches glue together if if there's a section $s$ in $F(U)$ that restricts down to exactly those patches.
 
 % ----------------------------------------
  \begin{Definition}[Gluing]
@@ -1641,18 +1621,24 @@ Given a presheaf $F$ and a selection of compatible patch candidates $\{ s_{i} \}
 \]
 
 \noindent
-As a matter of terminology, if a section $s \in F(U)$ is glued from patches $\{ s_{i} \}_{i \in I}$, we say that $s$ is a global section of the cover, and each $s_{i}$ is a local section of the cover. We may also say variously that $s$ is \emph{glued from} those patches, that $s$ is \emph{composed} of those patches, that those patches \emph{compose} $s$, or that gluing those patches \emph{yields} $s$.
-
 A selection of patches $\{ s_{i} \}_{i \in I}$ glues uniquely if there is one and only one such section $s \in F(U)$ that is glued from them.
- 
+
 \end{Definition}
+
+
+% ----------------------------------------
+\begin{Remark}
+
+As a matter of terminology, if a section $s \in F(U)$ is glued from patches $\{ s_{i} \}_{i \in I}$, we say that $s$ is a global section of the cover, and each $s_{i}$ is a local section of the cover. We may also say variously that $s$ is a \emph{gluing} of those patches, that $s$ is \emph{composed} of those patches, that those patches \emph{compose} $s$, or that gluing those patches \emph{yields} $s$.
+ 
+\end{Remark}
 
 
 % ----------------------------------------
 \begin{Example}
 \label{ex:gluing}
  
-Take the presheaf from \cref{ex:compatible-patch-candidates}, and consider the cover $\{ V, W \}$ again. Take the the selection of patches $\{ a, c \}$, which are compatible because they agree on overlap:
+Take the presheaf from \cref{ex:compatible-patch-candidates}, and consider the cover $\{ V, W \}$ again. Take the selection of patches $\{ s, t \}$, which are compatible because they agree on overlap:
 
 \begin{diagram}
 
@@ -1677,40 +1663,40 @@ Take the presheaf from \cref{ex:compatible-patch-candidates}, and consider the c
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (bottomq) at (0, 1.75) {};
 
-(\draw[arrow,->, faded] (Uc) to (Vb);
-\draw[arrow, ->, faded] (Ub) to (Vb);
-\draw[arrow, ->, faded] (Ua) to (Va);
+(\draw[arrow,->, faded] (Uc) to (Vr);
+\draw[arrow, ->, faded] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
 \node at (-1.25, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
 
-\draw[arrow, ->, faded] (Ua) to (Wb);
-\draw[arrow, ->, faded] (Ub) to (Wb);
-\draw[arrow, ->, faded] (Uc) to (Wc);
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->, faded] (Ub) to (Wu);
+\draw[arrow, ->, faded] (Uc) to (Wt);
 \node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
 
-\draw[arrow, ->, faded] (Vb) to (bottomq);
-\draw[arrow, ->] (Va) to (bottomp);
+\draw[arrow, ->, faded] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wb) to (bottomq);
-\draw[arrow, ->] (Wc) to (bottomp);
+\draw[arrow, ->, faded] (Wu) to (bottomq);
+\draw[arrow, ->] (Wt) to (bottomp);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
 
-Even though $a$ and $c$ are compatible, they do not glue together, because there is no section in $F(U)$ that restricts down to them. Consider $a \in F(U)$ first. It restricts to $a \in F(V)$ on the left, but it does not restrict to $c \in F(W)$ on the right:
+Even though $s$ and $t$ are compatible, they do not glue together, because there is no section in $F(U)$ that restricts down to them. Consider $a \in F(U)$ first. It restricts to $s \in F(V)$ on the left, but it does not restrict to $t \in F(W)$ on the right:
 
 \begin{diagram}
 
@@ -1735,35 +1721,35 @@ Even though $a$ and $c$ are compatible, they do not glue together, because there
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->, faded] (Vb) to (bottomq);
-\draw[arrow, ->] (Va) to (bottomp);
+\draw[arrow, ->, faded] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wb) to (bottomq);
-\draw[arrow, ->] (Wc) to (bottomp);
+\draw[arrow, ->, faded] (Wu) to (bottomq);
+\draw[arrow, ->] (Wt) to (bottomp);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
-(\draw[arrow,->, faded] (Uc) to (Vb);
-\draw[arrow, ->, faded] (Ub) to (Vb);
-\draw[arrow, ->] (Ua) to (Va);
+(\draw[arrow,->, faded] (Uc) to (Vr);
+\draw[arrow, ->, faded] (Ub) to (Vr);
+\draw[arrow, ->] (Ua) to (Vs);
 \node at (-1.25, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
 
-\draw[arrow, ->] (Ua) to (Wb);
-\draw[arrow, ->, faded] (Ub) to (Wb);
-\draw[arrow, ->, faded] (Uc) to (Wc);
+\draw[arrow, ->] (Ua) to (Wu);
+\draw[arrow, ->, faded] (Ub) to (Wu);
+\draw[arrow, ->, faded] (Uc) to (Wt);
 \node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
 
 \draw[ultra thick, wrong] (-0.3, 4.3) to (0.3, 3.6);
@@ -1771,7 +1757,7 @@ Even though $a$ and $c$ are compatible, they do not glue together, because there
 
 \end{diagram}
 
-As for $b \in F(U)$, it restricts to neither $a \in F(V)$  on the left nor $c \in F(W)$ on the right:
+As for $b \in F(U)$, it restricts to neither $s \in F(V)$  on the left nor $t \in F(W)$ on the right:
 
 \begin{diagram}
 
@@ -1796,35 +1782,35 @@ As for $b \in F(U)$, it restricts to neither $a \in F(V)$  on the left nor $c \i
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->, faded] (Vb) to (bottomq);
+\draw[arrow, ->, faded] (Vr) to (bottomq);
 \draw[arrow, ->] (Va) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wb) to (bottomq);
-\draw[arrow, ->] (Wc) to (bottomp);
+\draw[arrow, ->, faded] (Wu) to (bottomq);
+\draw[arrow, ->] (Wt) to (bottomp);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
-(\draw[arrow,->, faded] (Uc) to (Vb);
-\draw[arrow, ->] (Ub) to (Vb);
-\draw[arrow, ->, faded] (Ua) to (Va);
+(\draw[arrow,->, faded] (Uc) to (Vr);
+\draw[arrow, ->] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
 \node at (-1.25, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
 
-\draw[arrow, ->, faded] (Ua) to (Wb);
-\draw[arrow, ->] (Ub) to (Wb);
-\draw[arrow, ->, faded] (Uc) to (Wc);
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->] (Ub) to (Wu);
+\draw[arrow, ->, faded] (Uc) to (Wt);
 \node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
 
 \draw[ultra thick, wrong] (-0.3, 5.2) to (0.3, 4.6);
@@ -1832,7 +1818,7 @@ As for $b \in F(U)$, it restricts to neither $a \in F(V)$  on the left nor $c \i
 
 \end{diagram}
 
-Finally, $c \in F(U)$ restricts to $c \in F(W)$ on the right, but not to $a \in F(V)$ on the left:
+Finally, $c \in F(U)$ restricts to $t \in F(W)$ on the right, but not to $s \in F(V)$ on the left:
 
 \begin{diagram}
 
@@ -1857,35 +1843,35 @@ Finally, $c \in F(U)$ restricts to $c \in F(W)$ on the right, but not to $a \in 
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
 \node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->, faded] (Vb) to (bottomq);
-\draw[arrow, ->] (Va) to (bottomp);
+\draw[arrow, ->, faded] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wb) to (bottomq);
-\draw[arrow, ->] (Wc) to (bottomp);
+\draw[arrow, ->, faded] (Wu) to (bottomq);
+\draw[arrow, ->] (Wt) to (bottomp);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
-(\draw[arrow,->] (Uc) to (Vb);
-\draw[arrow, ->, faded] (Ub) to (Vb);
-\draw[arrow, ->, faded] (Ua) to (Va);
+(\draw[arrow,->] (Uc) to (Vr);
+\draw[arrow, ->, faded] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
 \node at (-1.25, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
 
-\draw[arrow, ->, faded] (Ua) to (Wb);
-\draw[arrow, ->, faded] (Ub) to (Wb);
-\draw[arrow, ->] (Uc) to (Wc);
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->, faded] (Ub) to (Wu);
+\draw[arrow, ->] (Uc) to (Wt);
 \node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
 
 \draw[ultra thick, wrong] (-0.3, 5.9) to (0.3, 5.3);
@@ -1893,14 +1879,15 @@ Finally, $c \in F(U)$ restricts to $c \in F(W)$ on the right, but not to $a \in 
 
 \end{diagram}
 
-Thus, none of $a$, $b$, or $c$ in $F(U)$ are glued from $\{ a, c \}$, because none of them decompose into $a$ on the left and $c$ on the right.
+Thus, none of $a$, $b$, or $c$ in $F(U)$ are glued from $\{ s, t \}$, because none of them decompose into $s$ on the left and $t$ on the right.
 
-Now suppose we pick $\{ b, b \}$ for patch candidates. These do glue together (trivially), because there is a section in $F(U)$ (namely $b \in F(U)$) that restricts down to $b \in F(V)$ on the left and $b \in F(W)$ on the right:
+Now suppose we pick $\{ r, u \}$ for patch candidates. These do glue together, because there is a section in $F(U)$ (namely $b \in F(U)$) that restricts down to $r \in F(V)$ on the left and $u \in F(W)$ on the right:
 
 \begin{diagram}
 
 \draw[rounded corners=4pt,fill=selected] (-2.5, 3.4) rectangle (-1.5, 3.1);
 \draw[rounded corners=4pt,fill=selected] (1.5, 2.65) rectangle (2.5, 2.35);
+\draw[rounded corners=4pt,fill=selected2] (-0.5, 4.9) rectangle (0.5, 4.6);
 
 \node (U) at (0, 3) {\textcolor{faded}{$U$}};
 \node (V) at (-2, 1.5) {$V$};
@@ -1920,35 +1907,35 @@ Now suppose we pick $\{ b, b \}$ for patch candidates. These do glue together (t
 
 \draw (-2, 1.75) to (-2, 2.275);
 \draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
-\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
 \draw (2, 3.1) ellipse (0.375cm and 0.875cm);
-\node[dot, label=above:{$b$}] (Wb) at (2, 2.5) {};
-\node[dot, label=above:{$c$}] (Wc) at (2, 3.25) {};
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.75);
 \draw (0, 1.5) ellipse (0.375cm and 0.875cm);
 \node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (bottomp) at (0, 1) {};
 \node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
 
-\draw[arrow, ->, faded] (Uc) to (Vb);
-\draw[arrow, ->] (Ub) to (Vb);
-\draw[arrow, ->, faded] (Ua) to (Va);
+\draw[arrow, ->, faded] (Uc) to (Vr);
+\draw[arrow, ->] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
 \node at (-1.25, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
 
-\draw[arrow, ->, faded] (Ua) to (Wb);
-\draw[arrow, ->] (Ub) to (Wb);
-\draw[arrow, ->, faded] (Uc) to (Wc);
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->] (Ub) to (Wu);
+\draw[arrow, ->, faded] (Uc) to (Wt);
 \node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
 
-\draw[arrow, ->] (Vb) to (bottomq);
-\draw[arrow, ->, faded] (Va) to (bottomp);
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->, faded] (Vs) to (bottomp);
 \node at (-1.25, 1.5) {$\restrict{V}{\bottom/}$};
 
-\draw[arrow, ->, faded] (Wc) to (bottomp);
-\draw[arrow, ->] (Wb) to (bottomq);
+\draw[arrow, ->, faded] (Wt) to (bottomp);
+\draw[arrow, ->] (Wu) to (bottomq);
 \node at (1, 1.5) {$\restrict{W}{\bottom/}$};
 
 \end{diagram}
@@ -1963,183 +1950,6 @@ Consider an example that glues together behaviors. Imagine a toy robot that look
 
 Let's represent the robot as a locale. Let $LT$ and $RT$ be the left and right track assemblies respectively, let $D$ be the drive controller that is shared by $LT$ and $RT$, and let $R$ be the whole robot (the join of $LT$ and $RT$). As a picture:
 
-\begin{diagram}
-
-\node (R) at (0, 3) {$R$};
-\node (LT) at (-2, 1.5) {$LT$};
-\node (RT) at (2, 1.5) {$RT$};
-\node (D) at (0, 0) {$D$};
-
-\draw[] (D) to (LT);
-\draw[] (D) to (RT);
-\draw[] (LT) to (R);
-\draw[] (RT) to (R);
-
-\end{diagram}
-
-For a presheaf, let's assign to each region the behaviors that are locally observable at that region:
-
-\begin{itemize}
-
-\item The drive controller $D$ can either $drive$ (turn) or sit $idle$. 
-\item The left track assembly can each either $move_{L}$ or $stand\mhyphen still_{L}$.
-\item The right track assembly can also either $move_{R}$ or $stand\mhyphen still_{R}$.
-\item The entire robot can either move $forward$ or $sit$ stationary.
-
-\end{itemize}
-
-\noindent
-In a picture:
-
-\begin{diagram}
-
-\node (R) at (0, 3) {$R$};
-\node (LT) at (-2, 1.5) {$LT$};
-\node (RT) at (2, 1.5) {$RT$};
-\node (D) at (0, 0) {$D$};
-
-\draw[dashed] (D) to (LT);
-\draw[dashed] (D) to (RT);
-\draw[dashed] (LT) to (R);
-\draw[dashed] (RT) to (R);
-
-\draw (0, 3.25) to (0, 3.75);
-\draw (0, 4.5) ellipse (0.75cm and 1cm);
-\node[dot, label=above:{\small{$sit$}}] (sit) at (0, 4.75) {};
-\node[dot, label=above:{\small{$forward$}}] (move) at (0, 4) {};
-
-\draw (-2, 1.75) to (-2, 2.275);
-\draw (-2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=left:{\small{$move_{L}$}}] (left-turn) at (-2, 2.6) {};
-\node[dot, label=left:{\small{$stand\mhyphen still_{L}$}}] (left-stand) at (-2, 3.25) {};
-
-\draw (2, 1.75) to (2, 2.275);
-\draw (2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=right:{\small{$move_{R}$}}] (right-turn) at (2, 2.6) {};
-\node[dot, label=right:{\small{$stand\mhyphen still_{R}$}}] (right-stand) at (2, 3.25) {};
-
-\draw (0, 0.25) to (0, 0.5);
-\draw (0, 1.5) ellipse (0.75cm and 1cm);
-\node[dot, label=below:{\small{$drive$}}] (drive) at (0, 1.25) {};
-\node[dot, label=below:{\small{$idle$}}] (idle) at (0, 2) {};
-
-\end{diagram}
-
-For the restriction maps, let's say that they restrict the observable behavior of a larger region to the observable behavior of the smaller region. For instance, if you are observing the whole robot moving forward ($forward$), and you then ``zoom in'' on the left track assembly, you'll see those tracks rotating ($move_{L}$).
-
-\begin{itemize}
-
-\item $\restrict{R}{LT}(sit) = stand\mhyphen still_{L}$, $\restrict{R}{LT}(forward) = move_{L}$.
-\item $\restrict{R}{RT}(sit) = stand\mhyphen still_{R}$, $\restrict{R}{RT}(forward) = move_{R}$.
-\item $\restrict{LT}{D}(stand\mhyphen still_{L}) = idle$, $\restrict{LT}{D}(move_{L}) = drive$.
-\item $\restrict{RT}{D}(stand\mhyphen still_{R}) = idle$, $\restrict{RT}{D}(move_{R}) = drive$.
-
-\end{itemize}
-
-In a picture:
-
-\begin{diagram}
-
-\node (R) at (0, 3) {$R$};
-\node (LT) at (-2, 1.5) {$LT$};
-\node (RT) at (2, 1.5) {$RT$};
-\node (D) at (0, 0) {$D$};
-
-\draw[dashed] (D) to (LT);
-\draw[dashed] (D) to (RT);
-\draw[dashed] (LT) to (R);
-\draw[dashed] (RT) to (R);
-
-\draw (0, 3.25) to (0, 3.75);
-\draw (0, 4.5) ellipse (0.75cm and 1cm);
-\node[dot, label=above:{\small{$sit$}}] (sit) at (0, 4.75) {};
-\node[dot, label=above:{\small{$forward$}}] (move) at (0, 4) {};
-
-\draw (-2, 1.75) to (-2, 2.275);
-\draw (-2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=left:{\small{$move_{L}$}}] (left-turn) at (-2, 2.6) {};
-\node[dot, label=left:{\small{$stand\mhyphen still_{L}$}}] (left-stand) at (-2, 3.25) {};
-
-\draw (2, 1.75) to (2, 2.275);
-\draw (2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=right:{\small{$move_{R}$}}] (right-turn) at (2, 2.6) {};
-\node[dot, label=right:{\small{$stand\mhyphen still_{R}$}}] (right-stand) at (2, 3.25) {};
-
-\draw (0, 0.25) to (0, 0.5);
-\draw (0, 1.5) ellipse (0.75cm and 1cm);
-\node[dot, label=below:{\small{$drive$}}] (drive) at (0, 1.25) {};
-\node[dot, label=below:{\small{$idle$}}] (idle) at (0, 2) {};
-
-\draw[arrow, ->] (move) to (left-turn);
-\draw[arrow, ->] (sit) to (left-stand);
-\node at (-1.65, 4.375) {$\restrict{R}{LT}$};
-
-\draw[arrow, ->] (move) to (right-turn);
-\draw[arrow, ->] (sit) to (right-stand);
-\node at (1.65, 4.375) {$\restrict{R}{RT}$};
-
-\draw[arrow, ->] (left-turn) to (drive);
-\draw[arrow, ->] (left-stand) to (idle);
-\node at (-1.25, 1.5) {$\restrict{LT}{D}$};
-
-\draw[arrow, ->] (right-turn) to (drive);
-\draw[arrow, ->] (right-stand) to (idle);
-\node at (1.25, 1.5) {$\restrict{RT}{D}$};
-
-\end{diagram}
-
-Now take the cover $\{ LT, RT \}$ of $R$. The patch candidates $\{ move_{L}, move_{R} \}$ are compatible, because they agree on overlap (they both restrict down to $drive$). But they also glue uniquely, yielding $forward$. In other words, the robot's forward motion is patched together precisely from the two pieces of its cover, namely the left tracks rotating ($move_{L}$) and the right tracks rotating ($move_{R}$).
-
-Similarly, the Robot's sitting still ($sit$) behavior is also glued from the two pieces of its cover, namely the left track assembly standing still ($stand\mhyphen still_{L}$) and the right track assembly standing still ($stand\mhyphen still_{R}$).
-
-Thus, there are two global sections of $R$'s behavior: moving forwards (patched together from its left and right motions), or standing still (patched together from its left and right lack of motion). 
-
-\end{Example}
- 
-We can now state what it is to be a sheaf. A sheaf is a presheaf that satisfies a special gluing condition: namely, that for every cover, every compatible selection of patch candidates glues together uniquely.
- 
-\todo{Define separated presheaf here.}
- 
-
-% ----------------------------------------
-\begin{Definition}[Sheaf]
- 
-A presheaf $F$ is a sheaf iff it satisfies the following condition (called ``the gluing condition''):
-
-\begin{enumerate}
-
-\item [(G0)] For every cover $\{ U_{i} \}_{i \in I}$ of a region $U$ and every selection of patch candidates $\{ s_{i} \}_{i \in I}$ for that cover, if $\{ s_{i} \}_{i \in I}$ are compatible, then there exists a unique gluing $s \in F(U)$ of $\{ s_{i} \}_{i \in I}$.
-
-\end{enumerate}
- 
-\end{Definition}
-
-% ----------------------------------------
-\begin{Remark}
-
-There is a subtlety regarding what sheaves look like over the least element of a locale. Note that the gluing condition is formulated as an implication. That is to say, it says that, for every cross-section of patch candidates, \emph{if} that cross-section can glue, \emph{then} it glues in exactly one way. 
-
-Next, consider the fact that the cover over the least region of a locale is an empty cover. Since there are no patch candidates that need to be checked for compatibility, there is nothing that needs to be done to get a ``selection of gluable patch candidates.'' Hence, the antecedent of the gluing condition is satisfied vacuously over the least element of the locale.
-
-But since the empty cover satisfies the antecedent of the gluing condition vacuously, it follows that if a presheaf is to qualify as a sheaf, it must ensure that the consequent is satisfied over the empty cover as well. In other words, it must assign a unique glued section (a singleton set) to the least region of the locale. So, even though a \emph{presheaf} may assign a larger set of data to the least element of a locale, a \emph{sheaf} always assigns a singleton to that region.
-
-\end{Remark}
-
-
-% ----------------------------------------
-\begin{Example}
-
-The presheaf from \cref{ex:compatible-patch-candidates} fails to be sheaf, because as we saw in \cref{ex:gluing}, there is a compatible selection of patch candidates (namely, $\{ a, c \}$) which fails to glue. To be a sheaf, every compatible selection of patch candidates must glue.
-
-\end{Example}
-
-% ----------------------------------------
-\begin{Example}
-\label{ex:robot-sheaf}
-
-The presheaf from \cref{ex:robot} fails to be a sheaf, because it does not assign a singleton to the lowest region of the underlying locale. In that example $D$ is the lowest region of the locale, and $F(D) = \{ p, q \}$, a set containing two elements. Hence, $F$ fails to be a sheaf.
-
-However, suppose we add a distinct bottom element to the locale:
 
 \begin{diagram}
 
@@ -2157,7 +1967,21 @@ However, suppose we add a distinct bottom element to the locale:
 
 \end{diagram}
 
-If we assign a singleton set to $\bottom/$ (so that $F(\bottom/) = \{ \ast \}$, say), then $F$ looks like this:
+\noindent
+For a presheaf, let's assign to each region the behaviors that are locally observable at that region:
+
+\begin{itemize}
+
+\item The drive controller $D$ can either $drive$ or sit $idle$. 
+\item The left track assembly can either $move_{L}$ or $stand\mhyphen still_{L}$.
+\item The right track assembly can also either $move_{R}$ or $stand\mhyphen still_{R}$.
+\item The entire robot can either move $forward$ or $sit$ stationary.
+\item For the fiber over $\bottom/$, where there are no regions that could carry any behaviors to begin with, assign the special symbol zero.
+
+\end{itemize}
+
+\noindent
+In a picture:
 
 \begin{diagram}
 
@@ -2176,26 +2000,81 @@ If we assign a singleton set to $\bottom/$ (so that $F(\bottom/) = \{ \ast \}$, 
 \draw (0, 3.25) to (0, 3.75);
 \draw (0, 4.5) ellipse (0.75cm and 1cm);
 \node[dot, label=above:{\small{$sit$}}] (sit) at (0, 4.75) {};
-\node[dot, label=above:{\small{$move$}}] (move) at (0, 4) {};
+\node[dot, label=above:{\small{$forward$}}] (move) at (0, 4) {};
 
 \draw (-2, 1.75) to (-2, 2.275);
-\draw (-2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=left:{\small{$rotate_{L}$}}] (left-turn) at (-2, 2.6) {};
-\node[dot, label=left:{\small{$stand_{L}$}}] (left-stand) at (-2, 3.25) {};
+\draw (-2.75, 3) ellipse (1.25cm and 0.8cm);
+\node[dot, label=left:{\small{$move_{L}$}}] (left-turn) at (-2, 2.6) {};
+\node[dot, label=left:{\small{$stand\mhyphen still_{L}$}}] (left-stand) at (-2, 3.25) {};
 
 \draw (2, 1.75) to (2, 2.275);
-\draw (2.5, 2.9) ellipse (1cm and 0.8cm);
-\node[dot, label=right:{\small{$rotate_{R}$}}] (right-turn) at (2, 2.6) {};
-\node[dot, label=right:{\small{$stand_{R}$}}] (right-stand) at (2, 3.25) {};
+\draw (2.75, 3) ellipse (1.25cm and 0.8cm);
+\node[dot, label=right:{\small{$move_{R}$}}] (right-turn) at (2, 2.6) {};
+\node[dot, label=right:{\small{$stand\mhyphen still_{R}$}}] (right-stand) at (2, 3.25) {};
 
 \draw (0, 0.25) to (0, 0.5);
 \draw (0, 1.5) ellipse (0.75cm and 1cm);
 \node[dot, label=below:{\small{$drive$}}] (drive) at (0, 1.25) {};
 \node[dot, label=below:{\small{$idle$}}] (idle) at (0, 2) {};
 
-\draw (0.25, -1.5) to (0.75, -1);
+\draw (0.25, -1.5) to (0.65, -1.1);
 \draw (0.75, -0.65) ellipse (0.35cm and 0.5cm);
-\node[dot, label=below:{\small{$\ast $}}] (asterisk) at (0.75, -0.575) {};
+\node[dot, label=below:{\small{$0$}}] (asterisk) at (0.75, -0.575) {};
+
+\end{diagram}
+
+For the restriction maps, let's say that they restrict the observable behavior of a larger region to the observable behavior of the smaller region. For instance, if you are observing the whole robot moving forward ($forward$), and you then ``zoom in'' on the left track assembly, you'll see those tracks rotating ($move_{L}$).
+
+\begin{itemize}
+
+\item $\restrict{R}{LT}(sit) = stand\mhyphen still_{L}$, $\restrict{R}{LT}(forward) = move_{L}$.
+\item $\restrict{R}{RT}(sit) = stand\mhyphen still_{R}$, $\restrict{R}{RT}(forward) = move_{R}$.
+\item $\restrict{LT}{D}(stand\mhyphen still_{L}) = idle$, $\restrict{LT}{D}(move_{L}) = drive$.
+\item $\restrict{RT}{D}(stand\mhyphen still_{R}) = idle$, $\restrict{RT}{D}(move_{R}) = drive$.
+\item $\restrict{D}{\bottom/}(idle) = \restrict{D}{\bottom/}(drive) = 0$.
+
+\end{itemize}
+
+\noindent
+In a picture:
+
+\begin{diagram}
+
+\node (R) at (0, 3) {$R$};
+\node (LT) at (-2, 1.5) {$LT$};
+\node (RT) at (2, 1.5) {$RT$};
+\node (D) at (0, 0) {$D$};
+\node (bottom) at (0, -1.5) {$\bottom/$};
+
+\draw[dashed] (D) to (bottom);
+\draw[dashed] (D) to (LT);
+\draw[dashed] (D) to (RT);
+\draw[dashed] (LT) to (R);
+\draw[dashed] (RT) to (R);
+
+\draw (0, 3.25) to (0, 3.75);
+\draw (0, 4.5) ellipse (0.75cm and 1cm);
+\node[dot, label=above:{\small{$sit$}}] (sit) at (0, 4.75) {};
+\node[dot, label=above:{\small{$forward$}}] (move) at (0, 4) {};
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2.75, 3) ellipse (1.25cm and 0.8cm);
+\node[dot, label=left:{\small{$move_{L}$}}] (left-turn) at (-2, 2.6) {};
+\node[dot, label=left:{\small{$stand\mhyphen still_{L}$}}] (left-stand) at (-2, 3.25) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2.75, 3) ellipse (1.25cm and 0.8cm);
+\node[dot, label=right:{\small{$move_{R}$}}] (right-turn) at (2, 2.6) {};
+\node[dot, label=right:{\small{$stand\mhyphen still_{R}$}}] (right-stand) at (2, 3.25) {};
+
+\draw (0, 0.25) to (0, 0.5);
+\draw (0, 1.5) ellipse (0.75cm and 1cm);
+\node[dot, label=below:{\small{$drive$}}] (drive) at (0, 1.25) {};
+\node[dot, label=below:{\small{$idle$}}] (idle) at (0, 2) {};
+
+\draw (0.25, -1.5) to (0.65, -1.1);
+\draw (0.75, -0.65) ellipse (0.35cm and 0.5cm);
+\node[dot, label=below:{\small{$0$}}] (asterisk) at (0.75, -0.575) {};
 
 \draw[arrow, ->] (move) to (left-turn);
 \draw[arrow, ->] (sit) to (left-stand);
@@ -2219,189 +2098,691 @@ If we assign a singleton set to $\bottom/$ (so that $F(\bottom/) = \{ \ast \}$, 
 
 \end{diagram}
 
-\noindent
-This modification ensures that $F$ qualifies as a sheaf, since it ensures that \emph{all} gluable selections of patch candidates (including the empty one) glue uniquely.
+Now take the cover $\{ LT, RT \}$ of $R$. The patch candidates $\{ move_{L}, move_{R} \}$ are compatible, because they agree on overlap (they both restrict down to $drive$). But they also glue uniquely, yielding $forward$. In other words, the robot's forward motion is patched together precisely from the two pieces of its cover, namely the left tracks rotating ($move_{L}$) and the right tracks rotating ($move_{R}$).
+
+Similarly, the Robot's sitting still ($sit$) behavior is also glued from the two pieces of its cover, namely the left track assembly standing still ($stand\mhyphen still_{L}$) and the right track assembly standing still ($stand\mhyphen still_{R}$).
+
+Thus, there are two global sections of $R$'s behavior: moving forwards (patched together from its left and right motions), or standing still (patched together from its left and right lack of motion). 
 
 \end{Example}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{A Canonical Sheaf Construction}
+\subsection{Monopresheaves}
 
 \noindent
-Not every presheaf is a sheaf, since some presheaves fail the gluing condition. However, there is a canonical procedure called ``sheafification'' that turns any presheaf into a sheaf. To sheafify a presheaf, add any missing sections that glue, then quotient sections that are locally indistinguishable. The result is guaranteed to be a sheaf, by construction. 
+In a presheaf, compatible patch candidates can be glued together to form sections that span multiple fibers. However, nothing said so far prevents there being multiple gluings from the same patch candidates. In other words, nothing requires gluings to be extensional. 
 
-For our purposes, there is a simplified version of sheafification that we can use to construct sheaves that model part-whole complexes in a natural way. Given a presentation of a locale, the recipe to build such a sheaf over it goes like this:
+If we want to work only with extensional gluings, then we can impose a restriction that says gluings must be unique: i.e., if a selection of patch candidates can glue, they form at most one gluing. Presheaves where this obtains are called monopresheaves.
+
+% ----------------------------------------
+\begin{Definition}[Monopresheaves]
+ 
+A presheaf $F$ is a monopresheaf iff it satisfies the following gluing-uniqueness condition:
 
 \begin{enumerate}
 
-\item Assign local data to atomic regions.
-\item Specify a gluing condition.
-\item Recursively glue more and more pieces together until you can't glue any more.
+\item [(G1)] For every cover $\{ U_{i} \}_{i \in I}$ of a region $U$ and every selection of compatible patch candidates $\{ s_{i} \}_{i \in I}$ for that cover, if there is a gluing $s \in F(U)$ of $\{ s_{i} \}_{i \in I}$, then it is unique.
 
 \end{enumerate}
 
-Let's make this more precise. Given a presented locale, we can uniquely write each region as the join of its atomic regions.
-
-
-% ----------------------------------------
-\begin{Definition}[Atomic indices]
-
-Let $\category{L} = \tuple{G, R}$ be a presented locale with $G = \{ U_{1}, \ldots, U_{n} \}$. Let $\Index/ \subseteq \{ 0, \ldots, n \}$ be the indices of the atomic regions of $G$. 
-
-For any $U \in \category{L}$, define its atomic support (denoted $\support/(U)$, or just $\support/$ for short) as:
-
-\begin{equation*}
-  \support/(U) = \{ i \in \Index/ \mid U_{i} \childOf/ U \}
-\end{equation*}
-
 \noindent
-Then $U$ can be written canonically as $U_{\support/(U)}$, the join of its atomic supports:
-
-\begin{equation*}
-  U_{\support/(U)} = \bigjoin/\limits_{i \in \support/(U)} U_{i}.
-\end{equation*}
-
-\end{Definition}
-
-
-\todo{Say something along the lines that there are many kinds of sheafs, and the fibers can have many different shapes. For instance, a standard example of a sheaf over a topological space is the set of real-valued functions defined over each region of that topology.}
-
-We're going to focus on a simple kind of sparse sheaf. We will build this sheaf by assigning to atomic regions some basic data: to each atomic region $U_{k}$, we assign some piece of data $\{ \tuple{ b_{k} } \}$. What $b_{k}$ is doesn't matter for our purposes at the moment. It just needs to be some piece of atomic data.
-
-Then, we will glue together a selection of patch candidates $\{ \tuple{ b_{1} } \}$, $\{ \tuple{ b_{2} } \}$, and so on of atomic pieces of data to form $\{ \tuple{b_{1}, b_{2}, \ldots } \}$. To decide when to glue such tuples together, we will define a gluing condition.
-
-\todo{Talk about how we are going to imagine that each ``$b_{k}$'' represents something that occupies the region $U_{k}$. E.g., it's a chunk of matter, or a mechanical gadget, or whatever. But it is the part or stuff in that atomic region. The larger whole will then be built up by fusing together these parts according to the gluing condition.}
-
-A gluing condition is a family of predicates that say when a selection of patch candidates glue.
-
-% ----------------------------------------
-\begin{Definition}[Gluing condition]
-
-A gluing condition $\glues{}$ is a family of predicates
-
-\[
-  \glues{U}: \prod_{i \in \support/(U)} F(U_{i}) \to \{ \mathrm{true}, \mathrm{false} \},
-\]
-
-\noindent
-i.e. for each region $U \in \category{L}$ a predicate over the Cartesian product of the fibers of the atomic support of $U$, that collectively satisfy the following coherence conditions:
+Equivalently, given $s, t \in F(U)$: 
 
 \begin{enumerate}
 
-\item [(G1)] \emph{Local data is glued}. If $U_{k} \in \atomsOf{\category{L}}$ and $F(U_{k}) = \{ \tuple{b_{k}} \}$, then
-
-\[
-  \glues{U_{k}}(\tuple{b_{k}}) = \mathrm{true}.
-\]
-
-\item [(G2)] \emph{Downward stability}. If $\glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true}$, then for each $V \childOf/ U$, we must have:
-
-\[
-  \glues{V}(\restrict{U}{V}(\tuple{b_{i}}_{i \in \support/(U)})) = \mathrm{true}.
-\]
-
-\item [(G3)] \emph{Upward stability}. Given a selection of patch candidates $\tuple{b_{i}}_{i \in \support/(U)}$, if $\glues{U_{i} \join/ U_{j}}(\tuple{b_{i}, b_{j}}) = \mathrm{true}$ for each $i, j \in \support/(U)$, then we must have:
-
-\[
-  \glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true}.
-\]
+\item [(G1$^{\ast}$)] For every cover $\{ U_{i} \}_{i \in I}$ of $U$, if $\restrict{U}{U_{i}}(s) = \restrict{U}{U_{i}}(t)$ for each $U_{i}$, then $s = t$.
 
 \end{enumerate}
-
-\end{Definition}
-
-A sheaf can be generated from a gluing condition by starting with some local data on the atomic regions and then gluing all pieces together that satisfy the gluing condition.
-
-% ----------------------------------------
-\begin{Definition}[\Gsheaves/]
-\label{def:g-sheaves}
-
-Given a gluing condition $\glues{}$ and local data $F(U_{k}) = \{ \tuple{b_{k}} \}$ for each atomic region $U_{k}$, define for each region $U$:
-
-\[
-  F(U) = \{ \tuple{b_{i}}_{i \in \support/(U)} \in \prod_{i \in \support/(U)} F(U_{i}) 
-    \mid \glues{U}(\tuple{b_{i}}_{i \in \support/(U)}) = \mathrm{true} \}.
-\]
-
-\noindent
-For $V \childOf/ U$, define the restriction map
-
-\[
-  \restrict{U}{V}: F(U) \to F(V) 
-    \quad\text{ as }\quad
-    \restrict{U}{V}(\tuple{b_{i}}_{i \in \support/(U)}) = \tuple{b_{i}}_{i \in \support/(V)}.
-\]
-
-\noindent
-Set $F(\bottom/) = \{ \tuple{} \}$, the empty tuple.
-
+ 
 \end{Definition}
 
 \begin{Remark}
 
-Alternatively, given some local data and a gluing condition, define a presheaf over the given locale, call it $F_{\wp}$, that assigns all combinations of local data to each region:
-
-\[
-F_{\wp}(U) = \prod_{i \in \support/(U)} F(U_{i}).
-\]
-
-\noindent
-Then filter by the gluing condition. That produces the same sheaf.
+Monopresheaves are also called separated presheaves. The ``mono'' part of the name comes from category theory: every joint restriction to a covering family is a monomorphism, i.e., there can be at most one section restricting to a given selection of patch candidates.
 
 \end{Remark}
 
-We must check that \cref{def:g-sheaves} really defines a sheaf. 
 
 % ----------------------------------------
-\begin{Theorem}[\Gsheaves/ are presheaves]
+\begin{Example}
+\label{ex:non-monopresheaf}
+ 
+By way of counter-example, consider the following presheaf:
 
-Given a gluing condition $\glues{}$ and an assignment of local data to the atomic regions of the underlying locale, the corresponding \Gsheaf/ is a presheaf.
+\begin{diagram}
 
-\end{Theorem}
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
 
-\begin{proof}
+\draw[dashed] (bottom) to (V);
+\draw[dashed] (bottom) to (W);
+\draw[dashed] (V) to (U);
+\draw[dashed] (W) to (U);
 
-We must show that restrictions preserve identities and composition.
+\draw (0, 3.25) to (0, 3.75);
+\draw (0, 4.925) ellipse (0.425cm and 1.325cm);
+\node[dot, label=above:{$a$}] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
 
-\begin{itemize}
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
 
-\item \emph{Identities}. $\restrict{U}{U}$ projects to the same index set, so $\restrict{U}{U} = \ident{F(U)}$.
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
 
-\item \emph{Composition}. $\restrict{U}{V}$ restricts to the fiber over $V$, and $\restrict{V}{W}$ restricts to the fiber over $W$, so $\restrict{V}{W} \compose/ \restrict{U}{V}$ = $\restrict{U}{W}$.
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.5) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$p$}] (bottomp) at (0, 1) {};
+\node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
 
-\end{itemize}
+(\draw[arrow,->] (Uc) to (Vr);
+\draw[arrow, ->] (Ub) to (Vr);
+\draw[arrow, ->] (Ua) to (Vs);
+\node at (-1.5, 4.5) {$\restrict{U}{V}$};
+
+\draw[arrow, ->] (Ua) to (Wu);
+\draw[arrow, ->] (Ub) to (Wt);
+\draw[arrow, ->] (Uc) to (Wt);
+\node at (1.675, 4.5) {$\restrict{U}{W}$};
+
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->] (Vs) to (bottomp);
+\node at (-1.25, 1.4) {$\restrict{V}{\bottom/}$};
+
+\draw[arrow, ->] (Wt) to (bottomq);
+\draw[arrow, ->] (Wu) to (bottomp);
+\node at (1.25, 1.4) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+Take the cover $\{ V, W \}$ and selection of patch candidates $\{ r, t \}$, which are compatible because they agree on overlap:
+
+\begin{diagram}
+
+\draw[rounded corners=4pt,fill=selected] (-2.5, 3.4) rectangle (-1.5, 3.1);
+\draw[rounded corners=4pt,fill=selected] (1.5, 3.4) rectangle (2.5, 3.1);
+
+\node (U) at (0, 3) {\textcolor{faded}{$U$}};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed,faded] (bottom) to (V);
+\draw[dashed,faded] (bottom) to (W);
+\draw[dashed,faded] (V) to (U);
+\draw[dashed,faded] (W) to (U);
+
+\draw[faded] (0, 3.25) to (0, 3.75);
+\draw[faded] (0, 4.925) ellipse (0.425cm and 1.325cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] (Ua) at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] (Uc) at (0, 5.5) {};
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.5) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (bottomp) at (0, 1) {};
+\node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
+
+(\draw[arrow,->, faded] (Uc) to (Vr);
+\draw[arrow, ->, faded] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
+\node at (-1.5, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
+
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->, faded] (Ub) to (Wt);
+\draw[arrow, ->, faded] (Uc) to (Wt);
+\node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
+
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->, faded] (Vs) to (bottomp);
+\node at (-1.25, 1.4) {$\restrict{V}{\bottom/}$};
+
+\draw[arrow, ->] (Wt) to (bottomq);
+\draw[arrow, ->, faded] (Wu) to (bottomp);
+\node at (1.25, 1.4) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+Do $r$ and $t$ glue? That is to say, is there a section in $F(U)$ that decomposes exactly to $r$ and $t$? In this case, $b \in F(U)$ is a gluing of $r$ and $t$:
+
+\begin{diagram}
+
+\draw[rounded corners=4pt,fill=selected] (-2.5, 3.4) rectangle (-1.5, 3.1);
+\draw[rounded corners=4pt,fill=selected] (1.5, 3.4) rectangle (2.5, 3.1);
+\draw[rounded corners=4pt,fill=selected2] (-0.5, 4.9) rectangle (0.5, 4.6);
+
+\node (U) at (0, 3) {\textcolor{faded}{$U$}};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed,faded] (bottom) to (V);
+\draw[dashed,faded] (bottom) to (W);
+\draw[dashed,faded] (V) to (U);
+\draw[dashed,faded] (W) to (U);
+
+\draw[faded] (0, 3.25) to (0, 3.75);
+\draw[faded] (0, 4.925) ellipse (0.425cm and 1.325cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] (Ua) at (0, 4) {};
+\node[dot, label=above:{$b$}] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] (Uc) at (0, 5.5) {};
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.5) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (bottomp) at (0, 1) {};
+\node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
+
+(\draw[arrow,->, faded] (Uc) to (Vr);
+\draw[arrow, ->] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
+\node at (-1.5, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
+
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->] (Ub) to (Wt);
+\draw[arrow, ->, faded] (Uc) to (Wt);
+\node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
+
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->, faded] (Vs) to (bottomp);
+\node at (-1.25, 1.4) {$\restrict{V}{\bottom/}$};
+
+\draw[arrow, ->] (Wt) to (bottomq);
+\draw[arrow, ->, faded] (Wu) to (bottomp);
+\node at (1.25, 1.4) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+However, $b$ is not a unique gluing, since $c$ is also a gluing of $r$ and $t$:
+
+\begin{diagram}
+
+\draw[rounded corners=4pt,fill=selected] (-2.5, 3.4) rectangle (-1.5, 3.1);
+\draw[rounded corners=4pt,fill=selected] (1.5, 3.4) rectangle (2.5, 3.1);
+\draw[rounded corners=4pt,fill=selected2] (-0.5, 5.65) rectangle (0.5, 5.35);
+
+\node (U) at (0, 3) {\textcolor{faded}{$U$}};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed,faded] (bottom) to (V);
+\draw[dashed,faded] (bottom) to (W);
+\draw[dashed,faded] (V) to (U);
+\draw[dashed,faded] (W) to (U);
+
+\draw[faded] (0, 3.25) to (0, 3.75);
+\draw[faded] (0, 4.925) ellipse (0.425cm and 1.325cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] (Ua) at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] (Ub) at (0, 4.75) {};
+\node[dot, label=above:{$c$}] (Uc) at (0, 5.5) {};
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$s$}] (Vs) at (-2, 2.5) {};
+\node[dot, label=above:{$r$}] (Vr) at (-2, 3.25) {};
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$u$}] (Wu) at (2, 2.5) {};
+\node[dot, label=above:{$t$}] (Wt) at (2, 3.25) {};
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.5) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (bottomp) at (0, 1) {};
+\node[dot, label=above:{$q$}] (bottomq) at (0, 1.75) {};
+
+(\draw[arrow,->] (Uc) to (Vr);
+\draw[arrow, ->, faded] (Ub) to (Vr);
+\draw[arrow, ->, faded] (Ua) to (Vs);
+\node at (-1.5, 4.5) {\textcolor{faded}{$\restrict{U}{V}$}};
+
+\draw[arrow, ->, faded] (Ua) to (Wu);
+\draw[arrow, ->, faded] (Ub) to (Wt);
+\draw[arrow, ->] (Uc) to (Wt);
+\node at (1.675, 4.5) {\textcolor{faded}{$\restrict{U}{W}$}};
+
+\draw[arrow, ->] (Vr) to (bottomq);
+\draw[arrow, ->, faded] (Vs) to (bottomp);
+\node at (-1.25, 1.4) {$\restrict{V}{\bottom/}$};
+
+\draw[arrow, ->] (Wt) to (bottomq);
+\draw[arrow, ->, faded] (Wu) to (bottomp);
+\node at (1.25, 1.4) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+Thus, this is not a monopresheaf, since gluable patch candidates don't glue uniquely. 
+
+\end{Example}
+
+
+% ----------------------------------------
+\begin{Example}
+
+On the other hand, the presheaf from \cref{ex:compatible-patch-candidates} is a monopresheaf, for whenever patch candidates glue together in that presheaf, they do so uniquely.
+
+\end{Example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sheaves}
+\label{sec:sheaves}
 
 \noindent
-We must also show that the restrictions are well defined. 
+The definition of a monopresheaf requires only that if compatible patch candidates glue, they do so uniquely. It does not require that compatible patch candidates always do glue together. Patch candidates in a monopresheaf need not glue.
 
-\begin{itemize}
+If we want to work with monopresheaves where all gluable patch candidates do in fact glue together, then we can work with sheaves. A sheaf is a monopresheaf that satisfies an extra existence requirement: whenever patch candidates \emph{can} glue, they \emph{do} glue.
 
-\item For $V \childOf/ U$, if $\tuple{b_{i}}_{i \in \support/(U)} \in F(U)$, then by (G2) $\tuple{b_{i}}_{i \in \support/(V)}$ satisfies $\glues{V}$, so $\restrict{U}{V}$ is well-defined. \qedhere
+ 
+% ----------------------------------------
+\begin{Definition}[Sheaf]
+ 
+A monopresheaf $F$ is a sheaf iff it satisfies the following gluing-existence condition:
 
-\end{itemize}
+\begin{enumerate}
 
-\end{proof}
+\item [(G2)] For every cover $\{ U_{i} \}_{i \in I}$ of a region $U$ and every selection of patch candidates $\{ s_{i} \}_{i \in I}$ for that cover, if $\{ s_{i} \}_{i \in I}$ are compatible, then there exists a unique gluing $s \in F(U)$ of $\{ s_{i} \}_{i \in I}$.
+
+\end{enumerate}
+ 
+\end{Definition}
 
 % ----------------------------------------
-\begin{Theorem}[\Gsheaves/ are sheaves]
+\begin{Example}
 
-Given a gluing condition $\glues{}$ and an assignment of local data to the atomic regions of the underlying locale, the corresponding \Gsheaf/ satisfies the gluing condition G0.
+The presheaf from \cref{ex:compatible-patch-candidates} fails to be sheaf, because as we saw in \cref{ex:gluing}, there is a compatible selection of patch candidates (namely, $\{ s, t \}$) which fails to glue. To be a sheaf, every compatible selection of patch candidates must glue.
 
-\end{Theorem}
+\end{Example}
 
-\begin{proof}
+There is a subtlety regarding what sheaves look like over the least element of a locale. Note that the gluing condition is formulated as an implication. That is to say, it says that, for every cross-section of patch candidates, \emph{if} that cross-section can glue, \emph{then} it glues in exactly one way. 
 
-We must show that every gluable selection of patch candidates $\tuple{b_{i}}_{i \in \support/(U)}$ glues to yield a unique section in $F(U)$. Assume that we have a compatible selection of patch candidates $\tuple{b_{i}}_{i \in \support/(U)}$. Then:
+Next, consider the fact that the cover over the least region of a locale is an empty cover. Since there are no patch candidates that need to be checked for compatibility, there is nothing that needs to be done to get a ``selection of gluable patch candidates.'' Hence, the antecedent of the gluing condition is satisfied vacuously over the least element of the locale.
 
-\begin{itemize}
+But since the empty cover satisfies the antecedent of the gluing condition vacuously, it follows that if a presheaf is to qualify as a sheaf, it must ensure that the consequent is satisfied over the empty cover as well. In other words, it must assign a unique glued section (a singleton set) to the least region of the locale. So, even though a \emph{presheaf} or \emph{monopresheaf} may assign a larger set of data to the least element of a locale, a \emph{sheaf} always assigns a singleton to that region.
 
-\item Existence: we assumed the patch candidates are compatible. By (G3) then, $\tuple{b_{i}}_{i \in \support/(U)} \in F(U)$.
 
-\item Uniqueness: let $s = \tuple{b_{i}}_{i \in \support/(U)} \in F(U)$. If another section $t = \tuple{b_{i}}_{i \in \support/(U)} \in F(U)$ were glued from the same components, then $s = t$, since both restrict to the same supports. \qedhere
+% ----------------------------------------
+\begin{Example}
+\label{ex:robot-sheaf}
 
-\end{itemize}
+The presheaf from \cref{ex:robot} is a sheaf. Note that the bottom fiber is a singleton. This ensures that \emph{all} gluable selections of patch candidates (including the empty one) glue uniquely.
 
-\end{proof}
+\end{Example}
 
-Throughout the rest of this paper, we will use \Gsheaves/ to model part-whole complexes, but that is only for simplicity of exposition. Any sheaf over a locale would do just as well.
+If we consider presheaves, monopresheaves, and sheaves together, we see that we have a hierarchy of increasingly strict gluing requirements. (1) Presheaves have no gluing requirements. (2) Monopresheaves have a uniqueness requirement: gluings need not exist, but when they do, they are unique. (3) Sheaves have both a uniqueness and an existence requirement: gluings exist whenever possible, and they are unique. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The bottom fiber}
+\label{sec:the-bottom-fiber}
+
+\noindent
+The bottom element of a locale represents no regions at all. Thus, it plays a special role. Since it represents the \emph{absence} of any regions, the data that we assign to its fiber is of a different kind than the data we assign to other fibers. 
+
+The other fibers sit over genuine regions in the parts space, so the data we assign to them plays a kind of ontological role: it's the ``stuff'' that occupies that region. By contrast, the fiber over $\bottom/$ cannot play this role. Since $\bottom/$ represents no region at all, its fiber cannot represent material occupancy. Instead, it plays a structural role.
+
+Since any compatibility check between patch candidates ultimately factors through restriction maps that ultimately land in the fiber over $\bottom/$, agreement at $\bottom/$ functions as a final anchor point. Given this fact, we can make a general observation: there are as many kinds or modes of gluing as there are anchor points over $\bottom/$. 
+
+If there is a single point in the fiber over $\bottom/$, then there will be only one kind of gluing that occurs throughout the presheaf. This is most evident in a sheaf, which as we saw requires a singleton over $\bottom/$. This makes sense, because in a sheaf, gluing must be consistent and uniform throughout, and so all gluing has to anchor to a single point.
+
+If we move to presheaves, and hence relax our gluing constraints, then we can have multiple points in the fiber over $\bottom/$. These will correspond to multiple kinds or modes of gluing. This also makes sense, since multiple gluings can only exist in a structure with weaker gluing conditions than we find in a sheaf.
+
+\begin{Example}
+\label{ex:multiplicity-over-bottom}
+
+Consider the following simple locale:
+
+\begin{diagram}
+
+% The locale
+
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw (bottom) to (V);
+\draw (bottom) to (W);
+\draw (V) to (U);
+\draw (W) to (U);
+
+\end{diagram}
+
+\noindent
+Now consider a presheaf with more than one anchor over $\bottom/$:
+
+\begin{diagram}
+
+% The locale
+
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed] (bottom) to (V);
+\draw[dashed] (bottom) to (W);
+\draw[dashed] (V) to (U);
+\draw[dashed] (W) to (U);
+
+% Fiber over U
+
+\draw (0, 3.25) to (0, 3.775);
+\draw (0, 5) ellipse (0.5cm and 1.25cm);
+\node[dot, label=above:{$p$}] (Up) at (0, 4) {};
+\node[dot, label=above:{$q$}] (Uq) at (0, 4.75) {};
+\node[dot, label=above:{$r$}] (Ur) at (0, 5.5) {};
+
+% Fiber over V
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
+\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+
+% Fiber over W
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
+\node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
+
+% Fiber over bottom
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.55) ellipse (0.375cm and 0.85cm);
+\node[dot, label=above:{$\alpha$}] (alpha) at (0, 1) {};
+\node[dot, label=above:{$\beta$}] (beta) at (0, 1.75) {};
+
+% rho U, V
+
+\draw[arrow, ->] (Ur.west) to (Va.east);
+\draw[arrow, ->] (Uq.west) to (Vb.east);
+\draw[arrow, ->] (Up.west) to (Va.east);
+\node at (-1.675, 4.5) {$\restrict{U}{V}$};
+
+% rho U, W
+
+\draw[arrow, ->] (Ur.east) to (Wd.west);
+\draw[arrow, ->] (Uq.east) to (Wd.west);
+\draw[arrow, ->] (Up.east) to (Wc.west);
+\node at (1.675, 4.5) {$\restrict{U}{W}$};
+
+% rho V, bottom
+
+\draw[arrow, ->] (Vb.east) to (beta.west);
+\draw[arrow, ->] (Va.east) to (alpha.west);
+\node at (-1.15, 1.35) {$\restrict{V}{\bottom/}$};
+
+% rho W, bottom
+
+\draw[arrow, ->] (Wd.west) to (beta.east);
+\draw[arrow, ->] (Wc.west) to (alpha.east);
+\node at (1.15, 1.35) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+\noindent
+For the cover $\{ V, W \}$ of $U$, take patch candidates $a$ and $c$:
+
+\begin{diagram}
+
+\draw[rounded corners=4pt,fill=selected] (-2.5, 2.65) rectangle (-1.5, 2.35);
+\draw[rounded corners=4pt,fill=selected] (1.5, 2.65) rectangle (2.5, 2.35);
+
+% The locale
+
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed, faded] (bottom) to (V);
+\draw[dashed, faded] (bottom) to (W);
+\draw[dashed, faded] (V) to (U);
+\draw[dashed, faded] (W) to (U);
+
+% Fiber over U
+
+\draw (0, 3.25) to (0, 3.775);
+\draw (0, 5) ellipse (0.5cm and 1.25cm);
+\node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (Up) at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (Uq) at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$r$}}, faded] (Ur) at (0, 5.5) {};
+
+% Fiber over V
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] (Vb) at (-2, 3.25) {};
+
+% Fiber over W
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
+\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] (Wd) at (2, 3.25) {};
+
+% Fiber over bottom
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.55) ellipse (0.375cm and 0.85cm);
+\node[dot, label=above:{\textcolor{faded}{$\alpha$}}, faded] (alpha) at (0, 1) {};
+\node[dot, label=above:{\textcolor{faded}{$\beta$}}, faded] (beta) at (0, 1.75) {};
+
+% rho U, V
+
+\draw[arrow, ->, faded] (Ur.west) to (Va.east);
+\draw[arrow, ->, faded] (Uq.west) to (Vb.east);
+\draw[arrow, ->, faded] (Up.west) to (Va.east);
+\node at (-1.675, 4.5) {$\restrict{U}{V}$};
+
+% rho U, W
+
+\draw[arrow, ->, faded] (Ur.east) to (Wd.west);
+\draw[arrow, ->, faded] (Uq.east) to (Wd.west);
+\draw[arrow, ->, faded] (Up.east) to (Wc.west);
+\node at (1.675, 4.5) {$\restrict{U}{W}$};
+
+% rho V, bottom
+
+\draw[arrow, ->, faded] (Vb.east) to (beta.west);
+\draw[arrow, ->, faded] (Va.east) to (alpha.west);
+\node at (-1.15, 1.35) {$\restrict{V}{\bottom/}$};
+
+% rho W, bottom
+
+\draw[arrow, ->, faded] (Wd.west) to (beta.east);
+\draw[arrow, ->, faded] (Wc.west) to (alpha.east);
+\node at (1.15, 1.35) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+These glue at $p$, and are anchored to $\alpha$:
+
+\begin{diagram}
+
+\draw[rounded corners=4pt,fill=selected] (-2.5, 2.65) rectangle (-1.5, 2.35);
+\draw[rounded corners=4pt,fill=selected] (1.5, 2.65) rectangle (2.5, 2.35);
+\draw[rounded corners=4pt,fill=selected2] (-0.5, 4.15) rectangle (0.5, 3.85);
+
+% The locale
+
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed, faded] (bottom) to (V);
+\draw[dashed, faded] (bottom) to (W);
+\draw[dashed, faded] (V) to (U);
+\draw[dashed, faded] (W) to (U);
+
+% Fiber over U
+
+\draw (0, 3.25) to (0, 3.775);
+\draw (0, 5) ellipse (0.5cm and 1.25cm);
+\node[dot, label=above:{$p$}] (Up) at (0, 4) {};
+\node[dot, label=above:{\textcolor{faded}{$q$}}, faded] (Uq) at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$r$}}, faded] (Ur) at (0, 5.5) {};
+
+% Fiber over V
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$a$}] (Va) at (-2, 2.5) {};
+\node[dot, label=above:{\textcolor{faded}{$b$}}, faded] (Vb) at (-2, 3.25) {};
+
+% Fiber over W
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{$c$}] (Wc) at (2, 2.5) {};
+\node[dot, label=above:{\textcolor{faded}{$d$}}, faded] (Wd) at (2, 3.25) {};
+
+% Fiber over bottom
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.55) ellipse (0.375cm and 0.85cm);
+\node[dot, label=above:{$\alpha$}] (alpha) at (0, 1) {};
+\node[dot, label=above:{\textcolor{faded}{$\beta$}}, faded] (beta) at (0, 1.75) {};
+
+% rho U, V
+
+\draw[arrow, ->, faded] (Ur.west) to (Va.east);
+\draw[arrow, ->, faded] (Uq.west) to (Vb.east);
+\draw[arrow, ->] (Up.west) to (Va.east);
+\node at (-1.675, 4.5) {$\restrict{U}{V}$};
+
+% rho U, W
+
+\draw[arrow, ->, faded] (Ur.east) to (Wd.west);
+\draw[arrow, ->, faded] (Uq.east) to (Wd.west);
+\draw[arrow, ->] (Up.east) to (Wc.west);
+\node at (1.675, 4.5) {$\restrict{U}{W}$};
+
+% rho V, bottom
+
+\draw[arrow, ->, faded] (Vb.east) to (beta.west);
+\draw[arrow, ->] (Va.east) to (alpha.west);
+\node at (-1.15, 1.35) {$\restrict{V}{\bottom/}$};
+
+% rho W, bottom
+
+\draw[arrow, ->, faded] (Wd.west) to (beta.east);
+\draw[arrow, ->] (Wc.west) to (alpha.east);
+\node at (1.15, 1.35) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+Similarly, the patch candidates $b$ and $d$ glue at $q$, and anchor at $\beta$:
+
+\begin{diagram}
+
+\draw[rounded corners=4pt,fill=selected] (-2.5, 3.4) rectangle (-1.5, 3.1);
+\draw[rounded corners=4pt,fill=selected] (1.5, 3.4) rectangle (2.5, 3.1);
+\draw[rounded corners=4pt,fill=selected2] (-0.5, 4.9) rectangle (0.5, 4.6);
+
+% The locale
+
+\node (U) at (0, 3) {$U$};
+\node (V) at (-2, 1.5) {$V$};
+\node (W) at (2, 1.5) {$W$};
+\node (bottom) at (0, 0) {$\bottom/$};
+
+\draw[dashed, faded] (bottom) to (V);
+\draw[dashed, faded] (bottom) to (W);
+\draw[dashed, faded] (V) to (U);
+\draw[dashed, faded] (W) to (U);
+
+% Fiber over U
+
+\draw (0, 3.25) to (0, 3.775);
+\draw (0, 5) ellipse (0.5cm and 1.25cm);
+\node[dot, label=above:{\textcolor{faded}{$p$}}, faded] (Up) at (0, 4) {};
+\node[dot, label=above:{$q$}] (Uq) at (0, 4.75) {};
+\node[dot, label=above:{\textcolor{faded}{$r$}}, faded] (Ur) at (0, 5.5) {};
+
+% Fiber over V
+
+\draw (-2, 1.75) to (-2, 2.275);
+\draw (-2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{\textcolor{faded}{$a$}}, faded] (Va) at (-2, 2.5) {};
+\node[dot, label=above:{$b$}] (Vb) at (-2, 3.25) {};
+
+% Fiber over W
+
+\draw (2, 1.75) to (2, 2.275);
+\draw (2, 3.1) ellipse (0.375cm and 0.875cm);
+\node[dot, label=above:{\textcolor{faded}{$c$}}, faded] (Wc) at (2, 2.5) {};
+\node[dot, label=above:{$d$}] (Wd) at (2, 3.25) {};
+
+% Fiber over bottom
+
+\draw (0, 0.25) to (0, 0.75);
+\draw (0, 1.55) ellipse (0.375cm and 0.85cm);
+\node[dot, label=above:{\textcolor{faded}{$\alpha$}}, faded] (alpha) at (0, 1) {};
+\node[dot, label=above:{$\beta$}] (beta) at (0, 1.75) {};
+
+% rho U, V
+
+\draw[arrow, ->, faded] (Ur.west) to (Va.east);
+\draw[arrow, ->] (Uq.west) to (Vb.east);
+\draw[arrow, ->, faded] (Up.west) to (Va.east);
+\node at (-1.675, 4.5) {$\restrict{U}{V}$};
+
+% rho U, W
+
+\draw[arrow, ->, faded] (Ur.east) to (Wd.west);
+\draw[arrow, ->] (Uq.east) to (Wd.west);
+\draw[arrow, ->, faded] (Up.east) to (Wc.west);
+\node at (1.675, 4.5) {$\restrict{U}{W}$};
+
+% rho V, bottom
+
+\draw[arrow, ->] (Vb.east) to (beta.west);
+\draw[arrow, ->, faded] (Va.east) to (alpha.west);
+\node at (-1.15, 1.35) {$\restrict{V}{\bottom/}$};
+
+% rho W, bottom
+
+\draw[arrow, ->] (Wd.west) to (beta.east);
+\draw[arrow, ->, faded] (Wc.west) to (alpha.east);
+\node at (1.15, 1.35) {$\restrict{W}{\bottom/}$};
+
+\end{diagram}
+
+\noindent
+The patch candidates $a$ and $d$ cannot glue, because their restrictions to $\bottom/$ do not agree. Here is another place where sheaf theory controls coherence: it prevents gluing in more than one mode at the same time. Glued sections must be glued consistently (in whatever mode they anchor to over $\bottom/$). 
+
+\end{Example}
+

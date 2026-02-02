@@ -28,8 +28,9 @@
 %-----------------------------------------------------------------
 % Custom commands/definitions
 
-\definecolor{faded}{HTML}{AAAAAA}
+\definecolor{faded}{HTML}{ABABAB}
 \definecolor{selected}{HTML}{DDBB88}
+\definecolor{selected2}{HTML}{88AABB}
 \definecolor{wrong}{HTML}{CC3445}
 \definecolor{wire0}{HTML}{898989}
 \definecolor{wire1}{HTML}{ABABAB}
@@ -43,6 +44,7 @@
 \newcommand\e[1]{\mathsf{#1}}
 \def\EmptySet/{\varnothing}
 \def\Nat/{\mathbb{N}}
+\def\Reals/{\mathbb{R}}
 \def\bottom/{\perp}
 \def\meet/{\wedge}
 \def\bigmeet/{\bigwedge}
@@ -50,6 +52,7 @@
 \def\bigjoin/{\bigvee}
 \def\compose/{\circ}
 \def\childOf/{\preccurlyeq}
+\def\powerset/{\wp}
 
 \def\openTuple/{\langle}
 \def\closeTuple/{\rangle}
@@ -58,9 +61,10 @@
 
 \newcommand\ident[1]{\e{id}_{#1}}
 \newcommand\category[1]{\mathbb{#1}}
-\newcommand\oppCategory[1]{\mathbb{#1}^{op}}
+\newcommand\oppCategory[1]{\mathbb{#1}^{\e{op}}}
 \def\objects/{\e{Ob}}
 \def\morphisms/{\e{Arr}}
+\def\Set/{\e{\mathbb{S}et}}
 
 \newcommand\atomsOf[1]{\e{Atoms}(#1)}
 \newcommand\restrict[2]{\rho^{#1}_{#2}}
@@ -71,3 +75,8 @@
 \def\Gsheaves/{$\glues{}$-sheaves}
 
 \newcommand\jop[1]{j_{#1}}
+
+\def\jointRunSymbol/{\mathcal R}
+\newcommand\jointRun[1]{\jointRunSymbol/(#1)}
+\def\extensions/{\e{ext}}
+\def\funcRestrict/{\!\!\mid}
