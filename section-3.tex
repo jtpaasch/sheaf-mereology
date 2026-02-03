@@ -10,8 +10,6 @@ As noted in \cref{sec:introduction}, the central claim of this paper is that we 
 
 We can thus define the core mereological concepts of part and whole in sheaf-theoretic terms. Regarding wholes, we can identify fusion with gluing: to say that some pieces fuse or form a ``fusion'' is just to say that they are glued together. Regarding parts, to say that a piece is a ``part'' is just to say that it is a part of a fusion. In other words, the parts of a fusion are just the pieces from which it is glued together.
 
-\def\partOf/{\sqsubseteq}
-
 \begin{Definition}[Fusions and parts]
 
 We say that a section $s \in F(U)$ is a fusion iff there exists a cover $\{ U_{i} \}_{i \in I}$ of $U$ and a selection of patch candidates $\{ s_{i} \}_{i \in I}$ such that:
@@ -28,6 +26,12 @@ Given $t \in F(V)$ and $s \in F(U)$ with $V \childOf/ U$ and $V \not = \bottom/$
 \]
 
 \end{Definition}
+
+\begin{Remark}
+
+$V \not = \bottom/$, for as we saw in \cref{sec:the-bottom-fiber}, $\bottom/$ represents no regions at all, and hence cannot be occupied by parts. The elements in the fiber over $\bottom/$ are structural anchors, not parts.
+
+\end{Remark}
 
 Because fusions do not freely arise here, but rather only exist where parts are explicitly glued together, sheaf theory thus provides a systematic framework with which to model a large variety of part-whole complexes in a ``fusions-first'' manner. In the rest of this section, we illustrate with examples. In each case, we construct a custom presheaf designed to model a particular part-whole complex. Our choices of presheaves should be interpreted as modeling choices. One could construct different presheaves, and each can be evaluated on its own merits. 
 

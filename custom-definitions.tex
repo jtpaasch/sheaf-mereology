@@ -52,6 +52,7 @@
 \def\bigjoin/{\bigvee}
 \def\compose/{\circ}
 \def\childOf/{\preccurlyeq}
+\def\childOfStrict/{\prec}
 \def\powerset/{\wp}
 
 \def\openTuple/{\langle}
@@ -66,15 +67,10 @@
 \def\morphisms/{\e{Arr}}
 \def\Set/{\e{\mathbb{S}et}}
 
-\newcommand\atomsOf[1]{\e{Atoms}(#1)}
 \newcommand\restrict[2]{\rho^{#1}_{#2}}
-\def\Index/{\mathbb{A}}
-\def\support/{I}
-\newcommand\glues[1]{\mathcal{G}_{#1}}
-\def\Gsheaf/{$\glues{}$-sheaf}
-\def\Gsheaves/{$\glues{}$-sheaves}
-
-\newcommand\jop[1]{j_{#1}}
+\def\partOf/{\sqsubseteq}
+\def\properPartOf/{\sqsubset}
+\def\partOverlap/{\sqcap}
 
 \def\jointRunSymbol/{\mathcal R}
 \newcommand\jointRun[1]{\jointRunSymbol/(#1)}

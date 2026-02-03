@@ -8,32 +8,390 @@
 \noindent
 In this section, we provide a discussion of what classical notions of mereology look like in the sheaf-theoretic setting.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Standard Definitions}
+\label{sec:standard-definitions}
+
+\noindent
+Recall the definitions of fusion and part.
+
+\begin{Definition}[Fusions and parts]
+
+We say that a section $s \in F(U)$ is a fusion iff there exists a cover $\{ U_{i} \}_{i \in I}$ of $U$ and a selection of patch candidates $\{ s_{i} \}_{i \in I}$ such that:
+
+\[ 
+\restrict{U}{U_{i}}(s) = s_{i}, \quad \text{ for each } U_{i}.
+\]
+
+\noindent
+Given $t \in F(V)$ and $s \in F(U)$ with $V \childOf/ U$ and $V \not = \bottom/$, we say $t$ is a part of $s$, denoted $t \partOf/ s$, iff $s$ is a fusion and
+
+\[
+\restrict{U}{V}(s) = t.
+\]
+
+\end{Definition}
+
+\noindent
+Morally, the overlap of two fusions is a shared part. In this context, it is a section used in two gluings.
+
+\begin{Definition}[Overlap]
+
+Let $s \in F(V)$ and $t \in F(U)$ be fusions. We say that $s$ and $t$ overlap, denoted $s \partOverlap/ t$, iff
+
 \begin{itemize}
 
-\item \emph{Cambridge fusions}. Sheaves handle Cambridge fusions correctly.
-
-\item \emph{Mere collections}. The collection of all dogs. Is that a ``whole''? Well, we could build a sheaf whose atomic regions are filled with dogs, none of which glue. Then we have a collection of dogs, but no glued object. That matches exactly the intuition: yes, we have a ``collection'' (we built a sheaf for it, after all), but the internals of that sheaf reveal that it's \emph{merely} a collection, i.e., that its parts are not glued.
-
-\item \emph{Co-habitating fusions}. Sheaves allow multiple fusions to occupy the same locale, without being glued. For instance, in the sheaf of real-valued functions over real number line, there are many functions that glue together, and occupy the same locale. 
-
-\item \emph{Non-boolean algebra}. The parts space is Heyting, not Boolean. We're not saddled with such a strong complement operation. You can pick a locale that is Boolean if you need it, but this framework doesn't require it. In fact, the positive logic of a locale is ``geometric logic.''
-
-\item \emph{Reflexivity, antisymmetry, and transitivity}. These are guaranteed. Locally, of course, you may not have transitivity. But globally, it's a theorem. [Check that.]
-
-\item \emph{Distributivity}. \todo{do the glued sections of a sheaf have to be distrubitive? Only inside what glues (since we glue pairwise, so every $i \join/ j$ of the cover.}
-
-\item \emph{An empty element}. There is a need for a bottom element in the \emph{algebra} of parts, but a sheaf need not contain any such thing. There is no need here to try and construct awkward mathematical structures that do algebra on parts but yet don't have a bottom element because our ontological intuitions tell us there can be no such thing. That confuses two issues: algebra and integrity. So here we separate those cleanly, and the algebra can do algebra while the sheaf can do integrity. [In a sheaf you CAN'T assign an empty element to bottom, for coherence, so the bottom element is special...need to say more about that and figure it out.]
-
-\item \emph{Supplementation principles}. Sheaves don't constrain one way or another. [Is that really true? Maybe it's better to say that it doesn't force any supplementation principles, which might provide a reason to call into question whether supplementation is another one of those ideas that is about integrity of parts but has been confused with the algebra of parts.]
-
-\item \emph{Ordering of parts}. Consider that ``pit'' and ``tip'' have the same parts but are different words. These differences can be handled by different sheaves over a 3-stage prefix-ordered locale as in the example of concurrent processes. Note that we retain extensionality.
-
-\item \emph{Extensionality}. Classical mereology's notion of extensionality essentially flattens any structure and is thus overly aggressive. This is why extensionality is so controversial. The sheaf-theoretic perspective retains extensionality, but is much more nuanced. [Here too, I suspect that mereological discussions of extensionality have confused the algebra of parts and the integrity of wholes.]
-
-\item \emph{Gunk and atoms}. You can model continuity and gunky parts if you so desire. You just need a sober space to do it. \todo{check that we can model continuity in the locale in this way.} \todo{can you do continuity only in the sheaf data, without an underlying continuous decompositon in the locale? I would think that if you can't infinitely decompose into smaller opens around a point in the locale, you couldn't do such a thing in the sheaf data?}
-
-\item \emph{Priority of wholes}. The framework is agnostic as to whether you take an  Aristotelian-Thomistic approach\addcite{Aquinas, Arlig, and that guy who wrote that recent book defending the Aristotelian view}.
-
-\item \emph{The whole is greater than its parts}. The framework is agnostic as to whether you want to be a Scotist and say that the whole is something over and above its parts (cite Cross) or an Ockhamist who says it is not\addcite{Normore, Arlig}.
+\item there exists a region $W$ such that $W \childOf/ (V \meet/ U)$ and $W \not = \bottom/$,
+\item a section $r \in F(W)$
 
 \end{itemize}
+
+\noindent
+such that $r \partOf/ F(V)$ and $r \partOf/ F(U)$.
+
+\end{Definition}
+
+\noindent
+Note that overlap is not merely order-theoretic: it is not ``just'' a shared region. In this setting, two fusions can have a shared region without having a shared part in that region. Parts are only those sections that comprise a gluing.
+
+Disjointness in fusions amounts to disjointness in the regions they occupy: 
+
+\begin{Theorem}[Regional disjointness]
+
+Let $s \in F(V)$ and $t \in F(U)$ be fusions. Then:
+
+\[
+  \lnot (s \partOverlap/ t) \implies V \meet/ U = \bottom/.
+\]
+
+\end{Theorem}
+
+\begin{proof}
+
+\todo{Admitted.}
+\end{proof}
+
+\noindent
+A proper part is a part that is not identical to its fusion.
+
+\begin{Definition}[Proper part]
+
+Let $s \in F(V)$ and $t \in F(U)$. We say that $s$ is a proper part of $t$, denoted $s \properPartOf/ t$, iff
+
+\begin{itemize}
+
+\item $s \partOf/ t$,
+\item $V \not = U$.
+
+\end{itemize}
+
+\end{Definition}
+
+\begin{Theorem}[Nothing is a proper part of itself]
+
+For any part $s$, $s \not \properPartOf/ s$.
+
+\end{Theorem}
+
+\begin{proof}
+
+By reflexivity, $s \partOf/ s$. But $s \in F(U)$ for some $U$, and $U = U$, so $s \not \properPartOf/ s$.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Partial Ordering}
+\label{sec:partial-order}
+
+\noindent
+In the sheaf-theoretic setting, parthood is a partial order.
+
+\begin{Theorem}[Reflexivity]
+
+For any part $s$, $s \partOf/ s$.
+
+\end{Theorem}
+
+\begin{proof}
+
+For any $U$, $\{ U \}$ is its trivial cover. For any $s \in F(U)$, $\{ s \}$ is a trivial selection of patch candidates for that trivial cover $\{ U \}$. Further, $\restrict{U}{U}(s) = s$, since restricting to the same region is an identity. Hence, $s$ is a fusion of itself, and $s \partOf/ s$, as required.
+\end{proof}
+
+\begin{Theorem}[Transitivity]
+
+For any parts $s$, $t$, $u$, if $s \partOf/ t$ and $t \partOf/ u$, then $s \partOf/ u$.
+
+\end{Theorem}
+
+\begin{proof}
+
+Suppose $s \partOf/ t$ and $t \partOf/ u$, with $s \in F(W)$, $t \in F(V)$, and $u \in F(U)$. Then $\restrict{U}{V}(u) = t$, and $\restrict{V}{W}(t) = s$. By transitivity of restriction, $\restrict{U}{W}(u) = s$, and hence $s \partOf/ u$. 
+\end{proof}
+
+\noindent
+\begin{Theorem}[Antisymmetry]
+
+For any parts $s$, $t$, if $s \partOf/ t$ and $t \partOf/ s$, then $s = t$.
+
+\end{Theorem}
+
+\begin{proof}
+
+Suppose $s \partOf/ t$ and $t \partOf/ s$, with $s \in F(U)$ and  $t \in F(V)$.  Since $s \partOf/ t$ and $t \in F(V)$, there is a region $W$ such that $s \in F(W)$, $W \childOf/ V$, and $\restrict{V}{W}(t) = s$. But since we already have that $s \in F(U)$, it must be that $U = W$. Substituting $U$ for $W$ in $W \childOf/ V$ and $\restrict{V}{W}(t) = s$ yields $U \childOf/ V$ and $\restrict{V}{U}(t) = s$.
+
+Conversely, since $t \partOf/ s$, by a similar argument, there is a region $Z$ such that $V = Z$, and substituting $V$ for $Z$ yields $V \childOf/ U$ and $\restrict{U}{V}(s) = t$. 
+
+Since $U \childOf/ V$ and $V \childOf/ U$, it must be that $U = V$. If we then substitute $U$ for $V$ in  $\restrict{V}{U}(t) = s$ and $\restrict{U}{V}(s) = t$, we get $\restrict{U}{U}(t) = s$ and $\restrict{U}{U}(s) = t$. But $\restrict{U}{U}$ is the identity, so $t = s$, as required.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Extensionality}
+\label{sec:extensionality}
+
+\noindent
+In the sheaf-theoretic setting, extensionality says that fusions are identical when they are glued from the same patch candidates. Formally:
+
+\begin{Definition}[Extensionality]
+
+We say that extensionality holds in a presheaf $F$ iff, for all fusions $s$, $t$ in $F$:
+
+\[
+  (\forall r, r \partOf/ t \Longleftrightarrow r \partOf/ s) \implies s = t.
+\]
+
+\end{Definition}
+
+\noindent
+If extensionality holds, then equal gluings must live in the same fiber.
+
+\begin{Theorem}[Equality in fibers]
+
+If $s \in F(V)$ and $t \in F(U)$ are gluings and $s = t$, then $U = V$.
+
+\end{Theorem}
+
+\begin{proof}
+
+Suppose $s \in F(V)$, $t \in F(U)$, and $s = t$. Since $s$ is a fusion, there exists a cover $\{ V_{i} \}$ and selection of patch candidates $\{ s_{i} \}_{i \in I}$ such that $\restrict{V}{V_{i}} = s_{i}$ for every $i \in I$.  But since $s = t$, if we substitute $t$ for $s$, we get $\restrict{U}{V_{i}}(t) = s_{i}$, for every $i \in I$. 
+
+Since $t$ restricts to each region $U_{i}$ in the cover, it follows that $U_{i} \childOf/ V$, for all $i \in I$. But since $\{ U_{i} \}_{i \in I}$ is a cover of $U$, $U$ is their join:
+
+\[
+  U = \bigjoin/_{i \in I} U_{i}.
+\]
+
+\noindent
+Since every $U_{i}$ is below $V$, it follows that the join of the cover's components is also below $V$, for the join of any collection of regions is their least upper bound, hence, $V$ is guaranteed to be no lower than that join. Hence $U \childOf/ V$.
+
+Going the other way, by a similar argument, we can show that $V \childOf/ U$. Then, by antisymmetry, $V = U$.
+\end{proof}
+
+\noindent
+Extensionality can fail in presheaves.
+
+\begin{Theorem}[Extensionality failure in presheaves]
+
+It is not the case that extensionality holds in every presheaf.
+
+\end{Theorem}
+
+\begin{proof}
+
+In the presheaf from \cref{ex:non-monopresheaf}, $b$ and $c$ are glued from the same parts, yet $b \not = c$.
+\end{proof}
+
+\noindent
+By contrast, monopresheaves and sheaves have extensional gluings.
+
+\begin{Theorem}[Extensionality in monopresheaves and sheaves]
+
+Let $F$ be a presheaf over a locale. If $F$ is a monosheaf or a sheaf, then extensionality holds in $F$.
+
+\end{Theorem}
+
+\begin{proof}
+
+Let $F$ be a monoprsheaf, and let $s, t \in F(U)$ be fusions such that
+
+\[
+  \forall r, r \partOf/ s \Longleftrightarrow r \partOf/ t.
+\]
+
+\noindent
+Then for any cover $\{ U_{i} \}_{i \in I}$ of $U$, every patch $r_{i}$ used to glue $s$ is also used to glue $t$. Thus, $\restrict{U}{U_{i}}(s) = \restrict{U}{U_{i}}(t)$, for each $U_{i}$ in the cover. 
+
+By the definition of monopresheaves, it follows that $s = t$. Since a sheaf is a monopresheaf with extra conditions, the same argument shows that extensionality holds for sheaves.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Supplementation}
+\label{sec:supplementation}
+
+\noindent
+Supplementation is the idea that fusions are not made from a single proper part. If you remove a proper part from a fusion, there should be at least one other proper part left over.
+
+There are weaker and stronger formulations. In this setting, weak supplementation is the claim that if $s$ is a proper part of $t$, then $t$ has another part $r$ disjoint from $s$. 
+
+\begin{Definition}[Weak supplementation]
+
+We say that weak supplementation holds in a presheaf $F$ iff, for any part $s \in F(V)$ and fusion $t \in F(U)$:
+
+\[
+  s \properPartOf/ t \implies \exists r \in F(W) (r \partOf/ t \text{ and } \lnot(r \partOverlap/ s)).
+\]
+
+\end{Definition}
+
+\noindent
+Note that disjointness of fusions $r$ and $s$ implies disjointness of regions $W$ and $V$, while $s \properPartOf/ t$ means that $V \childOfStrict/ U$. Thus, for weak supplementation to hold, there must be another region $W$ disjoint from $V$. This is purely a requirement on the available regions.
+
+\begin{Definition}[Regional supplementation]
+
+We say that a locale $\category{L}$ is regionally supplemented iff, for all $U \in \category{L}$ and all $V \childOfStrict/ U$ with $V \not = \bottom/$, there exists a $W \not = \bottom/$ such that
+
+\[
+  W \childOf/ U
+  \quad \text{ and } \quad
+  W \meet/ V = \bottom/.
+\]
+
+\end{Definition}
+
+\noindent
+In other words, in order for weak supplementation to hold in a presheaf, the underlying locale must be regionally supplemented.
+
+Regional supplementation holds in Boolean locales. 
+
+\todo{Cite Johnstone or Goldblatt for Boolean locales, e.g. complement pushing to top and bottom via join and meet.}
+
+\begin{Theorem}[Boolean locales are regionally supplemented]
+
+Let $\category{L}$ be a locale. If $\category{L}$ is Boolean, then $\category{L}$ is regionally supplemented.
+
+\end{Theorem}
+
+\begin{proof}
+
+Suppose $\category{L}$ is Boolean, and fix a $V \childOfStrict/ U$ with $V \not = \bottom/$. Since $\category{L}$ is Boolean, $V$ has a complement $\lnot V$ satisfying
+
+\[
+  V \meet/ \lnot V = \bottom/
+  \quad \text{ and } \quad
+  V \join/ \lnot V = \top.
+\]
+
+\noindent
+Define $W = U \meet/ \lnot V$. Then:
+
+\begin{enumerate}
+  \item 
+    In a locale, $a \meet/ b \childOf/ a$. Let $a = U$ and $b = \lnot V$. Then
+    $U \meet/ \lnot V \childOf/ U$. Substituting $W$ yields $W \childOf/ U$.
+  \item 
+    $W \meet/ V$ = $(U \meet/ \lnot V) \meet/ V$ = 
+    $U \meet/ (\lnot V \meet/ V)$ = $U \meet/ \bottom/ = \bottom/$.
+  \item
+    In a Boolean locale, $a \meet/ b = \bottom/ \Longleftrightarrow a \childOf/ \lnot b$. 
+    If we assume for contradiction that $U \meet/ \lnot V = \bottom/$, it therefore follows that
+    $U \childOf/ \lnot(\lnot V)$. But since $\lnot \lnot a = a$ in a Boolean locale, 
+    $U \childOf/ V$. That contradicts the assumption $V \childOfStrict/ U$.
+    Hence, $W = U \meet/ \lnot V \lnot = \bottom/$.
+\end{enumerate}
+
+\noindent
+Thus, $W$ witnesses regional supplementation.
+\end{proof}
+
+\noindent
+So, Boolean locales are regionally supplemented. It goes the other direction too.
+
+\begin{Theorem}[Regionally supplemented locales are Boolean]
+
+Let $\category{L}$ be a locale. If $\category{L}$ is regionally supplemented, then $\category{L}$ is Boolean.
+
+\end{Theorem}
+
+\begin{proof}
+
+To prove that $\category{L}$ is Boolean, it suffices to show that every $V \in \category{L}$ has a complement.
+
+We construct a candidate complement. Suppose $\category{L}$ is regionally supplemented, and fix a $V \in \category{L}$. Next, define:
+
+\[
+  \mathcal D_{V} = \{ X \in \category{L} \mid X \meet/ V = \bottom/ \},
+\]
+
+\noindent
+i.e., the set of all regions disjoint from $V$. This set is nonempty, since it at least contains $\bottom/$. Then, define the complement of $V$ as the largest element of $D_{V}$, which is obtained by taking their join:
+
+\[
+  \lnot V = \bigjoin/ \mathcal D_{V}.
+\]
+
+\noindent
+This join exists because $\category{L}$ is a complete lattice.
+
+Having constructed a candidate complement of $V$, we next show that is the complement by showing that it satisfies the Boolean complement laws, namely that $V \meet/ \lnot V = \bottom/$ and $V \join/ \lnot V = \top$.
+
+First, we show that $V \meet/ \lnot V = \bottom/$. We can do this by the distributivity of locales:
+
+\[
+  V \meet/ \lnot V = V \meet/ \bigjoin/_{X \in \mathcal D_{V}} X = \bigjoin/_{X \in \mathcal D_{V}} (V \meet/ X) = \bigjoin/ \bottom/ = \bottom/.
+\]
+
+\noindent
+In other words, $\lnot V$ is disjoint from $V$.
+
+Next, we must show that $V \join/ \lnot V = \top$. Assume, for contradiction, that $V \join/ \lnot V \childOfStrict/ \top$. Let $U$ be $V \join/ \lnot V$. Then $V \childOfStrict/ U \childOfStrict/ \top$.
+
+Regional supplementation says that, since $V \childOfStrict/ U$, there exists a $W \not = \bottom/$ such that $W \childOf/ U$ and $W \meet/ V = \bottom/$. 
+
+But $W \meet/ V = \bottom/$ implies that $W \in \mathcal D_{V}$. So, $W \childOf/ \bigjoin/ \mathcal D_{V} = \lnot V$. In a locale, if $a \childOf/ b$ and $a \childOf/ c$, then $a \childOf/ b \meet/ c$. Here, we have that $W \childOf/ U$ and $W \childOf/ \lnot V$. Thus, $W \childOf/ U \meet/ \lnot V$. But then:
+
+\[
+  W \childOf/ U \meet/ \lnot V = (V \join/ \lnot V) \meet/ \lnot V = \lnot V.
+\]
+
+\noindent
+That implies that $W \childOf/ \lnot V \childOf/ U$, so $W$ was already below $\lnot V$.
+
+Now observe that $\lnot V \childOf/ V \join/ \lnot V = U$, so adding $W$ below $\lnot V$ cannot enlarge $U$. But regional supplementation requires that $W \not =\bottom/$ and $W \childOf/ U$ strictly witnessing supplementation inside $U$. This contradicts the assumption that $\lnot V$ already collected \emph{all} elements disjoint from $V$. 
+
+Formally, if $V \join/ \lnot V \childOfStrict/ \top$, regional supplementation produces a non-bottom disjoint region below $U$, but by construction all such regions are already $\childOf/ \lnot V$, forcing $U = V \join/ \lnot \top$, which is a contradiction. Hence, $V \join/ \lnot V = \top$.
+
+Since $V \meet/ \lnot V = \bottom/$ and $V \join/ \lnot V = \top$, $\lnot V$ is a Boolean complement. Since $V$ was chosen arbitrarily, this holds for all $V$ in $\category{L}$, hence $\category{L}$ is a Boolean locale.
+\end{proof}
+
+\noindent
+Thus, regional supplementation is equivalent to the Booleanness of the locale, and we can conclude that a presheaf can satisfy weak supplementation only if it has the right kind of geometry, namely a Boolean geometry.
+
+\begin{Theorem}[Booleanness = regional supplementation]
+
+Let $\category{L}$ be a locale. Then the following are equivalent:
+
+\begin{enumerate}
+  \item $\category{L}$ is regionally supplemented.
+  \item $\category{L}$ is Boolean.
+  \item For any presheaf $F$ over $\category{L}$, $F$ can satisfy weak supplementation only if $\category{L}$ is regionally supplemented or Boolean.
+\end{enumerate}
+
+\end{Theorem}
+
+\todo{Tighten up 3. What's that really mean? Maybe keep it outside the theorem, and keep it meta.}
+
+\begin{proof}
+Immediate.
+\end{proof}
+
+\noindent
+This strongly suggests that classical supplementation is not merely a mereological axiom. It presupposes a Boolean geometry of parts. This explains why supplementation can fail in topological contexts (e.g. in $Sh([0, 1])$), since topological contexts are typically non-Boolean, and it explains why supplementation tacitly assumes a Boolean background.
+
+ 
