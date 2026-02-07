@@ -553,7 +553,7 @@ However, what if we weaken our requirements and consider this as a presheaf? In 
 \noindent
 Interpreted as a presheaf, there is a sensible interpretation of this structure. Nothing sits in the fiber over $WH \join/ EH$, since a single coherent piece of flooring cannot be glued from wood and tile. The wood and tile from the two halves each extend into the overlap though, but since they don't agree, one of them must sit on top of the other in that overlapping area. It is like when two area rugs overlap: one sits on top of the other.
 
-As a final point, note that this fails to be monopresheaf, because there are two sections in $F(O)$ that restrict to $\bottom/$. The gluings are trivial here, but nonetheless, gluing is not unique precisely in the overlap. Hence, this is a presheaf, but not a monopresheaf. This illustrates how presheaves allow multiple assemblies of parts, but monopresheaves do not.
+As a final point, note that this fails to be monopresheaf, because there are two sections in $F(O)$ that restrict to $\bottom/$. The gluings are trivial here, but nonetheless, gluing is not unique precisely over $\bottom/$. Hence, this is a presheaf, but not a monopresheaf. This is a limit case where presheaves allow multiple assemblies of the same parts, but monopresheaves do not.
 
 \end{Example}
 
@@ -1404,6 +1404,7 @@ This is a particularly simple sheaf, but the sheaf's strong gluing conditions te
 
 % ----------------------------------------
 \begin{Example}
+\label{ex:clay-through-time}
 
 For another continuous example, let's model a lump of clay through time.
 
@@ -1464,24 +1465,48 @@ has two or more connected components, then there will not be a maximal connected
  
  What exactly does the sheaf give us here that $\phi$ doesn't? What $\phi$ gives us is a time-indexed history of spatial occupation. It is like a movie: each frame is just a picture. It says nothing about what the material parts are, or which parts persist through time. That information has to be imposed on top of $\phi$. 
  
- $F$ does exactly that, and makes it explicit. $F$ assigns to the locale precisely what the material parts are that persist through time, along with a principled notion of fusion. In short, $\phi$ gives us what points in space are occupied at each instant, whereas $F$ gives us which parts persist over regions of time, and how they compose.
+ $F$ provides that extra information explicitly. $F$ provides precisely what the material parts are that persist through time, along with a principled notion of fusion. In short, $\phi$ gives us what points in space are occupied at each instant, whereas $F$ gives us which parts persist over regions of time, and how they compose.
  
-Examples like this can be enriched to model further features. For instance, we might allow multiple overlapping material parts in the same fiber, each tagged by a different modifier of some kind.
+ \end{Example}
+ 
+Adopting weaker gluing conditions allows one to model more exotic part-whole complexes that fail extensionality.
+ 
+ \begin{Example}
+ 
+ Take the example of the lump of clay from \cref{ex:clay-through-time}. Examples like this can be enriched to model further features. 
+ 
+ For instance, suppose we model Socrates in the fashion of \cref{ex:clay-through-time}. But then we might want to enrich the example and say that the fibers carry not just persistent material parts, but rather that they carry persistent material parts tagged with an accidental mode (e.g., a posture, like seated or standing).
 
-With the lump of clay, each fiber only carried persistent material parts. But we might let the fibers carry persistent material parts tagged with an accidental mode (e.g., a posture, like seated or standing). 
+Let $\e{Posture} = \{ seated, standing, \ldots, \} \cup \{ unspecified \}$. Then for every $U \in \category{L}$, we can say that $F(U)$ is a set of pairs $\tuple{S, \pi}$ such that $\forall t \in U$, $S \subseteq \phi(t)$, and $\pi \in \e{Posture}$. Intuitively, these pairs are the material parts in standing-Socrates, seated-Socrates, and Socrates-simpliciter that persist in the given mode throughout $U$. Such a presheaf would then have multiple, distinct persistent material fusions (e.g., Socrates-simpliciter and seated-Socrates) that simultaneously inhabit the same regions of space and differ only by their accidental mode.
 
-Let $\e{Posture} = \{ seated, standing, \ldots, \} \cup \{ unspecified \}$. Then for every $U \in \category{L}$, we can say that $F(U)$ is a set of pairs $\tuple{S, \pi}$ such that $\forall t \in U$, $S \subseteq \phi(t)$, and $\pi \in \e{Posture}$. Intuitively, these pairs are the material parts in standing-Socrates, seated-Socrates, and Socrates-simpliciter that persist in the given mode throughout $U$. This presheaf can have multiple, distinct persistent material fusions (e.g., Socrates-simpliciter and seated-Socrates) that simultaneously inhabit the same regions of space and differ only by their accidental mode.
+Note that in the sheaf-theoretic setting, we can model part-whole complexes where gluing need not be unique (via presheaves). In other words, if we choose to give up the stricter gluing conditions of monopresheaves and sheaves, we can then use presheaves to model situations where multiple fusions are glued from the same parts. For instance, we can model seated-/standing-Socrates, Athena and Lumpl, matter-and-substantial-form, a soul-and-its-powers, etc.
+
+\end{Example}
+
+Sheaf-theoretic mereology is rare in the literature, but there are a few notable nearby cases. We conclude this section by distinguishing two kindred approaches from one genuine instance of the framework developed here.
+
+\begin{Example}
+
+Thomas Mormann’s work on trope sheaves \cite{Mormann:1995} provides an explicit philosophical application of sheaf theory to the construction of complex entities. Although Mormann does not frame this work in mereological terms, and does not define parts and fusions via restriction and gluing of sections, the motivations and mathematical setting are clearly allied with our approach.
+
+In later work on what he calls ``structural mereology'' (\cite{Mormann:2009}, \cite{Mormann:2010}, \cite{Mormann:2012}), Mormann frequently employs presheaf- and sheaf-like constructions (often without using that terminology). In these cases, however, parts and wholes are defined via the category-theoretic notion of a subobject, and fusions are given by unions (joins) of subobjects. Since mereological structure then lives in the lattice of an object's subobjects rather than in the fibers of the presheaf, this yields a distinct mereological theory.
+
+Thus, while Mormann’s structural mereology is a close conceptual relative of sheaf-theoretic mereology, it is not an instance of the gluing-based framework developed here.
+
+\end{Example}
+
+\begin{Example}
+
+A genuine instance of our framework appears in the theory of ``behavioral mereology'' developed by Fong, Myers, and Spivak (\cite{FongMyersAndSpivak:2020}; cf. \cite{SchultzAndSpivak:2019}). On this approach, a system is defined to be a sheaf of behaviors. Global sections represent complete system behaviors (wholes), while restrictions of sections to smaller regions represent parts of the system.
+
+In this setting, composition of parts is given by the sheaf-theoretic gluing operation, exactly as in the framework presented here. Parts are not subobjects but fiber-level data: they are local behaviors that arise as restrictions of global ones. So this is an exact instance of our framework.
+
+Interestingly, Fong, Myers, and Spivak impose an additional constraint, requiring restriction maps to be surjective. The effect is that a part of a system consists precisely of those behaviors observable when attention is restricted to a smaller region. In this sense, a part is legitimate only insofar as it is genuinely realized by the whole system.
+
+This yields a distinctly Aristotelian conception of parthood (cf. \cite{Inman:2018}). Famously, Aquinas (\cite{Svoboda:2012}) held that a hand is a part of a body only insofar as it remains functionally integrated with it; a severed hand is no longer a hand. Interpreting a human organism as a system, the hand is exactly that portion of the organism’s behavior observable at the hand. Once detached, it is no longer a surjective restriction of the whole system’s behavior.
+
+This example illustrates the flexibility of the sheaf-theoretic setting. By imposing additional constraints --- such as surjectivity of restrictions --- one can recover substantively different metaphysical views of parthood within a single mathematical framework.
 
 \end{Example}
 
 
-
-% ----------------------------------------
-TODO:
-\begin{itemize}
-
-\item Note Spivak et al's behavioral mereology is an example of a \Gsheaf/ (and check the details to make sure that's really true).
-
-\item Mormann's ``structural mereology'' is basically just our thesis. Add examples from his similarity structures.
-  
-\end{itemize}

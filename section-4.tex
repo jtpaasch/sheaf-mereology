@@ -3,10 +3,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Classical Mereological Notions in the Sheaf-theoretic Setting}
-\label{sec:classical-mereology-in-sheaves}
+\label{sec:classical-mereology}
 
 \noindent
-In this section, we provide a discussion of what classical notions of mereology look like in the sheaf-theoretic setting.
+In this section, we show how classical mereological notions translate to the sheaf-theoretic setting.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,24 +56,26 @@ such that $r \partOf/ F(V)$ and $r \partOf/ F(U)$.
 \noindent
 Note that overlap is not merely order-theoretic: it is not ``just'' a shared region. In this setting, two fusions can have a shared region without having a shared part in that region. Parts are only those sections that comprise a gluing.
 
-Disjointness in fusions amounts to disjointness in the regions they occupy: 
+If fusions overlap, the regions they occupy overlap.
 
-\begin{Theorem}[Regional disjointness]
+\begin{Theorem}[Regional overlap]
 
 Let $s \in F(V)$ and $t \in F(U)$ be fusions. Then:
 
 \[
-  \lnot (s \partOverlap/ t) \implies V \meet/ U = \bottom/.
+  s \partOverlap/ t \implies V \meet/ U \not = \bottom/.
 \]
 
 \end{Theorem}
 
 \begin{proof}
 
-\todo{Admitted.}
+Suppose $s \partOverlap/ t$. By definition, there exists a region $W$ such that $\bottom/ \strictChildOf/ W \childOf/ (V \meet/ U)$ with a section $r \in F(W)$ that is a part of both $s$ and $t$. Since $W$ is strictly larger than $\bottom/$ and $W \childOf/ V \meet/ U$, then $V \meet/ U \not = \bottom/$.
 \end{proof}
 
 \noindent
+The converse is not true. Fusions can fail to overlap either because they occupy disjoint regions, or because they don't have a part in a shared region. So geometric overlap is sufficient but not necessary for mereological disjointness.
+
 A proper part is a part that is not identical to its fusion.
 
 \begin{Definition}[Proper part]
@@ -195,7 +197,7 @@ Going the other way, by a similar argument, we can show that $V \childOf/ U$. Th
 \noindent
 Extensionality can fail in presheaves.
 
-\begin{Theorem}[Extensionality failure in presheaves]
+\begin{Theorem}[Extensionality in presheaves]
 
 It is not the case that extensionality holds in every presheaf.
 
@@ -236,162 +238,74 @@ By the definition of monopresheaves, it follows that $s = t$. Since a sheaf is a
 \label{sec:supplementation}
 
 \noindent
-Supplementation is the idea that fusions are not made from a single proper part. If you remove a proper part from a fusion, there should be at least one other proper part left over.
-
-There are weaker and stronger formulations. In this setting, weak supplementation is the claim that if $s$ is a proper part of $t$, then $t$ has another part $r$ disjoint from $s$. 
+In the sheaf-theoretic setting, weak supplementation says that fusions are glued from more than one patch candidate. 
 
 \begin{Definition}[Weak supplementation]
 
-We say that weak supplementation holds in a presheaf $F$ iff, for any part $s \in F(V)$ and fusion $t \in F(U)$:
+We say that weak supplementation holds in a presheaf $F$ iff, for any $s \in F(V)$ and $t \in F(U)$:
 
 \[
-  s \properPartOf/ t \implies \exists r \in F(W) (r \partOf/ t \text{ and } \lnot(r \partOverlap/ s)).
+  s \properPartOf/ t \implies \exists W \in \category{L}, r \in F(W) (r \properPartOf/ t \text{ and } \lnot(r \partOverlap/ s)).
 \]
 
 \end{Definition}
 
 \noindent
-Note that disjointness of fusions $r$ and $s$ implies disjointness of regions $W$ and $V$, while $s \properPartOf/ t$ means that $V \childOfStrict/ U$. Thus, for weak supplementation to hold, there must be another region $W$ disjoint from $V$. This is purely a requirement on the available regions.
+In the sheaf-theoretic setting, weak supplementation need not hold. Consider a simple locale $\category{L}$ with $\bottom/ \strictChildOf/ V \strictChildOf/ U$. Then define a presheaf $F$ such that $F(\bottom/) = \{ 0 \}$, $F(V) = \{ s \}$, and $F(U) = \{ t \}$. This is (trivially) a presheaf, monopresheaf, and a sheaf, yet weak supplementation fails.
 
-\begin{Definition}[Regional supplementation]
+Strong supplementation says that if a section $s$ lives in a fiber outside of a fusion $t$, it is disjoint from one of the patch candidates from which $t$ is glued.
 
-We say that a locale $\category{L}$ is regionally supplemented iff, for all $U \in \category{L}$ and all $V \childOfStrict/ U$ with $V \not = \bottom/$, there exists a $W \not = \bottom/$ such that
+\begin{Definition}[Strong supplementation]
+
+We say that strong supplementation holds in a presheaf $F$ iff, for any fusions $s \in F(V)$ and $t \in F(U)$:
 
 \[
-  W \childOf/ U
-  \quad \text{ and } \quad
-  W \meet/ V = \bottom/.
+  s \not \partOf/ t \implies \exists W \in \category{L}, r \in F(W) (r \properPartOf/ t \text{ and } \lnot(r \partOverlap/ s)).
 \]
 
 \end{Definition}
 
 \noindent
-In other words, in order for weak supplementation to hold in a presheaf, the underlying locale must be regionally supplemented.
+This is a strictly stronger condition than weak supplementation, so it fails in the sheaf-theoretic setting too.
 
-Regional supplementation holds in Boolean locales. 
+It may be tempting to suppose that mereological supplementation imposes a corresponding supplementation condition on the underlying locale. However, this inference is invalid in the sheaf-theoretic setting. Two fusions may fail to overlap either because their regions are disjoint or because, despite regional overlap, no part of either fusion occupies the overlapping region.
 
-\todo{Cite Johnstone or Goldblatt for Boolean locales, e.g. complement pushing to top and bottom via join and meet.}
 
-\begin{Theorem}[Boolean locales are regionally supplemented]
-
-Let $\category{L}$ be a locale. If $\category{L}$ is Boolean, then $\category{L}$ is regionally supplemented.
-
-\end{Theorem}
-
-\begin{proof}
-
-Suppose $\category{L}$ is Boolean, and fix a $V \childOfStrict/ U$ with $V \not = \bottom/$. Since $\category{L}$ is Boolean, $V$ has a complement $\lnot V$ satisfying
-
-\[
-  V \meet/ \lnot V = \bottom/
-  \quad \text{ and } \quad
-  V \join/ \lnot V = \top.
-\]
-
-\noindent
-Define $W = U \meet/ \lnot V$. Then:
-
-\begin{enumerate}
-  \item 
-    In a locale, $a \meet/ b \childOf/ a$. Let $a = U$ and $b = \lnot V$. Then
-    $U \meet/ \lnot V \childOf/ U$. Substituting $W$ yields $W \childOf/ U$.
-  \item 
-    $W \meet/ V$ = $(U \meet/ \lnot V) \meet/ V$ = 
-    $U \meet/ (\lnot V \meet/ V)$ = $U \meet/ \bottom/ = \bottom/$.
-  \item
-    In a Boolean locale, $a \meet/ b = \bottom/ \Longleftrightarrow a \childOf/ \lnot b$. 
-    If we assume for contradiction that $U \meet/ \lnot V = \bottom/$, it therefore follows that
-    $U \childOf/ \lnot(\lnot V)$. But since $\lnot \lnot a = a$ in a Boolean locale, 
-    $U \childOf/ V$. That contradicts the assumption $V \childOfStrict/ U$.
-    Hence, $W = U \meet/ \lnot V \lnot = \bottom/$.
-\end{enumerate}
-
-\noindent
-Thus, $W$ witnesses regional supplementation.
-\end{proof}
-
-\noindent
-So, Boolean locales are regionally supplemented. It goes the other direction too.
-
-\begin{Theorem}[Regionally supplemented locales are Boolean]
-
-Let $\category{L}$ be a locale. If $\category{L}$ is regionally supplemented, then $\category{L}$ is Boolean.
-
-\end{Theorem}
-
-\begin{proof}
-
-To prove that $\category{L}$ is Boolean, it suffices to show that every $V \in \category{L}$ has a complement.
-
-We construct a candidate complement. Suppose $\category{L}$ is regionally supplemented, and fix a $V \in \category{L}$. Next, define:
-
-\[
-  \mathcal D_{V} = \{ X \in \category{L} \mid X \meet/ V = \bottom/ \},
-\]
-
-\noindent
-i.e., the set of all regions disjoint from $V$. This set is nonempty, since it at least contains $\bottom/$. Then, define the complement of $V$ as the largest element of $D_{V}$, which is obtained by taking their join:
-
-\[
-  \lnot V = \bigjoin/ \mathcal D_{V}.
-\]
-
-\noindent
-This join exists because $\category{L}$ is a complete lattice.
-
-Having constructed a candidate complement of $V$, we next show that is the complement by showing that it satisfies the Boolean complement laws, namely that $V \meet/ \lnot V = \bottom/$ and $V \join/ \lnot V = \top$.
-
-First, we show that $V \meet/ \lnot V = \bottom/$. We can do this by the distributivity of locales:
-
-\[
-  V \meet/ \lnot V = V \meet/ \bigjoin/_{X \in \mathcal D_{V}} X = \bigjoin/_{X \in \mathcal D_{V}} (V \meet/ X) = \bigjoin/ \bottom/ = \bottom/.
-\]
-
-\noindent
-In other words, $\lnot V$ is disjoint from $V$.
-
-Next, we must show that $V \join/ \lnot V = \top$. Assume, for contradiction, that $V \join/ \lnot V \childOfStrict/ \top$. Let $U$ be $V \join/ \lnot V$. Then $V \childOfStrict/ U \childOfStrict/ \top$.
-
-Regional supplementation says that, since $V \childOfStrict/ U$, there exists a $W \not = \bottom/$ such that $W \childOf/ U$ and $W \meet/ V = \bottom/$. 
-
-But $W \meet/ V = \bottom/$ implies that $W \in \mathcal D_{V}$. So, $W \childOf/ \bigjoin/ \mathcal D_{V} = \lnot V$. In a locale, if $a \childOf/ b$ and $a \childOf/ c$, then $a \childOf/ b \meet/ c$. Here, we have that $W \childOf/ U$ and $W \childOf/ \lnot V$. Thus, $W \childOf/ U \meet/ \lnot V$. But then:
-
-\[
-  W \childOf/ U \meet/ \lnot V = (V \join/ \lnot V) \meet/ \lnot V = \lnot V.
-\]
-
-\noindent
-That implies that $W \childOf/ \lnot V \childOf/ U$, so $W$ was already below $\lnot V$.
-
-Now observe that $\lnot V \childOf/ V \join/ \lnot V = U$, so adding $W$ below $\lnot V$ cannot enlarge $U$. But regional supplementation requires that $W \not =\bottom/$ and $W \childOf/ U$ strictly witnessing supplementation inside $U$. This contradicts the assumption that $\lnot V$ already collected \emph{all} elements disjoint from $V$. 
-
-Formally, if $V \join/ \lnot V \childOfStrict/ \top$, regional supplementation produces a non-bottom disjoint region below $U$, but by construction all such regions are already $\childOf/ \lnot V$, forcing $U = V \join/ \lnot \top$, which is a contradiction. Hence, $V \join/ \lnot V = \top$.
-
-Since $V \meet/ \lnot V = \bottom/$ and $V \join/ \lnot V = \top$, $\lnot V$ is a Boolean complement. Since $V$ was chosen arbitrarily, this holds for all $V$ in $\category{L}$, hence $\category{L}$ is a Boolean locale.
-\end{proof}
-
-\noindent
-Thus, regional supplementation is equivalent to the Booleanness of the locale, and we can conclude that a presheaf can satisfy weak supplementation only if it has the right kind of geometry, namely a Boolean geometry.
-
-\begin{Theorem}[Booleanness = regional supplementation]
-
-Let $\category{L}$ be a locale. Then the following are equivalent:
-
-\begin{enumerate}
-  \item $\category{L}$ is regionally supplemented.
-  \item $\category{L}$ is Boolean.
-  \item For any presheaf $F$ over $\category{L}$, $F$ can satisfy weak supplementation only if $\category{L}$ is regionally supplemented or Boolean.
-\end{enumerate}
-
-\end{Theorem}
-
-\todo{Tighten up 3. What's that really mean? Maybe keep it outside the theorem, and keep it meta.}
-
-\begin{proof}
-Immediate.
-\end{proof}
-
-\noindent
-This strongly suggests that classical supplementation is not merely a mereological axiom. It presupposes a Boolean geometry of parts. This explains why supplementation can fail in topological contexts (e.g. in $Sh([0, 1])$), since topological contexts are typically non-Boolean, and it explains why supplementation tacitly assumes a Boolean background.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Unrestricted fusion}
+\label{sec:unrestricted-fusion}
  
+ \noindent
+There is a sense in which unrestricted fusion does not make sense in the sheaf-theoretic setting. Consider the following.
+
+\begin{itemize}
+
+\item In the classical-setting, everything in the domain is already a part. By contrast, in the sheaf-theoretic setting, not every section of a fiber is a part. Only those sections that glue are parts. 
+
+\item In the classical setting, you can collect together any plurality of parts as candidates for a fusion. By contrast, in the sheaf-theoretic setting, you can't pick just any selection of patch candidates. You must select them from the regions in a cover.
+
+\item In the classical setting, once you select a plurality of parts, no further coherence or compatibility conditions need to be met before fusing them. By contrast, in the sheaf-theoretic setting, a selection of patch candidates can be glued only if they are compatible.
+
+\end{itemize}
+
+If one really wanted to translate unrestricted fusion into the sheaf-theoretic setting, it would have to be stated along the following lines:
+
+\begin{Definition}[Sheaf-theoretic unrestricted fusion]
+
+Given a presheaf $F$ over a local $\category{L}$, for any region $U \in \category{L}$ and selection of sections $\{ s_F(U_{i}) \}_{i \in I}$ satisfying
+
+\begin{itemize}
+
+\item $\{ U_{i} \}_{i \in I}$ covers $U$
+\item $\{ s_F(U_{i}) \}_{i \in I}$ are compatible
+
+\end{itemize}
+
+\noindent
+There exists a section $s \in F(U)$ such that $\restrict{U}{U_{i}}(s) = s_{i}$ for each $i$. 
+
+\end{Definition}
+
+\noindent
+But that is just the sheaf condition. In the sheaf-theoretic setting, unrestricted fusion thus amounts to requiring that all part-whole complexes are sheaves. That is a strong requirement. As we have seen, many natural part-whole complexes are more naturally modeled with the looser gluing conditions of monopresheaves and presheaves.
