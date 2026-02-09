@@ -1011,12 +1011,12 @@ The definition of a presheaf requires only that the data be stable under restric
 
 In some cases though, certain sections in different fibers turn out to be compatible (i.e., there is a coherent way to patch them together). When this occurs, those compatible sections can be glued together to form sections that stretch across fibers.
 
-To get at this idea, let's first define a cover. A cover of a region $U$ is a selection of sub-regions that covers $U$ in its entirety. The chosen sub-regions don't leave any part of $U$ exposed.
+To get at this idea, let's first define a \emph{cover}. A cover of a region $U$ is a collection of sub-regions that, when combined, contain $U$ in its entirety. The chosen sub-regions don't leave any part of $U$ exposed. For example, the Northern and Southern hemispheres are a cover of the Earth. So are the Southern, Eastern, and Western hemispheres.  The Northern and Eastern hemispheres do \emph{not} form a cover of the Earth, because when taken together, they lack portions of the Southern and Western hemispheres.
 
 % ----------------------------------------
 \begin{Definition}[Cover]
 
-Let $\category{L}$ be a topology or a locale, and let $U$ be a region of $\category{L}$. A \emph{cover} of $U$ is a family $\{ U_{i} \}_{i \in I} \subseteq \category{L}$ such that:
+Let $\category{L}$ be a locale, and let $U$ be a region of $\category{L}$. A \emph{cover} of $U$ is a family $\{ U_{i} \}_{i \in I} \subseteq \category{L}$ such that:
 
 $$U = \bigjoin/\limits_{i \in I} \{ U_{i} \}.$$
 
@@ -1025,6 +1025,11 @@ In other words, a cover of $U$ is a family of regions that join together to form
 
 \end{Definition}
 
+\begin{Remark}
+
+Recall that when we view a topology as a locale, ``join'' denotes the union of open sets.  Thus, our definition of cover coincides with the traditional sense of \emph{open cover} familiar to topologists.
+
+\end{Remark}
 
 % ----------------------------------------
 \begin{Example}
