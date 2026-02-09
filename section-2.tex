@@ -74,7 +74,7 @@ It is sometimes convenient to turn the diagram sideways and group together point
 
 \end{diagram}
 
-That makes the pre-images very easy to see. For any point in $B$, its pre-image is just the group of points sitting ``over'' it: 
+This presentation makes the pre-images of elements in $B$ very easy to see. For any point in $B$, its pre-image is just the set of points sitting ``over'' it:
 
 \begin{diagram}
 
@@ -141,12 +141,12 @@ If we stack the points in each pre-image vertically, one on top of the other, we
 
 \end{diagram}
 
-This gives rise to the idea of the ``fibers'' of a map. The fibers of a map are just its pre-images. For instance, the fiber over $b$ is $\{ 2, 4, 6 \}$.
+This gives rise to the idea of the ``fibers'' of a map. The fibers of a map are just its pre-images. For instance, the fiber of $f$ over $b$ is $\{ 2, 4, 6 \}$.
 
 % ----------------------------------------
 \begin{Definition}[Fibers]
 
-Given a map $f : E \to B$ and a point $y \in B$, the fiber over $y$ is its pre-image $\preimage{f}(y)$ = $\{ x \mid f(x) = y \}$. $B$ is called the base space of $f$, and $y$ the base point of the fiber.
+Given a map $f : E \to B$ and a point $y \in B$, the \emph{fiber} over $y$ is its pre-image $\preimage{f}(y)$ = $\{ x \mid f(x) = y \}$. $B$ is called the \emph{base space} of $f$, and $y$ the \emph{base poin}t of the fiber.
 
 \end{Definition}
 
@@ -219,7 +219,7 @@ We can also take cross-sections local to only some of the fibers. For instance, 
 % ----------------------------------------
 \begin{Definition}[Sections]
 
-Given a map $f : E \to B$ and a subset of base points $C \subseteq B$, a section of $f$ (over $C$) is a choice of one element from each fiber over each base point $x \in C$.
+Given a map $f : E \to B$ and a subset of base points $C \subseteq B$, a \emph{section} of $f$ (over $C$) is a choice of one element from each fiber over each base point $x \in C$.
 
 \end{Definition}
 
@@ -227,7 +227,7 @@ Given a map $f : E \to B$ and a subset of base points $C \subseteq B$, a section
 \begin{Remark}
 \label{remark:section-terminology}
 
-Since each point in a fiber amounts to a section over the fiber's base, the elements of a fiber are often just called the sections of the fiber. 
+Since each element in a fiber amounts to a section over the fiber's base point, the elements of a fiber are often just called the sections of the fiber.
 
 \end{Remark}
 
@@ -243,19 +243,19 @@ In traditional topology, spaces are built out of the points of the space. Given 
 % ----------------------------------------
 \begin{Definition}[Topology]
 
-Let $X$ be a non-empty set, thought of as the points of the space. A topology on X is a collection $T$ of subsets of $X$, thought of as the regions of the space and called the open sets (or just the opens) of $T$, that satisfy the following conditions:
+Let $X$ be a non-empty set, thought of as the points of the space. A \emph{topology} on X is a collection $T$ of subsets of $X$, thought of as the regions of the space and called the \emph{open sets} (or just the \emph{opens}) of $T$, that satisfy the following conditions:
 
 \begin{enumerate}
 
-\item [(T1)] The empty set and the whole set are open: 
+\item [(O1)] The empty set and the whole set are open:
 
 $$\EmptySet/ \in T, X \in T.$$
 
-\item [(T2)] Arbitrary unions of opens are open:
+\item [(O2)] Arbitrary unions of opens are open:
 
 $$\text{if } \{ U_{i} \}_{i \in I} \subseteq T, \text{ then } \bigcup\limits_{i \in I} U_{i} \in T.$$
 
-\item [(T3)] Finite intersections of opens are open: 
+\item [(O3)] Finite intersections of opens are open:
 
 $$\text{if } U_{1}, \ldots, U_{n} \in T, \text{ then } \bigcap\limits_{i=1}^{n} U_{i} \in T.$$
 
@@ -319,7 +319,7 @@ The lattice structure suggests that much of what is important about a space is n
 % ----------------------------------------
 \begin{Definition}[Frames/locales]
 
-A frame (synonymously, a locale) $\category{L}$ is a partially ordered set $L$ (whose elements are called opens or regions) that satisfies the following conditions:
+A \emph{frame} (synonymously, a \emph{locale}) $\category{L}$ is a partially ordered set $L$ (whose elements are called opens or regions) that satisfies the following conditions:
 
 \begin{enumerate}
 
@@ -370,7 +370,7 @@ Locales have presentations much like groups and other algebraic structures. To g
 % ----------------------------------------
 \begin{Definition}[Presentations]
 
-A presentation $\tuple{G, R}$ of a locale $\category{L}$ is comprised of: 
+A \emph{presentation} $\tuple{G, R}$ of a locale $\category{L}$ is comprised of:
 
 \begin{enumerate}
 
@@ -519,19 +519,17 @@ We have three generators ($U_{1}$, $U_{2}$, and $U_{3}$), and there are no relat
 
 \end{Example}
 
-A presentation provides the most ``minimal'' information from which the rest of the locale is generated. 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Presheaves}
 
 \noindent
-Above we considered the fibers of a map $f : E \to B$, where $E$ and $B$ were sets. We can also consider fibers over locales, where the fibers respect the locale's structure. This is called a presheaf. A presheaf is an assignment of data to each of a locale's regions that is ``stable under restriction,'' i.e., that respects zooming in and out.
+Above we considered the fibers of a map $f : E \to B$, where $E$ and $B$ were sets. We can also consider fibers over locales, where the fibers respect the locale's structure. This is called a \emph{presheaf}. A presheaf is an assignment of data to each of a locale's regions that is ``stable under restriction,'' i.e., that respects ``zooming'' in and out.
 
 % ----------------------------------------
 \begin{Definition}[Presheaf]
 
-Let $\category{L}$ be a locale, and let $\morphisms/(\category{L})$ be $\{ \tuple{A, B} \mid A \childOf/ B \in \category{L} \}$. A presheaf on $\category{L}$ is a pair $\tuple{F, \{ \restrict{B}{A} \}_{\tuple{A, B} \in \morphisms/(\category{L})}}$, where:
+Let $\category{L}$ be a locale, and let $\morphisms/(\category{L})$ be $\{ \tuple{A, B} \mid A \childOf/ B \in \category{L} \}$. A \emph{presheaf} on $\category{L}$ is a pair $\tuple{F, \{ \restrict{B}{A} \}_{\tuple{A, B} \in \morphisms/(\category{L})}}$, where:
 
 \begin{itemize}
 
@@ -586,7 +584,7 @@ Let $\category{L}$ be a locale $\{ \bottom/, W, V, U \}$ with the following stru
 
 \end{diagram}
 
-Next, let's define a presheaf $F$ as follows:
+Define the presheaf $F$ as follows:
 
 \begin{itemize}
 
@@ -1018,7 +1016,7 @@ To get at this idea, let's first define a cover. A cover of a region $U$ is a se
 % ----------------------------------------
 \begin{Definition}[Cover]
 
-Let $\category{L}$ be a topology or a locale, and let $U$ be a region of $\category{L}$. A cover of $U$ is a family $\{ U_{i} \}_{i \in I} \subseteq \category{L}$ such that:
+Let $\category{L}$ be a topology or a locale, and let $U$ be a region of $\category{L}$. A \emph{cover} of $U$ is a family $\{ U_{i} \}_{i \in I} \subseteq \category{L}$ such that:
 
 $$U = \bigjoin/\limits_{i \in I} \{ U_{i} \}.$$
 
@@ -1112,7 +1110,7 @@ Given a presheaf $F$ over a locale $\category{L}$, if we have a cover $\{ U_{i} 
 % ----------------------------------------
 \begin{Definition}[Patch candidates]
 
-Given a presheaf $F$ and a cover $\{ U_{i} \}_{i \in I}$ with a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$, a selection of patch candidates $\{ s_{i} \}_{i \in I}$ is a choice of one section $s_{i}$ from each $F(U_{i})$.
+Given a presheaf $F$ and a cover $\{ U_{i} \}_{i \in I}$ with a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$, a selection of \emph{patch candidates} $\{ s_{i} \}_{i \in I}$ is a choice of one section $s_{i}$ from each $F(U_{i})$.
 
 \end{Definition}
 
@@ -1291,7 +1289,7 @@ A selection of patch candidates might fit together, or they might not. We say th
 % ----------------------------------------
 \begin{Definition}[Compatible patch candidates]
 
-Given two fibers $F(U_{i})$ and $F(U_{j})$ and a patch candidate from each, $s_{i} \in F(U_{i})$ and $s_{j} \in F(U_{j})$, $s_{i}$ and $s_{j}$ are compatible if they restrict to the same data on their overlap $U_{i} \meet/ U_{j}$:
+Given two fibers $F(U_{i})$ and $F(U_{j})$ and a patch candidate from each, $s_{i} \in F(U_{i})$ and $s_{j} \in F(U_{j})$, $s_{i}$ and $s_{j}$ are \emph{compatible} if they restrict to the same data on their overlap $U_{i} \meet/ U_{j}$:
 $$\restrict{U_{i}}{U_{i} \meet/ U_{j}}(s_{i}) 
     = 
     \restrict{U_{j}}{U_{i} \meet/ U_{j}}(s_{j}).$$
@@ -1615,7 +1613,7 @@ When selected patch candidates $s_{i}$, \ldots, $s_{k}$ across a cover of $U$ ar
 % ----------------------------------------
  \begin{Definition}[Gluing]
 
-Given a presheaf $F$ and a selection of compatible patch candidates $\{ s_{i} \}_{i \in I}$ for a cover $\{ U_{i} \}_{i \in I}$, $\{ s_{i} \}_{i \in I}$ glue together only if there is a section $s \in F(U)$ that restricts down to $s_{i}$ on each fiber $F(U_{i})$ of the cover, i.e., only if $s$ is such that:
+Given a presheaf $F$ and a selection of compatible patch candidates $\{ s_{i} \}_{i \in I}$ for a cover $\{ U_{i} \}_{i \in I}$, $\{ s_{i} \}_{i \in I}$ \emph{glue} together only if there is a section $s \in F(U)$ that restricts down to $s_{i}$ on each fiber $F(U_{i})$ of the cover, i.e., only if $s$ is such that:
 \[
 \restrict{U}{U_{i}}(s) = s_{i}, \text{ for each } i \in I.
 \]
@@ -2118,7 +2116,7 @@ If we want to work only with extensional gluings, then we can impose a restricti
 % ----------------------------------------
 \begin{Definition}[Monopresheaves]
  
-A presheaf $F$ is a monopresheaf iff it satisfies the following gluing-uniqueness condition:
+A presheaf $F$ is a \emph{monopresheaf} iff it satisfies the following gluing-uniqueness condition:
 
 \begin{enumerate}
 
@@ -2139,7 +2137,7 @@ Equivalently, given $s, t \in F(U)$:
 
 \begin{Remark}
 
-Monopresheaves are also called separated presheaves. The ``mono'' part of the name comes from category theory: every joint restriction to a covering family is a monomorphism, i.e., there can be at most one section restricting to a given selection of patch candidates.
+Monopresheaves are also called \emph{separated presheaves}. The ``mono'' part of the name comes from category theory: every joint restriction to a covering family is a monomorphism, i.e., there can be at most one section restricting to a given selection of patch candidates.
 
 \end{Remark}
 
@@ -2405,7 +2403,7 @@ If we want to work with monopresheaves where all gluable patch candidates do in 
 % ----------------------------------------
 \begin{Definition}[Sheaf]
  
-A monopresheaf $F$ is a sheaf iff it satisfies the following gluing-existence condition:
+A monopresheaf $F$ is a \emph{sheaf} iff it satisfies the following gluing-existence condition:
 
 \begin{enumerate}
 
