@@ -144,7 +144,7 @@ If we stack the points in each pre-image vertically, one on top of the other, we
 This gives rise to the idea of the ``fibers'' of a map. The fibers of a map are just its pre-images. For instance, the fiber of $f$ over $b$ is $\{ 2, 4, 6 \}$.
 
 % ----------------------------------------
-\begin{Definition}[Fibers]
+\begin{Definition}[Fiber]
 
 Given a map $f : E \to B$ and a point $y \in B$, the \emph{fiber} over $y$ is its pre-image $\preimage{f}(y)$ = $\{ x \mid f(x) = y \}$. $B$ is called the \emph{base space} of $f$, and $y$ the \emph{base poin}t of the fiber.
 
@@ -217,7 +217,7 @@ We can also take cross-sections local to only some of the fibers. For instance, 
 \end{diagram}
 
 % ----------------------------------------
-\begin{Definition}[Sections]
+\begin{Definition}[Section]
 
 Given a map $f : E \to B$ and a subset of base points $C \subseteq B$, a \emph{section} of $f$ (over $C$) is a choice of one element from each fiber over each base point $x \in C$.
 
@@ -317,7 +317,7 @@ The lattice structure suggests that much of what is important about a space is n
 
 
 % ----------------------------------------
-\begin{Definition}[Frames/locales]
+\begin{Definition}[Frame/Locale]
 
 A \emph{frame} (synonymously, a \emph{locale}) $\category{L}$ is a partially ordered set $L$ (whose elements are called opens or regions) that satisfies the following conditions:
 
@@ -368,7 +368,7 @@ Locales have presentations much like groups and other algebraic structures. To g
 
 
 % ----------------------------------------
-\begin{Definition}[Presentations]
+\begin{Definition}[Presentation]
 
 A \emph{presentation} $\tuple{G, R}$ of a locale $\category{L}$ is comprised of:
 
@@ -1109,13 +1109,13 @@ A cover over the least element of a locale (or a topology) is empty (the empty s
 \end{Remark}
 
 
-Given a presheaf $F$ over a locale $\category{L}$, if we have a cover $\{ U_{i} \}_{i \in I}$ of some portion of $\category{L}$, there is a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$ over that cover.  We can pick one section (i.e., one element) from each such fiber to get a slice of elements that spans all of the fibers over that cover. Let us call such a choice a selection of patch candidates.
+Given a presheaf $F$ over a locale $\category{L}$, if we have a cover $\{ U_{i} \}_{i \in I}$ of some portion of $\category{L}$, there is a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$ over that cover.  We can pick one section (i.e., one element) from each such fiber to get a slice of elements that spans all of the fibers over that cover. Let us call such a choice a \emph{selection of patch candidates}.
 
 
 % ----------------------------------------
 \begin{Definition}[Patch candidates]
 
-Given a presheaf $F$ and a cover $\{ U_{i} \}_{i \in I}$ with a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$, a selection of \emph{patch candidates} $\{ s_{i} \}_{i \in I}$ is a choice of one section $s_{i}$ from each $F(U_{i})$.
+Given a presheaf $F$ and a cover $\{ U_{i} \}_{i \in I}$ with a corresponding family of fibers $\{ F(U_{i}) \}_{i \in I}$, a \emph{selection of patch candidates} $\{ s_{i} \}_{i \in I}$ is a choice of one section $s_{i}$ from each $F(U_{i})$.
 
 \end{Definition}
 
@@ -2119,7 +2119,7 @@ In a presheaf, compatible patch candidates can be glued together to form section
 If we want to work only with extensional gluings, then we can impose a restriction that says gluings must be unique: i.e., if a selection of patch candidates can glue, they form at most one gluing. Presheaves where this obtains are called monopresheaves.
 
 % ----------------------------------------
-\begin{Definition}[Monopresheaves]
+\begin{Definition}[Monopresheaf]
  
 A presheaf $F$ is a \emph{monopresheaf} iff it satisfies the following gluing-uniqueness condition:
 
