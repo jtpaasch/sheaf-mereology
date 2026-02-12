@@ -551,7 +551,7 @@ However, what if we weaken our requirements and consider this as a presheaf? In 
 \end{diagram}
 
 \noindent
-Interpreted as a presheaf, there is a sensible interpretation of this structure. Nothing sits in the fiber over $WH \join/ EH$, since a single coherent piece of flooring cannot be glued from wood and tile. The wood and tile from the two halves each extend into the overlap though, but since they don't agree, one of them must sit on top of the other in that overlapping area. It is like when two area rugs overlap: one sits on top of the other.
+Interpreted as a presheaf, there is a sensible interpretation of this structure. Nothing sits in the fiber over $WH \join/ EH$, since a single coherent piece of flooring cannot be glued from wood and tile. The wood and tile from the two halves each extend into the overlap, but since they don't agree, one of them must sit on top of the other in that overlapping area. It is like when two area rugs overlap: one sits on top of the other.
 
 As a final point, note that this fails to be monopresheaf, because there are two sections in $F(O)$ that restrict to $\bottom/$. The gluings are trivial here, but nonetheless, gluing is not unique precisely over $\bottom/$. Hence, this is a presheaf, but not a monopresheaf. This is a limit case where presheaves allow multiple assemblies of the same parts, but monopresheaves do not.
 
@@ -1013,7 +1013,7 @@ The result is a sheaf: a fused mesh of relationships over the population, which 
 
 \item Mereological overlap is then modeled by shared relationships: two parts overlap if their relational graphs intersect coherently.
 
-\item Regions that are not covered by a mesh (as in $F(A \join/ D) = \EmptySet/$ and $F(B \join/ C) = \EmptySet/$) reflect mereological separation: the regions in question are simple not related, so there is nothing to glue.
+\item Regions that are not covered by a mesh (as in $F(A \join/ D) = \EmptySet/$ and $F(B \join/ C) = \EmptySet/$) reflect mereological separation: the regions in question are simply not related, so there is nothing to glue.
 
 \end{itemize}
 
@@ -1035,7 +1035,8 @@ Let us say that $\Sigma^{\leqslant n}$ is the set of all finite sequences less t
 \begin{itemize}
 
 \item $\Sigma^{=0} = \{ \epsilon \}$.
-\item $\Sigma^{=1} = \Sigma^{\leqslant 1} = \{ \epsilon, a, b \}$.
+\item $\Sigma^{\leqslant 1} = \{ \epsilon, a, b \}$.
+\item $\Sigma^{=1} = \{ a, b \}$.
 \item $\Sigma^{\leqslant 2} = \{ \epsilon, a, b, aa, bb, ab, ba \}$.
 \item $\Sigma^{=2} = \{ aa, bb, ab, ba \}$.
 \item Etc.
@@ -1185,19 +1186,19 @@ We can define a process (program trace) as a map from $n$-length words to $n$-le
 \item $f : \Sigma^{=2} \to A \times A$
 
   \begin{itemize}
-    \item $f(aa) = \tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}$
-    \item $f(ab) = \tuple{\{ r1 \mapsto 1 \}, \{ r2 \mapsto 0 \} \}}$
-    \item $f(bb) = \tuple{\{ \{ r1 \mapsto 0 \}, \{ r2 \mapsto 1 \} \}}$
-    \item $f(ba) = \tuple{\{ \{ r1 \mapsto 0 \}, \{ r1 \mapsto 1 \} \}}$
+    \item $f(aa) = \tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \}}$
+    \item $f(ab) = \tuple{\{ r1 \mapsto 1 \}, \{ r2 \mapsto 0 \}}$
+    \item $f(bb) = \tuple{\{ r1 \mapsto 0 \}, \{ r2 \mapsto 1 \}}$
+    \item $f(ba) = \tuple{\{ r1 \mapsto 0 \}, \{ r1 \mapsto 1 \}}$
   \end{itemize}
 
 \item $g : \Sigma^{=2} \to A \times A$
 
   \begin{itemize}
-    \item $g(aa) = \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} \}}$
-    \item $g(ab) = \tuple{\{ r2 \mapsto 0 \}, \EmptySet/ \}}$
-    \item $g(bb) = \tuple{\{ \{ r1 \mapsto 1 \}, \EmptySet/ \}}$
-    \item $g(ba) = \tuple{\{ \{ r1 \mapsto 1 \}, \EmptySet/ \}}$
+    \item $g(aa) = \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \}}$
+    \item $g(ab) = \tuple{\{ r2 \mapsto 0 \}, \EmptySet/ }$
+    \item $g(bb) = \tuple{\{ r1 \mapsto 1 \}, \EmptySet/ }$
+    \item $g(ba) = \tuple{\{ r1 \mapsto 1 \}, \EmptySet/ }$
   \end{itemize}
 
 \end{itemize}
@@ -1213,7 +1214,7 @@ Let us say that we now want to run $f$ and $g$ concurrently on the machine. For 
 i.e., the joint run of $f$ and $g$ on $w$. For instance:
 
 \[
-  \jointRun{aa} = (f(aa), g(aa)) = (\tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \} \}}, \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \} \}}).
+  \jointRun{aa} = (f(aa), g(aa)) = (\tuple{\{ r1 \mapsto 1 \}, \{ r1 \mapsto 0 \}}, \tuple{\{ r2 \mapsto 0 \}, \{ r2 \mapsto 0 \}}).
 \]
 
 Next, let us say that two joint runs $\jointRun{w}$ and $\jointRun{v}$ are prefix-compatible iff:
@@ -1343,7 +1344,7 @@ The maximal fusions in this presheaf occur over $U_{a}$: the execution model in 
 
 This is not a sheaf, because it is missing gluings (e.g., over $U_{b}$). However, it is a monopresheaf, because when gluings exist (over $U_{a}$), they are unique.
 
-This relevance of this example is t hat it illustrates how sheaf theory can model processes, concurrency, and resource conflicts. Here the processes are programs running on a simple machine, but they could just as easily be biological processes competing for resources, etc.
+This relevance of this example is that it illustrates how sheaf theory can model processes, concurrency, and resource conflicts. Here the processes are programs running on a simple machine, but they could just as easily be biological processes competing for resources, etc.
 
 Whatever the concrete details may be, this example captures how local behaviors integrate and extend  over larger regions of the process space. One might naively think that the ``parts'' of such systems are the processes. But there is a different way to slice it: if you want to talk about the integrity of the ``whole'' of a concurrent system, you need to talk about how that involves coherent, integrated behavior that is functionally united locally across the various ``regions'' and ``stages'' of the system's evolution.
 
@@ -1443,7 +1444,7 @@ Restriction is inclusion again, since persistence through a larger time span $U$
   \restrict{U}{V}(S) = S.
 \]
 
-This is a sheaf, since compatible local section glue by intersection. The fibers of this sheaf are typically infinite: each fiber includes the whole lump of clay, all of is sub-regions, and these regions are themselves spatially continuous.
+This is a sheaf, since compatible local section glue by intersection. The fibers of this sheaf are typically infinite: each fiber includes the whole lump of clay, all of its sub-regions, and these regions are themselves spatially continuous.
 
 Given a time span $U$, if 
 
